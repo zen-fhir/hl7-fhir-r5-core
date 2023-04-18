@@ -1,0 +1,52 @@
+{ns hl7-fhir-r5-core.search.Condition-abatement-age,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Condition-abatement-age",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Condition-abatement-age",
+         :fhir/type "quantity",
+         :name "abatement-age",
+         :expr {:Condition {:knife [["abatement" "ofType(Age"]
+                                    ["abatement" "ofType(Range"]],
+                            :jsonpath ["$.\"abatement\".\"ofType(Age\"[*]"
+                                       "$.\"abatement\".\"ofType(Range\"[*]"],
+                            :data-types #{},
+                            :template :quantity,
+                            :sql {:where [:or
+                                          [:and
+                                           [:>=
+                                            [:pg/call
+                                             :jsonpath_extract_max_numeric
+                                             [:pg/sql
+                                              "{{table}}.resource"]
+                                             "$.\"abatement\".\"ofType(Age\"[*].\"value\""]
+                                            [:pg/cast
+                                             [:pg/sql "{{param}}"]
+                                             :numeric]]
+                                           [:<=
+                                            [:pg/call
+                                             :jsonpath_extract_min_numeric
+                                             [:pg/sql
+                                              "{{table}}.resource"]
+                                             "$.\"abatement\".\"ofType(Age\"[*].\"value\""]
+                                            [:pg/cast
+                                             [:pg/sql "{{param}}"]
+                                             :numeric]]]
+                                          [:and
+                                           [:>=
+                                            [:pg/call
+                                             :jsonpath_extract_max_numeric
+                                             [:pg/sql
+                                              "{{table}}.resource"]
+                                             "$.\"abatement\".\"ofType(Range\"[*].\"value\""]
+                                            [:pg/cast
+                                             [:pg/sql "{{param}}"]
+                                             :numeric]]
+                                           [:<=
+                                            [:pg/call
+                                             :jsonpath_extract_min_numeric
+                                             [:pg/sql
+                                              "{{table}}.resource"]
+                                             "$.\"abatement\".\"ofType(Range\"[*].\"value\""]
+                                            [:pg/cast
+                                             [:pg/sql "{{param}}"]
+                                             :numeric]]]]}}}}}

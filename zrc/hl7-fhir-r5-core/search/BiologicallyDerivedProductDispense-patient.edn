@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.BiologicallyDerivedProductDispense-patient,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "BiologicallyDerivedProductDispense-patient",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/BiologicallyDerivedProductDispense-patient",
+         :fhir/type "reference",
+         :name "patient",
+         :expr {:BiologicallyDerivedProductDispense {:knife [["patient"]],
+                                                     :jsonpath ["$.\"patient\"[*]"],
+                                                     :data-types #{{:type "Reference",
+                                                                    :polymorphic? false}},
+                                                     :template :reference}}}}

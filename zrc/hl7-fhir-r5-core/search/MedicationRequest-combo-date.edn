@@ -1,0 +1,20 @@
+{ns hl7-fhir-r5-core.search.MedicationRequest-combo-date,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "MedicationRequest-combo-date",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/MedicationRequest-combo-date",
+         :fhir/type "date",
+         :name "combo-date",
+         :expr {:MedicationRequest {:knife [["dosageInstruction"
+                                             "timing"
+                                             "event"]
+                                            ["dosageInstruction"
+                                             "timing"
+                                             "repeat"
+                                             "bounds"
+                                             "ofType(Period"]],
+                                    :jsonpath ["$.\"dosageInstruction\".\"timing\".\"event\"[*]"
+                                               "$.\"dosageInstruction\".\"timing\".\"repeat\".\"bounds\".\"ofType(Period\"[*]"],
+                                    :data-types #{},
+                                    :template :date,
+                                    :sql {:where [:or]}}}}}

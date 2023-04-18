@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.NutritionProduct-identifier,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "NutritionProduct-identifier",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/NutritionProduct-identifier",
+         :fhir/type "token",
+         :name "identifier",
+         :expr {:NutritionProduct {:knife [["instance" "identifier"]],
+                                   :jsonpath ["$.\"instance\".\"identifier\"[*]"],
+                                   :data-types #{{:type "Identifier",
+                                                  :polymorphic? false}},
+                                   :template :token}}}}

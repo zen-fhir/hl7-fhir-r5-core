@@ -1,0 +1,9 @@
+{ns hl7-fhir-r5-core.value-set.medicinal-product-classification,
+ import #{zen.fhir},
+ value-set {:zen/tags #{zen.fhir/value-set},
+            :zen/desc "This value set includes codes from the Anatomical Therapeutic Chemical Classification System - provided as an exemplar value set.",
+            :zen.fhir/version "0.6.21-2",
+            :fhir/code-systems #{{:fhir/url "http://www.whocc.no/atc",
+                                  :zen.fhir/content :not-present}},
+            :uri "http://hl7.org/fhir/ValueSet/medicinal-product-classification",
+            :version "5.0.0"}}

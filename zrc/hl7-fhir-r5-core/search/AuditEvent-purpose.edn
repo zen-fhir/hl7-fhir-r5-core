@@ -1,0 +1,14 @@
+{ns hl7-fhir-r5-core.search.AuditEvent-purpose,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "AuditEvent-purpose",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/AuditEvent-purpose",
+         :fhir/type "token",
+         :name "purpose",
+         :expr {:AuditEvent {:knife [["authorization"]
+                                     ["agent" "authorization"]],
+                             :jsonpath ["$.\"authorization\"[*]"
+                                        "$.\"agent\".\"authorization\"[*]"],
+                             :data-types #{{:type "CodeableConcept",
+                                            :polymorphic? false}},
+                             :template :token}}}}

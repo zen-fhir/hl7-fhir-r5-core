@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.BiologicallyDerivedProductDispense-product,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "BiologicallyDerivedProductDispense-product",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/BiologicallyDerivedProductDispense-product",
+         :fhir/type "reference",
+         :name "product",
+         :expr {:BiologicallyDerivedProductDispense {:knife [["product"]],
+                                                     :jsonpath ["$.\"product\"[*]"],
+                                                     :data-types #{{:type "Reference",
+                                                                    :polymorphic? false}},
+                                                     :template :reference}}}}

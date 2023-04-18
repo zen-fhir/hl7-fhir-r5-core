@@ -1,0 +1,13 @@
+{ns hl7-fhir-r5-core.search.PaymentReconciliation-allocation-account,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "PaymentReconciliation-allocation-account",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/PaymentReconciliation-allocation-account",
+         :fhir/type "reference",
+         :name "allocation-account",
+         :expr {:PaymentReconciliation {:knife [["allocation"
+                                                 "account"]],
+                                        :jsonpath ["$.\"allocation\".\"account\"[*]"],
+                                        :data-types #{{:type "Reference",
+                                                       :polymorphic? false}},
+                                        :template :reference}}}}

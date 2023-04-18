@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Coverage-insurer,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Coverage-insurer",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Coverage-insurer",
+         :fhir/type "reference",
+         :name "insurer",
+         :expr {:Coverage {:knife [["insurer"]],
+                           :jsonpath ["$.\"insurer\"[*]"],
+                           :data-types #{{:type "Reference",
+                                          :polymorphic? false}},
+                           :template :reference}}}}

@@ -1,0 +1,45 @@
+{ns hl7-fhir-r5-core.bodytemp,
+ import #{zen.fhir
+          hl7-fhir-r5-core.value-set.ucum-bodytemp
+          hl7-fhir-r5-core.bodytemp
+          hl7-fhir-r5-core.vitalsigns},
+ referenceRange-schema {:zen/tags #{zen/schema
+                                    zen.fhir/structure-schema},
+                        :zen.fhir/version "0.6.21-2"},
+ schema {:zen/tags #{zen.fhir/profile-schema zen/schema},
+         :zen/desc "FHIR Body Temperature Profile",
+         :zen.fhir/type "Observation",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/bodytemp",
+         :zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.vitalsigns/schema
+                     zen.fhir/Resource},
+         :type zen/map,
+         :keys {:code {:type zen/map,
+                       :keys {:coding {:type zen/vector,
+                                       :slicing {:slices {"BodyTempCode" {:schema {:type zen/vector,
+                                                                                   :minItems 1,
+                                                                                   :maxItems 1,
+                                                                                   :every {:type zen/map,
+                                                                                           :keys {:system {:const {:value "http://loinc.org"}},
+                                                                                                  :code {:const {:value "8310-5"}}},
+                                                                                           :require #{:system
+                                                                                                      :code}}},
+                                                                          :filter {:engine :match,
+                                                                                   :match {:code "8310-5",
+                                                                                           :system "http://loinc.org"}}}}}}},
+                       :zen/desc "Body Temperature"},
+                :value {:type zen/map,
+                        :keys {:Quantity {:type zen/map,
+                                          :keys {:value {:fhir/flags #{:MS}},
+                                                 :unit {:fhir/flags #{:MS}},
+                                                 :system {:const {:value "http://unitsofmeasure.org"},
+                                                          :fhir/flags #{:MS}},
+                                                 :code {:fhir/flags #{:MS},
+                                                        :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.ucum-bodytemp/value-set,
+                                                                             :strength :required},
+                                                        :zen/desc "Coded responses from the common UCUM units for vital signs value set."}},
+                                          :require #{:system
+                                                     :unit
+                                                     :value
+                                                     :code}}}},
+                :referenceRange {:confirms #{hl7-fhir-r5-core.bodytemp/referenceRange-schema}}}}}

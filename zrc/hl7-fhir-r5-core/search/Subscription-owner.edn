@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Subscription-owner,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Subscription-owner",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Subscription-owner",
+         :fhir/type "reference",
+         :name "owner",
+         :expr {:Subscription {:knife [["managingEntity"]],
+                               :jsonpath ["$.\"managingEntity\"[*]"],
+                               :data-types #{{:type "Reference",
+                                              :polymorphic? false}},
+                               :template :reference}}}}

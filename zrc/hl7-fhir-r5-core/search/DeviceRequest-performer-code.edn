@@ -1,0 +1,11 @@
+{ns hl7-fhir-r5-core.search.DeviceRequest-performer-code,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "DeviceRequest-performer-code",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/DeviceRequest-performer-code",
+         :fhir/type "token",
+         :name "performer-code",
+         :expr {:DeviceRequest {:knife [["performer" "concept"]],
+                                :jsonpath ["$.\"performer\".\"concept\"[*]"],
+                                :data-types #{},
+                                :template :token}}}}

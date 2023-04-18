@@ -1,0 +1,16 @@
+{ns hl7-fhir-r5-core.search.CommunicationRequest-occurrence,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "CommunicationRequest-occurrence",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/CommunicationRequest-occurrence",
+         :fhir/type "date",
+         :name "occurrence",
+         :expr {:CommunicationRequest {:knife [["occurrence"
+                                                "ofType(dateTime"]
+                                               ["occurrence"
+                                                "ofType(Period"]],
+                                       :jsonpath ["$.\"occurrence\".\"ofType(dateTime\"[*]"
+                                                  "$.\"occurrence\".\"ofType(Period\"[*]"],
+                                       :data-types #{},
+                                       :template :date,
+                                       :sql {:where [:or]}}}}}

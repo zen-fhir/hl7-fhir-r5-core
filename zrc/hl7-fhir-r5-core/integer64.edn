@@ -1,0 +1,7 @@
+{ns hl7-fhir-r5-core.integer64,
+ import #{zen.fhir},
+ schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen/desc "integer64 Type: A very large whole number",
+         :zen.fhir/type "integer64",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/integer64",
+         :zen.fhir/version "0.6.21-2"}}

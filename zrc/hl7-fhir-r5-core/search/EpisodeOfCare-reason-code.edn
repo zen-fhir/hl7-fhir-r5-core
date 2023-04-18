@@ -1,0 +1,11 @@
+{ns hl7-fhir-r5-core.search.EpisodeOfCare-reason-code,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "EpisodeOfCare-reason-code",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/EpisodeOfCare-reason-code",
+         :fhir/type "token",
+         :name "reason-code",
+         :expr {:EpisodeOfCare {:knife [["reason" "value" "concept"]],
+                                :jsonpath ["$.\"reason\".\"value\".\"concept\"[*]"],
+                                :data-types #{},
+                                :template :token}}}}

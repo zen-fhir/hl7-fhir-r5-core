@@ -1,0 +1,35 @@
+{ns hl7-fhir-r5-core.Coding,
+ import #{hl7-fhir-r5-core.boolean
+          zen.fhir
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.DataType
+          hl7-fhir-r5-core.uri},
+ schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen/desc "Coding Type: A reference to a code defined by a terminology system.",
+         :zen.fhir/type "Coding",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Coding",
+         :zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DataType/schema},
+         :type zen/map,
+         :keys {:userSelected {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                               :fhir/flags #{:SU},
+                               :zen/desc "If this coding was chosen directly by the user"},
+                :_code {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :system {:confirms #{hl7-fhir-r5-core.uri/schema},
+                         :fhir/flags #{:SU},
+                         :zen/desc "Identity of the terminology system"},
+                :_userSelected {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :code {:confirms #{hl7-fhir-r5-core.code/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "Symbol in syntax defined by the system"},
+                :display {:confirms #{hl7-fhir-r5-core.string/schema},
+                          :fhir/flags #{:SU},
+                          :zen/desc "Representation defined by the system"},
+                :_system {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :version {:confirms #{hl7-fhir-r5-core.string/schema},
+                          :fhir/flags #{:SU},
+                          :zen/desc "Version of the system - if relevant"},
+                :_version {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_display {:confirms #{hl7-fhir-r5-core.Element/schema}}}}}

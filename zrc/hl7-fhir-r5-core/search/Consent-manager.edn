@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Consent-manager,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Consent-manager",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Consent-manager",
+         :fhir/type "reference",
+         :name "manager",
+         :expr {:Consent {:knife [["manager"]],
+                          :jsonpath ["$.\"manager\"[*]"],
+                          :data-types #{{:type "Reference",
+                                         :polymorphic? false}},
+                          :template :reference}}}}

@@ -1,0 +1,120 @@
+{ns hl7-fhir-r5-core.ImmunizationRecommendation,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.markdown
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.value-set.immunization-target-disease
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.value-set.immunization-recommendation-date-criterion
+          hl7-fhir-r5-core.value-set.vaccine-code
+          hl7-fhir-r5-core.value-set.immunization-recommendation-reason
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.value-set.immunization-recommendation-status
+          hl7-fhir-r5-core.Immunization
+          hl7-fhir-r5-core.ImmunizationEvaluation
+          hl7-fhir-r5-core.Patient},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/ImmunizationRecommendation",
+         :require #{:patient :date :recommendation},
+         :type zen/map,
+         :zen/desc "A patient's point-in-time set of recommendations (i.e. forecasting) according to a published schedule with optional supporting justification.",
+         :keys {:identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Business identifier"}},
+                :patient {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                      zen.fhir/Reference},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema}},
+                          :zen/desc "Who this profile is for"},
+                :date {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "Date recommendation(s) created"},
+                :_date {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :authority {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                        zen.fhir/Reference},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Organization/schema}},
+                            :zen/desc "Who is responsible for protocol"},
+                :recommendation {:type zen/vector,
+                                 :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                         :type zen/map,
+                                         :keys {:description {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                                                              :zen/desc "Protocol details"},
+                                                :contraindicatedVaccineCode {:type zen/vector,
+                                                                             :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                                     :fhir/flags #{:SU},
+                                                                                     :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.vaccine-code/value-set,
+                                                                                                          :strength :example},
+                                                                                     :zen/desc "Vaccine which is contraindicated to fulfill the recommendation"}},
+                                                :series {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                         :zen/desc "Name of vaccination series"},
+                                                :doseNumber {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                             :fhir/flags #{:SU},
+                                                             :zen/desc "Recommended dose number within series"},
+                                                :vaccineCode {:type zen/vector,
+                                                              :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                      :fhir/flags #{:SU},
+                                                                      :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.vaccine-code/value-set,
+                                                                                           :strength :example},
+                                                                      :zen/desc "Vaccine  or vaccine group recommendation applies to"}},
+                                                :_seriesDoses {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                :_description {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                :_doseNumber {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                :seriesDoses {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                              :zen/desc "Recommended number of doses for immunity"},
+                                                :forecastStatus {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                 :fhir/flags #{:SU
+                                                                               :?!},
+                                                                 :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.immunization-recommendation-status/value-set,
+                                                                                      :strength :example},
+                                                                 :zen/desc "Vaccine recommendation status"},
+                                                :forecastReason {:type zen/vector,
+                                                                 :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                         :fhir/flags #{:SU},
+                                                                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.immunization-recommendation-reason/value-set,
+                                                                                              :strength :example},
+                                                                         :zen/desc "Vaccine administration status reason"}},
+                                                :dateCriterion {:type zen/vector,
+                                                                :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                                                        :type zen/map,
+                                                                        :keys {:code {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                                      :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.immunization-recommendation-date-criterion/value-set,
+                                                                                                           :strength :example},
+                                                                                      :zen/desc "Type of date"},
+                                                                               :value {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                                                                                       :zen/desc "Recommended date"},
+                                                                               :_value {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                                                        :require #{:value
+                                                                                   :code},
+                                                                        :zen/desc "Dates governing proposed immunization"}},
+                                                :targetDisease {:type zen/vector,
+                                                                :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                        :fhir/flags #{:SU},
+                                                                        :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.immunization-target-disease/value-set,
+                                                                                             :strength :example},
+                                                                        :zen/desc "Disease to be immunized against"}},
+                                                :_series {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                :supportingImmunization {:type zen/vector,
+                                                                         :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                                             zen.fhir/Reference},
+                                                                                 :zen.fhir/reference {:refers #{hl7-fhir-r5-core.ImmunizationEvaluation/schema
+                                                                                                                hl7-fhir-r5-core.Immunization/schema}},
+                                                                                 :zen/desc "Past immunizations supporting recommendation"}},
+                                                :supportingPatientInformation {:type zen/vector,
+                                                                               :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                                                   zen.fhir/Reference},
+                                                                                       :zen.fhir/reference {:refers #{}},
+                                                                                       :zen/desc "Patient observations supporting recommendation"}}},
+                                         :require #{:forecastStatus},
+                                         :fhir/flags #{:SU},
+                                         :zen/desc "Vaccine administration recommendations"},
+                                 :minItems 1}},
+         :zen.fhir/type "ImmunizationRecommendation"}}

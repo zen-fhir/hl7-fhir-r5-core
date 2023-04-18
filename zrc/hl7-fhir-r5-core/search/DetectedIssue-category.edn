@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.DetectedIssue-category,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "DetectedIssue-category",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/DetectedIssue-category",
+         :fhir/type "token",
+         :name "category",
+         :expr {:DetectedIssue {:knife [["category"]],
+                                :jsonpath ["$.\"category\"[*]"],
+                                :data-types #{{:type "CodeableConcept",
+                                               :polymorphic? false}},
+                                :template :token}}}}

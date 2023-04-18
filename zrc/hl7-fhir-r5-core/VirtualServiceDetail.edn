@@ -1,0 +1,51 @@
+{ns hl7-fhir-r5-core.VirtualServiceDetail,
+ import #{zen.fhir
+          hl7-fhir-r5-core.positiveInt
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.url
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.ExtendedContactDetail
+          hl7-fhir-r5-core.value-set.virtual-service-type
+          hl7-fhir-r5-core.ContactPoint
+          hl7-fhir-r5-core.Coding
+          hl7-fhir-r5-core.DataType},
+ schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen/desc "VirtualServiceDetail Type: Virtual Service Contact Details.",
+         :zen.fhir/type "VirtualServiceDetail",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/VirtualServiceDetail",
+         :zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DataType/schema},
+         :type zen/map,
+         :keys {:channelType {:confirms #{hl7-fhir-r5-core.Coding/schema},
+                              :fhir/flags #{:SU},
+                              :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.virtual-service-type/value-set,
+                                                   :strength :example},
+                              :zen/desc "Channel Type"},
+                :address {:fhir/polymorphic true,
+                          :type zen/map,
+                          :exclusive-keys #{#{:string
+                                              :ContactPoint
+                                              :url
+                                              :ExtendedContactDetail}},
+                          :keys {:url {:confirms #{hl7-fhir-r5-core.url/schema}},
+                                 :_url {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                 :string {:confirms #{hl7-fhir-r5-core.string/schema}},
+                                 :_string {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                 :ContactPoint {:confirms #{hl7-fhir-r5-core.ContactPoint/schema}},
+                                 :ExtendedContactDetail {:confirms #{hl7-fhir-r5-core.ExtendedContactDetail/schema}}},
+                          :fhir/flags #{:SU},
+                          :zen/desc "Contact address/number"},
+                :additionalInfo {:type zen/vector,
+                                 :every {:confirms #{hl7-fhir-r5-core.url/schema},
+                                         :fhir/flags #{:SU},
+                                         :zen/desc "Address to see alternative connection details"}},
+                :_additionalInfo {:type zen/vector,
+                                  :every {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                :maxParticipants {:confirms #{hl7-fhir-r5-core.positiveInt/schema},
+                                  :fhir/flags #{:SU},
+                                  :zen/desc "Maximum number of participants supported by the virtual service"},
+                :_maxParticipants {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :sessionKey {:confirms #{hl7-fhir-r5-core.string/schema},
+                             :fhir/flags #{:SU},
+                             :zen/desc "Session Key required by the virtual service"},
+                :_sessionKey {:confirms #{hl7-fhir-r5-core.Element/schema}}}}}

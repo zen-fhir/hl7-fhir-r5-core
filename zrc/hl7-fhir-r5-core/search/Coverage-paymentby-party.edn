@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Coverage-paymentby-party,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Coverage-paymentby-party",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Coverage-paymentby-party",
+         :fhir/type "reference",
+         :name "paymentby-party",
+         :expr {:Coverage {:knife [["paymentBy" "party"]],
+                           :jsonpath ["$.\"paymentBy\".\"party\"[*]"],
+                           :data-types #{{:type "Reference",
+                                          :polymorphic? false}},
+                           :template :reference}}}}

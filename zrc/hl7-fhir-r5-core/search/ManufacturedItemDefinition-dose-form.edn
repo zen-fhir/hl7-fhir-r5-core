@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.ManufacturedItemDefinition-dose-form,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "ManufacturedItemDefinition-dose-form",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/ManufacturedItemDefinition-dose-form",
+         :fhir/type "token",
+         :name "dose-form",
+         :expr {:ManufacturedItemDefinition {:knife [["manufacturedDoseForm"]],
+                                             :jsonpath ["$.\"manufacturedDoseForm\"[*]"],
+                                             :data-types #{{:type "CodeableConcept",
+                                                            :polymorphic? false}},
+                                             :template :token}}}}

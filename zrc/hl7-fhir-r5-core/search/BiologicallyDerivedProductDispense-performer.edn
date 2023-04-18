@@ -1,0 +1,13 @@
+{ns hl7-fhir-r5-core.search.BiologicallyDerivedProductDispense-performer,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "BiologicallyDerivedProductDispense-performer",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/BiologicallyDerivedProductDispense-performer",
+         :fhir/type "reference",
+         :name "performer",
+         :expr {:BiologicallyDerivedProductDispense {:knife [["performer"
+                                                              "actor"]],
+                                                     :jsonpath ["$.\"performer\".\"actor\"[*]"],
+                                                     :data-types #{{:type "Reference",
+                                                                    :polymorphic? false}},
+                                                     :template :reference}}}}

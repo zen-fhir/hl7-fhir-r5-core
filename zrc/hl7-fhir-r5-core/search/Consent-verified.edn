@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Consent-verified,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Consent-verified",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Consent-verified",
+         :fhir/type "token",
+         :name "verified",
+         :expr {:Consent {:knife [["verification" "verified"]],
+                          :jsonpath ["$.\"verification\".\"verified\"[*]"],
+                          :data-types #{{:type "boolean",
+                                         :polymorphic? false}},
+                          :template :token}}}}

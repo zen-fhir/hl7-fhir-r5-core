@@ -1,0 +1,226 @@
+{ns hl7-fhir-r5-core.PaymentReconciliation,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.value-set.forms
+          hl7-fhir-r5-core.BackboneElement
+          zen.fhir
+          hl7-fhir-r5-core.positiveInt
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.value-set.payment-issuertype
+          hl7-fhir-r5-core.ChargeItem
+          hl7-fhir-r5-core.value-set.payment-type
+          hl7-fhir-r5-core.Encounter
+          hl7-fhir-r5-core.Claim
+          hl7-fhir-r5-core.Location
+          hl7-fhir-r5-core.Contract
+          hl7-fhir-r5-core.Practitioner
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.Money
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.value-set.payment-outcome
+          hl7-fhir-r5-core.Invoice
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.date
+          hl7-fhir-r5-core.ClaimResponse
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.RelatedPerson
+          hl7-fhir-r5-core.PractitionerRole
+          hl7-fhir-r5-core.Period
+          hl7-fhir-r5-core.value-set.note-type
+          hl7-fhir-r5-core.Account
+          hl7-fhir-r5-core.value-set.payment-kind
+          hl7-fhir-r5-core.value-set.fm-status
+          hl7-fhir-r5-core.Task
+          hl7-fhir-r5-core.Patient
+          hl7-terminology-r5.value-set.v2-0570},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/PaymentReconciliation",
+         :require #{:amount :date :type :created :status},
+         :type zen/map,
+         :zen/desc "This resource provides the details including amount of a payment and allocates the payment items being paid.",
+         :keys {:_created {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :requestor {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                        zen.fhir/Reference},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.PractitionerRole/schema
+                                                           hl7-fhir-r5-core.Organization/schema
+                                                           hl7-fhir-r5-core.Practitioner/schema}},
+                            :zen/desc "Responsible practitioner"},
+                :_cardBrand {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :amount {:confirms #{hl7-fhir-r5-core.Money/schema},
+                         :fhir/flags #{:SU},
+                         :zen/desc "Total amount of Payment"},
+                :date {:confirms #{hl7-fhir-r5-core.date/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "When payment issued"},
+                :request {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                      zen.fhir/Reference},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Task/schema}},
+                          :zen/desc "Reference to requesting resource"},
+                :processNote {:type zen/vector,
+                              :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                      :type zen/map,
+                                      :keys {:type {:confirms #{hl7-fhir-r5-core.code/schema},
+                                                    :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.note-type/value-set,
+                                                                         :strength :required},
+                                                    :zen/desc "display | print | printoper"},
+                                             :_type {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                             :text {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                    :zen/desc "Note explanatory text"},
+                                             :_text {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                      :zen/desc "Note concerning processing"}},
+                :cardBrand {:confirms #{hl7-fhir-r5-core.string/schema},
+                            :zen/desc "Type of card"},
+                :accountNumber {:confirms #{hl7-fhir-r5-core.string/schema},
+                                :zen/desc "Digits for verification"},
+                :_disposition {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :returnedAmount {:confirms #{hl7-fhir-r5-core.Money/schema},
+                                 :zen/desc "Amount returned by the receiver"},
+                :enterer {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                      zen.fhir/Reference},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.PractitionerRole/schema
+                                                         hl7-fhir-r5-core.Organization/schema
+                                                         hl7-fhir-r5-core.Practitioner/schema}},
+                          :zen/desc "Who entered the payment"},
+                :method {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                         :zen.fhir/value-set {:symbol hl7-terminology-r5.value-set.v2-0570/value-set,
+                                              :strength :extensible},
+                         :zen/desc "Payment instrument"},
+                :_date {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_authorization {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :authorization {:confirms #{hl7-fhir-r5-core.string/schema},
+                                :zen/desc "Authorization number"},
+                :_accountNumber {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :tenderedAmount {:confirms #{hl7-fhir-r5-core.Money/schema},
+                                 :zen/desc "Amount offered by the issuer"},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :type {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                       :fhir/flags #{:SU},
+                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.payment-type/value-set,
+                                            :strength :extensible},
+                       :zen/desc "Category of payment"},
+                :created {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                          :fhir/flags #{:SU},
+                          :zen/desc "Creation date"},
+                :outcome {:confirms #{hl7-fhir-r5-core.code/schema},
+                          :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.payment-outcome/value-set,
+                                               :strength :required},
+                          :zen/desc "queued | complete | error | partial"},
+                :referenceNumber {:confirms #{hl7-fhir-r5-core.string/schema},
+                                  :zen/desc "Check number or payment reference"},
+                :_outcome {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_expirationDate {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_referenceNumber {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :disposition {:confirms #{hl7-fhir-r5-core.string/schema},
+                              :zen/desc "Disposition message"},
+                :paymentIdentifier {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                    :zen/desc "Business identifier for the payment"},
+                :_processor {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.fm-status/value-set,
+                                              :strength :required},
+                         :zen/desc "active | cancelled | draft | entered-in-error"},
+                :kind {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.payment-kind/value-set,
+                                            :strength :extensible},
+                       :zen/desc "Workflow originating payment"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :zen/desc "Business Identifier for a payment reconciliation"}},
+                :issuerType {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                             :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.payment-issuertype/value-set,
+                                                  :strength :extensible},
+                             :zen/desc "Nature of the source"},
+                :period {:confirms #{hl7-fhir-r5-core.Period/schema},
+                         :fhir/flags #{:SU},
+                         :zen/desc "Period covered"},
+                :paymentIssuer {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                            zen.fhir/Reference},
+                                :fhir/flags #{:SU},
+                                :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                               hl7-fhir-r5-core.Organization/schema
+                                                               hl7-fhir-r5-core.RelatedPerson/schema}},
+                                :zen/desc "Party generating payment"},
+                :formCode {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                           :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.forms/value-set,
+                                                :strength :example},
+                           :zen/desc "Printed form identifier"},
+                :location {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                       zen.fhir/Reference},
+                           :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Location/schema}},
+                           :zen/desc "Where payment collected"},
+                :processor {:confirms #{hl7-fhir-r5-core.string/schema},
+                            :zen/desc "Processor name"},
+                :allocation {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                     :type zen/map,
+                                     :keys {:response {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                   zen.fhir/Reference},
+                                                       :zen.fhir/reference {:refers #{hl7-fhir-r5-core.ClaimResponse/schema}},
+                                                       :zen/desc "Response committing to a payment"},
+                                            :amount {:confirms #{hl7-fhir-r5-core.Money/schema},
+                                                     :zen/desc "Amount allocated to this payable"},
+                                            :date {:confirms #{hl7-fhir-r5-core.date/schema},
+                                                   :zen/desc "Date of commitment to pay"},
+                                            :encounter {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                    zen.fhir/Reference},
+                                                        :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Encounter/schema}},
+                                                        :zen/desc "Applied-to encounter"},
+                                            :_date {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                            :type {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                   :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.payment-type/value-set,
+                                                                        :strength :extensible},
+                                                   :zen/desc "Category of payment"},
+                                            :account {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                  zen.fhir/Reference},
+                                                      :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Account/schema}},
+                                                      :zen/desc "Applied-to account"},
+                                            :responsible {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                      zen.fhir/Reference},
+                                                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.PractitionerRole/schema}},
+                                                          :zen/desc "Contact for the response"},
+                                            :payee {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                zen.fhir/Reference},
+                                                    :zen.fhir/reference {:refers #{hl7-fhir-r5-core.PractitionerRole/schema
+                                                                                   hl7-fhir-r5-core.Organization/schema
+                                                                                   hl7-fhir-r5-core.Practitioner/schema}},
+                                                    :zen/desc "Recipient of the payment"},
+                                            :predecessor {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                                          :zen/desc "Business identifier of the prior payment detail"},
+                                            :targetItem {:fhir/polymorphic true,
+                                                         :type zen/map,
+                                                         :exclusive-keys #{#{:Identifier
+                                                                             :string
+                                                                             :positiveInt}},
+                                                         :keys {:string {:confirms #{hl7-fhir-r5-core.string/schema}},
+                                                                :_string {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                                :Identifier {:confirms #{hl7-fhir-r5-core.Identifier/schema}},
+                                                                :positiveInt {:confirms #{hl7-fhir-r5-core.positiveInt/schema}},
+                                                                :_positiveInt {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                                         :zen/desc "Sub-element of the subject"},
+                                            :identifier {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                                         :zen/desc "Business identifier of the payment detail"},
+                                            :target {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                 zen.fhir/Reference},
+                                                     :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Invoice/schema
+                                                                                    hl7-fhir-r5-core.Account/schema
+                                                                                    hl7-fhir-r5-core.Contract/schema
+                                                                                    hl7-fhir-r5-core.Encounter/schema
+                                                                                    hl7-fhir-r5-core.Claim/schema
+                                                                                    hl7-fhir-r5-core.ChargeItem/schema}},
+                                                     :zen/desc "Subject of the payment"},
+                                            :submitter {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                    zen.fhir/Reference},
+                                                        :zen.fhir/reference {:refers #{hl7-fhir-r5-core.PractitionerRole/schema
+                                                                                       hl7-fhir-r5-core.Organization/schema
+                                                                                       hl7-fhir-r5-core.Practitioner/schema}},
+                                                        :zen/desc "Submitter of the request"}},
+                                     :zen/desc "Settlement particulars"}},
+                :expirationDate {:confirms #{hl7-fhir-r5-core.date/schema},
+                                 :zen/desc "Expiration year-month"}},
+         :zen.fhir/type "PaymentReconciliation"}}

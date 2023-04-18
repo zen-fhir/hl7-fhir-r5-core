@@ -1,0 +1,84 @@
+{ns hl7-fhir-r5-core.ImmunizationEvaluation,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.value-set.immunization-evaluation-dose-status
+          hl7-fhir-r5-core.markdown
+          hl7-fhir-r5-core.value-set.immunization-target-disease
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.value-set.immunization-evaluation-dose-status-reason
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.Immunization
+          hl7-fhir-r5-core.value-set.immunization-evaluation-status
+          hl7-fhir-r5-core.Patient},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/ImmunizationEvaluation",
+         :require #{:patient
+                    :immunizationEvent
+                    :status
+                    :targetDisease
+                    :doseStatus},
+         :type zen/map,
+         :zen/desc "Describes a comparison of an immunization event against published recommendations to determine if the administration is \"valid\" in relation to those  recommendations.",
+         :keys {:patient {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                      zen.fhir/Reference},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema}},
+                          :zen/desc "Who this evaluation is for"},
+                :description {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                              :zen/desc "Evaluation notes"},
+                :date {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                       :zen/desc "Date evaluation was performed"},
+                :series {:confirms #{hl7-fhir-r5-core.string/schema},
+                         :zen/desc "Name of vaccine series"},
+                :doseNumber {:confirms #{hl7-fhir-r5-core.string/schema},
+                             :zen/desc "Dose number within series"},
+                :_date {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :authority {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                        zen.fhir/Reference},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Organization/schema}},
+                            :zen/desc "Who is responsible for publishing the recommendations"},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_seriesDoses {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_description {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_doseNumber {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :seriesDoses {:confirms #{hl7-fhir-r5-core.string/schema},
+                              :zen/desc "Recommended number of doses for immunity"},
+                :doseStatusReason {:type zen/vector,
+                                   :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                           :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.immunization-evaluation-dose-status-reason/value-set,
+                                                                :strength :example},
+                                           :zen/desc "Reason why the doese is considered valid, invalid or some other status"}},
+                :immunizationEvent {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                zen.fhir/Reference},
+                                    :fhir/flags #{:SU},
+                                    :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Immunization/schema}},
+                                    :zen/desc "Immunization being evaluated"},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.immunization-evaluation-status/value-set,
+                                              :strength :required},
+                         :zen/desc "completed | entered-in-error"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :zen/desc "Business identifier"}},
+                :targetDisease {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                :fhir/flags #{:SU},
+                                :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.immunization-target-disease/value-set,
+                                                     :strength :example},
+                                :zen/desc "The vaccine preventable disease schedule being evaluated"},
+                :doseStatus {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                             :fhir/flags #{:SU},
+                             :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.immunization-evaluation-dose-status/value-set,
+                                                  :strength :example},
+                             :zen/desc "Status of the dose relative to published recommendations"},
+                :_series {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+         :zen.fhir/type "ImmunizationEvaluation"}}

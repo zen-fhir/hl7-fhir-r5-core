@@ -1,0 +1,13 @@
+{ns hl7-fhir-r5-core.search.ClinicalUseDefinition-product,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "ClinicalUseDefinition-product",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/ClinicalUseDefinition-product",
+         :fhir/type "reference",
+         :name "product",
+         :expr {:ClinicalUseDefinition {:knife [["subject"
+                                                 {:resourceType "MedicinalProductDefinition"}]],
+                                        :jsonpath ["$.\"subject\"?(@.\"resourceType\"==\"MedicinalProductDefinition\")[*]"],
+                                        :data-types #{{:type "Reference",
+                                                       :polymorphic? false}},
+                                        :template :reference}}}}

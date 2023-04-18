@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.NutritionProduct-code,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "NutritionProduct-code",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/NutritionProduct-code",
+         :fhir/type "token",
+         :name "code",
+         :expr {:NutritionProduct {:knife [["code"]],
+                                   :jsonpath ["$.\"code\"[*]"],
+                                   :data-types #{{:type "CodeableConcept",
+                                                  :polymorphic? false}},
+                                   :template :token}}}}

@@ -1,0 +1,143 @@
+{ns hl7-fhir-r5-core.MedicationStatement,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.value-set.medication-statement-adherence
+          hl7-fhir-r5-core.Condition
+          hl7-fhir-r5-core.markdown
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.CodeableReference
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.Group
+          hl7-fhir-r5-core.Observation
+          hl7-fhir-r5-core.value-set.reason-medication-status-codes
+          hl7-fhir-r5-core.Annotation
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.value-set.medication-codes
+          hl7-fhir-r5-core.Encounter
+          hl7-fhir-r5-core.Practitioner
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.value-set.medication-statement-status
+          hl7-fhir-r5-core.MedicationStatement
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.value-set.condition-code
+          hl7-fhir-r5-core.Procedure
+          hl7-fhir-r5-core.Timing
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.RelatedPerson
+          hl7-fhir-r5-core.PractitionerRole
+          hl7-fhir-r5-core.Period
+          hl7-fhir-r5-core.Dosage
+          hl7-fhir-r5-core.value-set.medicationrequest-admin-location
+          hl7-fhir-r5-core.Patient},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/MedicationStatement",
+         :require #{:status :subject :medication},
+         :type zen/map,
+         :zen/desc "A record of a medication that is being consumed by a patient.   A MedicationStatement may indicate that the patient may be taking the medication now or has taken the medication in the past or will be taking the medication in the future.  The source of this information can be the patient, significant other (such as a family member or spouse), or a clinician.  A common scenario where this information is captured is during the history taking process during a patient visit or stay.   The medication information may come from sources such as the patient's memory, from a prescription bottle,  or from a list of medications the patient, clinician or other party maintains. \n\nThe primary difference between a medicationstatement and a medicationadministration is that the medication administration has complete administration information and is based on actual administration information from the person who administered the medication.  A medicationstatement is often, if not always, less specific.  There is no required date/time when the medication was administered, in fact we only know that a source has reported the patient is taking this medication, where details such as time, quantity, or rate or even medication product may be incomplete or missing or less precise.  As stated earlier, the Medication Statement information may come from the patient's memory, from a prescription bottle or from a list of medications the patient, clinician or other party maintains.  Medication administration is more formal and is not missing detailed information.",
+         :keys {:category {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                   :fhir/flags #{:SU},
+                                   :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.medicationrequest-admin-location/value-set,
+                                                        :strength :example},
+                                   :zen/desc "Type of medication statement"}},
+                :dosage {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.Dosage/schema},
+                                 :zen/desc "Details of how medication is/was taken or should be taken"}},
+                :_renderedDosageInstruction {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :derivedFrom {:type zen/vector,
+                              :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                  zen.fhir/Reference},
+                                      :zen.fhir/reference {:refers #{}},
+                                      :zen/desc "Link to information used to derive the MedicationStatement"}},
+                :encounter {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                        zen.fhir/Reference},
+                            :fhir/flags #{:SU},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Encounter/schema}},
+                            :zen/desc "Encounter associated with MedicationStatement"},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :adherence {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                            :type zen/map,
+                            :keys {:code {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                          :fhir/flags #{:SU},
+                                          :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.medication-statement-adherence/value-set,
+                                                               :strength :example},
+                                          :zen/desc "Type of adherence"},
+                                   :reason {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                            :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.reason-medication-status-codes/value-set,
+                                                                 :strength :example},
+                                            :zen/desc "Details of the reason for the current use of the medication"}},
+                            :require #{:code},
+                            :fhir/flags #{:SU},
+                            :zen/desc "Indicates whether the medication is or is not being consumed or administered"},
+                :note {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.Annotation/schema},
+                               :zen/desc "Further information about the usage"}},
+                :reason {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                 :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.condition-code/value-set,
+                                                      :strength :example},
+                                 :zen/desc "Reason for why the medication is being/was taken"}},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.medication-statement-status/value-set,
+                                              :strength :required},
+                         :zen/desc "recorded | entered-in-error | draft"},
+                :effective {:fhir/polymorphic true,
+                            :type zen/map,
+                            :exclusive-keys #{#{:dateTime
+                                                :Period
+                                                :Timing}},
+                            :keys {:dateTime {:confirms #{hl7-fhir-r5-core.dateTime/schema}},
+                                   :_dateTime {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                   :Period {:confirms #{hl7-fhir-r5-core.Period/schema}},
+                                   :Timing {:confirms #{hl7-fhir-r5-core.Timing/schema}}},
+                            :fhir/flags #{:SU},
+                            :zen/desc "The date/time or interval when the medication is/was/will be taken"},
+                :_dateAsserted {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "External identifier"}},
+                :relatedClinicalInformation {:type zen/vector,
+                                             :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                 zen.fhir/Reference},
+                                                     :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Observation/schema
+                                                                                    hl7-fhir-r5-core.Condition/schema}},
+                                                     :zen/desc "Link to information relevant to the usage of a medication"}},
+                :renderedDosageInstruction {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                                            :zen/desc "Full representation of the dosage instructions"},
+                :dateAsserted {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                               :fhir/flags #{:SU},
+                               :zen/desc "When the usage was asserted?"},
+                :partOf {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                             zen.fhir/Reference},
+                                 :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Procedure/schema
+                                                                hl7-fhir-r5-core.MedicationStatement/schema}},
+                                 :zen/desc "Part of referenced event"}},
+                :informationSource {:type zen/vector,
+                                    :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                        zen.fhir/Reference},
+                                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                                           hl7-fhir-r5-core.PractitionerRole/schema
+                                                                           hl7-fhir-r5-core.Organization/schema
+                                                                           hl7-fhir-r5-core.Practitioner/schema
+                                                                           hl7-fhir-r5-core.RelatedPerson/schema}},
+                                            :zen/desc "Person or organization that provided the information about the taking of this medication"}},
+                :subject {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                      zen.fhir/Reference},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                         hl7-fhir-r5-core.Group/schema}},
+                          :zen/desc "Who is/was taking  the medication"},
+                :medication {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                             :fhir/flags #{:SU},
+                             :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.medication-codes/value-set,
+                                                  :strength :example},
+                             :zen/desc "What medication was taken"}},
+         :zen.fhir/type "MedicationStatement"}}

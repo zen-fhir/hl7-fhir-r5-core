@@ -1,0 +1,96 @@
+{ns hl7-fhir-r5-core.EncounterHistory,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.CodeableReference
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.Group
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.Encounter
+          hl7-terminology-r5.value-set.v3-ActEncounterCode
+          hl7-fhir-r5-core.Location
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.Period
+          hl7-fhir-r5-core.Duration
+          hl7-fhir-r5-core.value-set.service-type
+          hl7-fhir-r5-core.value-set.encounter-subject-status
+          hl7-fhir-r5-core.value-set.encounter-type
+          hl7-fhir-r5-core.value-set.location-form
+          hl7-fhir-r5-core.Patient
+          hl7-fhir-r5-core.value-set.encounter-status},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/EncounterHistory",
+         :require #{:status :class},
+         :type zen/map,
+         :zen/desc "A record of significant events/milestones key data throughout the history of an Encounter",
+         :keys {:_plannedEndDate {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :encounter {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                        zen.fhir/Reference},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Encounter/schema}},
+                            :zen/desc "The Encounter associated with this set of historic values"},
+                :subjectStatus {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.encounter-subject-status/value-set,
+                                                     :strength :example},
+                                :zen/desc "The current status of the subject in relation to the Encounter"},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_plannedStartDate {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :type {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                               :fhir/flags #{:SU},
+                               :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.encounter-type/value-set,
+                                                    :strength :example},
+                               :zen/desc "Specific type of encounter"}},
+                :serviceType {:type zen/vector,
+                              :every {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                      :fhir/flags #{:SU},
+                                      :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.service-type/value-set,
+                                                           :strength :example},
+                                      :zen/desc "Specific type of service"}},
+                :actualPeriod {:confirms #{hl7-fhir-r5-core.Period/schema},
+                               :zen/desc "The actual start and end time associated with this set of values associated with the encounter"},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.encounter-status/value-set,
+                                              :strength :required},
+                         :zen/desc "planned | in-progress | on-hold | discharged | completed | cancelled | discontinued | entered-in-error | unknown"},
+                :class {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                        :fhir/flags #{:SU},
+                        :zen.fhir/value-set {:symbol hl7-terminology-r5.value-set.v3-ActEncounterCode/value-set,
+                                             :strength :extensible},
+                        :zen/desc "Classification of patient encounter"},
+                :length {:confirms #{hl7-fhir-r5-core.Duration/schema},
+                         :zen/desc "Actual quantity of time the encounter lasted (less time absent)"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Identifier(s) by which this encounter is known"}},
+                :plannedStartDate {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                                   :zen/desc "The planned start date/time (or admission date) of the encounter"},
+                :location {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                   :type zen/map,
+                                   :keys {:location {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                 zen.fhir/Reference},
+                                                     :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Location/schema}},
+                                                     :zen/desc "Location the encounter takes place"},
+                                          :form {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                 :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.location-form/value-set,
+                                                                      :strength :example},
+                                                 :zen/desc "The physical type of the location (usually the level in the location hierarchy - bed, room, ward, virtual etc.)"}},
+                                   :require #{:location},
+                                   :zen/desc "Location of the patient at this point in the encounter"}},
+                :subject {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                      zen.fhir/Reference},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                         hl7-fhir-r5-core.Group/schema}},
+                          :zen/desc "The patient or group related to this encounter"},
+                :plannedEndDate {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                                 :zen/desc "The planned end date/time (or discharge date) of the encounter"}},
+         :zen.fhir/type "EncounterHistory"}}

@@ -1,0 +1,92 @@
+{ns hl7-fhir-r5-core.Medication,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.value-set.medication-status
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.CodeableReference
+          hl7-fhir-r5-core.boolean
+          hl7-fhir-r5-core.Ratio
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.value-set.medication-codes
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.value-set.medication-ingredientstrength
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.value-set.medication-form-codes
+          hl7-fhir-r5-core.Quantity
+          hl7-fhir-r5-core.MedicationKnowledge},
+ schema {:zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen/desc "This resource is primarily used for the identification and definition of a medication, including ingredients, for the purposes of prescribing, dispensing, and administering a medication as well as for making statements about medication use.",
+         :zen.fhir/type "Medication",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Medication",
+         :zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :type zen/map,
+         :keys {:definition {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                         zen.fhir/Reference},
+                             :zen.fhir/reference {:refers #{hl7-fhir-r5-core.MedicationKnowledge/schema}},
+                             :zen/desc "Knowledge about this medication"},
+                :doseForm {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                           :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.medication-form-codes/value-set,
+                                                :strength :example},
+                           :zen/desc "powder | tablets | capsule +"},
+                :totalVolume {:confirms #{hl7-fhir-r5-core.Quantity/schema},
+                              :fhir/flags #{:SU},
+                              :zen/desc "When the specified product code does not infer a package size, this is the specific amount of drug in the product"},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :batch {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                        :type zen/map,
+                        :keys {:lotNumber {:confirms #{hl7-fhir-r5-core.string/schema},
+                                           :zen/desc "Identifier assigned to batch"},
+                               :_lotNumber {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                               :expirationDate {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                                                :zen/desc "When batch will expire"},
+                               :_expirationDate {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                        :zen/desc "Details about packaged medications"},
+                :ingredient {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                     :type zen/map,
+                                     :keys {:item {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                                   :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.medication-codes/value-set,
+                                                                        :strength :example},
+                                                   :zen/desc "The ingredient (substance or medication) that the ingredient.strength relates to"},
+                                            :isActive {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                                                       :zen/desc "Active ingredient indicator"},
+                                            :_isActive {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                            :strength {:fhir/polymorphic true,
+                                                       :type zen/map,
+                                                       :exclusive-keys #{#{:Ratio
+                                                                           :CodeableConcept
+                                                                           :Quantity}},
+                                                       :keys {:Ratio {:confirms #{hl7-fhir-r5-core.Ratio/schema}},
+                                                              :CodeableConcept {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema}},
+                                                              :Quantity {:confirms #{hl7-fhir-r5-core.Quantity/schema}}},
+                                                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.medication-ingredientstrength/value-set,
+                                                                            :strength :preferred},
+                                                       :zen/desc "Quantity of ingredient present"}},
+                                     :require #{:item},
+                                     :zen/desc "Active or inactive ingredient"}},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.medication-status/value-set,
+                                              :strength :required},
+                         :zen/desc "active | inactive | entered-in-error"},
+                :code {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                       :fhir/flags #{:SU},
+                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.medication-codes/value-set,
+                                            :strength :example},
+                       :zen/desc "Codes that identify this medication"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Business identifier for this medication"}},
+                :marketingAuthorizationHolder {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                           zen.fhir/Reference},
+                                               :fhir/flags #{:SU},
+                                               :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Organization/schema}},
+                                               :zen/desc "Organization that has authorization to market medication"}}}}

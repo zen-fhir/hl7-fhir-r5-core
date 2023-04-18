@@ -1,0 +1,151 @@
+{ns hl7-fhir-r5-core.DetectedIssue,
+ import #{hl7-fhir-r5-core.BiologicallyDerivedProduct
+          hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.Medication
+          hl7-fhir-r5-core.Substance
+          hl7-fhir-r5-core.markdown
+          hl7-fhir-r5-core.BackboneElement
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.Group
+          hl7-fhir-r5-core.Annotation
+          hl7-fhir-r5-core.value-set.manifestation-or-symptom
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.Encounter
+          hl7-fhir-r5-core.Location
+          hl7-fhir-r5-core.value-set.detectedissue-status
+          hl7-fhir-r5-core.Practitioner
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.Device
+          hl7-fhir-r5-core.value-set.detectedissue-category
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.NutritionProduct
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.value-set.detectedissue-mitigation-action
+          hl7-fhir-r5-core.Procedure
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.RelatedPerson
+          hl7-fhir-r5-core.PractitionerRole
+          hl7-fhir-r5-core.Period
+          hl7-fhir-r5-core.value-set.detectedissue-severity
+          hl7-fhir-r5-core.uri
+          hl7-fhir-r5-core.Patient},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/DetectedIssue",
+         :require #{:status},
+         :type zen/map,
+         :zen/desc "Indicates an actual or potential clinical issue with or between one or more active or proposed clinical actions for a patient; e.g. Drug-drug interaction, Ineffective treatment frequency, Procedure-condition conflict, gaps in care, etc.",
+         :keys {:category {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                   :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.detectedissue-category/value-set,
+                                                        :strength :preferred},
+                                   :zen/desc "Type of detected issue, e.g. drug-drug, duplicate therapy, etc"}},
+                :_reference {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :encounter {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                        zen.fhir/Reference},
+                            :fhir/flags #{:SU},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Encounter/schema}},
+                            :zen/desc "Encounter detected issue is part of"},
+                :evidence {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                   :type zen/map,
+                                   :keys {:code {:type zen/vector,
+                                                 :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.manifestation-or-symptom/value-set,
+                                                                              :strength :example},
+                                                         :zen/desc "Manifestation"}},
+                                          :detail {:type zen/vector,
+                                                   :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                       zen.fhir/Reference},
+                                                           :zen.fhir/reference {:refers #{}},
+                                                           :zen/desc "Supporting information"}}},
+                                   :zen/desc "Supporting evidence"}},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :mitigation {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                     :type zen/map,
+                                     :keys {:action {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                     :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.detectedissue-mitigation-action/value-set,
+                                                                          :strength :preferred},
+                                                     :zen/desc "What mitigation?"},
+                                            :date {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                                                   :zen/desc "Date committed"},
+                                            :_date {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                            :author {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                 zen.fhir/Reference},
+                                                     :zen.fhir/reference {:refers #{hl7-fhir-r5-core.PractitionerRole/schema
+                                                                                    hl7-fhir-r5-core.Practitioner/schema}},
+                                                     :zen/desc "Who is committing?"},
+                                            :note {:type zen/vector,
+                                                   :every {:confirms #{hl7-fhir-r5-core.Annotation/schema},
+                                                           :zen/desc "Additional notes about the mitigation"}}},
+                                     :require #{:action},
+                                     :zen/desc "Step taken to address"}},
+                :author {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                     zen.fhir/Reference},
+                         :fhir/flags #{:SU},
+                         :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                        hl7-fhir-r5-core.PractitionerRole/schema
+                                                        hl7-fhir-r5-core.Device/schema
+                                                        hl7-fhir-r5-core.Practitioner/schema
+                                                        hl7-fhir-r5-core.RelatedPerson/schema}},
+                         :zen/desc "The provider or device that identified the issue"},
+                :reference {:confirms #{hl7-fhir-r5-core.uri/schema},
+                            :zen/desc "Authority for issue"},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.detectedissue-status/value-set,
+                                              :strength :required},
+                         :zen/desc "preliminary | final | entered-in-error | mitigated"},
+                :severity {:confirms #{hl7-fhir-r5-core.code/schema},
+                           :fhir/flags #{:SU},
+                           :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.detectedissue-severity/value-set,
+                                                :strength :required},
+                           :zen/desc "high | moderate | low"},
+                :code {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                       :fhir/flags #{:SU},
+                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.detectedissue-category/value-set,
+                                            :strength :preferred},
+                       :zen/desc "Specific type of detected issue, e.g. drug-drug, duplicate therapy, etc"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Unique id for the detected issue"}},
+                :_severity {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :identified {:fhir/polymorphic true,
+                             :type zen/map,
+                             :exclusive-keys #{#{:dateTime :Period}},
+                             :keys {:dateTime {:confirms #{hl7-fhir-r5-core.dateTime/schema}},
+                                    :_dateTime {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                    :Period {:confirms #{hl7-fhir-r5-core.Period/schema}}},
+                             :fhir/flags #{:SU},
+                             :zen/desc "When identified"},
+                :implicated {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                 zen.fhir/Reference},
+                                     :fhir/flags #{:SU},
+                                     :zen.fhir/reference {:refers #{}},
+                                     :zen/desc "Problem resource"}},
+                :subject {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                      zen.fhir/Reference},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                         hl7-fhir-r5-core.Medication/schema
+                                                         hl7-fhir-r5-core.Organization/schema
+                                                         hl7-fhir-r5-core.Location/schema
+                                                         hl7-fhir-r5-core.NutritionProduct/schema
+                                                         hl7-fhir-r5-core.Substance/schema
+                                                         hl7-fhir-r5-core.Device/schema
+                                                         hl7-fhir-r5-core.Procedure/schema
+                                                         hl7-fhir-r5-core.Practitioner/schema
+                                                         hl7-fhir-r5-core.BiologicallyDerivedProduct/schema
+                                                         hl7-fhir-r5-core.Group/schema}},
+                          :zen/desc "Associated subject"},
+                :_detail {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :detail {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                         :zen/desc "Description and context"}},
+         :zen.fhir/type "DetectedIssue"}}

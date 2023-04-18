@@ -1,0 +1,18 @@
+{ns hl7-fhir-r5-core.search.Specimen-collected,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Specimen-collected",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Specimen-collected",
+         :fhir/type "date",
+         :name "collected",
+         :expr {:Specimen {:knife [["collection"
+                                    "collected"
+                                    "ofType(dateTime"]
+                                   ["collection"
+                                    "collected"
+                                    "ofType(Period"]],
+                           :jsonpath ["$.\"collection\".\"collected\".\"ofType(dateTime\"[*]"
+                                      "$.\"collection\".\"collected\".\"ofType(Period\"[*]"],
+                           :data-types #{},
+                           :template :date,
+                           :sql {:where [:or]}}}}}

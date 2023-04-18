@@ -1,0 +1,59 @@
+{ns hl7-fhir-r5-core.SampledData,
+ import #{hl7-fhir-r5-core.decimal
+          zen.fhir
+          hl7-fhir-r5-core.positiveInt
+          hl7-fhir-r5-core.SimpleQuantity
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.canonical
+          hl7-fhir-r5-core.Quantity
+          hl7-fhir-r5-core.DataType
+          hl7-fhir-r5-core.value-set.ucum-units},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DataType/schema},
+         :zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/SampledData",
+         :require #{:intervalUnit :dimensions :origin},
+         :type zen/map,
+         :zen/desc "SampledData Type: A series of measurements taken by a device, with upper and lower limits. There may be more than one dimension in the data.",
+         :keys {:_data {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :upperLimit {:confirms #{hl7-fhir-r5-core.decimal/schema},
+                             :fhir/flags #{:SU},
+                             :zen/desc "Upper limit of detection"},
+                :intervalUnit {:confirms #{hl7-fhir-r5-core.code/schema},
+                               :fhir/flags #{:SU},
+                               :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.ucum-units/value-set,
+                                                    :strength :required},
+                               :zen/desc "The measurement unit of the interval between samples"},
+                :_lowerLimit {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_interval {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :lowerLimit {:confirms #{hl7-fhir-r5-core.decimal/schema},
+                             :fhir/flags #{:SU},
+                             :zen/desc "Lower limit of detection"},
+                :_factor {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_codeMap {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_intervalUnit {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_upperLimit {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :dimensions {:confirms #{hl7-fhir-r5-core.positiveInt/schema},
+                             :fhir/flags #{:SU},
+                             :zen/desc "Number of sample points at each time point"},
+                :factor {:confirms #{hl7-fhir-r5-core.decimal/schema},
+                         :fhir/flags #{:SU},
+                         :zen/desc "Multiply data by this before adding to origin"},
+                :codeMap {:confirms #{hl7-fhir-r5-core.canonical/schema},
+                          :zen/desc "Defines the codes used in the data"},
+                :origin {:confirms #{hl7-fhir-r5-core.Quantity/schema
+                                     hl7-fhir-r5-core.SimpleQuantity/schema},
+                         :fhir/flags #{:SU},
+                         :zen/desc "Zero value and units"},
+                :_offsets {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :interval {:confirms #{hl7-fhir-r5-core.decimal/schema},
+                           :fhir/flags #{:SU},
+                           :zen/desc "Number of intervalUnits between samples"},
+                :_dimensions {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :offsets {:confirms #{hl7-fhir-r5-core.string/schema},
+                          :zen/desc "Offsets, typically in time, at which data values were taken"},
+                :data {:confirms #{hl7-fhir-r5-core.string/schema},
+                       :zen/desc "Decimal values with spaces, or \"E\" | \"U\" | \"L\", or another code"}},
+         :zen.fhir/type "SampledData"}}

@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.Distance,
+ import #{zen.fhir
+          hl7-fhir-r5-core.Quantity
+          hl7-fhir-r5-core.value-set.distance-units},
+ schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen/desc "Distance Type: A length - a value with a unit that is a physical distance.",
+         :zen.fhir/type "Distance",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Distance",
+         :zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.Quantity/schema},
+         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.distance-units/value-set,
+                              :strength :extensible}}}

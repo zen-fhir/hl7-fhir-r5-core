@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.NutritionOrder-group-identifier,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "NutritionOrder-group-identifier",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/NutritionOrder-group-identifier",
+         :fhir/type "token",
+         :name "group-identifier",
+         :expr {:NutritionOrder {:knife [["groupIdentifier"]],
+                                 :jsonpath ["$.\"groupIdentifier\"[*]"],
+                                 :data-types #{{:type "Identifier",
+                                                :polymorphic? false}},
+                                 :template :token}}}}

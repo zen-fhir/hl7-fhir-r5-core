@@ -1,0 +1,13 @@
+{ns hl7-fhir-r5-core.search.EpisodeOfCare-diagnosis-code,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "EpisodeOfCare-diagnosis-code",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/EpisodeOfCare-diagnosis-code",
+         :fhir/type "token",
+         :name "diagnosis-code",
+         :expr {:EpisodeOfCare {:knife [["diagnosis"
+                                         "condition"
+                                         "concept"]],
+                                :jsonpath ["$.\"diagnosis\".\"condition\".\"concept\"[*]"],
+                                :data-types #{},
+                                :template :token}}}}

@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.StructureDefinition-ext-context-type,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "StructureDefinition-ext-context-type",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/StructureDefinition-ext-context-type",
+         :fhir/type "token",
+         :name "ext-context-type",
+         :expr {:StructureDefinition {:knife [["context" "type"]],
+                                      :jsonpath ["$.\"context\".\"type\"[*]"],
+                                      :data-types #{{:type "code",
+                                                     :polymorphic? false}},
+                                      :template :token}}}}

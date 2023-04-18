@@ -1,0 +1,494 @@
+{ns hl7-fhir-r5-core.search.CanonicalResource-description,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "CanonicalResource-description",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/CanonicalResource-description",
+         :fhir/type "string",
+         :name "description",
+         :expr {:MessageDefinition {:knife [["description"]],
+                                    :jsonpath ["$.\"description\"[*]"],
+                                    :data-types #{{:type "markdown",
+                                                   :polymorphic? false}},
+                                    :template :string,
+                                    :sql {:where [:or
+                                                  [:ilike
+                                                   [:pg/cast
+                                                    [:pg/jsonb-path-query-array
+                                                     [:pg/sql
+                                                      "{{table}}.resource"]
+                                                     [:pg/cast
+                                                      "($.\"description\"[*]).** ? (@.type() == \"string\")"
+                                                      :jsonpath]]
+                                                    :text]
+                                                   [:pg/sql
+                                                    "{{param}}"]]],
+                                          :parameter-format "%\"?%"}},
+                :Evidence {:knife [["description"]],
+                           :jsonpath ["$.\"description\"[*]"],
+                           :data-types #{{:type "markdown",
+                                          :polymorphic? false}},
+                           :template :string,
+                           :sql {:where [:or
+                                         [:ilike
+                                          [:pg/cast
+                                           [:pg/jsonb-path-query-array
+                                            [:pg/sql
+                                             "{{table}}.resource"]
+                                            [:pg/cast
+                                             "($.\"description\"[*]).** ? (@.type() == \"string\")"
+                                             :jsonpath]]
+                                           :text]
+                                          [:pg/sql "{{param}}"]]],
+                                 :parameter-format "%\"?%"}},
+                :ConditionDefinition {:knife [["description"]],
+                                      :jsonpath ["$.\"description\"[*]"],
+                                      :data-types #{{:type "markdown",
+                                                     :polymorphic? false}},
+                                      :template :string,
+                                      :sql {:where [:or
+                                                    [:ilike
+                                                     [:pg/cast
+                                                      [:pg/jsonb-path-query-array
+                                                       [:pg/sql
+                                                        "{{table}}.resource"]
+                                                       [:pg/cast
+                                                        "($.\"description\"[*]).** ? (@.type() == \"string\")"
+                                                        :jsonpath]]
+                                                      :text]
+                                                     [:pg/sql
+                                                      "{{param}}"]]],
+                                            :parameter-format "%\"?%"}},
+                :CompartmentDefinition {:knife [["description"]],
+                                        :jsonpath ["$.\"description\"[*]"],
+                                        :data-types #{{:type "markdown",
+                                                       :polymorphic? false}},
+                                        :template :string,
+                                        :sql {:where [:or
+                                                      [:ilike
+                                                       [:pg/cast
+                                                        [:pg/jsonb-path-query-array
+                                                         [:pg/sql
+                                                          "{{table}}.resource"]
+                                                         [:pg/cast
+                                                          "($.\"description\"[*]).** ? (@.type() == \"string\")"
+                                                          :jsonpath]]
+                                                        :text]
+                                                       [:pg/sql
+                                                        "{{param}}"]]],
+                                              :parameter-format "%\"?%"}},
+                :EvidenceVariable {:knife [["description"]],
+                                   :jsonpath ["$.\"description\"[*]"],
+                                   :data-types #{{:type "markdown",
+                                                  :polymorphic? false}},
+                                   :template :string,
+                                   :sql {:where [:or
+                                                 [:ilike
+                                                  [:pg/cast
+                                                   [:pg/jsonb-path-query-array
+                                                    [:pg/sql
+                                                     "{{table}}.resource"]
+                                                    [:pg/cast
+                                                     "($.\"description\"[*]).** ? (@.type() == \"string\")"
+                                                     :jsonpath]]
+                                                   :text]
+                                                  [:pg/sql
+                                                   "{{param}}"]]],
+                                         :parameter-format "%\"?%"}},
+                :ImplementationGuide {:knife [["description"]],
+                                      :jsonpath ["$.\"description\"[*]"],
+                                      :data-types #{{:type "markdown",
+                                                     :polymorphic? false}},
+                                      :template :string,
+                                      :sql {:where [:or
+                                                    [:ilike
+                                                     [:pg/cast
+                                                      [:pg/jsonb-path-query-array
+                                                       [:pg/sql
+                                                        "{{table}}.resource"]
+                                                       [:pg/cast
+                                                        "($.\"description\"[*]).** ? (@.type() == \"string\")"
+                                                        :jsonpath]]
+                                                      :text]
+                                                     [:pg/sql
+                                                      "{{param}}"]]],
+                                            :parameter-format "%\"?%"}},
+                :CodeSystem {:knife [["description"]],
+                             :jsonpath ["$.\"description\"[*]"],
+                             :data-types #{{:type "markdown",
+                                            :polymorphic? false}},
+                             :template :string,
+                             :sql {:where [:or
+                                           [:ilike
+                                            [:pg/cast
+                                             [:pg/jsonb-path-query-array
+                                              [:pg/sql
+                                               "{{table}}.resource"]
+                                              [:pg/cast
+                                               "($.\"description\"[*]).** ? (@.type() == \"string\")"
+                                               :jsonpath]]
+                                             :text]
+                                            [:pg/sql "{{param}}"]]],
+                                   :parameter-format "%\"?%"}},
+                :PlanDefinition {:knife [["description"]],
+                                 :jsonpath ["$.\"description\"[*]"],
+                                 :data-types #{{:type "markdown",
+                                                :polymorphic? false}},
+                                 :template :string,
+                                 :sql {:where [:or
+                                               [:ilike
+                                                [:pg/cast
+                                                 [:pg/jsonb-path-query-array
+                                                  [:pg/sql
+                                                   "{{table}}.resource"]
+                                                  [:pg/cast
+                                                   "($.\"description\"[*]).** ? (@.type() == \"string\")"
+                                                   :jsonpath]]
+                                                 :text]
+                                                [:pg/sql "{{param}}"]]],
+                                       :parameter-format "%\"?%"}},
+                :StructureMap {:knife [["description"]],
+                               :jsonpath ["$.\"description\"[*]"],
+                               :data-types #{{:type "markdown",
+                                              :polymorphic? false}},
+                               :template :string,
+                               :sql {:where [:or
+                                             [:ilike
+                                              [:pg/cast
+                                               [:pg/jsonb-path-query-array
+                                                [:pg/sql
+                                                 "{{table}}.resource"]
+                                                [:pg/cast
+                                                 "($.\"description\"[*]).** ? (@.type() == \"string\")"
+                                                 :jsonpath]]
+                                               :text]
+                                              [:pg/sql "{{param}}"]]],
+                                     :parameter-format "%\"?%"}},
+                :Library {:knife [["description"]],
+                          :jsonpath ["$.\"description\"[*]"],
+                          :data-types #{{:type "markdown",
+                                         :polymorphic? false}},
+                          :template :string,
+                          :sql {:where [:or
+                                        [:ilike
+                                         [:pg/cast
+                                          [:pg/jsonb-path-query-array
+                                           [:pg/sql
+                                            "{{table}}.resource"]
+                                           [:pg/cast
+                                            "($.\"description\"[*]).** ? (@.type() == \"string\")"
+                                            :jsonpath]]
+                                          :text]
+                                         [:pg/sql "{{param}}"]]],
+                                :parameter-format "%\"?%"}},
+                :ActivityDefinition {:knife [["description"]],
+                                     :jsonpath ["$.\"description\"[*]"],
+                                     :data-types #{{:type "markdown",
+                                                    :polymorphic? false}},
+                                     :template :string,
+                                     :sql {:where [:or
+                                                   [:ilike
+                                                    [:pg/cast
+                                                     [:pg/jsonb-path-query-array
+                                                      [:pg/sql
+                                                       "{{table}}.resource"]
+                                                      [:pg/cast
+                                                       "($.\"description\"[*]).** ? (@.type() == \"string\")"
+                                                       :jsonpath]]
+                                                     :text]
+                                                    [:pg/sql
+                                                     "{{param}}"]]],
+                                           :parameter-format "%\"?%"}},
+                :Citation {:knife [["description"]],
+                           :jsonpath ["$.\"description\"[*]"],
+                           :data-types #{{:type "markdown",
+                                          :polymorphic? false}},
+                           :template :string,
+                           :sql {:where [:or
+                                         [:ilike
+                                          [:pg/cast
+                                           [:pg/jsonb-path-query-array
+                                            [:pg/sql
+                                             "{{table}}.resource"]
+                                            [:pg/cast
+                                             "($.\"description\"[*]).** ? (@.type() == \"string\")"
+                                             :jsonpath]]
+                                           :text]
+                                          [:pg/sql "{{param}}"]]],
+                                 :parameter-format "%\"?%"}},
+                :ChargeItemDefinition {:knife [["description"]],
+                                       :jsonpath ["$.\"description\"[*]"],
+                                       :data-types #{{:type "markdown",
+                                                      :polymorphic? false}},
+                                       :template :string,
+                                       :sql {:where [:or
+                                                     [:ilike
+                                                      [:pg/cast
+                                                       [:pg/jsonb-path-query-array
+                                                        [:pg/sql
+                                                         "{{table}}.resource"]
+                                                        [:pg/cast
+                                                         "($.\"description\"[*]).** ? (@.type() == \"string\")"
+                                                         :jsonpath]]
+                                                       :text]
+                                                      [:pg/sql
+                                                       "{{param}}"]]],
+                                             :parameter-format "%\"?%"}},
+                :NamingSystem {:knife [["description"]],
+                               :jsonpath ["$.\"description\"[*]"],
+                               :data-types #{{:type "markdown",
+                                              :polymorphic? false}},
+                               :template :string,
+                               :sql {:where [:or
+                                             [:ilike
+                                              [:pg/cast
+                                               [:pg/jsonb-path-query-array
+                                                [:pg/sql
+                                                 "{{table}}.resource"]
+                                                [:pg/cast
+                                                 "($.\"description\"[*]).** ? (@.type() == \"string\")"
+                                                 :jsonpath]]
+                                               :text]
+                                              [:pg/sql "{{param}}"]]],
+                                     :parameter-format "%\"?%"}},
+                :Questionnaire {:knife [["description"]],
+                                :jsonpath ["$.\"description\"[*]"],
+                                :data-types #{{:type "markdown",
+                                               :polymorphic? false}},
+                                :template :string,
+                                :sql {:where [:or
+                                              [:ilike
+                                               [:pg/cast
+                                                [:pg/jsonb-path-query-array
+                                                 [:pg/sql
+                                                  "{{table}}.resource"]
+                                                 [:pg/cast
+                                                  "($.\"description\"[*]).** ? (@.type() == \"string\")"
+                                                  :jsonpath]]
+                                                :text]
+                                               [:pg/sql "{{param}}"]]],
+                                      :parameter-format "%\"?%"}},
+                :EventDefinition {:knife [["description"]],
+                                  :jsonpath ["$.\"description\"[*]"],
+                                  :data-types #{{:type "markdown",
+                                                 :polymorphic? false}},
+                                  :template :string,
+                                  :sql {:where [:or
+                                                [:ilike
+                                                 [:pg/cast
+                                                  [:pg/jsonb-path-query-array
+                                                   [:pg/sql
+                                                    "{{table}}.resource"]
+                                                   [:pg/cast
+                                                    "($.\"description\"[*]).** ? (@.type() == \"string\")"
+                                                    :jsonpath]]
+                                                  :text]
+                                                 [:pg/sql "{{param}}"]]],
+                                        :parameter-format "%\"?%"}},
+                :ValueSet {:knife [["description"]],
+                           :jsonpath ["$.\"description\"[*]"],
+                           :data-types #{{:type "markdown",
+                                          :polymorphic? false}},
+                           :template :string,
+                           :sql {:where [:or
+                                         [:ilike
+                                          [:pg/cast
+                                           [:pg/jsonb-path-query-array
+                                            [:pg/sql
+                                             "{{table}}.resource"]
+                                            [:pg/cast
+                                             "($.\"description\"[*]).** ? (@.type() == \"string\")"
+                                             :jsonpath]]
+                                           :text]
+                                          [:pg/sql "{{param}}"]]],
+                                 :parameter-format "%\"?%"}},
+                :Measure {:knife [["description"]],
+                          :jsonpath ["$.\"description\"[*]"],
+                          :data-types #{{:type "markdown",
+                                         :polymorphic? false}},
+                          :template :string,
+                          :sql {:where [:or
+                                        [:ilike
+                                         [:pg/cast
+                                          [:pg/jsonb-path-query-array
+                                           [:pg/sql
+                                            "{{table}}.resource"]
+                                           [:pg/cast
+                                            "($.\"description\"[*]).** ? (@.type() == \"string\")"
+                                            :jsonpath]]
+                                          :text]
+                                         [:pg/sql "{{param}}"]]],
+                                :parameter-format "%\"?%"}},
+                :CapabilityStatement {:knife [["description"]],
+                                      :jsonpath ["$.\"description\"[*]"],
+                                      :data-types #{{:type "markdown",
+                                                     :polymorphic? false}},
+                                      :template :string,
+                                      :sql {:where [:or
+                                                    [:ilike
+                                                     [:pg/cast
+                                                      [:pg/jsonb-path-query-array
+                                                       [:pg/sql
+                                                        "{{table}}.resource"]
+                                                       [:pg/cast
+                                                        "($.\"description\"[*]).** ? (@.type() == \"string\")"
+                                                        :jsonpath]]
+                                                      :text]
+                                                     [:pg/sql
+                                                      "{{param}}"]]],
+                                            :parameter-format "%\"?%"}},
+                :TestScript {:knife [["description"]],
+                             :jsonpath ["$.\"description\"[*]"],
+                             :data-types #{{:type "markdown",
+                                            :polymorphic? false}},
+                             :template :string,
+                             :sql {:where [:or
+                                           [:ilike
+                                            [:pg/cast
+                                             [:pg/jsonb-path-query-array
+                                              [:pg/sql
+                                               "{{table}}.resource"]
+                                              [:pg/cast
+                                               "($.\"description\"[*]).** ? (@.type() == \"string\")"
+                                               :jsonpath]]
+                                             :text]
+                                            [:pg/sql "{{param}}"]]],
+                                   :parameter-format "%\"?%"}},
+                :ConceptMap {:knife [["description"]],
+                             :jsonpath ["$.\"description\"[*]"],
+                             :data-types #{{:type "markdown",
+                                            :polymorphic? false}},
+                             :template :string,
+                             :sql {:where [:or
+                                           [:ilike
+                                            [:pg/cast
+                                             [:pg/jsonb-path-query-array
+                                              [:pg/sql
+                                               "{{table}}.resource"]
+                                              [:pg/cast
+                                               "($.\"description\"[*]).** ? (@.type() == \"string\")"
+                                               :jsonpath]]
+                                             :text]
+                                            [:pg/sql "{{param}}"]]],
+                                   :parameter-format "%\"?%"}},
+                :StructureDefinition {:knife [["description"]],
+                                      :jsonpath ["$.\"description\"[*]"],
+                                      :data-types #{{:type "markdown",
+                                                     :polymorphic? false}},
+                                      :template :string,
+                                      :sql {:where [:or
+                                                    [:ilike
+                                                     [:pg/cast
+                                                      [:pg/jsonb-path-query-array
+                                                       [:pg/sql
+                                                        "{{table}}.resource"]
+                                                       [:pg/cast
+                                                        "($.\"description\"[*]).** ? (@.type() == \"string\")"
+                                                        :jsonpath]]
+                                                      :text]
+                                                     [:pg/sql
+                                                      "{{param}}"]]],
+                                            :parameter-format "%\"?%"}},
+                :Requirements {:knife [["description"]],
+                               :jsonpath ["$.\"description\"[*]"],
+                               :data-types #{{:type "markdown",
+                                              :polymorphic? false}},
+                               :template :string,
+                               :sql {:where [:or
+                                             [:ilike
+                                              [:pg/cast
+                                               [:pg/jsonb-path-query-array
+                                                [:pg/sql
+                                                 "{{table}}.resource"]
+                                                [:pg/cast
+                                                 "($.\"description\"[*]).** ? (@.type() == \"string\")"
+                                                 :jsonpath]]
+                                               :text]
+                                              [:pg/sql "{{param}}"]]],
+                                     :parameter-format "%\"?%"}},
+                :ActorDefinition {:knife [["description"]],
+                                  :jsonpath ["$.\"description\"[*]"],
+                                  :data-types #{{:type "markdown",
+                                                 :polymorphic? false}},
+                                  :template :string,
+                                  :sql {:where [:or
+                                                [:ilike
+                                                 [:pg/cast
+                                                  [:pg/jsonb-path-query-array
+                                                   [:pg/sql
+                                                    "{{table}}.resource"]
+                                                   [:pg/cast
+                                                    "($.\"description\"[*]).** ? (@.type() == \"string\")"
+                                                    :jsonpath]]
+                                                  :text]
+                                                 [:pg/sql "{{param}}"]]],
+                                        :parameter-format "%\"?%"}},
+                :SearchParameter {:knife [["description"]],
+                                  :jsonpath ["$.\"description\"[*]"],
+                                  :data-types #{{:type "markdown",
+                                                 :polymorphic? false}},
+                                  :template :string,
+                                  :sql {:where [:or
+                                                [:ilike
+                                                 [:pg/cast
+                                                  [:pg/jsonb-path-query-array
+                                                   [:pg/sql
+                                                    "{{table}}.resource"]
+                                                   [:pg/cast
+                                                    "($.\"description\"[*]).** ? (@.type() == \"string\")"
+                                                    :jsonpath]]
+                                                  :text]
+                                                 [:pg/sql "{{param}}"]]],
+                                        :parameter-format "%\"?%"}},
+                :OperationDefinition {:knife [["description"]],
+                                      :jsonpath ["$.\"description\"[*]"],
+                                      :data-types #{{:type "markdown",
+                                                     :polymorphic? false}},
+                                      :template :string,
+                                      :sql {:where [:or
+                                                    [:ilike
+                                                     [:pg/cast
+                                                      [:pg/jsonb-path-query-array
+                                                       [:pg/sql
+                                                        "{{table}}.resource"]
+                                                       [:pg/cast
+                                                        "($.\"description\"[*]).** ? (@.type() == \"string\")"
+                                                        :jsonpath]]
+                                                      :text]
+                                                     [:pg/sql
+                                                      "{{param}}"]]],
+                                            :parameter-format "%\"?%"}},
+                :GraphDefinition {:knife [["description"]],
+                                  :jsonpath ["$.\"description\"[*]"],
+                                  :data-types #{{:type "markdown",
+                                                 :polymorphic? false}},
+                                  :template :string,
+                                  :sql {:where [:or
+                                                [:ilike
+                                                 [:pg/cast
+                                                  [:pg/jsonb-path-query-array
+                                                   [:pg/sql
+                                                    "{{table}}.resource"]
+                                                   [:pg/cast
+                                                    "($.\"description\"[*]).** ? (@.type() == \"string\")"
+                                                    :jsonpath]]
+                                                  :text]
+                                                 [:pg/sql "{{param}}"]]],
+                                        :parameter-format "%\"?%"}},
+                :TerminologyCapabilities {:knife [["description"]],
+                                          :jsonpath ["$.\"description\"[*]"],
+                                          :data-types #{{:type "markdown",
+                                                         :polymorphic? false}},
+                                          :template :string,
+                                          :sql {:where [:or
+                                                        [:ilike
+                                                         [:pg/cast
+                                                          [:pg/jsonb-path-query-array
+                                                           [:pg/sql
+                                                            "{{table}}.resource"]
+                                                           [:pg/cast
+                                                            "($.\"description\"[*]).** ? (@.type() == \"string\")"
+                                                            :jsonpath]]
+                                                          :text]
+                                                         [:pg/sql
+                                                          "{{param}}"]]],
+                                                :parameter-format "%\"?%"}}}}}

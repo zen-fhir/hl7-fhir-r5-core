@@ -1,0 +1,11 @@
+{ns hl7-fhir-r5-core.search.DocumentReference-event-code,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "DocumentReference-event-code",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/DocumentReference-event-code",
+         :fhir/type "token",
+         :name "event-code",
+         :expr {:DocumentReference {:knife [["event" "concept"]],
+                                    :jsonpath ["$.\"event\".\"concept\"[*]"],
+                                    :data-types #{},
+                                    :template :token}}}}

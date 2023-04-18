@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Resource-language,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Resource-language",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Resource-language",
+         :fhir/type "token",
+         :name "_language",
+         :expr {:Resource {:knife [["language"]],
+                           :jsonpath ["$.\"language\"[*]"],
+                           :data-types #{{:type "code",
+                                          :polymorphic? false}},
+                           :template :token}}}}

@@ -1,0 +1,9 @@
+{ns hl7-fhir-r5-core.value-set.doc-typecodes,
+ import #{zen.fhir},
+ value-set {:zen/tags #{zen.fhir/value-set},
+            :zen/desc "FHIR Document Codes - all LOINC codes where scale type = 'DOC'.",
+            :zen.fhir/version "0.6.21-2",
+            :fhir/code-systems #{{:fhir/url "http://loinc.org",
+                                  :zen.fhir/content :not-present}},
+            :uri "http://hl7.org/fhir/ValueSet/doc-typecodes",
+            :version "5.0.0"}}

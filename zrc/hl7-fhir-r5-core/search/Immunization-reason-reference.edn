@@ -1,0 +1,11 @@
+{ns hl7-fhir-r5-core.search.Immunization-reason-reference,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Immunization-reason-reference",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Immunization-reason-reference",
+         :fhir/type "reference",
+         :name "reason-reference",
+         :expr {:Immunization {:knife [["reason" "reference"]],
+                               :jsonpath ["$.\"reason\".\"reference\"[*]"],
+                               :data-types #{},
+                               :template :reference}}}}

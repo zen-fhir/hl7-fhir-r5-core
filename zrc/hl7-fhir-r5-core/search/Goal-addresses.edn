@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Goal-addresses,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Goal-addresses",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Goal-addresses",
+         :fhir/type "reference",
+         :name "addresses",
+         :expr {:Goal {:knife [["addresses"]],
+                       :jsonpath ["$.\"addresses\"[*]"],
+                       :data-types #{{:type "Reference",
+                                      :polymorphic? false}},
+                       :template :reference}}}}

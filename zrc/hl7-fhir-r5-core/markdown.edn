@@ -1,0 +1,10 @@
+{ns hl7-fhir-r5-core.markdown,
+ import #{zen.fhir hl7-fhir-r5-core.string},
+ schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen/desc "markdown type: A string that may contain Github Flavored Markdown syntax for optional processing by a mark down presentation engine",
+         :zen.fhir/type "markdown",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/markdown",
+         :zen.fhir/version "0.6.21-2",
+         :type zen/string,
+         :maxLength 1048576,
+         :confirms #{hl7-fhir-r5-core.string/schema}}}

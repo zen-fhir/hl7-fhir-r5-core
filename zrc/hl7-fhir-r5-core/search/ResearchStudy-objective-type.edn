@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.ResearchStudy-objective-type,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "ResearchStudy-objective-type",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/ResearchStudy-objective-type",
+         :fhir/type "token",
+         :name "objective-type",
+         :expr {:ResearchStudy {:knife [["objective" "type"]],
+                                :jsonpath ["$.\"objective\".\"type\"[*]"],
+                                :data-types #{{:type "CodeableConcept",
+                                               :polymorphic? false}},
+                                :template :token}}}}

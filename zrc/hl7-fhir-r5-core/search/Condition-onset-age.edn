@@ -1,0 +1,52 @@
+{ns hl7-fhir-r5-core.search.Condition-onset-age,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Condition-onset-age",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Condition-onset-age",
+         :fhir/type "quantity",
+         :name "onset-age",
+         :expr {:Condition {:knife [["onset" "ofType(Age"]
+                                    ["onset" "ofType(Range"]],
+                            :jsonpath ["$.\"onset\".\"ofType(Age\"[*]"
+                                       "$.\"onset\".\"ofType(Range\"[*]"],
+                            :data-types #{},
+                            :template :quantity,
+                            :sql {:where [:or
+                                          [:and
+                                           [:>=
+                                            [:pg/call
+                                             :jsonpath_extract_max_numeric
+                                             [:pg/sql
+                                              "{{table}}.resource"]
+                                             "$.\"onset\".\"ofType(Age\"[*].\"value\""]
+                                            [:pg/cast
+                                             [:pg/sql "{{param}}"]
+                                             :numeric]]
+                                           [:<=
+                                            [:pg/call
+                                             :jsonpath_extract_min_numeric
+                                             [:pg/sql
+                                              "{{table}}.resource"]
+                                             "$.\"onset\".\"ofType(Age\"[*].\"value\""]
+                                            [:pg/cast
+                                             [:pg/sql "{{param}}"]
+                                             :numeric]]]
+                                          [:and
+                                           [:>=
+                                            [:pg/call
+                                             :jsonpath_extract_max_numeric
+                                             [:pg/sql
+                                              "{{table}}.resource"]
+                                             "$.\"onset\".\"ofType(Range\"[*].\"value\""]
+                                            [:pg/cast
+                                             [:pg/sql "{{param}}"]
+                                             :numeric]]
+                                           [:<=
+                                            [:pg/call
+                                             :jsonpath_extract_min_numeric
+                                             [:pg/sql
+                                              "{{table}}.resource"]
+                                             "$.\"onset\".\"ofType(Range\"[*].\"value\""]
+                                            [:pg/cast
+                                             [:pg/sql "{{param}}"]
+                                             :numeric]]]]}}}}}

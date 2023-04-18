@@ -1,0 +1,22 @@
+{ns hl7-fhir-r5-core.value-set.relatedperson-relationshiptype,
+ import #{zen.fhir},
+ value-set {:zen/tags #{zen.fhir/value-set},
+            :zen/desc "A set of codes that can be used to indicate the relationship between a Patient and a Related Person.",
+            :zen.fhir/version "0.6.21-2",
+            :fhir/code-systems #{{:fhir/url "http://terminology.hl7.org/CodeSystem/v3-RoleClass",
+                                  :zen.fhir/content :bundled}
+                                 {:fhir/url "http://terminology.hl7.org/CodeSystem/v2-0131",
+                                  :zen.fhir/content :bundled}
+                                 {:fhir/url "http://terminology.hl7.org/CodeSystem/v3-RoleCode",
+                                  :zen.fhir/content :bundled}
+                                 {:fhir/url "http://terminology.hl7.org/CodeSystem/v3-ParticipationType",
+                                  :zen.fhir/content :bundled}},
+            :uri "http://hl7.org/fhir/ValueSet/relatedperson-relationshiptype",
+            :version "5.0.0",
+            :ftr {:module "hl7-fhir-r5-core",
+                  :source-url "https://storage.googleapis.com",
+                  :source-type :cloud-storage,
+                  :ftr-path "ftr",
+                  :tag "init",
+                  :validation-index {:type :nippy,
+                                     :file "index.nippy"}}}}

@@ -1,0 +1,215 @@
+{ns hl7-fhir-r5-core.ImagingSelection,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.Medication
+          hl7-fhir-r5-core.Substance
+          hl7-fhir-r5-core.Appointment
+          hl7-fhir-r5-core.instant
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.decimal
+          hl7-fhir-r5-core.CodeableReference
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.Group
+          hl7-fhir-r5-core.value-set.body-site
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.AppointmentResponse
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.Location
+          hl7-fhir-r5-core.Practitioner
+          hl7-fhir-r5-core.Device
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.CarePlan
+          hl7-fhir-r5-core.Specimen
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.value-set.series-performer-function
+          hl7-fhir-r5-core.CareTeam
+          hl7-fhir-r5-core.Procedure
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.RelatedPerson
+          hl7-fhir-r5-core.value-set.imagingselection-3dgraphictype
+          hl7-fhir-r5-core.PractitionerRole
+          hl7-fhir-r5-core.ImagingStudy
+          hl7-fhir-r5-core.Coding
+          hl7-fhir-r5-core.ServiceRequest
+          hl7-fhir-r5-core.ImagingSelection
+          hl7-fhir-r5-core.value-set.imagingselection-2dgraphictype
+          hl7-fhir-r5-core.id
+          hl7-fhir-r5-core.HealthcareService
+          hl7-fhir-r5-core.DocumentReference
+          hl7-fhir-r5-core.value-set.imagingselection-status
+          hl7-fhir-r5-core.unsignedInt
+          hl7-fhir-r5-core.Task
+          hl7-fhir-r5-core.Endpoint
+          hl7-fhir-r5-core.Patient},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/ImagingSelection",
+         :require #{:status :code},
+         :type zen/map,
+         :zen/desc "A selection of DICOM SOP instances and/or frames within a single Study and Series. This might include additional specifics such as an image region, an Observation UID or a Segmentation Number, allowing linkage to an Observation Resource or transferring this information along with the ImagingStudy Resource.",
+         :keys {:category {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                   :fhir/flags #{:SU},
+                                   :zen/desc "Classifies the imaging selection"}},
+                :_issued {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_frameOfReferenceUid {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :seriesNumber {:confirms #{hl7-fhir-r5-core.unsignedInt/schema},
+                               :fhir/flags #{:SU},
+                               :zen/desc "DICOM Series Number"},
+                :seriesUid {:confirms #{hl7-fhir-r5-core.id/schema},
+                            :fhir/flags #{:SU},
+                            :zen/desc "DICOM Series Instance UID"},
+                :instance {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                   :type zen/map,
+                                   :keys {:_subset {:type zen/vector,
+                                                    :every {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                          :sopClass {:confirms #{hl7-fhir-r5-core.Coding/schema},
+                                                     :zen/desc "DICOM SOP Class UID"},
+                                          :subset {:type zen/vector,
+                                                   :every {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                           :zen/desc "The selected subset of the SOP Instance"}},
+                                          :number {:confirms #{hl7-fhir-r5-core.unsignedInt/schema},
+                                                   :fhir/flags #{:SU},
+                                                   :zen/desc "DICOM Instance Number"},
+                                          :uid {:confirms #{hl7-fhir-r5-core.id/schema},
+                                                :fhir/flags #{:SU},
+                                                :zen/desc "DICOM SOP Instance UID"},
+                                          :imageRegion2D {:type zen/vector,
+                                                          :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                                                  :type zen/map,
+                                                                  :keys {:regionType {:confirms #{hl7-fhir-r5-core.code/schema},
+                                                                                      :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.imagingselection-2dgraphictype/value-set,
+                                                                                                           :strength :required},
+                                                                                      :zen/desc "point | polyline | interpolated | circle | ellipse"},
+                                                                         :_regionType {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                                         :coordinate {:type zen/vector,
+                                                                                      :every {:confirms #{hl7-fhir-r5-core.decimal/schema},
+                                                                                              :zen/desc "Specifies the coordinates that define the image region"},
+                                                                                      :minItems 1},
+                                                                         :_coordinate {:type zen/vector,
+                                                                                       :every {:confirms #{hl7-fhir-r5-core.Element/schema}}}},
+                                                                  :require #{:coordinate
+                                                                             :regionType},
+                                                                  :zen/desc "A specific 2D region in a DICOM image / frame"}},
+                                          :_number {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                          :imageRegion3D {:type zen/vector,
+                                                          :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                                                  :type zen/map,
+                                                                  :keys {:regionType {:confirms #{hl7-fhir-r5-core.code/schema},
+                                                                                      :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.imagingselection-3dgraphictype/value-set,
+                                                                                                           :strength :required},
+                                                                                      :zen/desc "point | multipoint | polyline | polygon | ellipse | ellipsoid"},
+                                                                         :_regionType {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                                         :coordinate {:type zen/vector,
+                                                                                      :every {:confirms #{hl7-fhir-r5-core.decimal/schema},
+                                                                                              :zen/desc "Specifies the coordinates that define the image region"},
+                                                                                      :minItems 1},
+                                                                         :_coordinate {:type zen/vector,
+                                                                                       :every {:confirms #{hl7-fhir-r5-core.Element/schema}}}},
+                                                                  :require #{:coordinate
+                                                                             :regionType},
+                                                                  :zen/desc "A specific 3D region in a DICOM frame of reference"}},
+                                          :_uid {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                   :require #{:uid},
+                                   :fhir/flags #{:SU},
+                                   :zen/desc "The selected instances"}},
+                :derivedFrom {:type zen/vector,
+                              :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                  zen.fhir/Reference},
+                                      :fhir/flags #{:SU},
+                                      :zen.fhir/reference {:refers #{hl7-fhir-r5-core.ImagingStudy/schema
+                                                                     hl7-fhir-r5-core.DocumentReference/schema}},
+                                      :zen/desc "The imaging study from which the imaging selection is derived"}},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_seriesNumber {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.imagingselection-status/value-set,
+                                              :strength :required},
+                         :zen/desc "available | entered-in-error | unknown"},
+                :_studyUid {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :code {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "Imaging Selection purpose text or code"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Business Identifier for Imaging Selection"}},
+                :bodySite {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                           :fhir/flags #{:SU},
+                           :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.body-site/value-set,
+                                                :strength :example},
+                           :zen/desc "Body part examined"},
+                :frameOfReferenceUid {:confirms #{hl7-fhir-r5-core.id/schema},
+                                      :fhir/flags #{:SU},
+                                      :zen/desc "The Frame of Reference UID for the selected images"},
+                :focus {:type zen/vector,
+                        :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                            zen.fhir/Reference},
+                                :fhir/flags #{:SU},
+                                :zen.fhir/reference {:refers #{hl7-fhir-r5-core.ImagingSelection/schema}},
+                                :zen/desc "Related resource that is the focus for the imaging selection"}},
+                :issued {:confirms #{hl7-fhir-r5-core.instant/schema},
+                         :fhir/flags #{:SU},
+                         :zen/desc "Date / Time when this imaging selection was created"},
+                :_seriesUid {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :studyUid {:confirms #{hl7-fhir-r5-core.id/schema},
+                           :fhir/flags #{:SU},
+                           :zen/desc "DICOM Study Instance UID"},
+                :basedOn {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                              zen.fhir/Reference},
+                                  :fhir/flags #{:SU},
+                                  :zen.fhir/reference {:refers #{hl7-fhir-r5-core.ServiceRequest/schema
+                                                                 hl7-fhir-r5-core.CarePlan/schema
+                                                                 hl7-fhir-r5-core.Task/schema
+                                                                 hl7-fhir-r5-core.Appointment/schema
+                                                                 hl7-fhir-r5-core.AppointmentResponse/schema}},
+                                  :zen/desc "Associated request"}},
+                :endpoint {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                               zen.fhir/Reference},
+                                   :fhir/flags #{:SU},
+                                   :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Endpoint/schema}},
+                                   :zen/desc "The network service providing retrieval for the images referenced in the imaging selection"}},
+                :subject {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                      zen.fhir/Reference},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                         hl7-fhir-r5-core.Medication/schema
+                                                         hl7-fhir-r5-core.Organization/schema
+                                                         hl7-fhir-r5-core.Location/schema
+                                                         hl7-fhir-r5-core.Substance/schema
+                                                         hl7-fhir-r5-core.Device/schema
+                                                         hl7-fhir-r5-core.Procedure/schema
+                                                         hl7-fhir-r5-core.Practitioner/schema
+                                                         hl7-fhir-r5-core.Group/schema
+                                                         hl7-fhir-r5-core.Specimen/schema}},
+                          :zen/desc "Subject of the selected instances"},
+                :performer {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                    :type zen/map,
+                                    :keys {:function {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                      :fhir/flags #{:SU},
+                                                      :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.series-performer-function/value-set,
+                                                                           :strength :extensible},
+                                                      :zen/desc "Type of performer"},
+                                           :actor {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                               zen.fhir/Reference},
+                                                   :fhir/flags #{:SU},
+                                                   :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                                                  hl7-fhir-r5-core.CareTeam/schema
+                                                                                  hl7-fhir-r5-core.HealthcareService/schema
+                                                                                  hl7-fhir-r5-core.PractitionerRole/schema
+                                                                                  hl7-fhir-r5-core.Organization/schema
+                                                                                  hl7-fhir-r5-core.Device/schema
+                                                                                  hl7-fhir-r5-core.Practitioner/schema
+                                                                                  hl7-fhir-r5-core.RelatedPerson/schema}},
+                                                   :zen/desc "Author (human or machine)"}},
+                                    :fhir/flags #{:SU},
+                                    :zen/desc "Selector of the instances (human or machine)"}}},
+         :zen.fhir/type "ImagingSelection"}}

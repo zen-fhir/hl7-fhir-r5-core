@@ -1,0 +1,180 @@
+{ns hl7-fhir-r5-core.AdministrableProductDefinition,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.value-set.product-characteristic-codes
+          hl7-fhir-r5-core.value-set.target-species
+          hl7-fhir-r5-core.markdown
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.boolean
+          hl7-fhir-r5-core.Ratio
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.value-set.administrable-dose-form
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.Attachment
+          hl7-fhir-r5-core.DeviceDefinition
+          hl7-fhir-r5-core.ManufacturedItemDefinition
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.date
+          hl7-fhir-r5-core.value-set.route-codes
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.value-set.publication-status
+          hl7-fhir-r5-core.Duration
+          hl7-fhir-r5-core.value-set.unit-of-presentation
+          hl7-fhir-r5-core.Quantity
+          hl7-fhir-r5-core.MedicinalProductDefinition
+          hl7-fhir-r5-core.Binary
+          hl7-fhir-r5-core.value-set.animal-tissue-type
+          hl7-fhir-r5-core.value-set.substance-codes},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/AdministrableProductDefinition",
+         :require #{:routeOfAdministration :status},
+         :type zen/map,
+         :zen/desc "A medicinal product in the final form which is suitable for administering to a patient (after any mixing of multiple components, dissolution etc. has been performed).",
+         :keys {:description {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                              :zen/desc "A general description of the product, when in its final form, suitable for administration e.g. effervescent blue liquid, to be swallowed"},
+                :routeOfAdministration {:type zen/vector,
+                                        :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                                :type zen/map,
+                                                :keys {:code {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                              :fhir/flags #{:SU},
+                                                              :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.route-codes/value-set,
+                                                                                   :strength :example},
+                                                              :zen/desc "Coded expression for the route"},
+                                                       :firstDose {:confirms #{hl7-fhir-r5-core.Quantity/schema},
+                                                                   :fhir/flags #{:SU},
+                                                                   :zen/desc "The first dose (dose quantity) administered can be specified for the product"},
+                                                       :maxSingleDose {:confirms #{hl7-fhir-r5-core.Quantity/schema},
+                                                                       :fhir/flags #{:SU},
+                                                                       :zen/desc "The maximum single dose that can be administered"},
+                                                       :maxDosePerDay {:confirms #{hl7-fhir-r5-core.Quantity/schema},
+                                                                       :fhir/flags #{:SU},
+                                                                       :zen/desc "The maximum dose quantity to be administered in any one 24-h period"},
+                                                       :maxDosePerTreatmentPeriod {:confirms #{hl7-fhir-r5-core.Ratio/schema},
+                                                                                   :fhir/flags #{:SU},
+                                                                                   :zen/desc "The maximum dose per treatment period that can be administered"},
+                                                       :maxTreatmentPeriod {:confirms #{hl7-fhir-r5-core.Duration/schema},
+                                                                            :fhir/flags #{:SU},
+                                                                            :zen/desc "The maximum treatment period during which the product can be administered"},
+                                                       :targetSpecies {:type zen/vector,
+                                                                       :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                                                               :type zen/map,
+                                                                               :keys {:code {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                                             :fhir/flags #{:SU},
+                                                                                             :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.target-species/value-set,
+                                                                                                                  :strength :example},
+                                                                                             :zen/desc "Coded expression for the species"},
+                                                                                      :withdrawalPeriod {:type zen/vector,
+                                                                                                         :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                                                                                                 :type zen/map,
+                                                                                                                 :keys {:tissue {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                                                                                 :fhir/flags #{:SU},
+                                                                                                                                 :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.animal-tissue-type/value-set,
+                                                                                                                                                      :strength :example},
+                                                                                                                                 :zen/desc "The type of tissue for which the withdrawal period applies, e.g. meat, milk"},
+                                                                                                                        :value {:confirms #{hl7-fhir-r5-core.Quantity/schema},
+                                                                                                                                :fhir/flags #{:SU},
+                                                                                                                                :zen/desc "A value for the time"},
+                                                                                                                        :supportingInformation {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                                                                                                                :fhir/flags #{:SU},
+                                                                                                                                                :zen/desc "Extra information about the withdrawal period"},
+                                                                                                                        :_supportingInformation {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                                                                                                 :require #{:tissue
+                                                                                                                            :value},
+                                                                                                                 :fhir/flags #{:SU},
+                                                                                                                 :zen/desc "A species specific time during which consumption of animal product is not appropriate"}}},
+                                                                               :require #{:code},
+                                                                               :fhir/flags #{:SU},
+                                                                               :zen/desc "A species for which this route applies"}}},
+                                                :require #{:code},
+                                                :fhir/flags #{:SU},
+                                                :zen/desc "The path by which the product is taken into or makes contact with the body"},
+                                        :minItems 1},
+                :property {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                   :type zen/map,
+                                   :keys {:type {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                 :fhir/flags #{:SU},
+                                                 :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.product-characteristic-codes/value-set,
+                                                                      :strength :example},
+                                                 :zen/desc "A code expressing the type of characteristic"},
+                                          :value {:fhir/polymorphic true,
+                                                  :type zen/map,
+                                                  :exclusive-keys #{#{:markdown
+                                                                      :date
+                                                                      :Attachment
+                                                                      :CodeableConcept
+                                                                      :Quantity
+                                                                      :boolean
+                                                                      :Reference}},
+                                                  :keys {:markdown {:confirms #{hl7-fhir-r5-core.markdown/schema}},
+                                                         :date {:confirms #{hl7-fhir-r5-core.date/schema}},
+                                                         :_date {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                         :_boolean {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                         :Attachment {:confirms #{hl7-fhir-r5-core.Attachment/schema}},
+                                                         :_markdown {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                         :CodeableConcept {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema}},
+                                                         :Quantity {:confirms #{hl7-fhir-r5-core.Quantity/schema}},
+                                                         :boolean {:confirms #{hl7-fhir-r5-core.boolean/schema}},
+                                                         :Reference {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                                 zen.fhir/Reference},
+                                                                     :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Binary/schema}}}},
+                                                  :fhir/flags #{:SU},
+                                                  :zen/desc "A value for the characteristic"},
+                                          :status {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                   :fhir/flags #{:SU},
+                                                   :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.publication-status/value-set,
+                                                                        :strength :required},
+                                                   :zen/desc "The status of characteristic e.g. assigned or pending"}},
+                                   :require #{:type},
+                                   :fhir/flags #{:SU},
+                                   :zen/desc "Characteristics e.g. a product's onset of action"}},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :unitOfPresentation {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.unit-of-presentation/value-set,
+                                                          :strength :example},
+                                     :zen/desc "The presentation type in which this item is given to a patient. e.g. for a spray - 'puff'"},
+                :_description {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :producedFrom {:type zen/vector,
+                               :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                   zen.fhir/Reference},
+                                       :fhir/flags #{:SU},
+                                       :zen.fhir/reference {:refers #{hl7-fhir-r5-core.ManufacturedItemDefinition/schema}},
+                                       :zen/desc "Indicates the specific manufactured items that are part of the 'formOf' product that are used in the preparation of this specific administrable form"}},
+                :ingredient {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.substance-codes/value-set,
+                                                          :strength :example},
+                                     :zen/desc "The ingredients of this administrable medicinal product. This is only needed if the ingredients are not specified either using ManufacturedItemDefiniton, or using by incoming references from the Ingredient resource"}},
+                :administrableDoseForm {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                        :fhir/flags #{:SU},
+                                        :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.administrable-dose-form/value-set,
+                                                             :strength :example},
+                                        :zen/desc "The dose form of the final product after necessary reconstitution or processing"},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.publication-status/value-set,
+                                              :strength :required},
+                         :zen/desc "draft | active | retired | unknown"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "An identifier for the administrable product"}},
+                :device {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                     zen.fhir/Reference},
+                         :fhir/flags #{:SU},
+                         :zen.fhir/reference {:refers #{hl7-fhir-r5-core.DeviceDefinition/schema}},
+                         :zen/desc "A device that is integral to the medicinal product, in effect being considered as an \"ingredient\" of the medicinal product"},
+                :formOf {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                             zen.fhir/Reference},
+                                 :fhir/flags #{:SU},
+                                 :zen.fhir/reference {:refers #{hl7-fhir-r5-core.MedicinalProductDefinition/schema}},
+                                 :zen/desc "References a product from which one or more of the constituent parts of that product can be prepared and used as described by this administrable product"}}},
+         :zen.fhir/type "AdministrableProductDefinition"}}

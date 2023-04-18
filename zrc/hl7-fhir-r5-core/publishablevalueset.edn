@@ -1,0 +1,59 @@
+{ns hl7-fhir-r5-core.publishablevalueset,
+ import #{hl7-fhir-r5-core.publishablevalueset
+          zen.fhir
+          hl7-fhir-uv-extensions-r5.valueset-trusted-expansion
+          hl7-fhir-uv-extensions-r5.valueset-sourceReference
+          hl7-fhir-r5-core.shareablevalueset
+          hl7-fhir-uv-extensions-r5.valueset-otherTitle
+          hl7-fhir-uv-extensions-r5.valueset-compose-createdBy},
+ compose-include-concept-designation-schema {:zen/tags #{zen/schema
+                                                         zen.fhir/structure-schema},
+                                             :zen.fhir/version "0.6.21-2"},
+ compose-include-schema {:zen/tags #{zen/schema
+                                     zen.fhir/structure-schema},
+                         :zen.fhir/version "0.6.21-2",
+                         :type zen/map,
+                         :keys {:copyright {:fhir/flags #{:MS}},
+                                :concept {:every {:keys {:designation {:confirms #{hl7-fhir-r5-core.publishablevalueset/compose-include-concept-designation-schema}}}}}}},
+ expansion-contains-schema {:zen/tags #{zen/schema
+                                        zen.fhir/structure-schema},
+                            :zen.fhir/version "0.6.21-2"},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.shareablevalueset/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen.fhir/profile-schema zen/schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/publishablevalueset",
+         :require #{:date},
+         :type zen/map,
+         :zen/desc "Defines and enforces the minimum expectations for publication and distribution of a value set, typically as part of an artifact repository or implementation guide publication",
+         :keys {:compose {:type zen/map,
+                          :keys {:composeCreatedBy {:confirms #{hl7-fhir-uv-extensions-r5.valueset-compose-createdBy/schema},
+                                                    :fhir/extensionUri "http://hl7.org/fhir/StructureDefinition/valueset-compose-createdBy"},
+                                 :composeCreationDate {:confirms #{hl7-fhir-uv-extensions-r5.valueset-compose-createdBy/schema},
+                                                       :fhir/extensionUri "http://hl7.org/fhir/StructureDefinition/valueset-compose-createdBy"},
+                                 :include {:type zen/vector,
+                                           :every {:confirms #{hl7-fhir-r5-core.publishablevalueset/compose-include-schema}}}}},
+                :date {:fhir/flags #{:MS}},
+                :jurisdiction {:type zen/vector,
+                               :every {:fhir/flags #{:MS}}},
+                :purpose {:fhir/flags #{:MS}},
+                :copyrightLabel {:fhir/flags #{:MS}},
+                :useContext {:type zen/vector,
+                             :every {:fhir/flags #{:MS}}},
+                :trustedExpansion {:confirms #{hl7-fhir-uv-extensions-r5.valueset-trusted-expansion/schema},
+                                   :fhir/extensionUri "http://hl7.org/fhir/StructureDefinition/valueset-trusted-expansion",
+                                   :fhir/flags #{:MS}},
+                :copyright {:fhir/flags #{:MS}},
+                :topic {:type zen/vector, :every {:fhir/flags #{:MS}}},
+                :expansion {:every {:keys {:contains {:confirms #{hl7-fhir-r5-core.publishablevalueset/expansion-contains-schema}}}}},
+                :sourceReference {:confirms #{hl7-fhir-uv-extensions-r5.valueset-sourceReference/schema},
+                                  :fhir/extensionUri "http://hl7.org/fhir/StructureDefinition/valueset-sourceReference"},
+                :identifier {:type zen/vector,
+                             :every {:fhir/flags #{:MS}}},
+                :contact {:type zen/vector,
+                          :every {:fhir/flags #{:MS}}},
+                :otherTitle {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-uv-extensions-r5.valueset-otherTitle/schema},
+                                     :fhir/extensionUri "http://hl7.org/fhir/StructureDefinition/valueset-otherTitle"}},
+                :effectivePeriod {:fhir/flags #{:MS}}},
+         :zen.fhir/type "ValueSet"}}

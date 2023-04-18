@@ -1,0 +1,14 @@
+{ns hl7-fhir-r5-core.search.Condition-abatement-date,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Condition-abatement-date",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Condition-abatement-date",
+         :fhir/type "date",
+         :name "abatement-date",
+         :expr {:Condition {:knife [["abatement" "ofType(dateTime"]
+                                    ["abatement" "ofType(Period"]],
+                            :jsonpath ["$.\"abatement\".\"ofType(dateTime\"[*]"
+                                       "$.\"abatement\".\"ofType(Period\"[*]"],
+                            :data-types #{},
+                            :template :date,
+                            :sql {:where [:or]}}}}}

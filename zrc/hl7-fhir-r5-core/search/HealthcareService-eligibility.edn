@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.HealthcareService-eligibility,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "HealthcareService-eligibility",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/HealthcareService-eligibility",
+         :fhir/type "token",
+         :name "eligibility",
+         :expr {:HealthcareService {:knife [["eligibility" "code"]],
+                                    :jsonpath ["$.\"eligibility\".\"code\"[*]"],
+                                    :data-types #{{:type "CodeableConcept",
+                                                   :polymorphic? false}},
+                                    :template :token}}}}

@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Encounter-careteam,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Encounter-careteam",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Encounter-careteam",
+         :fhir/type "reference",
+         :name "careteam",
+         :expr {:Encounter {:knife [["careTeam"]],
+                            :jsonpath ["$.\"careTeam\"[*]"],
+                            :data-types #{{:type "Reference",
+                                           :polymorphic? false}},
+                            :template :reference}}}}

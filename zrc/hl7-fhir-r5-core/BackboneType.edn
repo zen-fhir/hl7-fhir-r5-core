@@ -1,0 +1,15 @@
+{ns hl7-fhir-r5-core.BackboneType,
+ import #{zen.fhir
+          hl7-fhir-r5-core.Extension
+          hl7-fhir-r5-core.DataType},
+ schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen/desc "BackboneType Type: Base definition for the few data types that are allowed to carry modifier extensions.",
+         :zen.fhir/type "BackboneType",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/BackboneType",
+         :zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DataType/schema},
+         :type zen/map,
+         :keys {:modifierExtension {:type zen/vector,
+                                    :every {:confirms #{hl7-fhir-r5-core.Extension/schema},
+                                            :fhir/flags #{:SU :?!},
+                                            :zen/desc "Extensions that cannot be ignored even if unrecognized"}}}}}

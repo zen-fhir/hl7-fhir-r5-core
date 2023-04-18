@@ -1,0 +1,198 @@
+{ns hl7-fhir-r5-core.MedicationDispense,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.markdown
+          hl7-fhir-r5-core.Provenance
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.CodeableReference
+          hl7-fhir-r5-core.boolean
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.Group
+          hl7-fhir-r5-core.Annotation
+          hl7-fhir-r5-core.SimpleQuantity
+          hl7-terminology-r5.value-set.v3-SubstanceAdminSubstitutionReason
+          hl7-fhir-r5-core.MedicationRequest
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.value-set.medication-codes
+          hl7-fhir-r5-core.Encounter
+          hl7-fhir-r5-core.Location
+          hl7-fhir-r5-core.Practitioner
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.Device
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.CarePlan
+          hl7-fhir-r5-core.Reference
+          hl7-terminology-r5.value-set.v3-ActSubstanceAdminSubstitutionCode
+          hl7-fhir-r5-core.CareTeam
+          hl7-fhir-r5-core.value-set.medicationdispense-status
+          hl7-fhir-r5-core.Procedure
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-terminology-r5.value-set.v3-ActPharmacySupplyType
+          hl7-fhir-r5-core.RelatedPerson
+          hl7-fhir-r5-core.value-set.medicationdispense-admin-location
+          hl7-fhir-r5-core.MedicationAdministration
+          hl7-fhir-r5-core.PractitionerRole
+          hl7-fhir-r5-core.value-set.medicationdispense-performer-function
+          hl7-fhir-r5-core.value-set.medicationdispense-status-reason
+          hl7-fhir-r5-core.Dosage
+          hl7-fhir-r5-core.Quantity
+          hl7-fhir-r5-core.Patient},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/MedicationDispense",
+         :require #{:status :subject :medication},
+         :type zen/map,
+         :zen/desc "Indicates that a medication product is to be or has been dispensed for a named person/patient.  This includes a description of the medication product (supply) provided and the instructions for administering the medication.  The medication dispense is the result of a pharmacy system responding to a medication order.",
+         :keys {:_whenPrepared {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :category {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                   :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.medicationdispense-admin-location/value-set,
+                                                        :strength :example},
+                                   :zen/desc "Type of medication dispense"}},
+                :whenHandedOver {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                                 :zen/desc "When product was given out"},
+                :whenPrepared {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                               :fhir/flags #{:SU},
+                               :zen/desc "When product was packaged and reviewed"},
+                :_statusChanged {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :eventHistory {:type zen/vector,
+                               :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                   zen.fhir/Reference},
+                                       :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Provenance/schema}},
+                                       :zen/desc "A list of relevant lifecycle events"}},
+                :substitution {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                               :type zen/map,
+                               :keys {:wasSubstituted {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                                                       :zen/desc "Whether a substitution was or was not performed on the dispense"},
+                                      :_wasSubstituted {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                      :type {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                             :zen.fhir/value-set {:symbol hl7-terminology-r5.value-set.v3-ActSubstanceAdminSubstitutionCode/value-set,
+                                                                  :strength :example},
+                                             :zen/desc "Code signifying whether a different drug was dispensed from what was prescribed"},
+                                      :reason {:type zen/vector,
+                                               :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                       :zen.fhir/value-set {:symbol hl7-terminology-r5.value-set.v3-SubstanceAdminSubstitutionReason/value-set,
+                                                                            :strength :example},
+                                                       :zen/desc "Why was substitution made"}},
+                                      :responsibleParty {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                     zen.fhir/Reference},
+                                                         :zen.fhir/reference {:refers #{hl7-fhir-r5-core.PractitionerRole/schema
+                                                                                        hl7-fhir-r5-core.Organization/schema
+                                                                                        hl7-fhir-r5-core.Practitioner/schema}},
+                                                         :zen/desc "Who is responsible for the substitution"}},
+                               :require #{:wasSubstituted},
+                               :zen/desc "Whether a substitution was performed on the dispense"},
+                :_renderedDosageInstruction {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :encounter {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                        zen.fhir/Reference},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Encounter/schema}},
+                            :zen/desc "Encounter associated with event"},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :type {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                       :zen.fhir/value-set {:symbol hl7-terminology-r5.value-set.v3-ActPharmacySupplyType/value-set,
+                                            :strength :example},
+                       :zen/desc "Trial fill, partial fill, emergency fill, etc"},
+                :recorded {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                           :zen/desc "When the recording of the dispense started"},
+                :note {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.Annotation/schema},
+                               :zen/desc "Information about the dispense"}},
+                :statusChanged {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                                :zen/desc "When the status changed"},
+                :supportingInformation {:type zen/vector,
+                                        :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                            zen.fhir/Reference},
+                                                :zen.fhir/reference {:refers #{}},
+                                                :zen/desc "Information that supports the dispensing of the medication"}},
+                :notPerformedReason {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                     :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.medicationdispense-status-reason/value-set,
+                                                          :strength :example},
+                                     :zen/desc "Why a dispense was not performed"},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.medicationdispense-status/value-set,
+                                              :strength :required},
+                         :zen/desc "preparation | in-progress | cancelled | on-hold | completed | entered-in-error | stopped | declined | unknown"},
+                :dosageInstruction {:type zen/vector,
+                                    :every {:confirms #{hl7-fhir-r5-core.Dosage/schema},
+                                            :zen/desc "How the medication is to be used by the patient or administered by the caregiver"}},
+                :daysSupply {:confirms #{hl7-fhir-r5-core.Quantity/schema
+                                         hl7-fhir-r5-core.SimpleQuantity/schema},
+                             :zen/desc "Amount of medication expressed as a timing amount"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :zen/desc "External identifier"}},
+                :renderedDosageInstruction {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                                            :zen/desc "Full representation of the dosage instructions"},
+                :basedOn {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                              zen.fhir/Reference},
+                                  :zen.fhir/reference {:refers #{hl7-fhir-r5-core.CarePlan/schema}},
+                                  :zen/desc "Plan that is fulfilled by this dispense"}},
+                :quantity {:confirms #{hl7-fhir-r5-core.Quantity/schema
+                                       hl7-fhir-r5-core.SimpleQuantity/schema},
+                           :zen/desc "Amount dispensed"},
+                :partOf {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                             zen.fhir/Reference},
+                                 :zen.fhir/reference {:refers #{hl7-fhir-r5-core.MedicationAdministration/schema
+                                                                hl7-fhir-r5-core.Procedure/schema}},
+                                 :zen/desc "Event that dispense is part of"}},
+                :_recorded {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_whenHandedOver {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :location {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                       zen.fhir/Reference},
+                           :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Location/schema}},
+                           :zen/desc "Where the dispense occurred"},
+                :authorizingPrescription {:type zen/vector,
+                                          :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                              zen.fhir/Reference},
+                                                  :zen.fhir/reference {:refers #{hl7-fhir-r5-core.MedicationRequest/schema}},
+                                                  :zen/desc "Medication order that authorizes the dispense"}},
+                :receiver {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                               zen.fhir/Reference},
+                                   :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                                  hl7-fhir-r5-core.PractitionerRole/schema
+                                                                  hl7-fhir-r5-core.Location/schema
+                                                                  hl7-fhir-r5-core.Practitioner/schema
+                                                                  hl7-fhir-r5-core.RelatedPerson/schema}},
+                                   :zen/desc "Who collected the medication or where the medication was delivered"}},
+                :subject {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                      zen.fhir/Reference},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                         hl7-fhir-r5-core.Group/schema}},
+                          :zen/desc "Who the dispense is for"},
+                :destination {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                          zen.fhir/Reference},
+                              :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Location/schema}},
+                              :zen/desc "Where the medication was/will be sent"},
+                :performer {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                    :type zen/map,
+                                    :keys {:function {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                      :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.medicationdispense-performer-function/value-set,
+                                                                           :strength :example},
+                                                      :zen/desc "Who performed the dispense and what they did"},
+                                           :actor {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                               zen.fhir/Reference},
+                                                   :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                                                  hl7-fhir-r5-core.CareTeam/schema
+                                                                                  hl7-fhir-r5-core.PractitionerRole/schema
+                                                                                  hl7-fhir-r5-core.Organization/schema
+                                                                                  hl7-fhir-r5-core.Device/schema
+                                                                                  hl7-fhir-r5-core.Practitioner/schema
+                                                                                  hl7-fhir-r5-core.RelatedPerson/schema}},
+                                                   :zen/desc "Individual who was performing"}},
+                                    :require #{:actor},
+                                    :zen/desc "Who performed event"}},
+                :medication {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                             :fhir/flags #{:SU},
+                             :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.medication-codes/value-set,
+                                                  :strength :example},
+                             :zen/desc "What medication was supplied"}},
+         :zen.fhir/type "MedicationDispense"}}

@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.ClinicalUseDefinition-interaction,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "ClinicalUseDefinition-interaction",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/ClinicalUseDefinition-interaction",
+         :fhir/type "token",
+         :name "interaction",
+         :expr {:ClinicalUseDefinition {:knife [["interaction" "type"]],
+                                        :jsonpath ["$.\"interaction\".\"type\"[*]"],
+                                        :data-types #{{:type "CodeableConcept",
+                                                       :polymorphic? false}},
+                                        :template :token}}}}

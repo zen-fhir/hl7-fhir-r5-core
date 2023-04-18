@@ -1,0 +1,13 @@
+{ns hl7-fhir-r5-core.search.MedicinalProductDefinition-contact,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "MedicinalProductDefinition-contact",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/MedicinalProductDefinition-contact",
+         :fhir/type "reference",
+         :name "contact",
+         :expr {:MedicinalProductDefinition {:knife [["contact"
+                                                      "contact"]],
+                                             :jsonpath ["$.\"contact\".\"contact\"[*]"],
+                                             :data-types #{{:type "Reference",
+                                                            :polymorphic? false}},
+                                             :template :reference}}}}

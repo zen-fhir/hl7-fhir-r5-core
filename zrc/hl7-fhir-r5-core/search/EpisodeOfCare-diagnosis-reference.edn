@@ -1,0 +1,13 @@
+{ns hl7-fhir-r5-core.search.EpisodeOfCare-diagnosis-reference,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "EpisodeOfCare-diagnosis-reference",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/EpisodeOfCare-diagnosis-reference",
+         :fhir/type "reference",
+         :name "diagnosis-reference",
+         :expr {:EpisodeOfCare {:knife [["diagnosis"
+                                         "condition"
+                                         "reference"]],
+                                :jsonpath ["$.\"diagnosis\".\"condition\".\"reference\"[*]"],
+                                :data-types #{},
+                                :template :reference}}}}

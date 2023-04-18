@@ -1,0 +1,13 @@
+{ns hl7-fhir-r5-core.search.Encounter-diagnosis-code,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Encounter-diagnosis-code",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Encounter-diagnosis-code",
+         :fhir/type "token",
+         :name "diagnosis-code",
+         :expr {:Encounter {:knife [["diagnosis"
+                                     "condition"
+                                     "concept"]],
+                            :jsonpath ["$.\"diagnosis\".\"condition\".\"concept\"[*]"],
+                            :data-types #{},
+                            :template :token}}}}

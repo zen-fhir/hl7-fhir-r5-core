@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Encounter-date-start,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Encounter-date-start",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Encounter-date-start",
+         :fhir/type "date",
+         :name "date-start",
+         :expr {:Encounter {:knife [["actualPeriod" "start"]],
+                            :jsonpath ["$.\"actualPeriod\".\"start\"[*]"],
+                            :data-types #{},
+                            :template :date,
+                            :sql {:where [:or]}}}}}

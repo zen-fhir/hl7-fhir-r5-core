@@ -1,0 +1,11 @@
+{ns hl7-fhir-r5-core.search.Slot-service-type,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Slot-service-type",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Slot-service-type",
+         :fhir/type "token",
+         :name "service-type",
+         :expr {:Slot {:knife [["serviceType" "concept"]],
+                       :jsonpath ["$.\"serviceType\".\"concept\"[*]"],
+                       :data-types #{},
+                       :template :token}}}}

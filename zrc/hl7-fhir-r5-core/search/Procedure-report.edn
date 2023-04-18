@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Procedure-report,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Procedure-report",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Procedure-report",
+         :fhir/type "reference",
+         :name "report",
+         :expr {:Procedure {:knife [["report"]],
+                            :jsonpath ["$.\"report\"[*]"],
+                            :data-types #{{:type "Reference",
+                                           :polymorphic? false}},
+                            :template :reference}}}}

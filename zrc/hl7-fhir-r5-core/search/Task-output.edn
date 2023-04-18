@@ -1,0 +1,11 @@
+{ns hl7-fhir-r5-core.search.Task-output,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Task-output",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Task-output",
+         :fhir/type "reference",
+         :name "output",
+         :expr {:Task {:knife [["output" "value" "ofType(Reference"]],
+                       :jsonpath ["$.\"output\".\"value\".\"ofType(Reference\"[*]"],
+                       :data-types #{},
+                       :template :reference}}}}

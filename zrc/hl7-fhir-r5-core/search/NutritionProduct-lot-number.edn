@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.NutritionProduct-lot-number,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "NutritionProduct-lot-number",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/NutritionProduct-lot-number",
+         :fhir/type "token",
+         :name "lot-number",
+         :expr {:NutritionProduct {:knife [["instance" "lotNumber"]],
+                                   :jsonpath ["$.\"instance\".\"lotNumber\"[*]"],
+                                   :data-types #{{:type "string",
+                                                  :polymorphic? false}},
+                                   :template :token}}}}

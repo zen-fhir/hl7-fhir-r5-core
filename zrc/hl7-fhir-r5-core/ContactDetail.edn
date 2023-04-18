@@ -1,0 +1,21 @@
+{ns hl7-fhir-r5-core.ContactDetail,
+ import #{zen.fhir
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.ContactPoint
+          hl7-fhir-r5-core.DataType},
+ schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen/desc "ContactDetail Type: Specifies contact information for a person or organization.",
+         :zen.fhir/type "ContactDetail",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/ContactDetail",
+         :zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DataType/schema},
+         :type zen/map,
+         :keys {:name {:confirms #{hl7-fhir-r5-core.string/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "Name of an individual to contact"},
+                :_name {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :telecom {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.ContactPoint/schema},
+                                  :fhir/flags #{:SU},
+                                  :zen/desc "Contact details for individual or organization"}}}}}

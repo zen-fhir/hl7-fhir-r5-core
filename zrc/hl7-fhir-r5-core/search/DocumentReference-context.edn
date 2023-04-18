@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.DocumentReference-context,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "DocumentReference-context",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/DocumentReference-context",
+         :fhir/type "reference",
+         :name "context",
+         :expr {:DocumentReference {:knife [["context"]],
+                                    :jsonpath ["$.\"context\"[*]"],
+                                    :data-types #{{:type "Reference",
+                                                   :polymorphic? false}},
+                                    :template :reference}}}}

@@ -1,0 +1,11 @@
+{ns hl7-fhir-r5-core.search.Task-requestedperformer-reference,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Task-requestedperformer-reference",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Task-requestedperformer-reference",
+         :fhir/type "reference",
+         :name "requestedperformer-reference",
+         :expr {:Task {:knife [["requestedPerformer" "reference"]],
+                       :jsonpath ["$.\"requestedPerformer\".\"reference\"[*]"],
+                       :data-types #{},
+                       :template :reference}}}}

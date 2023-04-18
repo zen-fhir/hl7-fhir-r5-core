@@ -1,0 +1,11 @@
+{ns hl7-fhir-r5-core.search.Observation-value-reference,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Observation-value-reference",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Observation-value-reference",
+         :fhir/type "reference",
+         :name "value-reference",
+         :expr {:Observation {:knife [["value" "ofType(Reference"]],
+                              :jsonpath ["$.\"value\".\"ofType(Reference\"[*]"],
+                              :data-types #{},
+                              :template :reference}}}}

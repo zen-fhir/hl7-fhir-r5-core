@@ -1,0 +1,11 @@
+{ns hl7-fhir-r5-core.search.Substance-code-reference,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Substance-code-reference",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Substance-code-reference",
+         :fhir/type "reference",
+         :name "code-reference",
+         :expr {:Substance {:knife [["code" "reference"]],
+                            :jsonpath ["$.\"code\".\"reference\"[*]"],
+                            :data-types #{},
+                            :template :reference}}}}

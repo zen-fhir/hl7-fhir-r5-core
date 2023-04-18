@@ -1,0 +1,125 @@
+{ns hl7-fhir-r5-core.EpisodeOfCare,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.CodeableReference
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.value-set.encounter-diagnosis-use
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.Practitioner
+          hl7-fhir-r5-core.value-set.episode-of-care-status
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.value-set.condition-code
+          hl7-fhir-r5-core.CareTeam
+          hl7-fhir-r5-core.value-set.encounter-reason-use
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.value-set.encounter-reason
+          hl7-fhir-r5-core.PractitionerRole
+          hl7-fhir-r5-core.Period
+          hl7-fhir-r5-core.ServiceRequest
+          hl7-fhir-r5-core.value-set.episodeofcare-type
+          hl7-fhir-r5-core.Account
+          hl7-fhir-r5-core.Patient},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/EpisodeOfCare",
+         :require #{:patient :status},
+         :type zen/map,
+         :zen/desc "An association between a patient and an organization / healthcare provider(s) during which time encounters may occur. The managing organization assumes a level of responsibility for the patient during this time.",
+         :keys {:patient {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                      zen.fhir/Reference},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema}},
+                          :zen/desc "The patient who is the focus of this episode of care"},
+                :diagnosis {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                    :type zen/map,
+                                    :keys {:condition {:type zen/vector,
+                                                       :every {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                                               :fhir/flags #{:SU},
+                                                               :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.condition-code/value-set,
+                                                                                    :strength :example},
+                                                               :zen/desc "The medical condition that was addressed during the episode of care"}},
+                                           :use {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                 :fhir/flags #{:SU},
+                                                 :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.encounter-diagnosis-use/value-set,
+                                                                      :strength :preferred},
+                                                 :zen/desc "Role that this diagnosis has within the episode of care (e.g. admission, billing, discharge …)"}},
+                                    :fhir/flags #{:SU},
+                                    :zen/desc "The list of medical conditions that were addressed during the episode of care"}},
+                :managingOrganization {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                   zen.fhir/Reference},
+                                       :fhir/flags #{:SU},
+                                       :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Organization/schema}},
+                                       :zen/desc "Organization that assumes responsibility for care coordination"},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :type {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                               :fhir/flags #{:SU},
+                               :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.episodeofcare-type/value-set,
+                                                    :strength :example},
+                               :zen/desc "Type/class  - e.g. specialist referral, disease management"}},
+                :account {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                              zen.fhir/Reference},
+                                  :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Account/schema}},
+                                  :zen/desc "The set of accounts that may be used for billing for this EpisodeOfCare"}},
+                :referralRequest {:type zen/vector,
+                                  :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                      zen.fhir/Reference},
+                                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.ServiceRequest/schema}},
+                                          :zen/desc "Originating Referral Request(s)"}},
+                :reason {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                 :type zen/map,
+                                 :keys {:use {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                              :fhir/flags #{:SU},
+                                              :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.encounter-reason-use/value-set,
+                                                                   :strength :example},
+                                              :zen/desc "What the reason value should be used for/as"},
+                                        :value {:type zen/vector,
+                                                :every {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                                        :fhir/flags #{:SU},
+                                                        :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.encounter-reason/value-set,
+                                                                             :strength :example},
+                                                        :zen/desc "Medical reason to be addressed"}}},
+                                 :fhir/flags #{:SU},
+                                 :zen/desc "The list of medical reasons that are expected to be addressed during the episode of care"}},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.episode-of-care-status/value-set,
+                                              :strength :required},
+                         :zen/desc "planned | waitlist | active | onhold | finished | cancelled | entered-in-error"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :zen/desc "Business Identifier(s) relevant for this EpisodeOfCare"}},
+                :period {:confirms #{hl7-fhir-r5-core.Period/schema},
+                         :fhir/flags #{:SU},
+                         :zen/desc "Interval during responsibility is assumed"},
+                :careManager {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                          zen.fhir/Reference},
+                              :zen.fhir/reference {:refers #{hl7-fhir-r5-core.PractitionerRole/schema
+                                                             hl7-fhir-r5-core.Practitioner/schema}},
+                              :zen/desc "Care manager/care coordinator for the patient"},
+                :careTeam {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                               zen.fhir/Reference},
+                                   :zen.fhir/reference {:refers #{hl7-fhir-r5-core.CareTeam/schema}},
+                                   :zen/desc "Other practitioners facilitating this episode of care"}},
+                :statusHistory {:type zen/vector,
+                                :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                        :type zen/map,
+                                        :keys {:status {:confirms #{hl7-fhir-r5-core.code/schema},
+                                                        :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.episode-of-care-status/value-set,
+                                                                             :strength :required},
+                                                        :zen/desc "planned | waitlist | active | onhold | finished | cancelled | entered-in-error"},
+                                               :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                               :period {:confirms #{hl7-fhir-r5-core.Period/schema},
+                                                        :zen/desc "Duration the EpisodeOfCare was in the specified status"}},
+                                        :require #{:status :period},
+                                        :zen/desc "Past list of status codes (the current status may be included to cover the start date of the status)"}}},
+         :zen.fhir/type "EpisodeOfCare"}}

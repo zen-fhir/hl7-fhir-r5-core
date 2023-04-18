@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Device-biological-source-event,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Device-biological-source-event",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Device-biological-source-event",
+         :fhir/type "token",
+         :name "biological-source-event",
+         :expr {:Device {:knife [["biologicalSourceEvent"]],
+                         :jsonpath ["$.\"biologicalSourceEvent\"[*]"],
+                         :data-types #{{:type "Identifier",
+                                        :polymorphic? false}},
+                         :template :token}}}}

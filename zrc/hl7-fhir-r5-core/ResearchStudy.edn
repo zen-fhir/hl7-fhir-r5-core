@@ -1,0 +1,302 @@
+{ns hl7-fhir-r5-core.ResearchStudy,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.value-set.research-study-arm-type
+          hl7-fhir-r5-core.markdown
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.CodeableReference
+          hl7-fhir-r5-core.PlanDefinition
+          hl7-fhir-r5-core.boolean
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.Group
+          hl7-fhir-r5-core.value-set.study-design
+          hl7-fhir-r5-core.value-set.research-study-focus-type
+          hl7-fhir-r5-core.Annotation
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.value-set.research-study-status
+          hl7-fhir-r5-core.value-set.research-study-prim-purp-type
+          hl7-fhir-r5-core.value-set.jurisdiction
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.value-set.research-study-party-organization-type
+          hl7-fhir-r5-core.EvidenceVariable
+          hl7-fhir-r5-core.EvidenceReport
+          hl7-fhir-r5-core.Location
+          hl7-fhir-r5-core.Practitioner
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.DiagnosticReport
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.value-set.research-study-classifiers
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.value-set.condition-code
+          hl7-fhir-r5-core.Citation
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.ResearchStudy
+          hl7-fhir-r5-core.PractitionerRole
+          hl7-fhir-r5-core.Period
+          hl7-fhir-r5-core.value-set.publication-status
+          hl7-fhir-r5-core.value-set.research-study-phase
+          hl7-fhir-r5-core.RelatedArtifact
+          hl7-fhir-r5-core.value-set.title-type
+          hl7-fhir-r5-core.value-set.research-study-reason-stopped
+          hl7-fhir-r5-core.id
+          hl7-fhir-r5-core.value-set.research-study-objective-type
+          hl7-fhir-r5-core.uri
+          hl7-fhir-r5-core.value-set.research-study-party-role
+          hl7-fhir-r5-core.unsignedInt},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/ResearchStudy",
+         :require #{:status},
+         :type zen/map,
+         :zen/desc "A scientific study of nature that sometimes includes processes involved in health and disease. For example, clinical trials are research studies that involve people. These studies may be related to new ways to screen, prevent, diagnose, and treat disease. They may also study certain outcomes and certain groups of people by looking at data collected in the past or future.",
+         :keys {:description {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                              :zen/desc "Detailed narrative of the study"},
+                :date {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                       :zen/desc "Date the resource last changed"},
+                :site {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                           zen.fhir/Reference},
+                               :fhir/flags #{:SU},
+                               :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Organization/schema
+                                                              hl7-fhir-r5-core.Location/schema
+                                                              hl7-fhir-r5-core.ResearchStudy/schema}},
+                               :zen/desc "Facility where study activities are conducted"}},
+                :_descriptionSummary {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :protocol {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                               zen.fhir/Reference},
+                                   :fhir/flags #{:SU},
+                                   :zen.fhir/reference {:refers #{hl7-fhir-r5-core.PlanDefinition/schema}},
+                                   :zen/desc "Steps followed in executing study"}},
+                :_date {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :name {:confirms #{hl7-fhir-r5-core.string/schema},
+                       :zen/desc "Name for this study (computer friendly)"},
+                :classifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                     :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.research-study-classifiers/value-set,
+                                                          :strength :example},
+                                     :zen/desc "Classification for the study"}},
+                :progressStatus {:type zen/vector,
+                                 :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                         :type zen/map,
+                                         :keys {:state {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                        :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.research-study-status/value-set,
+                                                                             :strength :extensible},
+                                                        :zen/desc "Label for status or state (e.g. recruitment status)"},
+                                                :actual {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                                                         :zen/desc "Actual if true else anticipated"},
+                                                :_actual {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                :period {:confirms #{hl7-fhir-r5-core.Period/schema},
+                                                         :zen/desc "Date range"}},
+                                         :require #{:state},
+                                         :zen/desc "Status of study with time for that status"}},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :phase {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                        :fhir/flags #{:SU},
+                        :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.research-study-phase/value-set,
+                                             :strength :example},
+                        :zen/desc "n-a | early-phase-1 | phase-1 | phase-1-phase-2 | phase-2 | phase-2-phase-3 | phase-3 | phase-4"},
+                :whyStopped {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                             :fhir/flags #{:SU},
+                             :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.research-study-reason-stopped/value-set,
+                                                  :strength :example},
+                             :zen/desc "accrual-goal-met | closed-due-to-toxicity | closed-due-to-lack-of-study-progress | temporarily-closed-per-study-design"},
+                :title {:confirms #{hl7-fhir-r5-core.string/schema},
+                        :fhir/flags #{:SU},
+                        :zen/desc "Human readable name of the study"},
+                :_description {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :note {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.Annotation/schema},
+                               :zen/desc "Comments made about the study"}},
+                :region {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                 :fhir/flags #{:SU},
+                                 :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.jurisdiction/value-set,
+                                                      :strength :extensible},
+                                 :zen/desc "Geographic area for the study"}},
+                :descriptionSummary {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                                     :zen/desc "Brief text explaining the study"},
+                :outcomeMeasure {:type zen/vector,
+                                 :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                         :type zen/map,
+                                         :keys {:name {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                       :zen/desc "Label for the outcome"},
+                                                :_name {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                :type {:type zen/vector,
+                                                       :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                               :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.research-study-objective-type/value-set,
+                                                                                    :strength :preferred},
+                                                               :zen/desc "primary | secondary | exploratory"}},
+                                                :description {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                                                              :zen/desc "Description of the outcome"},
+                                                :_description {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                :reference {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                        zen.fhir/Reference},
+                                                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.EvidenceVariable/schema}},
+                                                            :zen/desc "Structured outcome definition"}},
+                                         :zen/desc "A variable measured during the study"}},
+                :keyword {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                  :fhir/flags #{:SU},
+                                  :zen/desc "Used to search for the study"}},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.publication-status/value-set,
+                                              :strength :required},
+                         :zen/desc "draft | active | retired | unknown"},
+                :result {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                             zen.fhir/Reference},
+                                 :fhir/flags #{:SU},
+                                 :zen.fhir/reference {:refers #{hl7-fhir-r5-core.EvidenceReport/schema
+                                                                hl7-fhir-r5-core.DiagnosticReport/schema
+                                                                hl7-fhir-r5-core.Citation/schema}},
+                                 :zen/desc "Link to results generated during the study"}},
+                :label {:type zen/vector,
+                        :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                :type zen/map,
+                                :keys {:type {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                              :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.title-type/value-set,
+                                                                   :strength :extensible},
+                                              :zen/desc "primary | official | scientific | plain-language | subtitle | short-title | acronym | earlier-title | language | auto-translated | human-use | machine-use | duplicate-uid"},
+                                       :value {:confirms #{hl7-fhir-r5-core.string/schema},
+                                               :zen/desc "The name"},
+                                       :_value {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                :zen/desc "Additional names for the study"}},
+                :condition {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                    :fhir/flags #{:SU},
+                                    :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.condition-code/value-set,
+                                                         :strength :example},
+                                    :zen/desc "Condition being studied"}},
+                :_name {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :url {:confirms #{hl7-fhir-r5-core.uri/schema},
+                      :zen/desc "Canonical identifier for this study resource"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Business Identifier for study"}},
+                :primaryPurposeType {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.research-study-prim-purp-type/value-set,
+                                                          :strength :preferred},
+                                     :zen/desc "treatment | prevention | diagnostic | supportive-care | screening | health-services-research | basic-science | device-feasibility"},
+                :focus {:type zen/vector,
+                        :every {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.research-study-focus-type/value-set,
+                                                     :strength :example},
+                                :zen/desc "Drugs, devices, etc. under study"}},
+                :_title {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :objective {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                    :type zen/map,
+                                    :keys {:name {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                  :zen/desc "Label for the objective"},
+                                           :_name {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                           :type {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                  :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.research-study-objective-type/value-set,
+                                                                       :strength :preferred},
+                                                  :zen/desc "primary | secondary | exploratory"},
+                                           :description {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                                                         :zen/desc "Description of the objective"},
+                                           :_description {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                    :zen/desc "A goal for the study"}},
+                :period {:confirms #{hl7-fhir-r5-core.Period/schema},
+                         :fhir/flags #{:SU},
+                         :zen/desc "When the study began and ended"},
+                :partOf {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                             zen.fhir/Reference},
+                                 :fhir/flags #{:SU},
+                                 :zen.fhir/reference {:refers #{hl7-fhir-r5-core.ResearchStudy/schema}},
+                                 :zen/desc "Part of larger study"}},
+                :version {:confirms #{hl7-fhir-r5-core.string/schema},
+                          :zen/desc "The business version for the study record"},
+                :_version {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :relatedArtifact {:type zen/vector,
+                                  :every {:confirms #{hl7-fhir-r5-core.RelatedArtifact/schema},
+                                          :zen/desc "References, URLs, and attachments"}},
+                :recruitment {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                              :type zen/map,
+                              :keys {:targetNumber {:confirms #{hl7-fhir-r5-core.unsignedInt/schema},
+                                                    :zen/desc "Estimated total number of participants to be enrolled"},
+                                     :_targetNumber {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                     :actualNumber {:confirms #{hl7-fhir-r5-core.unsignedInt/schema},
+                                                    :zen/desc "Actual total number of participants enrolled in study"},
+                                     :_actualNumber {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                     :eligibility {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                               zen.fhir/Reference},
+                                                   :zen.fhir/reference {:refers #{hl7-fhir-r5-core.EvidenceVariable/schema
+                                                                                  hl7-fhir-r5-core.Group/schema}},
+                                                   :zen/desc "Inclusion and exclusion criteria"},
+                                     :actualGroup {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                               zen.fhir/Reference},
+                                                   :fhir/flags #{:SU},
+                                                   :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Group/schema}},
+                                                   :zen/desc "Group of participants who were enrolled in study"}},
+                              :fhir/flags #{:SU},
+                              :zen/desc "Target or actual group of participants enrolled in study"},
+                :studyDesign {:type zen/vector,
+                              :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                      :fhir/flags #{:SU},
+                                      :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.study-design/value-set,
+                                                           :strength :preferred},
+                                      :zen/desc "Classifications of the study design characteristics"}},
+                :comparisonGroup {:type zen/vector,
+                                  :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                          :type zen/map,
+                                          :keys {:description {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                                                               :zen/desc "Short explanation of study path"},
+                                                 :linkId {:confirms #{hl7-fhir-r5-core.id/schema},
+                                                          :zen/desc "Allows the comparisonGroup for the study and the comparisonGroup for the subject to be linked easily"},
+                                                 :observedGroup {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                             zen.fhir/Reference},
+                                                                 :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Group/schema}},
+                                                                 :zen/desc "Group of participants who were enrolled in study comparisonGroup"},
+                                                 :name {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                        :zen/desc "Label for study comparisonGroup"},
+                                                 :type {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                        :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.research-study-arm-type/value-set,
+                                                                             :strength :extensible},
+                                                        :zen/desc "Categorization of study comparisonGroup"},
+                                                 :_linkId {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                 :_description {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                 :intendedExposure {:type zen/vector,
+                                                                    :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                                        zen.fhir/Reference},
+                                                                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.EvidenceVariable/schema}},
+                                                                            :zen/desc "Interventions or exposures in this comparisonGroup or cohort"}},
+                                                 :_name {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                          :require #{:name},
+                                          :zen/desc "Defined path through the study for a subject"}},
+                :associatedParty {:type zen/vector,
+                                  :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                          :type zen/map,
+                                          :keys {:name {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                        :zen/desc "Name of associated party"},
+                                                 :_name {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                 :role {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                        :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.research-study-party-role/value-set,
+                                                                             :strength :extensible},
+                                                        :zen/desc "sponsor | lead-sponsor | sponsor-investigator | primary-investigator | collaborator | funding-source | general-contact | recruitment-contact | sub-investigator | study-director | study-chair"},
+                                                 :period {:type zen/vector,
+                                                          :every {:confirms #{hl7-fhir-r5-core.Period/schema},
+                                                                  :zen/desc "When active in the role"}},
+                                                 :classifier {:type zen/vector,
+                                                              :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                      :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.research-study-party-organization-type/value-set,
+                                                                                           :strength :example},
+                                                                      :zen/desc "nih | fda | government | nonprofit | academic | industry"}},
+                                                 :party {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                     zen.fhir/Reference},
+                                                         :zen.fhir/reference {:refers #{hl7-fhir-r5-core.PractitionerRole/schema
+                                                                                        hl7-fhir-r5-core.Organization/schema
+                                                                                        hl7-fhir-r5-core.Practitioner/schema}},
+                                                         :zen/desc "Individual or organization associated with study (use practitionerRole to specify their organisation)"}},
+                                          :require #{:role},
+                                          :zen/desc "Sponsors, collaborators, and other parties"}},
+                :_url {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+         :zen.fhir/type "ResearchStudy"}}

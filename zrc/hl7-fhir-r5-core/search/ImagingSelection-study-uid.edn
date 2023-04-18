@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.ImagingSelection-study-uid,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "ImagingSelection-study-uid",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/ImagingSelection-study-uid",
+         :fhir/type "token",
+         :name "study-uid",
+         :expr {:ImagingSelection {:knife [["studyUid"]],
+                                   :jsonpath ["$.\"studyUid\"[*]"],
+                                   :data-types #{{:type "id",
+                                                  :polymorphic? false}},
+                                   :template :token}}}}

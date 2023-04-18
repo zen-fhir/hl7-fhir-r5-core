@@ -1,0 +1,14 @@
+{ns hl7-fhir-r5-core.search.AdverseEvent-substance,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "AdverseEvent-substance",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/AdverseEvent-substance",
+         :fhir/type "reference",
+         :name "substance",
+         :expr {:AdverseEvent {:knife [["suspectEntity"
+                                        "instance"
+                                        "Reference"]],
+                               :jsonpath ["$.\"suspectEntity\".\"instance\".\"Reference\"[*]"],
+                               :data-types #{{:type "Reference",
+                                              :polymorphic? false}},
+                               :template :reference}}}}

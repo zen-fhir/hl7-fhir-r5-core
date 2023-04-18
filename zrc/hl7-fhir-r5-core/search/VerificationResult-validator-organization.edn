@@ -1,0 +1,13 @@
+{ns hl7-fhir-r5-core.search.VerificationResult-validator-organization,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "VerificationResult-validator-organization",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/VerificationResult-validator-organization",
+         :fhir/type "reference",
+         :name "validator-organization",
+         :expr {:VerificationResult {:knife [["validator"
+                                              "organization"]],
+                                     :jsonpath ["$.\"validator\".\"organization\"[*]"],
+                                     :data-types #{{:type "Reference",
+                                                    :polymorphic? false}},
+                                     :template :reference}}}}

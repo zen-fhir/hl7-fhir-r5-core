@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Practitioner-deceased,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Practitioner-deceased",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Practitioner-deceased",
+         :fhir/type "token",
+         :name "deceased",
+         :expr {:Practitioner {:knife [["deceased and Practitioner"
+                                        "deceased != false"]],
+                               :jsonpath ["$.\"deceased and Practitioner\".\"deceased != false\"[*]"],
+                               :data-types #{},
+                               :template :token}}}}

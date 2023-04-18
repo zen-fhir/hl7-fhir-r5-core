@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.ImagingSelection-derived-from,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "ImagingSelection-derived-from",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/ImagingSelection-derived-from",
+         :fhir/type "reference",
+         :name "derived-from",
+         :expr {:ImagingSelection {:knife [["derivedFrom"]],
+                                   :jsonpath ["$.\"derivedFrom\"[*]"],
+                                   :data-types #{{:type "Reference",
+                                                  :polymorphic? false}},
+                                   :template :reference}}}}

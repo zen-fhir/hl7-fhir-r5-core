@@ -1,0 +1,35 @@
+{ns hl7-fhir-r5-core.search.VerificationResult-primarysource-date,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "VerificationResult-primarysource-date",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/VerificationResult-primarysource-date",
+         :fhir/type "date",
+         :name "primarysource-date",
+         :expr {:VerificationResult {:knife [["primarySource"
+                                              "validationDate"]],
+                                     :jsonpath ["$.\"primarySource\".\"validationDate\"[*]"],
+                                     :data-types #{{:type "dateTime",
+                                                    :polymorphic? false}},
+                                     :template :date,
+                                     :sql {:where [:or
+                                                   [:and
+                                                    [:>=
+                                                     [:pg/call
+                                                      :max_text_date_bound
+                                                      [:pg/sql
+                                                       "{{param}}"]]
+                                                     [:pg/call
+                                                      :jsonpath_extract_max_timestamptz
+                                                      [:pg/sql
+                                                       "{{table}}.resource"]
+                                                      "$.\"primarySource\".\"validationDate\"[*]"]]
+                                                    [:<=
+                                                     [:pg/call
+                                                      :min_text_date_bound
+                                                      [:pg/sql
+                                                       "{{param}}"]]
+                                                     [:pg/call
+                                                      :jsonpath_extract_min_timestamptz
+                                                      [:pg/sql
+                                                       "{{table}}.resource"]
+                                                      "$.\"primarySource\".\"validationDate\"[*]"]]]]}}}}}

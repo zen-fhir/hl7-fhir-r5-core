@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Requirements-derived-from,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Requirements-derived-from",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Requirements-derived-from",
+         :fhir/type "reference",
+         :name "derived-from",
+         :expr {:Requirements {:knife [["derivedFrom"]],
+                               :jsonpath ["$.\"derivedFrom\"[*]"],
+                               :data-types #{{:type "canonical",
+                                              :polymorphic? false}},
+                               :template :reference}}}}

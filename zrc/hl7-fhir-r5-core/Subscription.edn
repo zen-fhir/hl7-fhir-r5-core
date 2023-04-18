@@ -1,0 +1,155 @@
+{ns hl7-fhir-r5-core.Subscription,
+ import #{hl7-fhir-r5-core.value-set.subscription-channel-type
+          hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.instant
+          hl7-fhir-r5-core.value-set.search-modifier-code
+          hl7-fhir-r5-core.BackboneElement
+          zen.fhir
+          hl7-fhir-r5-core.positiveInt
+          hl7-fhir-r5-core.value-set.mimetypes
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.url
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.value-set.subscription-payload-content
+          hl7-fhir-r5-core.Practitioner
+          hl7-fhir-r5-core.value-set.subscription-types
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.CareTeam
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.value-set.subscription-status
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.ContactPoint
+          hl7-fhir-r5-core.RelatedPerson
+          hl7-fhir-r5-core.PractitionerRole
+          hl7-fhir-r5-core.canonical
+          hl7-fhir-r5-core.value-set.search-comparator
+          hl7-fhir-r5-core.Coding
+          hl7-fhir-r5-core.uri
+          hl7-fhir-r5-core.HealthcareService
+          hl7-fhir-r5-core.unsignedInt
+          hl7-fhir-r5-core.Patient},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Subscription",
+         :require #{:topic :status :channelType},
+         :type zen/map,
+         :zen/desc "The subscription resource describes a particular client's request to be notified about a SubscriptionTopic.",
+         :keys {:_content {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_topic {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :maxCount {:confirms #{hl7-fhir-r5-core.positiveInt/schema},
+                           :fhir/flags #{:SU},
+                           :zen/desc "Maximum number of events that can be combined in a single notification"},
+                :_heartbeatPeriod {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :content {:confirms #{hl7-fhir-r5-core.code/schema},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.subscription-payload-content/value-set,
+                                               :strength :required},
+                          :zen/desc "empty | id-only | full-resource"},
+                :_end {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :name {:confirms #{hl7-fhir-r5-core.string/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "Human readable name for this subscription"},
+                :_contentType {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :topic {:confirms #{hl7-fhir-r5-core.canonical/schema},
+                        :fhir/flags #{:SU},
+                        :zen/desc "Reference to the subscription topic being subscribed to"},
+                :reason {:confirms #{hl7-fhir-r5-core.string/schema},
+                         :fhir/flags #{:SU},
+                         :zen/desc "Description of why this subscription was created"},
+                :heartbeatPeriod {:confirms #{hl7-fhir-r5-core.unsignedInt/schema},
+                                  :fhir/flags #{:SU},
+                                  :zen/desc "Interval in seconds to send 'heartbeat' notification"},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.subscription-status/value-set,
+                                              :strength :required},
+                         :zen/desc "requested | active | error | off | entered-in-error"},
+                :_endpoint {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_name {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Additional identifiers (business identifier)"}},
+                :_reason {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :contentType {:confirms #{hl7-fhir-r5-core.code/schema},
+                              :fhir/flags #{:SU},
+                              :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.mimetypes/value-set,
+                                                   :strength :required},
+                              :zen/desc "MIME type to send, or omit for no payload"},
+                :timeout {:confirms #{hl7-fhir-r5-core.unsignedInt/schema},
+                          :fhir/flags #{:SU},
+                          :zen/desc "Timeout in seconds to attempt notification delivery"},
+                :managingEntity {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                             zen.fhir/Reference},
+                                 :fhir/flags #{:SU},
+                                 :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                                hl7-fhir-r5-core.CareTeam/schema
+                                                                hl7-fhir-r5-core.HealthcareService/schema
+                                                                hl7-fhir-r5-core.PractitionerRole/schema
+                                                                hl7-fhir-r5-core.Organization/schema
+                                                                hl7-fhir-r5-core.Practitioner/schema
+                                                                hl7-fhir-r5-core.RelatedPerson/schema}},
+                                 :zen/desc "Entity responsible for Subscription changes"},
+                :end {:confirms #{hl7-fhir-r5-core.instant/schema},
+                      :fhir/flags #{:SU},
+                      :zen/desc "When to automatically delete the subscription"},
+                :filterBy {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                   :type zen/map,
+                                   :keys {:modifier {:confirms #{hl7-fhir-r5-core.code/schema},
+                                                     :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.search-modifier-code/value-set,
+                                                                          :strength :required},
+                                                     :zen/desc "missing | exact | contains | not | text | in | not-in | below | above | type | identifier | of-type | code-text | text-advanced | iterate"},
+                                          :_comparator {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                          :value {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                  :fhir/flags #{:SU},
+                                                  :zen/desc "Literal value or resource path"},
+                                          :_value {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                          :resourceType {:confirms #{hl7-fhir-r5-core.uri/schema},
+                                                         :fhir/flags #{:SU},
+                                                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.subscription-types/value-set,
+                                                                              :strength :extensible},
+                                                         :zen/desc "Allowed Resource (reference to definition) for this Subscription filter"},
+                                          :_filterParameter {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                          :_resourceType {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                          :filterParameter {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                            :fhir/flags #{:SU},
+                                                            :zen/desc "Filter label defined in SubscriptionTopic"},
+                                          :comparator {:confirms #{hl7-fhir-r5-core.code/schema},
+                                                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.search-comparator/value-set,
+                                                                            :strength :required},
+                                                       :zen/desc "eq | ne | gt | lt | ge | le | sa | eb | ap"},
+                                          :_modifier {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                   :require #{:value :filterParameter},
+                                   :fhir/flags #{:SU},
+                                   :zen/desc "Criteria for narrowing the subscription topic stream"}},
+                :_maxCount {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_timeout {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :endpoint {:confirms #{hl7-fhir-r5-core.url/schema},
+                           :fhir/flags #{:SU},
+                           :zen/desc "Where the channel points to"},
+                :contact {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.ContactPoint/schema},
+                                  :fhir/flags #{:SU},
+                                  :zen/desc "Contact details for source (e.g. troubleshooting)"}},
+                :parameter {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                    :type zen/map,
+                                    :keys {:name {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                  :zen/desc "Name (key) of the parameter"},
+                                           :_name {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                           :value {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                   :zen/desc "Value of the parameter to use or pass through"},
+                                           :_value {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                    :require #{:name :value},
+                                    :zen/desc "Channel type"}},
+                :channelType {:confirms #{hl7-fhir-r5-core.Coding/schema},
+                              :fhir/flags #{:SU},
+                              :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.subscription-channel-type/value-set,
+                                                   :strength :extensible},
+                              :zen/desc "Channel type for notifications"}},
+         :zen.fhir/type "Subscription"}}

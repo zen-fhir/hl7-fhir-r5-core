@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.MolecularSequence-focus,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "MolecularSequence-focus",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/MolecularSequence-focus",
+         :fhir/type "reference",
+         :name "focus",
+         :expr {:MolecularSequence {:knife [["focus"]],
+                                    :jsonpath ["$.\"focus\"[*]"],
+                                    :data-types #{{:type "Reference",
+                                                   :polymorphic? false}},
+                                    :template :reference}}}}

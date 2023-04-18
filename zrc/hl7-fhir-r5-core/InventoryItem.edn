@@ -1,0 +1,213 @@
+{ns hl7-fhir-r5-core.InventoryItem,
+ import #{hl7-fhir-r5-core.BiologicallyDerivedProduct
+          hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.Medication
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.decimal
+          hl7-fhir-r5-core.boolean
+          hl7-fhir-r5-core.Ratio
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.Annotation
+          hl7-fhir-r5-core.SimpleQuantity
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.url
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.DeviceDefinition
+          hl7-fhir-r5-core.Location
+          hl7-fhir-r5-core.value-set.inventoryitem-status
+          hl7-fhir-r5-core.value-set.inventoryitem-nametype
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.Device
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.NutritionProduct
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.integer
+          hl7-fhir-r5-core.Address
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.Duration
+          hl7-fhir-r5-core.Coding
+          hl7-fhir-r5-core.InventoryItem
+          hl7-fhir-r5-core.Range
+          hl7-fhir-r5-core.value-set.languages
+          hl7-fhir-r5-core.Quantity
+          hl7-fhir-r5-core.MedicationKnowledge
+          hl7-fhir-r5-core.Patient},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/InventoryItem",
+         :require #{:status},
+         :type zen/map,
+         :zen/desc "functional description of an inventory item used in inventory and supply-related workflows.",
+         :keys {:description {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                              :type zen/map,
+                              :keys {:language {:confirms #{hl7-fhir-r5-core.code/schema},
+                                                :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.languages/value-set,
+                                                                     :strength :required},
+                                                :zen/desc "The language that is used in the item description"},
+                                     :_language {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                     :description {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                   :zen/desc "Textual description of the item"},
+                                     :_description {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                              :zen/desc "Descriptive characteristics of the item"},
+                :category {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                   :fhir/flags #{:SU},
+                                   :zen/desc "Category or class of the item"}},
+                :instance {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                           :type zen/map,
+                           :keys {:identifier {:type zen/vector,
+                                               :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                                       :zen/desc "The identifier for the physical instance, typically a serial number"}},
+                                  :lotNumber {:confirms #{hl7-fhir-r5-core.string/schema},
+                                              :zen/desc "The lot or batch number of the item"},
+                                  :_lotNumber {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                  :expiry {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                                           :zen/desc "The expiry date or date and time for the product"},
+                                  :_expiry {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                  :subject {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                        zen.fhir/Reference},
+                                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                                           hl7-fhir-r5-core.Organization/schema}},
+                                            :zen/desc "The subject that the item is associated with"},
+                                  :location {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                         zen.fhir/Reference},
+                                             :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Location/schema}},
+                                             :zen/desc "The location that the item is associated with"}},
+                           :zen/desc "Instances or occurrences of the product"},
+                :name {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                               :type zen/map,
+                               :keys {:nameType {:confirms #{hl7-fhir-r5-core.Coding/schema},
+                                                 :fhir/flags #{:SU},
+                                                 :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.inventoryitem-nametype/value-set,
+                                                                      :strength :preferred},
+                                                 :zen/desc "The type of name e.g. 'brand-name', 'functional-name', 'common-name'"},
+                                      :language {:confirms #{hl7-fhir-r5-core.code/schema},
+                                                 :fhir/flags #{:SU},
+                                                 :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.languages/value-set,
+                                                                      :strength :required},
+                                                 :zen/desc "The language used to express the item name"},
+                                      :_language {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                      :name {:confirms #{hl7-fhir-r5-core.string/schema},
+                                             :fhir/flags #{:SU},
+                                             :zen/desc "The name or designation of the item"},
+                                      :_name {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                               :require #{:name :language :nameType},
+                               :fhir/flags #{:SU},
+                               :zen/desc "The item name(s) - the brand name, or common name, functional name, generic name or others"}},
+                :productReference {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                               zen.fhir/Reference},
+                                   :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Medication/schema
+                                                                  hl7-fhir-r5-core.NutritionProduct/schema
+                                                                  hl7-fhir-r5-core.Device/schema
+                                                                  hl7-fhir-r5-core.BiologicallyDerivedProduct/schema}},
+                                   :zen/desc "Link to a product resource used in clinical workflows"},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :characteristic {:type zen/vector,
+                                 :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                         :type zen/map,
+                                         :keys {:characteristicType {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                     :zen/desc "The characteristic that is being defined"},
+                                                :value {:fhir/polymorphic true,
+                                                        :type zen/map,
+                                                        :exclusive-keys #{#{:string
+                                                                            :Address
+                                                                            :dateTime
+                                                                            :Range
+                                                                            :integer
+                                                                            :Ratio
+                                                                            :decimal
+                                                                            :url
+                                                                            :Duration
+                                                                            :CodeableConcept
+                                                                            :Quantity
+                                                                            :boolean
+                                                                            :Annotation}},
+                                                        :keys {:_decimal {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                               :_dateTime {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                               :string {:confirms #{hl7-fhir-r5-core.string/schema}},
+                                                               :Address {:confirms #{hl7-fhir-r5-core.Address/schema}},
+                                                               :dateTime {:confirms #{hl7-fhir-r5-core.dateTime/schema}},
+                                                               :Range {:confirms #{hl7-fhir-r5-core.Range/schema}},
+                                                               :integer {:confirms #{hl7-fhir-r5-core.integer/schema}},
+                                                               :Ratio {:confirms #{hl7-fhir-r5-core.Ratio/schema}},
+                                                               :_boolean {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                               :decimal {:confirms #{hl7-fhir-r5-core.decimal/schema}},
+                                                               :url {:confirms #{hl7-fhir-r5-core.url/schema}},
+                                                               :_integer {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                               :Duration {:confirms #{hl7-fhir-r5-core.Duration/schema}},
+                                                               :CodeableConcept {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema}},
+                                                               :Quantity {:confirms #{hl7-fhir-r5-core.Quantity/schema}},
+                                                               :boolean {:confirms #{hl7-fhir-r5-core.boolean/schema}},
+                                                               :_url {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                               :_string {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                               :Annotation {:confirms #{hl7-fhir-r5-core.Annotation/schema}}},
+                                                        :zen/desc "The value of the attribute"}},
+                                         :require #{:characteristicType
+                                                    :value},
+                                         :zen/desc "Characteristic of the item"}},
+                :association {:type zen/vector,
+                              :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                      :type zen/map,
+                                      :keys {:associationType {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                               :fhir/flags #{:SU},
+                                                               :zen/desc "The type of association between the device and the other item"},
+                                             :relatedItem {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                       zen.fhir/Reference},
+                                                           :fhir/flags #{:SU},
+                                                           :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Medication/schema
+                                                                                          hl7-fhir-r5-core.InventoryItem/schema
+                                                                                          hl7-fhir-r5-core.MedicationKnowledge/schema
+                                                                                          hl7-fhir-r5-core.NutritionProduct/schema
+                                                                                          hl7-fhir-r5-core.Device/schema
+                                                                                          hl7-fhir-r5-core.BiologicallyDerivedProduct/schema
+                                                                                          hl7-fhir-r5-core.DeviceDefinition/schema}},
+                                                           :zen/desc "The related item or product"},
+                                             :quantity {:confirms #{hl7-fhir-r5-core.Ratio/schema},
+                                                        :fhir/flags #{:SU},
+                                                        :zen/desc "The quantity of the product in this product"}},
+                                      :require #{:relatedItem
+                                                 :quantity
+                                                 :associationType},
+                                      :zen/desc "Association with other items or products"}},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.inventoryitem-status/value-set,
+                                              :strength :required},
+                         :zen/desc "active | inactive | entered-in-error | unknown"},
+                :baseUnit {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                           :fhir/flags #{:SU},
+                           :zen/desc "The base unit of measure - the unit in which the product is used or counted"},
+                :code {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                               :fhir/flags #{:SU},
+                               :zen/desc "Code designating the specific type of item"}},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Business identifier for the inventory item"}},
+                :responsibleOrganization {:type zen/vector,
+                                          :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                                  :type zen/map,
+                                                  :keys {:role {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                :zen/desc "The role of the organization e.g. manufacturer, distributor, or other"},
+                                                         :organization {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                                    zen.fhir/Reference},
+                                                                        :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Organization/schema}},
+                                                                        :zen/desc "An organization that is associated with the item"}},
+                                                  :require #{:role
+                                                             :organization},
+                                                  :zen/desc "Organization(s) responsible for the product"}},
+                :inventoryStatus {:type zen/vector,
+                                  :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                          :fhir/flags #{:SU},
+                                          :zen/desc "The usage status like recalled, in use, discarded"}},
+                :netContent {:confirms #{hl7-fhir-r5-core.Quantity/schema
+                                         hl7-fhir-r5-core.SimpleQuantity/schema},
+                             :fhir/flags #{:SU},
+                             :zen/desc "Net content or amount present in the item"}},
+         :zen.fhir/type "InventoryItem"}}

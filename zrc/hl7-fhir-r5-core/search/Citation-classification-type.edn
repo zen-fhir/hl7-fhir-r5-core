@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Citation-classification-type,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Citation-classification-type",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Citation-classification-type",
+         :fhir/type "token",
+         :name "classification-type",
+         :expr {:Citation {:knife [["classification" "type"]],
+                           :jsonpath ["$.\"classification\".\"type\"[*]"],
+                           :data-types #{{:type "CodeableConcept",
+                                          :polymorphic? false}},
+                           :template :token}}}}

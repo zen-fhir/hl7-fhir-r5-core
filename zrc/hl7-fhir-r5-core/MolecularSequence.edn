@@ -1,0 +1,159 @@
+{ns hl7-fhir-r5-core.MolecularSequence,
+ import #{hl7-fhir-r5-core.BiologicallyDerivedProduct
+          hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.Substance
+          hl7-fhir-r5-core.value-set.sequence-type
+          hl7-fhir-r5-core.BackboneElement
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.Group
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.Attachment
+          hl7-fhir-r5-core.Device
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.Specimen
+          hl7-fhir-r5-core.NutritionProduct
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.value-set.orientation-type
+          hl7-fhir-r5-core.integer
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.value-set.strand-type
+          hl7-fhir-r5-core.Range
+          hl7-fhir-r5-core.MolecularSequence
+          hl7-fhir-r5-core.Patient},
+ schema {:zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen/desc "Representation of a molecular sequence.",
+         :zen.fhir/type "MolecularSequence",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/MolecularSequence",
+         :zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :type zen/map,
+         :keys {:specimen {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                       zen.fhir/Reference},
+                           :fhir/flags #{:SU},
+                           :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Specimen/schema}},
+                           :zen/desc "Specimen used for sequencing"},
+                :_literal {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :formatted {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r5-core.Attachment/schema},
+                                    :fhir/flags #{:SU},
+                                    :zen/desc "Embedded file or a link (URL) which contains content to represent the sequence"}},
+                :_type {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :type {:confirms #{hl7-fhir-r5-core.code/schema},
+                       :fhir/flags #{:SU},
+                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.sequence-type/value-set,
+                                            :strength :required},
+                       :zen/desc "aa | dna | rna"},
+                :literal {:confirms #{hl7-fhir-r5-core.string/schema},
+                          :fhir/flags #{:SU},
+                          :zen/desc "Sequence that was observed"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Unique ID for this particular sequence"}},
+                :focus {:type zen/vector,
+                        :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                            zen.fhir/Reference},
+                                :fhir/flags #{:SU},
+                                :zen.fhir/reference {:refers #{}},
+                                :zen/desc "What the molecular sequence is about, when it is not about the subject of record"}},
+                :device {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                     zen.fhir/Reference},
+                         :fhir/flags #{:SU},
+                         :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Device/schema}},
+                         :zen/desc "The method for sequencing"},
+                :subject {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                      zen.fhir/Reference},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                         hl7-fhir-r5-core.NutritionProduct/schema
+                                                         hl7-fhir-r5-core.Substance/schema
+                                                         hl7-fhir-r5-core.BiologicallyDerivedProduct/schema
+                                                         hl7-fhir-r5-core.Group/schema}},
+                          :zen/desc "Subject this sequence is associated too"},
+                :relative {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                   :type zen/map,
+                                   :keys {:coordinateSystem {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                             :fhir/flags #{:SU},
+                                                             :zen/desc "Ways of identifying nucleotides or amino acids within a sequence"},
+                                          :ordinalPosition {:confirms #{hl7-fhir-r5-core.integer/schema},
+                                                            :zen/desc "Indicates the order in which the sequence should be considered when putting multiple 'relative' elements together"},
+                                          :_ordinalPosition {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                          :sequenceRange {:confirms #{hl7-fhir-r5-core.Range/schema},
+                                                          :zen/desc "Indicates the nucleotide range in the composed sequence when multiple 'relative' elements are used together"},
+                                          :startingSequence {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                                             :type zen/map,
+                                                             :keys {:chromosome {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                                 :fhir/flags #{:SU},
+                                                                                 :zen/desc "Chromosome Identifier"},
+                                                                    :windowEnd {:confirms #{hl7-fhir-r5-core.integer/schema},
+                                                                                :fhir/flags #{:SU},
+                                                                                :zen/desc "End position of the window on the starting sequence"},
+                                                                    :strand {:confirms #{hl7-fhir-r5-core.code/schema},
+                                                                             :fhir/flags #{:SU},
+                                                                             :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.strand-type/value-set,
+                                                                                                  :strength :required},
+                                                                             :zen/desc "watson | crick"},
+                                                                    :orientation {:confirms #{hl7-fhir-r5-core.code/schema},
+                                                                                  :fhir/flags #{:SU},
+                                                                                  :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.orientation-type/value-set,
+                                                                                                       :strength :required},
+                                                                                  :zen/desc "sense | antisense"},
+                                                                    :genomeAssembly {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                                     :fhir/flags #{:SU},
+                                                                                     :zen/desc "The genome assembly used for starting sequence, e.g. GRCh38"},
+                                                                    :_strand {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                                    :sequence {:fhir/polymorphic true,
+                                                                               :type zen/map,
+                                                                               :exclusive-keys #{#{:string
+                                                                                                   :CodeableConcept
+                                                                                                   :Reference}},
+                                                                               :keys {:CodeableConcept {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema}},
+                                                                                      :string {:confirms #{hl7-fhir-r5-core.string/schema}},
+                                                                                      :_string {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                                                      :Reference {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                                                              zen.fhir/Reference},
+                                                                                                  :zen.fhir/reference {:refers #{hl7-fhir-r5-core.MolecularSequence/schema}}}},
+                                                                               :fhir/flags #{:SU},
+                                                                               :zen/desc "The reference sequence that represents the starting sequence"},
+                                                                    :_windowStart {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                                    :_orientation {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                                    :_windowEnd {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                                    :windowStart {:confirms #{hl7-fhir-r5-core.integer/schema},
+                                                                                  :fhir/flags #{:SU},
+                                                                                  :zen/desc "Start position of the window on the starting sequence"}},
+                                                             :fhir/flags #{:SU},
+                                                             :zen/desc "A sequence used as starting sequence"},
+                                          :edit {:type zen/vector,
+                                                 :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                                         :type zen/map,
+                                                         :keys {:start {:confirms #{hl7-fhir-r5-core.integer/schema},
+                                                                        :fhir/flags #{:SU},
+                                                                        :zen/desc "Start position of the edit on the starting sequence"},
+                                                                :_start {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                                :end {:confirms #{hl7-fhir-r5-core.integer/schema},
+                                                                      :fhir/flags #{:SU},
+                                                                      :zen/desc "End position of the edit on the starting sequence"},
+                                                                :_end {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                                :replacementSequence {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                                                      :fhir/flags #{:SU},
+                                                                                      :zen/desc "Allele that was observed"},
+                                                                :_replacementSequence {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                                :replacedSequence {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                                                   :fhir/flags #{:SU},
+                                                                                   :zen/desc "Allele in the starting sequence"},
+                                                                :_replacedSequence {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                                         :fhir/flags #{:SU},
+                                                         :zen/desc "Changes in sequence from the starting sequence"}}},
+                                   :require #{:coordinateSystem},
+                                   :fhir/flags #{:SU},
+                                   :zen/desc "A sequence defined relative to another sequence"}},
+                :performer {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                        zen.fhir/Reference},
+                            :fhir/flags #{:SU},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Organization/schema}},
+                            :zen/desc "Who should be responsible for test result"}}}}

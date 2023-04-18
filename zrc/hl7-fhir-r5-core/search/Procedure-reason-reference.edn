@@ -1,0 +1,11 @@
+{ns hl7-fhir-r5-core.search.Procedure-reason-reference,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Procedure-reason-reference",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Procedure-reason-reference",
+         :fhir/type "reference",
+         :name "reason-reference",
+         :expr {:Procedure {:knife [["reason" "reference"]],
+                            :jsonpath ["$.\"reason\".\"reference\"[*]"],
+                            :data-types #{},
+                            :template :reference}}}}

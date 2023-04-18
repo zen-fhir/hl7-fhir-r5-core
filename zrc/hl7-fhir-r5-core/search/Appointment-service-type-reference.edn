@@ -1,0 +1,11 @@
+{ns hl7-fhir-r5-core.search.Appointment-service-type-reference,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Appointment-service-type-reference",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Appointment-service-type-reference",
+         :fhir/type "reference",
+         :name "service-type-reference",
+         :expr {:Appointment {:knife [["serviceType" "reference"]],
+                              :jsonpath ["$.\"serviceType\".\"reference\"[*]"],
+                              :data-types #{},
+                              :template :reference}}}}

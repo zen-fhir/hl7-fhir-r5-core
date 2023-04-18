@@ -1,0 +1,11 @@
+{ns hl7-fhir-r5-core.search.ServiceRequest-code-reference,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "ServiceRequest-code-reference",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/ServiceRequest-code-reference",
+         :fhir/type "reference",
+         :name "code-reference",
+         :expr {:ServiceRequest {:knife [["code" "reference"]],
+                                 :jsonpath ["$.\"code\".\"reference\"[*]"],
+                                 :data-types #{},
+                                 :template :reference}}}}

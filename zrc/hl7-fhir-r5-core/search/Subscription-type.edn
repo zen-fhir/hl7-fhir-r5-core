@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Subscription-type,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Subscription-type",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Subscription-type",
+         :fhir/type "token",
+         :name "type",
+         :expr {:Subscription {:knife [["channelType"]],
+                               :jsonpath ["$.\"channelType\"[*]"],
+                               :data-types #{{:type "Coding",
+                                              :polymorphic? false}},
+                               :template :token}}}}

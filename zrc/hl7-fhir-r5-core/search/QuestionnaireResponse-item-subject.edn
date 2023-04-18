@@ -1,0 +1,14 @@
+{ns hl7-fhir-r5-core.search.QuestionnaireResponse-item-subject,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "QuestionnaireResponse-item-subject",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/QuestionnaireResponse-item-subject",
+         :fhir/type "reference",
+         :name "item-subject",
+         :expr {:QuestionnaireResponse {:knife [["item"
+                                                 "answer"
+                                                 "value"
+                                                 "ofType(Reference"]],
+                                        :jsonpath ["$.\"item\".\"answer\".\"value\".\"ofType(Reference\"[*]"],
+                                        :data-types #{},
+                                        :template :reference}}}}

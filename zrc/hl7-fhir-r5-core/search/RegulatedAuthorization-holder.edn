@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.RegulatedAuthorization-holder,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "RegulatedAuthorization-holder",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/RegulatedAuthorization-holder",
+         :fhir/type "reference",
+         :name "holder",
+         :expr {:RegulatedAuthorization {:knife [["holder"]],
+                                         :jsonpath ["$.\"holder\"[*]"],
+                                         :data-types #{{:type "Reference",
+                                                        :polymorphic? false}},
+                                         :template :reference}}}}

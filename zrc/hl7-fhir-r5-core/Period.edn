@@ -1,0 +1,20 @@
+{ns hl7-fhir-r5-core.Period,
+ import #{zen.fhir
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.DataType},
+ schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen/desc "Period Type: A time period defined by a start and end date and optionally time.",
+         :zen.fhir/type "Period",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Period",
+         :zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DataType/schema},
+         :type zen/map,
+         :keys {:start {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                        :fhir/flags #{:SU},
+                        :zen/desc "Starting time with inclusive boundary"},
+                :_start {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :end {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                      :fhir/flags #{:SU},
+                      :zen/desc "End time with inclusive boundary, if not ongoing"},
+                :_end {:confirms #{hl7-fhir-r5-core.Element/schema}}}}}

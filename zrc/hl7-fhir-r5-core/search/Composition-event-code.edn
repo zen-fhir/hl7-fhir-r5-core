@@ -1,0 +1,11 @@
+{ns hl7-fhir-r5-core.search.Composition-event-code,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Composition-event-code",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Composition-event-code",
+         :fhir/type "token",
+         :name "event-code",
+         :expr {:Composition {:knife [["event" "detail" "concept"]],
+                              :jsonpath ["$.\"event\".\"detail\".\"concept\"[*]"],
+                              :data-types #{},
+                              :template :token}}}}

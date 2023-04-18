@@ -1,0 +1,336 @@
+{ns hl7-fhir-r5-core.AdverseEvent,
+ import #{hl7-fhir-r5-core.BiologicallyDerivedProduct
+          hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.Medication
+          hl7-fhir-r5-core.Substance
+          hl7-fhir-r5-core.Condition
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.value-set.adverse-event-participant-function
+          hl7-fhir-r5-core.boolean
+          zen.fhir
+          hl7-fhir-r5-core.value-set.adverse-event-seriousness
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.Group
+          hl7-fhir-r5-core.Observation
+          hl7-fhir-r5-core.QuestionnaireResponse
+          hl7-fhir-r5-core.Annotation
+          hl7-fhir-r5-core.MedicationRequest
+          hl7-fhir-r5-core.value-set.adverse-event-category
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.value-set.adverse-event-contributing-factor
+          hl7-fhir-r5-core.Encounter
+          hl7-fhir-r5-core.Location
+          hl7-fhir-r5-core.value-set.adverse-event-supporting-info
+          hl7-fhir-r5-core.Practitioner
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.Device
+          hl7-fhir-r5-core.MedicationStatement
+          hl7-fhir-r5-core.FamilyMemberHistory
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.DeviceUsage
+          hl7-fhir-r5-core.CareTeam
+          hl7-fhir-r5-core.ResearchSubject
+          hl7-fhir-r5-core.value-set.adverse-event-causality-method
+          hl7-fhir-r5-core.Procedure
+          hl7-fhir-r5-core.Timing
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.ResearchStudy
+          hl7-fhir-r5-core.RelatedPerson
+          hl7-fhir-r5-core.MedicationAdministration
+          hl7-fhir-r5-core.PractitionerRole
+          hl7-fhir-r5-core.Period
+          hl7-fhir-r5-core.value-set.adverse-event-mitigating-action
+          hl7-fhir-r5-core.value-set.adverse-event-actuality
+          hl7-fhir-r5-core.AllergyIntolerance
+          hl7-fhir-r5-core.Immunization
+          hl7-fhir-r5-core.value-set.adverse-event-causality-assess
+          hl7-fhir-r5-core.value-set.adverse-event-type
+          hl7-fhir-r5-core.value-set.adverse-event-preventive-action
+          hl7-fhir-r5-core.value-set.adverse-event-outcome
+          hl7-fhir-r5-core.DocumentReference
+          hl7-fhir-r5-core.value-set.adverse-event-status
+          hl7-fhir-r5-core.Patient},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/AdverseEvent",
+         :require #{:actuality :status :subject},
+         :type zen/map,
+         :zen/desc "An event (i.e. any change to current patient status) that may be related to unintended effects on a patient or research participant. The unintended effects may require additional monitoring, treatment, hospitalization, or may result in death. The AdverseEvent resource also extends to potential or avoided events that could have had such effects. There are two major domains where the AdverseEvent resource is expected to be used. One is in clinical care reported adverse events and the other is in reporting adverse events in clinical  research trial management.  Adverse events can be reported by healthcare providers, patients, caregivers or by medical products manufacturers.  Given the differences between these two concepts, we recommend consulting the domain specific implementation guides when implementing the AdverseEvent Resource. The implementation guides include specific extensions, value sets and constraints.",
+         :keys {:category {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                   :fhir/flags #{:SU},
+                                   :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.adverse-event-category/value-set,
+                                                        :strength :example},
+                                   :zen/desc "wrong-patient | procedure-mishap | medication-mishap | device | unsafe-physical-environment | hospital-aquired-infection | wrong-body-site"}},
+                :actuality {:confirms #{hl7-fhir-r5-core.code/schema},
+                            :fhir/flags #{:SU :?!},
+                            :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.adverse-event-actuality/value-set,
+                                                 :strength :required},
+                            :zen/desc "actual | potential"},
+                :study {:type zen/vector,
+                        :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                            zen.fhir/Reference},
+                                :fhir/flags #{:SU},
+                                :zen.fhir/reference {:refers #{hl7-fhir-r5-core.ResearchStudy/schema}},
+                                :zen/desc "Research study that the subject is enrolled in"}},
+                :supportingInfo {:type zen/vector,
+                                 :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                         :type zen/map,
+                                         :keys {:item {:fhir/polymorphic true,
+                                                       :type zen/map,
+                                                       :exclusive-keys #{#{:CodeableConcept
+                                                                           :Reference}},
+                                                       :keys {:Reference {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                                      zen.fhir/Reference},
+                                                                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.QuestionnaireResponse/schema
+                                                                                                         hl7-fhir-r5-core.MedicationAdministration/schema
+                                                                                                         hl7-fhir-r5-core.Observation/schema
+                                                                                                         hl7-fhir-r5-core.DocumentReference/schema
+                                                                                                         hl7-fhir-r5-core.Procedure/schema
+                                                                                                         hl7-fhir-r5-core.FamilyMemberHistory/schema
+                                                                                                         hl7-fhir-r5-core.Condition/schema
+                                                                                                         hl7-fhir-r5-core.Immunization/schema
+                                                                                                         hl7-fhir-r5-core.MedicationStatement/schema
+                                                                                                         hl7-fhir-r5-core.AllergyIntolerance/schema}}},
+                                                              :CodeableConcept {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema}}},
+                                                       :fhir/flags #{:SU},
+                                                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.adverse-event-supporting-info/value-set,
+                                                                            :strength :example},
+                                                       :zen/desc "Subject medical history or document relevant to this adverse event"}},
+                                         :require #{:item},
+                                         :fhir/flags #{:SU},
+                                         :zen/desc "Supporting information relevant to the event"}},
+                :encounter {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                        zen.fhir/Reference},
+                            :fhir/flags #{:SU},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Encounter/schema}},
+                            :zen/desc "The Encounter associated with the start of the AdverseEvent"},
+                :_expectedInResearchStudy {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :suspectEntity {:type zen/vector,
+                                :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                        :type zen/map,
+                                        :keys {:instance {:fhir/polymorphic true,
+                                                          :type zen/map,
+                                                          :exclusive-keys #{#{:CodeableConcept
+                                                                              :Reference}},
+                                                          :keys {:CodeableConcept {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema}},
+                                                                 :Reference {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                                         zen.fhir/Reference},
+                                                                             :zen.fhir/reference {:refers #{hl7-fhir-r5-core.MedicationAdministration/schema
+                                                                                                            hl7-fhir-r5-core.Medication/schema
+                                                                                                            hl7-fhir-r5-core.ResearchStudy/schema
+                                                                                                            hl7-fhir-r5-core.Substance/schema
+                                                                                                            hl7-fhir-r5-core.Device/schema
+                                                                                                            hl7-fhir-r5-core.Procedure/schema
+                                                                                                            hl7-fhir-r5-core.BiologicallyDerivedProduct/schema
+                                                                                                            hl7-fhir-r5-core.Immunization/schema
+                                                                                                            hl7-fhir-r5-core.MedicationStatement/schema}}}},
+                                                          :fhir/flags #{:SU},
+                                                          :zen/desc "Refers to the specific entity that caused the adverse event"},
+                                               :causality {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                                           :type zen/map,
+                                                           :keys {:assessmentMethod {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                                     :fhir/flags #{:SU},
+                                                                                     :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.adverse-event-causality-method/value-set,
+                                                                                                          :strength :example},
+                                                                                     :zen/desc "Method of evaluating the relatedness of the suspected entity to the event"},
+                                                                  :entityRelatedness {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                                      :fhir/flags #{:SU},
+                                                                                      :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.adverse-event-causality-assess/value-set,
+                                                                                                           :strength :example},
+                                                                                      :zen/desc "Result of the assessment regarding the relatedness of the suspected entity to the event"},
+                                                                  :author {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                                       zen.fhir/Reference},
+                                                                           :fhir/flags #{:SU},
+                                                                           :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                                                                          hl7-fhir-r5-core.PractitionerRole/schema
+                                                                                                          hl7-fhir-r5-core.ResearchSubject/schema
+                                                                                                          hl7-fhir-r5-core.Practitioner/schema
+                                                                                                          hl7-fhir-r5-core.RelatedPerson/schema}},
+                                                                           :zen/desc "Author of the information on the possible cause of the event"}},
+                                                           :fhir/flags #{:SU},
+                                                           :zen/desc "Information on the possible cause of the event"}},
+                                        :require #{:instance},
+                                        :fhir/flags #{:SU},
+                                        :zen/desc "The suspected agent causing the adverse event"}},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :expectedInResearchStudy {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                                          :zen/desc "Considered likely or probable or anticipated in the research study"},
+                :outcome {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                  :fhir/flags #{:SU},
+                                  :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.adverse-event-outcome/value-set,
+                                                       :strength :example},
+                                  :zen/desc "Type of outcome from the adverse event"}},
+                :participant {:type zen/vector,
+                              :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                      :type zen/map,
+                                      :keys {:function {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                        :fhir/flags #{:SU},
+                                                        :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.adverse-event-participant-function/value-set,
+                                                                             :strength :example},
+                                                        :zen/desc "Type of involvement"},
+                                             :actor {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                 zen.fhir/Reference},
+                                                     :fhir/flags #{:SU},
+                                                     :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                                                    hl7-fhir-r5-core.CareTeam/schema
+                                                                                    hl7-fhir-r5-core.PractitionerRole/schema
+                                                                                    hl7-fhir-r5-core.Organization/schema
+                                                                                    hl7-fhir-r5-core.ResearchSubject/schema
+                                                                                    hl7-fhir-r5-core.Device/schema
+                                                                                    hl7-fhir-r5-core.Practitioner/schema
+                                                                                    hl7-fhir-r5-core.RelatedPerson/schema}},
+                                                     :zen/desc "Who was involved in the adverse event or the potential adverse event"}},
+                                      :require #{:actor},
+                                      :fhir/flags #{:SU},
+                                      :zen/desc "Who was involved in the adverse event or the potential adverse event and what they did"}},
+                :note {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.Annotation/schema},
+                               :fhir/flags #{:SU},
+                               :zen/desc "Comment on adverse event"}},
+                :recordedDate {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                               :fhir/flags #{:SU},
+                               :zen/desc "When the event was recorded"},
+                :contributingFactor {:type zen/vector,
+                                     :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                             :type zen/map,
+                                             :keys {:item {:fhir/polymorphic true,
+                                                           :type zen/map,
+                                                           :exclusive-keys #{#{:CodeableConcept
+                                                                               :Reference}},
+                                                           :keys {:Reference {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                                          zen.fhir/Reference},
+                                                                              :zen.fhir/reference {:refers #{hl7-fhir-r5-core.MedicationAdministration/schema
+                                                                                                             hl7-fhir-r5-core.DeviceUsage/schema
+                                                                                                             hl7-fhir-r5-core.Observation/schema
+                                                                                                             hl7-fhir-r5-core.DocumentReference/schema
+                                                                                                             hl7-fhir-r5-core.Device/schema
+                                                                                                             hl7-fhir-r5-core.Procedure/schema
+                                                                                                             hl7-fhir-r5-core.FamilyMemberHistory/schema
+                                                                                                             hl7-fhir-r5-core.Condition/schema
+                                                                                                             hl7-fhir-r5-core.Immunization/schema
+                                                                                                             hl7-fhir-r5-core.MedicationStatement/schema
+                                                                                                             hl7-fhir-r5-core.AllergyIntolerance/schema}}},
+                                                                  :CodeableConcept {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema}}},
+                                                           :fhir/flags #{:SU},
+                                                           :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.adverse-event-contributing-factor/value-set,
+                                                                                :strength :example},
+                                                           :zen/desc "Item suspected to have increased the probability or severity of the adverse event"}},
+                                             :require #{:item},
+                                             :fhir/flags #{:SU},
+                                             :zen/desc "Contributing factors suspected to have increased the probability or severity of the adverse event"}},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.adverse-event-status/value-set,
+                                              :strength :required},
+                         :zen/desc "in-progress | completed | entered-in-error | unknown"},
+                :_recordedDate {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :recorder {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                       zen.fhir/Reference},
+                           :fhir/flags #{:SU},
+                           :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                          hl7-fhir-r5-core.PractitionerRole/schema
+                                                          hl7-fhir-r5-core.ResearchSubject/schema
+                                                          hl7-fhir-r5-core.Practitioner/schema
+                                                          hl7-fhir-r5-core.RelatedPerson/schema}},
+                           :zen/desc "Who recorded the adverse event"},
+                :seriousness {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                              :fhir/flags #{:SU},
+                              :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.adverse-event-seriousness/value-set,
+                                                   :strength :example},
+                              :zen/desc "Seriousness or gravity of the event"},
+                :mitigatingAction {:type zen/vector,
+                                   :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                           :type zen/map,
+                                           :keys {:item {:fhir/polymorphic true,
+                                                         :type zen/map,
+                                                         :exclusive-keys #{#{:CodeableConcept
+                                                                             :Reference}},
+                                                         :keys {:Reference {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                                        zen.fhir/Reference},
+                                                                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.MedicationAdministration/schema
+                                                                                                           hl7-fhir-r5-core.DocumentReference/schema
+                                                                                                           hl7-fhir-r5-core.Procedure/schema
+                                                                                                           hl7-fhir-r5-core.MedicationRequest/schema}}},
+                                                                :CodeableConcept {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema}}},
+                                                         :fhir/flags #{:SU},
+                                                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.adverse-event-mitigating-action/value-set,
+                                                                              :strength :example},
+                                                         :zen/desc "Ameliorating action taken after the adverse event occured in order to reduce the extent of harm"}},
+                                           :require #{:item},
+                                           :fhir/flags #{:SU},
+                                           :zen/desc "Ameliorating actions taken after the adverse event occured in order to reduce the extent of harm"}},
+                :code {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                       :fhir/flags #{:SU},
+                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.adverse-event-type/value-set,
+                                            :strength :example},
+                       :zen/desc "Event or incident that occurred or was averted"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Business identifier for the event"}},
+                :detected {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                           :fhir/flags #{:SU},
+                           :zen/desc "When the event was detected"},
+                :resultingEffect {:type zen/vector,
+                                  :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                      zen.fhir/Reference},
+                                          :fhir/flags #{:SU},
+                                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Observation/schema
+                                                                         hl7-fhir-r5-core.Condition/schema}},
+                                          :zen/desc "Effect on the subject due to this event"}},
+                :preventiveAction {:type zen/vector,
+                                   :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                           :type zen/map,
+                                           :keys {:item {:fhir/polymorphic true,
+                                                         :type zen/map,
+                                                         :exclusive-keys #{#{:CodeableConcept
+                                                                             :Reference}},
+                                                         :keys {:Reference {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                                        zen.fhir/Reference},
+                                                                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.MedicationAdministration/schema
+                                                                                                           hl7-fhir-r5-core.DocumentReference/schema
+                                                                                                           hl7-fhir-r5-core.Procedure/schema
+                                                                                                           hl7-fhir-r5-core.Immunization/schema
+                                                                                                           hl7-fhir-r5-core.MedicationRequest/schema}}},
+                                                                :CodeableConcept {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema}}},
+                                                         :fhir/flags #{:SU},
+                                                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.adverse-event-preventive-action/value-set,
+                                                                              :strength :example},
+                                                         :zen/desc "Action that contributed to avoiding the adverse event"}},
+                                           :require #{:item},
+                                           :fhir/flags #{:SU},
+                                           :zen/desc "Preventive actions that contributed to avoiding the adverse event"}},
+                :location {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                       zen.fhir/Reference},
+                           :fhir/flags #{:SU},
+                           :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Location/schema}},
+                           :zen/desc "Location where adverse event occurred"},
+                :_detected {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :subject {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                      zen.fhir/Reference},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                         hl7-fhir-r5-core.ResearchSubject/schema
+                                                         hl7-fhir-r5-core.Practitioner/schema
+                                                         hl7-fhir-r5-core.Group/schema
+                                                         hl7-fhir-r5-core.RelatedPerson/schema}},
+                          :zen/desc "Subject impacted by event"},
+                :_actuality {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :occurrence {:fhir/polymorphic true,
+                             :type zen/map,
+                             :exclusive-keys #{#{:dateTime
+                                                 :Period
+                                                 :Timing}},
+                             :keys {:dateTime {:confirms #{hl7-fhir-r5-core.dateTime/schema}},
+                                    :_dateTime {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                    :Period {:confirms #{hl7-fhir-r5-core.Period/schema}},
+                                    :Timing {:confirms #{hl7-fhir-r5-core.Timing/schema}}},
+                             :fhir/flags #{:SU},
+                             :zen/desc "When the event occurred"}},
+         :zen.fhir/type "AdverseEvent"}}

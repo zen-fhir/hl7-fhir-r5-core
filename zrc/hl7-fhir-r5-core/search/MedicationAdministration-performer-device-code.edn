@@ -1,0 +1,13 @@
+{ns hl7-fhir-r5-core.search.MedicationAdministration-performer-device-code,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "MedicationAdministration-performer-device-code",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/MedicationAdministration-performer-device-code",
+         :fhir/type "token",
+         :name "performer-device-code",
+         :expr {:MedicationAdministration {:knife [["performer"
+                                                    "actor"
+                                                    "concept"]],
+                                           :jsonpath ["$.\"performer\".\"actor\".\"concept\"[*]"],
+                                           :data-types #{},
+                                           :template :token}}}}

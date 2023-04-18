@@ -1,0 +1,16 @@
+{ns hl7-fhir-r5-core.search.ChargeItem-occurrence,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "ChargeItem-occurrence",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/ChargeItem-occurrence",
+         :fhir/type "date",
+         :name "occurrence",
+         :expr {:ChargeItem {:knife [["occurrence" "ofType(dateTime"]
+                                     ["occurrence" "ofType(Period"]
+                                     ["occurrence" "ofType(Timing"]],
+                             :jsonpath ["$.\"occurrence\".\"ofType(dateTime\"[*]"
+                                        "$.\"occurrence\".\"ofType(Period\"[*]"
+                                        "$.\"occurrence\".\"ofType(Timing\"[*]"],
+                             :data-types #{},
+                             :template :date,
+                             :sql {:where [:or]}}}}}

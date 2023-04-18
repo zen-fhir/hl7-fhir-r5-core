@@ -1,0 +1,14 @@
+{ns hl7-fhir-r5-core.search.PackagedProductDefinition-nutrition,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "PackagedProductDefinition-nutrition",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/PackagedProductDefinition-nutrition",
+         :fhir/type "reference",
+         :name "nutrition",
+         :expr {:PackagedProductDefinition {:knife [["packaging"
+                                                     "containedItem"
+                                                     "item"
+                                                     "reference"]],
+                                            :jsonpath ["$.\"packaging\".\"containedItem\".\"item\".\"reference\"[*]"],
+                                            :data-types #{},
+                                            :template :reference}}}}

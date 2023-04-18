@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Goal-target-date,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Goal-target-date",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Goal-target-date",
+         :fhir/type "date",
+         :name "target-date",
+         :expr {:Goal {:knife [["target" "due" "ofType(date"]],
+                       :jsonpath ["$.\"target\".\"due\".\"ofType(date\"[*]"],
+                       :data-types #{},
+                       :template :date,
+                       :sql {:where [:or]}}}}}

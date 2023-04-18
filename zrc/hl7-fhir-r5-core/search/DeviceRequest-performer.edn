@@ -1,0 +1,11 @@
+{ns hl7-fhir-r5-core.search.DeviceRequest-performer,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "DeviceRequest-performer",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/DeviceRequest-performer",
+         :fhir/type "reference",
+         :name "performer",
+         :expr {:DeviceRequest {:knife [["performer" "reference"]],
+                                :jsonpath ["$.\"performer\".\"reference\"[*]"],
+                                :data-types #{},
+                                :template :reference}}}}

@@ -1,0 +1,34 @@
+{ns hl7-fhir-r5-core.search.RequestOrchestration-authored,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "RequestOrchestration-authored",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/RequestOrchestration-authored",
+         :fhir/type "date",
+         :name "authored",
+         :expr {:RequestOrchestration {:knife [["authoredOn"]],
+                                       :jsonpath ["$.\"authoredOn\"[*]"],
+                                       :data-types #{{:type "dateTime",
+                                                      :polymorphic? false}},
+                                       :template :date,
+                                       :sql {:where [:or
+                                                     [:and
+                                                      [:>=
+                                                       [:pg/call
+                                                        :max_text_date_bound
+                                                        [:pg/sql
+                                                         "{{param}}"]]
+                                                       [:pg/call
+                                                        :jsonpath_extract_max_timestamptz
+                                                        [:pg/sql
+                                                         "{{table}}.resource"]
+                                                        "$.\"authoredOn\"[*]"]]
+                                                      [:<=
+                                                       [:pg/call
+                                                        :min_text_date_bound
+                                                        [:pg/sql
+                                                         "{{param}}"]]
+                                                       [:pg/call
+                                                        :jsonpath_extract_min_timestamptz
+                                                        [:pg/sql
+                                                         "{{table}}.resource"]
+                                                        "$.\"authoredOn\"[*]"]]]]}}}}}

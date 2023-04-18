@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.ChargeItem-factor-override,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "ChargeItem-factor-override",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/ChargeItem-factor-override",
+         :fhir/type "number",
+         :name "factor-override",
+         :expr {:ChargeItem {:knife [["totalPriceComponent" "factor"]],
+                             :jsonpath ["$.\"totalPriceComponent\".\"factor\"[*]"],
+                             :data-types #{},
+                             :template :number,
+                             :sql {:where [:or]}}}}}

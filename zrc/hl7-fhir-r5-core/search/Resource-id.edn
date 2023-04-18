@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Resource-id,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Resource-id",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Resource-id",
+         :fhir/type "token",
+         :name "_id",
+         :expr {:Resource {:knife [["id"]],
+                           :jsonpath ["$.\"id\"[*]"],
+                           :data-types #{{:type "id",
+                                          :polymorphic? false}},
+                           :template :token}}}}

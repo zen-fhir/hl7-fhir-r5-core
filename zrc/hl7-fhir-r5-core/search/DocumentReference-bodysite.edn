@@ -1,0 +1,11 @@
+{ns hl7-fhir-r5-core.search.DocumentReference-bodysite,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "DocumentReference-bodysite",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/DocumentReference-bodysite",
+         :fhir/type "token",
+         :name "bodysite",
+         :expr {:DocumentReference {:knife [["bodySite" "concept"]],
+                                    :jsonpath ["$.\"bodySite\".\"concept\"[*]"],
+                                    :data-types #{},
+                                    :template :token}}}}

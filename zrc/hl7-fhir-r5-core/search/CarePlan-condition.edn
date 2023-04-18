@@ -1,0 +1,11 @@
+{ns hl7-fhir-r5-core.search.CarePlan-condition,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "CarePlan-condition",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/CarePlan-condition",
+         :fhir/type "reference",
+         :name "condition",
+         :expr {:CarePlan {:knife [["addresses" "reference"]],
+                           :jsonpath ["$.\"addresses\".\"reference\"[*]"],
+                           :data-types #{},
+                           :template :reference}}}}

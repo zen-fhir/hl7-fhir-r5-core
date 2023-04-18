@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.AdministrableProductDefinition-identifier,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "AdministrableProductDefinition-identifier",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/AdministrableProductDefinition-identifier",
+         :fhir/type "token",
+         :name "identifier",
+         :expr {:AdministrableProductDefinition {:knife [["identifier"]],
+                                                 :jsonpath ["$.\"identifier\"[*]"],
+                                                 :data-types #{{:type "Identifier",
+                                                                :polymorphic? false}},
+                                                 :template :token}}}}

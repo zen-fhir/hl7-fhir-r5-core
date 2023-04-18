@@ -1,0 +1,28 @@
+{ns hl7-fhir-r5-core.ebmrecommendation,
+ import #{hl7-fhir-r5-core.ebmrecommendation
+          hl7-fhir-r5-core.PlanDefinition
+          zen.fhir
+          hl7-fhir-r5-core.ActivityDefinition
+          hl7-fhir-r5-core.ArtifactAssessment},
+ content-schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
+                 :zen.fhir/version "0.6.21-2"},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.ArtifactAssessment/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen.fhir/profile-schema zen/schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/ebmrecommendation",
+         :require #{:artifact},
+         :type zen/map,
+         :zen/desc "Represents justification for a recommendation",
+         :keys {:citeAs {:zen/desc "How to cite the recommendation"},
+                :artifact {:fhir/polymorphic true,
+                           :type zen/map,
+                           :exclusive-keys #{#{:canonical
+                                               :uri
+                                               :Reference}},
+                           :keys {:Reference {:confirms #{zen.fhir/Reference},
+                                              :zen.fhir/reference {:refers #{hl7-fhir-r5-core.PlanDefinition/schema
+                                                                             hl7-fhir-r5-core.ActivityDefinition/schema}}}},
+                           :fhir/flags #{:MS}},
+                :content {:confirms #{hl7-fhir-r5-core.ebmrecommendation/content-schema}}},
+         :zen.fhir/type "ArtifactAssessment"}}

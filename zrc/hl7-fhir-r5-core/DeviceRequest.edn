@@ -1,0 +1,194 @@
+{ns hl7-fhir-r5-core.DeviceRequest,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.value-set.device-type
+          hl7-fhir-r5-core.Provenance
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.CodeableReference
+          hl7-fhir-r5-core.boolean
+          hl7-fhir-r5-core.value-set.request-status
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.Group
+          hl7-fhir-r5-core.Annotation
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.Encounter
+          hl7-fhir-r5-core.DeviceRequest
+          hl7-fhir-r5-core.value-set.request-intent
+          hl7-fhir-r5-core.Location
+          hl7-fhir-r5-core.Practitioner
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.Device
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.value-set.condition-code
+          hl7-fhir-r5-core.ClaimResponse
+          hl7-fhir-r5-core.Coverage
+          hl7-fhir-r5-core.integer
+          hl7-fhir-r5-core.Timing
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.PractitionerRole
+          hl7-fhir-r5-core.Period
+          hl7-fhir-r5-core.canonical
+          hl7-fhir-r5-core.Range
+          hl7-fhir-r5-core.value-set.request-priority
+          hl7-fhir-r5-core.Quantity
+          hl7-fhir-r5-core.uri
+          hl7-fhir-r5-core.Patient},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/DeviceRequest",
+         :require #{:code :intent :subject},
+         :type zen/map,
+         :zen/desc "Represents a request a device to be provided to a specific patient. The device may be an implantable device to be subsequently implanted, or an external assistive device, such as a walker, to be delivered and subsequently be used.",
+         :keys {:_quantity {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :insurance {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                zen.fhir/Reference},
+                                    :zen.fhir/reference {:refers #{hl7-fhir-r5-core.ClaimResponse/schema
+                                                                   hl7-fhir-r5-core.Coverage/schema}},
+                                    :zen/desc "Associated insurance coverage"}},
+                :instantiatesCanonical {:type zen/vector,
+                                        :every {:confirms #{hl7-fhir-r5-core.canonical/schema},
+                                                :fhir/flags #{:SU},
+                                                :zen/desc "Instantiates FHIR protocol or definition"}},
+                :instantiatesUri {:type zen/vector,
+                                  :every {:confirms #{hl7-fhir-r5-core.uri/schema},
+                                          :fhir/flags #{:SU},
+                                          :zen/desc "Instantiates external protocol or definition"}},
+                :relevantHistory {:type zen/vector,
+                                  :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                      zen.fhir/Reference},
+                                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Provenance/schema}},
+                                          :zen/desc "Request provenance"}},
+                :asNeeded {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                           :zen/desc "PRN status of request"},
+                :_authoredOn {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :supportingInfo {:type zen/vector,
+                                 :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                     zen.fhir/Reference},
+                                         :zen.fhir/reference {:refers #{}},
+                                         :zen/desc "Additional clinical information"}},
+                :encounter {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                        zen.fhir/Reference},
+                            :fhir/flags #{:SU},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Encounter/schema}},
+                            :zen/desc "Encounter motivating request"},
+                :_doNotPerform {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_priority {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :authoredOn {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                             :fhir/flags #{:SU},
+                             :zen/desc "When recorded"},
+                :note {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.Annotation/schema},
+                               :zen/desc "Notes or comments"}},
+                :_intent {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :reason {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                 :fhir/flags #{:SU},
+                                 :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.condition-code/value-set,
+                                                      :strength :example},
+                                 :zen/desc "Coded/Linked Reason for request"}},
+                :requester {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                        zen.fhir/Reference},
+                            :fhir/flags #{:SU},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.PractitionerRole/schema
+                                                           hl7-fhir-r5-core.Organization/schema
+                                                           hl7-fhir-r5-core.Device/schema
+                                                           hl7-fhir-r5-core.Practitioner/schema}},
+                            :zen/desc "Who/what submitted the device request"},
+                :priority {:confirms #{hl7-fhir-r5-core.code/schema},
+                           :fhir/flags #{:SU},
+                           :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.request-priority/value-set,
+                                                :strength :required},
+                           :zen/desc "routine | urgent | asap | stat"},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.request-status/value-set,
+                                              :strength :required},
+                         :zen/desc "draft | active | on-hold | revoked | completed | entered-in-error | unknown"},
+                :groupIdentifier {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                  :fhir/flags #{:SU},
+                                  :zen/desc "Identifier of composite request"},
+                :code {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                       :fhir/flags #{:SU},
+                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.device-type/value-set,
+                                            :strength :example},
+                       :zen/desc "Device requested"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "External Request identifier"}},
+                :doNotPerform {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                               :fhir/flags #{:SU :?!},
+                               :zen/desc "True if the request is to stop or not to start using the device"},
+                :intent {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.request-intent/value-set,
+                                              :strength :required},
+                         :zen/desc "proposal | plan | directive | order | original-order | reflex-order | filler-order | instance-order | option"},
+                :replaces {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                               zen.fhir/Reference},
+                                   :fhir/flags #{:SU},
+                                   :zen.fhir/reference {:refers #{hl7-fhir-r5-core.DeviceRequest/schema}},
+                                   :zen/desc "What request replaces"}},
+                :_asNeeded {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :asNeededFor {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                              :zen/desc "Device usage reason"},
+                :basedOn {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                              zen.fhir/Reference},
+                                  :fhir/flags #{:SU},
+                                  :zen.fhir/reference {:refers #{}},
+                                  :zen/desc "What request fulfills"}},
+                :quantity {:confirms #{hl7-fhir-r5-core.integer/schema},
+                           :zen/desc "Quantity of devices to supply"},
+                :_instantiatesCanonical {:type zen/vector,
+                                         :every {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                :subject {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                      zen.fhir/Reference},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                         hl7-fhir-r5-core.Location/schema
+                                                         hl7-fhir-r5-core.Device/schema
+                                                         hl7-fhir-r5-core.Group/schema}},
+                          :zen/desc "Focus of request"},
+                :parameter {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                    :type zen/map,
+                                    :keys {:code {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                  :zen/desc "Device detail"},
+                                           :value {:fhir/polymorphic true,
+                                                   :type zen/map,
+                                                   :exclusive-keys #{#{:Range
+                                                                       :CodeableConcept
+                                                                       :Quantity
+                                                                       :boolean}},
+                                                   :keys {:CodeableConcept {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema}},
+                                                          :Quantity {:confirms #{hl7-fhir-r5-core.Quantity/schema}},
+                                                          :Range {:confirms #{hl7-fhir-r5-core.Range/schema}},
+                                                          :boolean {:confirms #{hl7-fhir-r5-core.boolean/schema}},
+                                                          :_boolean {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                                   :zen/desc "Value of detail"}},
+                                    :zen/desc "Device details"}},
+                :occurrence {:fhir/polymorphic true,
+                             :type zen/map,
+                             :exclusive-keys #{#{:dateTime
+                                                 :Period
+                                                 :Timing}},
+                             :keys {:dateTime {:confirms #{hl7-fhir-r5-core.dateTime/schema}},
+                                    :_dateTime {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                    :Period {:confirms #{hl7-fhir-r5-core.Period/schema}},
+                                    :Timing {:confirms #{hl7-fhir-r5-core.Timing/schema}}},
+                             :fhir/flags #{:SU},
+                             :zen/desc "Desired time or schedule for use"},
+                :performer {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                            :fhir/flags #{:SU},
+                            :zen/desc "Requested Filler"},
+                :_instantiatesUri {:type zen/vector,
+                                   :every {:confirms #{hl7-fhir-r5-core.Element/schema}}}},
+         :zen.fhir/type "DeviceRequest"}}

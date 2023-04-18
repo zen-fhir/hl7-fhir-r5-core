@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.GraphDefinition-start,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "GraphDefinition-start",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/GraphDefinition-start",
+         :fhir/type "token",
+         :name "start",
+         :expr {:GraphDefinition {:knife [["start"]],
+                                  :jsonpath ["$.\"start\"[*]"],
+                                  :data-types #{{:type "id",
+                                                 :polymorphic? false}},
+                                  :template :token}}}}

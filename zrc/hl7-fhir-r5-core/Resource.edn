@@ -1,0 +1,32 @@
+{ns hl7-fhir-r5-core.Resource,
+ import #{zen.fhir
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Meta
+          hl7-fhir-r5-core.value-set.all-languages
+          hl7-fhir-r5-core.id
+          hl7-fhir-r5-core.uri
+          hl7-fhir-r5-core.Base},
+ schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen/desc "This is the base resource type for everything.",
+         :zen.fhir/type "Resource",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Resource",
+         :zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.Base/schema zen.fhir/Resource},
+         :type zen/map,
+         :keys {:id {:confirms #{hl7-fhir-r5-core.id/schema},
+                     :fhir/flags #{:SU},
+                     :zen/desc "Logical id of this artifact"},
+                :_id {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :meta {:confirms #{hl7-fhir-r5-core.Meta/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "Metadata about the resource"},
+                :implicitRules {:confirms #{hl7-fhir-r5-core.uri/schema},
+                                :fhir/flags #{:SU :?!},
+                                :zen/desc "A set of rules under which this content was created"},
+                :_implicitRules {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :language {:confirms #{hl7-fhir-r5-core.code/schema},
+                           :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.all-languages/value-set,
+                                                :strength :required},
+                           :zen/desc "Language of the resource content"},
+                :_language {:confirms #{hl7-fhir-r5-core.Element/schema}}}}}

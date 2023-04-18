@@ -1,0 +1,323 @@
+{ns hl7-fhir-r5-core.MedicinalProductDefinition,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.value-set.product-characteristic-codes
+          hl7-fhir-r5-core.value-set.medicinal-product-cross-reference-type
+          hl7-fhir-r5-core.markdown
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.CodeableReference
+          hl7-fhir-r5-core.boolean
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.MarketingStatus
+          hl7-fhir-r5-core.value-set.jurisdiction
+          hl7-fhir-r5-core.value-set.medicinal-product-pediatric-use
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.value-set.medicinal-product-package-type
+          hl7-fhir-r5-core.value-set.medication-codes
+          hl7-fhir-r5-core.Attachment
+          hl7-fhir-r5-core.DeviceDefinition
+          hl7-fhir-r5-core.ManufacturedItemDefinition
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.value-set.medicinal-product-special-measures
+          hl7-fhir-r5-core.value-set.medicinal-product-type
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.date
+          hl7-fhir-r5-core.integer
+          hl7-fhir-r5-core.value-set.route-codes
+          hl7-fhir-r5-core.value-set.medicinal-product-contact-type
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.ResearchStudy
+          hl7-fhir-r5-core.PractitionerRole
+          hl7-fhir-r5-core.value-set.country
+          hl7-fhir-r5-core.Period
+          hl7-fhir-r5-core.value-set.publication-status
+          hl7-fhir-r5-core.value-set.medicinal-product-confidentiality
+          hl7-fhir-r5-core.Coding
+          hl7-fhir-r5-core.value-set.medicinal-product-additional-monitoring
+          hl7-fhir-r5-core.value-set.all-languages
+          hl7-fhir-r5-core.value-set.medicinal-product-domain
+          hl7-fhir-r5-core.value-set.medicinal-product-name-part-type
+          hl7-fhir-r5-core.Quantity
+          hl7-fhir-r5-core.value-set.combined-dose-form
+          hl7-fhir-r5-core.value-set.medicinal-product-classification
+          hl7-fhir-r5-core.DocumentReference
+          hl7-fhir-r5-core.value-set.substance-codes
+          hl7-fhir-r5-core.value-set.legal-status-of-supply
+          hl7-fhir-r5-core.value-set.medicinal-product-name-type},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/MedicinalProductDefinition",
+         :require #{:name},
+         :type zen/map,
+         :zen/desc "Detailed definition of a medicinal product, typically for uses other than direct patient care (e.g. regulatory use, drug catalogs, to support prescribing, adverse events management etc.).",
+         :keys {:description {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                              :fhir/flags #{:SU},
+                              :zen/desc "General description of this product"},
+                :additionalMonitoringIndicator {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                :fhir/flags #{:SU},
+                                                :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.medicinal-product-additional-monitoring/value-set,
+                                                                     :strength :example},
+                                                :zen/desc "Whether the Medicinal Product is subject to additional monitoring for regulatory reasons"},
+                :comprisedOf {:type zen/vector,
+                              :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                  zen.fhir/Reference},
+                                      :fhir/flags #{:SU},
+                                      :zen.fhir/reference {:refers #{hl7-fhir-r5-core.ManufacturedItemDefinition/schema
+                                                                     hl7-fhir-r5-core.DeviceDefinition/schema}},
+                                      :zen/desc "Types of medicinal manufactured items and/or devices that this product consists of, such as tablets, capsule, or syringes"}},
+                :combinedPharmaceuticalDoseForm {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                 :fhir/flags #{:SU},
+                                                 :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.combined-dose-form/value-set,
+                                                                      :strength :example},
+                                                 :zen/desc "The dose form for a single part product, or combined form of a multiple part product"},
+                :clinicalTrial {:type zen/vector,
+                                :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                    zen.fhir/Reference},
+                                        :fhir/flags #{:SU},
+                                        :zen.fhir/reference {:refers #{hl7-fhir-r5-core.ResearchStudy/schema}},
+                                        :zen/desc "Clinical trials or studies that this product is involved in"}},
+                :impurity {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                   :fhir/flags #{:SU},
+                                   :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.substance-codes/value-set,
+                                                        :strength :example},
+                                   :zen/desc "Any component of the drug product which is not the chemical entity defined as the drug substance, or an excipient in the drug product"}},
+                :indication {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                             :fhir/flags #{:SU},
+                             :zen/desc "Description of indication(s) for this product, used when structured indications are not required"},
+                :name {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                               :type zen/map,
+                               :keys {:productName {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                    :fhir/flags #{:SU},
+                                                    :zen/desc "The full product name"},
+                                      :_productName {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                      :type {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                             :fhir/flags #{:SU},
+                                             :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.medicinal-product-name-type/value-set,
+                                                                  :strength :example},
+                                             :zen/desc "Type of product name, such as rINN, BAN, Proprietary, Non-Proprietary"},
+                                      :part {:type zen/vector,
+                                             :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                                     :type zen/map,
+                                                     :keys {:part {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                                   :fhir/flags #{:SU},
+                                                                   :zen/desc "A fragment of a product name"},
+                                                            :_part {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                            :type {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                   :fhir/flags #{:SU},
+                                                                   :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.medicinal-product-name-part-type/value-set,
+                                                                                        :strength :example},
+                                                                   :zen/desc "Identifying type for this part of the name (e.g. strength part)"}},
+                                                     :require #{:part
+                                                                :type},
+                                                     :fhir/flags #{:SU},
+                                                     :zen/desc "Coding words or phrases of the name"}},
+                                      :usage {:type zen/vector,
+                                              :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                                      :type zen/map,
+                                                      :keys {:country {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                       :fhir/flags #{:SU},
+                                                                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.country/value-set,
+                                                                                            :strength :example},
+                                                                       :zen/desc "Country code for where this name applies"},
+                                                             :jurisdiction {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                            :fhir/flags #{:SU},
+                                                                            :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.jurisdiction/value-set,
+                                                                                                 :strength :example},
+                                                                            :zen/desc "Jurisdiction code for where this name applies"},
+                                                             :language {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                        :fhir/flags #{:SU},
+                                                                        :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.all-languages/value-set,
+                                                                                             :strength :required},
+                                                                        :zen/desc "Language code for this name"}},
+                                                      :require #{:language
+                                                                 :country},
+                                                      :fhir/flags #{:SU},
+                                                      :zen/desc "Country and jurisdiction where the name applies"}}},
+                               :require #{:productName},
+                               :fhir/flags #{:SU},
+                               :zen/desc "The product's name, including full name and possibly coded parts"},
+                       :minItems 1},
+                :_indication {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :masterFile {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                 zen.fhir/Reference},
+                                     :fhir/flags #{:SU},
+                                     :zen.fhir/reference {:refers #{hl7-fhir-r5-core.DocumentReference/schema}},
+                                     :zen/desc "A master file for the medicinal product (e.g. Pharmacovigilance System Master File)"}},
+                :operation {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                    :type zen/map,
+                                    :keys {:type {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                                  :fhir/flags #{:SU},
+                                                  :zen/desc "The type of manufacturing operation e.g. manufacturing itself, re-packaging"},
+                                           :effectiveDate {:confirms #{hl7-fhir-r5-core.Period/schema},
+                                                           :fhir/flags #{:SU},
+                                                           :zen/desc "Date range of applicability"},
+                                           :organization {:type zen/vector,
+                                                          :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                              zen.fhir/Reference},
+                                                                  :fhir/flags #{:SU},
+                                                                  :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Organization/schema}},
+                                                                  :zen/desc "The organization responsible for the particular process, e.g. the manufacturer or importer"}},
+                                           :confidentialityIndicator {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                      :fhir/flags #{:SU},
+                                                                      :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.medicinal-product-confidentiality/value-set,
+                                                                                           :strength :example},
+                                                                      :zen/desc "Specifies whether this process is considered proprietary or confidential"}},
+                                    :fhir/flags #{:SU},
+                                    :zen/desc "A manufacturing or administrative process for the medicinal product"}},
+                :type {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                       :fhir/flags #{:SU},
+                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.medicinal-product-type/value-set,
+                                            :strength :example},
+                       :zen/desc "Regulatory type, e.g. Investigational or Authorized"},
+                :route {:type zen/vector,
+                        :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                :fhir/flags #{:SU},
+                                :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.route-codes/value-set,
+                                                     :strength :example},
+                                :zen/desc "The path by which the product is taken into or makes contact with the body"}},
+                :pediatricUseIndicator {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                        :fhir/flags #{:SU},
+                                        :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.medicinal-product-pediatric-use/value-set,
+                                                             :strength :example},
+                                        :zen/desc "If authorised for use in children"},
+                :classification {:type zen/vector,
+                                 :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                         :fhir/flags #{:SU},
+                                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.medicinal-product-classification/value-set,
+                                                              :strength :example},
+                                         :zen/desc "Allows the product to be classified by various systems"}},
+                :_description {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :characteristic {:type zen/vector,
+                                 :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                         :type zen/map,
+                                         :keys {:type {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                       :fhir/flags #{:SU},
+                                                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.product-characteristic-codes/value-set,
+                                                                            :strength :example},
+                                                       :zen/desc "A code expressing the type of characteristic"},
+                                                :value {:fhir/polymorphic true,
+                                                        :type zen/map,
+                                                        :exclusive-keys #{#{:markdown
+                                                                            :date
+                                                                            :integer
+                                                                            :Attachment
+                                                                            :CodeableConcept
+                                                                            :Quantity
+                                                                            :boolean}},
+                                                        :keys {:markdown {:confirms #{hl7-fhir-r5-core.markdown/schema}},
+                                                               :date {:confirms #{hl7-fhir-r5-core.date/schema}},
+                                                               :_date {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                               :integer {:confirms #{hl7-fhir-r5-core.integer/schema}},
+                                                               :_boolean {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                               :Attachment {:confirms #{hl7-fhir-r5-core.Attachment/schema}},
+                                                               :_markdown {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                               :_integer {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                               :CodeableConcept {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema}},
+                                                               :Quantity {:confirms #{hl7-fhir-r5-core.Quantity/schema}},
+                                                               :boolean {:confirms #{hl7-fhir-r5-core.boolean/schema}}},
+                                                        :fhir/flags #{:SU},
+                                                        :zen/desc "A value for the characteristic"}},
+                                         :require #{:type},
+                                         :fhir/flags #{:SU},
+                                         :zen/desc "Key product features such as \"sugar free\", \"modified release\""}},
+                :marketingStatus {:type zen/vector,
+                                  :every {:confirms #{hl7-fhir-r5-core.MarketingStatus/schema},
+                                          :fhir/flags #{:SU},
+                                          :zen/desc "Marketing status of the medicinal product, in contrast to marketing authorization"}},
+                :specialMeasures {:type zen/vector,
+                                  :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                          :fhir/flags #{:SU},
+                                          :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.medicinal-product-special-measures/value-set,
+                                                               :strength :example},
+                                          :zen/desc "Whether the Medicinal Product is subject to special measures for regulatory reasons"}},
+                :ingredient {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.substance-codes/value-set,
+                                                          :strength :example},
+                                     :zen/desc "The ingredients of this medicinal product - when not detailed in other resources"}},
+                :status {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.publication-status/value-set,
+                                              :strength :preferred},
+                         :zen/desc "The status within the lifecycle of this product record"},
+                :packagedMedicinalProduct {:type zen/vector,
+                                           :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                   :fhir/flags #{:SU},
+                                                   :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.medicinal-product-package-type/value-set,
+                                                                        :strength :example},
+                                                   :zen/desc "Package type for the product"}},
+                :code {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.Coding/schema},
+                               :fhir/flags #{:SU},
+                               :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.medication-codes/value-set,
+                                                    :strength :example},
+                               :zen/desc "A code that this product is known by, within some formal terminology"}},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Business identifier for this product. Could be an MPID"}},
+                :statusDate {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                             :fhir/flags #{:SU},
+                             :zen/desc "The date at which the given status became applicable"},
+                :crossReference {:type zen/vector,
+                                 :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                         :type zen/map,
+                                         :keys {:product {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                                          :fhir/flags #{:SU},
+                                                          :zen/desc "Reference to another product, e.g. for linking authorised to investigational product"},
+                                                :type {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                       :fhir/flags #{:SU},
+                                                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.medicinal-product-cross-reference-type/value-set,
+                                                                            :strength :example},
+                                                       :zen/desc "The type of relationship, for instance branded to generic or virtual to actual product"}},
+                                         :require #{:product},
+                                         :fhir/flags #{:SU},
+                                         :zen/desc "Reference to another product, e.g. for linking authorised to investigational product"}},
+                :attachedDocument {:type zen/vector,
+                                   :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                       zen.fhir/Reference},
+                                           :fhir/flags #{:SU},
+                                           :zen.fhir/reference {:refers #{hl7-fhir-r5-core.DocumentReference/schema}},
+                                           :zen/desc "Additional documentation about the medicinal product"}},
+                :domain {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                         :fhir/flags #{:SU},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.medicinal-product-domain/value-set,
+                                              :strength :example},
+                         :zen/desc "If this medicine applies to human or veterinary uses"},
+                :legalStatusOfSupply {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                      :fhir/flags #{:SU},
+                                      :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.legal-status-of-supply/value-set,
+                                                           :strength :example},
+                                      :zen/desc "The legal status of supply of the medicinal product as classified by the regulator"},
+                :version {:confirms #{hl7-fhir-r5-core.string/schema},
+                          :fhir/flags #{:SU},
+                          :zen/desc "A business identifier relating to a specific version of the product"},
+                :_version {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :contact {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                  :type zen/map,
+                                  :keys {:type {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                :fhir/flags #{:SU},
+                                                :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.medicinal-product-contact-type/value-set,
+                                                                     :strength :example},
+                                                :zen/desc "Allows the contact to be classified, for example QPPV, Pharmacovigilance Enquiry Information"},
+                                         :contact {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                               zen.fhir/Reference},
+                                                   :fhir/flags #{:SU},
+                                                   :zen.fhir/reference {:refers #{hl7-fhir-r5-core.PractitionerRole/schema
+                                                                                  hl7-fhir-r5-core.Organization/schema}},
+                                                   :zen/desc "A product specific contact, person (in a role), or an organization"}},
+                                  :require #{:contact},
+                                  :fhir/flags #{:SU},
+                                  :zen/desc "A product specific contact, person (in a role), or an organization"}},
+                :_statusDate {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+         :zen.fhir/type "MedicinalProductDefinition"}}

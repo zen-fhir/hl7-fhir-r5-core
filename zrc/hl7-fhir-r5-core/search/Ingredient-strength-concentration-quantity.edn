@@ -1,0 +1,34 @@
+{ns hl7-fhir-r5-core.search.Ingredient-strength-concentration-quantity,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Ingredient-strength-concentration-quantity",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Ingredient-strength-concentration-quantity",
+         :fhir/type "quantity",
+         :name "strength-concentration-quantity",
+         :expr {:Ingredient {:knife [["substance"
+                                      "strength"
+                                      "concentration"
+                                      "ofType(Quantity"]],
+                             :jsonpath ["$.\"substance\".\"strength\".\"concentration\".\"ofType(Quantity\"[*]"],
+                             :data-types #{},
+                             :template :quantity,
+                             :sql {:where [:or
+                                           [:and
+                                            [:>=
+                                             [:pg/call
+                                              :jsonpath_extract_max_numeric
+                                              [:pg/sql
+                                               "{{table}}.resource"]
+                                              "$.\"substance\".\"strength\".\"concentration\".\"ofType(Quantity\"[*].\"value\""]
+                                             [:pg/cast
+                                              [:pg/sql "{{param}}"]
+                                              :numeric]]
+                                            [:<=
+                                             [:pg/call
+                                              :jsonpath_extract_min_numeric
+                                              [:pg/sql
+                                               "{{table}}.resource"]
+                                              "$.\"substance\".\"strength\".\"concentration\".\"ofType(Quantity\"[*].\"value\""]
+                                             [:pg/cast
+                                              [:pg/sql "{{param}}"]
+                                              :numeric]]]]}}}}}

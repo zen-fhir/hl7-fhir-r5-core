@@ -1,0 +1,80 @@
+{ns hl7-fhir-r5-core.Organization,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.markdown
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.boolean
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.value-set.organization-type
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.ExtendedContactDetail
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.Period
+          hl7-fhir-r5-core.Endpoint},
+ schema {:zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen/desc "A formally or informally recognized grouping of people or organizations formed for the purpose of achieving some form of collective action.  Includes companies, institutions, corporations, departments, community groups, healthcare practice groups, payer/insurer, etc.",
+         :zen.fhir/type "Organization",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Organization",
+         :zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :type zen/map,
+         :keys {:description {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                              :fhir/flags #{:SU},
+                              :zen/desc "Additional details about the Organization that could be displayed as further information to identify the Organization beyond its name"},
+                :_active {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :name {:confirms #{hl7-fhir-r5-core.string/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "Name used for the organization"},
+                :type {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                               :fhir/flags #{:SU},
+                               :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.organization-type/value-set,
+                                                    :strength :example},
+                               :zen/desc "Kind of organization"}},
+                :_description {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :alias {:type zen/vector,
+                        :every {:confirms #{hl7-fhir-r5-core.string/schema},
+                                :zen/desc "A list of alternate names that the organization is known as, or was known as in the past"}},
+                :active {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen/desc "Whether the organization's record is still in active use"},
+                :_name {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Identifies this organization  across multiple systems"}},
+                :qualification {:type zen/vector,
+                                :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                        :type zen/map,
+                                        :keys {:identifier {:type zen/vector,
+                                                            :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                                                    :zen/desc "An identifier for this qualification for the organization"}},
+                                               :code {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                      :zen/desc "Coded representation of the qualification"},
+                                               :period {:confirms #{hl7-fhir-r5-core.Period/schema},
+                                                        :zen/desc "Period during which the qualification is valid"},
+                                               :issuer {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                    zen.fhir/Reference},
+                                                        :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Organization/schema}},
+                                                        :zen/desc "Organization that regulates and issues the qualification"}},
+                                        :require #{:code},
+                                        :zen/desc "Qualifications, certifications, accreditations, licenses, training, etc. pertaining to the provision of care"}},
+                :partOf {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                     zen.fhir/Reference},
+                         :fhir/flags #{:SU},
+                         :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Organization/schema}},
+                         :zen/desc "The organization of which this organization forms a part"},
+                :_alias {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                :endpoint {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                               zen.fhir/Reference},
+                                   :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Endpoint/schema}},
+                                   :zen/desc "Technical endpoints providing access to services operated for the organization"}},
+                :contact {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.ExtendedContactDetail/schema},
+                                  :zen/desc "Official contact details for the Organization"}}}}}

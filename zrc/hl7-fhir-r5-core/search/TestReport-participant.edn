@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.TestReport-participant,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "TestReport-participant",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/TestReport-participant",
+         :fhir/type "uri",
+         :name "participant",
+         :expr {:TestReport {:knife [["participant" "uri"]],
+                             :jsonpath ["$.\"participant\".\"uri\"[*]"],
+                             :data-types #{{:type "uri",
+                                            :polymorphic? false}},
+                             :template :uri}}}}

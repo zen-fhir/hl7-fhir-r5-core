@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Specimen-procedure,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Specimen-procedure",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Specimen-procedure",
+         :fhir/type "reference",
+         :name "procedure",
+         :expr {:Specimen {:knife [["collection" "procedure"]],
+                           :jsonpath ["$.\"collection\".\"procedure\"[*]"],
+                           :data-types #{{:type "Reference",
+                                          :polymorphic? false}},
+                           :template :reference}}}}

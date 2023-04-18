@@ -1,0 +1,14 @@
+{ns hl7-fhir-r5-core.search.DocumentReference-format-uri,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "DocumentReference-format-uri",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/DocumentReference-format-uri",
+         :fhir/type "uri",
+         :name "format-uri",
+         :expr {:DocumentReference {:knife [["content"
+                                             "profile"
+                                             "value"
+                                             "ofType(uri"]],
+                                    :jsonpath ["$.\"content\".\"profile\".\"value\".\"ofType(uri\"[*]"],
+                                    :data-types #{},
+                                    :template :uri}}}}

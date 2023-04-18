@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Permission-status,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Permission-status",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Permission-status",
+         :fhir/type "token",
+         :name "status",
+         :expr {:Permission {:knife [["status"]],
+                             :jsonpath ["$.\"status\"[*]"],
+                             :data-types #{{:type "code",
+                                            :polymorphic? false}},
+                             :template :token}}}}

@@ -1,0 +1,11 @@
+{ns hl7-fhir-r5-core.search.MessageDefinition-event,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "MessageDefinition-event",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/MessageDefinition-event",
+         :fhir/type "token",
+         :name "event",
+         :expr {:MessageDefinition {:knife [["event" "ofType(Coding"]],
+                                    :jsonpath ["$.\"event\".\"ofType(Coding\"[*]"],
+                                    :data-types #{},
+                                    :template :token}}}}

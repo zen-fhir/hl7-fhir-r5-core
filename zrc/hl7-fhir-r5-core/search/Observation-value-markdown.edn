@@ -1,0 +1,37 @@
+{ns hl7-fhir-r5-core.search.Observation-value-markdown,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Observation-value-markdown",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Observation-value-markdown",
+         :fhir/type "string",
+         :name "value-markdown",
+         :expr {:Observation {:knife [["value" "ofType(markdown"]
+                                      ["value"
+                                       "ofType(CodeableConcept"
+                                       "text"]],
+                              :jsonpath ["$.\"value\".\"ofType(markdown\"[*]"
+                                         "$.\"value\".\"ofType(CodeableConcept\".\"text\"[*]"],
+                              :data-types #{},
+                              :template :string,
+                              :sql {:where [:or
+                                            [:ilike
+                                             [:pg/cast
+                                              [:pg/jsonb-path-query-array
+                                               [:pg/sql
+                                                "{{table}}.resource"]
+                                               [:pg/cast
+                                                "($.\"value\".\"ofType(markdown\"[*]).** ? (@.type() == \"string\")"
+                                                :jsonpath]]
+                                              :text]
+                                             [:pg/sql "{{param}}"]]
+                                            [:ilike
+                                             [:pg/cast
+                                              [:pg/jsonb-path-query-array
+                                               [:pg/sql
+                                                "{{table}}.resource"]
+                                               [:pg/cast
+                                                "($.\"value\".\"ofType(CodeableConcept\".\"text\"[*]).** ? (@.type() == \"string\")"
+                                                :jsonpath]]
+                                              :text]
+                                             [:pg/sql "{{param}}"]]],
+                                    :parameter-format "%\"?%"}}}}}

@@ -1,0 +1,14 @@
+{ns hl7-fhir-r5-core.search.Organization-identifier,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Organization-identifier",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Organization-identifier",
+         :fhir/type "token",
+         :name "identifier",
+         :expr {:Organization {:knife [["identifier"]
+                                       ["qualification" "identifier"]],
+                               :jsonpath ["$.\"identifier\"[*]"
+                                          "$.\"qualification\".\"identifier\"[*]"],
+                               :data-types #{{:type "Identifier",
+                                              :polymorphic? false}},
+                               :template :token}}}}

@@ -1,0 +1,64 @@
+{ns hl7-fhir-r5-core.TriggerDefinition,
+ import #{hl7-fhir-r5-core.DataRequirement
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.Schedule
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.date
+          hl7-fhir-r5-core.Timing
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.canonical
+          hl7-fhir-r5-core.Expression
+          hl7-fhir-r5-core.DataType
+          hl7-fhir-r5-core.value-set.trigger-type},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DataType/schema},
+         :zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/TriggerDefinition",
+         :require #{:type},
+         :type zen/map,
+         :zen/desc "TriggerDefinition Type: A description of a triggering event. Triggering events can be named events, data events, or periodic, as determined by the type element.",
+         :keys {:_subscriptionTopic {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :name {:confirms #{hl7-fhir-r5-core.string/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "Name or URI that identifies the event"},
+                :_type {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :type {:confirms #{hl7-fhir-r5-core.code/schema},
+                       :fhir/flags #{:SU},
+                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.trigger-type/value-set,
+                                            :strength :required},
+                       :zen/desc "named-event | periodic | data-changed | data-added | data-modified | data-removed | data-accessed | data-access-ended"},
+                :condition {:confirms #{hl7-fhir-r5-core.Expression/schema},
+                            :fhir/flags #{:SU},
+                            :zen/desc "Whether the event triggers (boolean expression)"},
+                :timing {:fhir/polymorphic true,
+                         :type zen/map,
+                         :exclusive-keys #{#{:date
+                                             :dateTime
+                                             :Timing
+                                             :Reference}},
+                         :keys {:Timing {:confirms #{hl7-fhir-r5-core.Timing/schema}},
+                                :Reference {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                        zen.fhir/Reference},
+                                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Schedule/schema}}},
+                                :date {:confirms #{hl7-fhir-r5-core.date/schema}},
+                                :_date {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                :dateTime {:confirms #{hl7-fhir-r5-core.dateTime/schema}},
+                                :_dateTime {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                         :fhir/flags #{:SU},
+                         :zen/desc "Timing of the event"},
+                :_name {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :code {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "Coded definition of the event"},
+                :subscriptionTopic {:confirms #{hl7-fhir-r5-core.canonical/schema},
+                                    :fhir/flags #{:SU},
+                                    :zen/desc "What event"},
+                :data {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.DataRequirement/schema},
+                               :fhir/flags #{:SU},
+                               :zen/desc "Triggering data of the event (multiple = 'and')"}}},
+         :zen.fhir/type "TriggerDefinition"}}

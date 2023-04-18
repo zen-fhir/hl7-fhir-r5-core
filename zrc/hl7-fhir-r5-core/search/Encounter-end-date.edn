@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Encounter-end-date,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Encounter-end-date",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Encounter-end-date",
+         :fhir/type "date",
+         :name "end-date",
+         :expr {:Encounter {:knife [["actualPeriod" "end"]],
+                            :jsonpath ["$.\"actualPeriod\".\"end\"[*]"],
+                            :data-types #{},
+                            :template :date,
+                            :sql {:where [:or]}}}}}

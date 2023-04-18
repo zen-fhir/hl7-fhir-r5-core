@@ -1,0 +1,14 @@
+{ns hl7-fhir-r5-core.search.PackagedProductDefinition-manufactured-item,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "PackagedProductDefinition-manufactured-item",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/PackagedProductDefinition-manufactured-item",
+         :fhir/type "reference",
+         :name "manufactured-item",
+         :expr {:PackagedProductDefinition {:knife [["packaging"
+                                                     "containedItem"
+                                                     "item"
+                                                     "reference"]],
+                                            :jsonpath ["$.\"packaging\".\"containedItem\".\"item\".\"reference\"[*]"],
+                                            :data-types #{},
+                                            :template :reference}}}}

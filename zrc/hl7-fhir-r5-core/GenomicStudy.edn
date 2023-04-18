@@ -1,0 +1,237 @@
+{ns hl7-fhir-r5-core.GenomicStudy,
+ import #{hl7-fhir-r5-core.BiologicallyDerivedProduct
+          hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.Substance
+          hl7-fhir-r5-core.value-set.genomicstudy-status
+          hl7-fhir-r5-core.markdown
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.CodeableReference
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.Group
+          hl7-fhir-r5-core.Observation
+          hl7-fhir-r5-core.Annotation
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.Encounter
+          hl7-fhir-r5-core.Practitioner
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.value-set.genomicstudy-changetype
+          hl7-fhir-r5-core.Device
+          hl7-fhir-r5-core.GenomicStudy
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.value-set.genomicstudy-type
+          hl7-fhir-r5-core.Specimen
+          hl7-fhir-r5-core.NutritionProduct
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.Procedure
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.PractitionerRole
+          hl7-fhir-r5-core.canonical
+          hl7-fhir-r5-core.value-set.genomicstudy-dataformat
+          hl7-fhir-r5-core.ServiceRequest
+          hl7-fhir-r5-core.value-set.genomicstudy-methodtype
+          hl7-fhir-r5-core.uri
+          hl7-fhir-r5-core.DocumentReference
+          hl7-fhir-r5-core.Task
+          hl7-fhir-r5-core.Patient},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/GenomicStudy",
+         :require #{:status :subject},
+         :type zen/map,
+         :zen/desc "A set of analyses performed to analyze and generate genomic data.",
+         :keys {:description {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                              :zen/desc "Description of the genomic study"},
+                :instantiatesCanonical {:confirms #{hl7-fhir-r5-core.canonical/schema},
+                                        :zen/desc "The defined protocol that describes the study"},
+                :instantiatesUri {:confirms #{hl7-fhir-r5-core.uri/schema},
+                                  :zen/desc "The URL pointing to an externally maintained protocol that describes the study"},
+                :interpreter {:type zen/vector,
+                              :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                  zen.fhir/Reference},
+                                      :zen.fhir/reference {:refers #{hl7-fhir-r5-core.PractitionerRole/schema
+                                                                     hl7-fhir-r5-core.Practitioner/schema}},
+                                      :zen/desc "Healthcare professionals who interpreted the genomic study"}},
+                :encounter {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                        zen.fhir/Reference},
+                            :fhir/flags #{:SU},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Encounter/schema}},
+                            :zen/desc "The healthcare event with which this genomics study is associated"},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :startDate {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                            :zen/desc "When the genomic study was started"},
+                :type {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                               :fhir/flags #{:SU},
+                               :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.genomicstudy-type/value-set,
+                                                    :strength :example},
+                               :zen/desc "The type of the study (e.g., Familial variant segregation, Functional variation detection, or Gene expression profiling)"}},
+                :_startDate {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_description {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :note {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.Annotation/schema},
+                               :zen/desc "Comments related to the genomic study"}},
+                :reason {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                 :zen/desc "Why the genomic study was performed"}},
+                :referrer {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                       zen.fhir/Reference},
+                           :zen.fhir/reference {:refers #{hl7-fhir-r5-core.PractitionerRole/schema
+                                                          hl7-fhir-r5-core.Practitioner/schema}},
+                           :zen/desc "Healthcare professional who requested or referred the genomic study"},
+                :analysis {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                   :type zen/map,
+                                   :keys {:regionsStudied {:type zen/vector,
+                                                           :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                               zen.fhir/Reference},
+                                                                   :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Observation/schema
+                                                                                                  hl7-fhir-r5-core.DocumentReference/schema}},
+                                                                   :zen/desc "The genomic regions to be studied in the analysis (BED file)"}},
+                                          :date {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                                                 :zen/desc "The date of the analysis event"},
+                                          :instantiatesCanonical {:confirms #{hl7-fhir-r5-core.canonical/schema},
+                                                                  :zen/desc "The defined protocol that describes the analysis"},
+                                          :instantiatesUri {:confirms #{hl7-fhir-r5-core.uri/schema},
+                                                            :zen/desc "The URL pointing to an externally maintained protocol that describes the analysis"},
+                                          :_date {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                          :specimen {:type zen/vector,
+                                                     :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                         zen.fhir/Reference},
+                                                             :fhir/flags #{:SU},
+                                                             :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Specimen/schema}},
+                                                             :zen/desc "The specimen used in the analysis event"}},
+                                          :genomeBuild {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                        :zen/desc "Genome build that is used in this analysis"},
+                                          :output {:type zen/vector,
+                                                   :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                                           :type zen/map,
+                                                           :keys {:file {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                                     zen.fhir/Reference},
+                                                                         :fhir/flags #{:SU},
+                                                                         :zen.fhir/reference {:refers #{hl7-fhir-r5-core.DocumentReference/schema}},
+                                                                         :zen/desc "File containing output data"},
+                                                                  :type {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                         :fhir/flags #{:SU},
+                                                                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.genomicstudy-dataformat/value-set,
+                                                                                              :strength :example},
+                                                                         :zen/desc "Type of output data (e.g., VCF, MAF, or BAM)"}},
+                                                           :zen/desc "Outputs for the analysis event"}},
+                                          :title {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                  :fhir/flags #{:SU},
+                                                  :zen/desc "Name of the analysis event (human friendly)"},
+                                          :note {:type zen/vector,
+                                                 :every {:confirms #{hl7-fhir-r5-core.Annotation/schema},
+                                                         :zen/desc "Any notes capture with the analysis event"}},
+                                          :identifier {:type zen/vector,
+                                                       :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                                               :fhir/flags #{:SU},
+                                                               :zen/desc "Identifiers for the analysis event"}},
+                                          :focus {:type zen/vector,
+                                                  :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                      zen.fhir/Reference},
+                                                          :fhir/flags #{:SU},
+                                                          :zen.fhir/reference {:refers #{}},
+                                                          :zen/desc "What the genomic analysis is about, when it is not about the subject of record"}},
+                                          :_title {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                          :device {:type zen/vector,
+                                                   :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                                           :type zen/map,
+                                                           :keys {:device {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                                       zen.fhir/Reference},
+                                                                           :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Device/schema}},
+                                                                           :zen/desc "Device used for the analysis"},
+                                                                  :function {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                             :zen/desc "Specific function for the device used for the analysis"}},
+                                                           :zen/desc "Devices used for the analysis (e.g., instruments, software), with settings and parameters"}},
+                                          :changeType {:type zen/vector,
+                                                       :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                               :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.genomicstudy-changetype/value-set,
+                                                                                    :strength :example},
+                                                               :zen/desc "Type of the genomic changes studied in the analysis (e.g., DNA, RNA, or AA change)"}},
+                                          :input {:type zen/vector,
+                                                  :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                                          :type zen/map,
+                                                          :keys {:file {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                                    zen.fhir/Reference},
+                                                                        :fhir/flags #{:SU},
+                                                                        :zen.fhir/reference {:refers #{hl7-fhir-r5-core.DocumentReference/schema}},
+                                                                        :zen/desc "File containing input data"},
+                                                                 :type {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                        :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.genomicstudy-dataformat/value-set,
+                                                                                             :strength :example},
+                                                                        :zen/desc "Type of input data (e.g., BAM, CRAM, or FASTA)"},
+                                                                 :generatedBy {:fhir/polymorphic true,
+                                                                               :type zen/map,
+                                                                               :exclusive-keys #{#{:Identifier
+                                                                                                   :Reference}},
+                                                                               :keys {:Identifier {:confirms #{hl7-fhir-r5-core.Identifier/schema}},
+                                                                                      :Reference {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                                                              zen.fhir/Reference},
+                                                                                                  :zen.fhir/reference {:refers #{hl7-fhir-r5-core.GenomicStudy/schema}}}},
+                                                                               :zen/desc "The analysis event or other GenomicStudy that generated this input file"}},
+                                                          :zen/desc "Inputs for the analysis event"}},
+                                          :protocolPerformed {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                          zen.fhir/Reference},
+                                                              :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Procedure/schema
+                                                                                             hl7-fhir-r5-core.Task/schema}},
+                                                              :zen/desc "The protocol that was performed for the analysis event"},
+                                          :_instantiatesCanonical {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                          :methodType {:type zen/vector,
+                                                       :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                               :fhir/flags #{:SU},
+                                                               :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.genomicstudy-methodtype/value-set,
+                                                                                    :strength :example},
+                                                               :zen/desc "Type of the methods used in the analysis (e.g., FISH, Karyotyping, MSI)"}},
+                                          :regionsCalled {:type zen/vector,
+                                                          :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                              zen.fhir/Reference},
+                                                                  :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Observation/schema
+                                                                                                 hl7-fhir-r5-core.DocumentReference/schema}},
+                                                                  :zen/desc "Genomic regions actually called in the analysis event (BED file)"}},
+                                          :performer {:type zen/vector,
+                                                      :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                                              :type zen/map,
+                                                              :keys {:actor {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                                         zen.fhir/Reference},
+                                                                             :zen.fhir/reference {:refers #{hl7-fhir-r5-core.PractitionerRole/schema
+                                                                                                            hl7-fhir-r5-core.Organization/schema
+                                                                                                            hl7-fhir-r5-core.Device/schema
+                                                                                                            hl7-fhir-r5-core.Practitioner/schema}},
+                                                                             :zen/desc "The organization, healthcare professional, or others who participated in performing this analysis"},
+                                                                     :role {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                            :zen/desc "Role of the actor for this analysis"}},
+                                                              :zen/desc "Performer for the analysis event"}},
+                                          :_instantiatesUri {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                   :zen/desc "Genomic Analysis Event"}},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.genomicstudy-status/value-set,
+                                              :strength :required},
+                         :zen/desc "registered | available | cancelled | entered-in-error | unknown"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Identifiers for this genomic study"}},
+                :basedOn {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                              zen.fhir/Reference},
+                                  :zen.fhir/reference {:refers #{hl7-fhir-r5-core.ServiceRequest/schema
+                                                                 hl7-fhir-r5-core.Task/schema}},
+                                  :zen/desc "Event resources that the genomic study is based on"}},
+                :_instantiatesCanonical {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :subject {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                      zen.fhir/Reference},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                         hl7-fhir-r5-core.NutritionProduct/schema
+                                                         hl7-fhir-r5-core.Substance/schema
+                                                         hl7-fhir-r5-core.BiologicallyDerivedProduct/schema
+                                                         hl7-fhir-r5-core.Group/schema}},
+                          :zen/desc "The primary subject of the genomic study"},
+                :_instantiatesUri {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+         :zen.fhir/type "GenomicStudy"}}

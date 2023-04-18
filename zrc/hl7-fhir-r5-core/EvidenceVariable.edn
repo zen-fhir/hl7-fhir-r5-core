@@ -1,0 +1,321 @@
+{ns hl7-fhir-r5-core.EvidenceVariable,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.markdown
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.boolean
+          zen.fhir
+          hl7-fhir-r5-core.positiveInt
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.Group
+          hl7-fhir-r5-core.Annotation
+          hl7-fhir-r5-core.UsageContext
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.value-set.version-algorithm
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.value-set.definition-method
+          hl7-fhir-r5-core.EvidenceVariable
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.Device
+          hl7-fhir-r5-core.Evidence
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.date
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.Period
+          hl7-fhir-r5-core.value-set.publication-status
+          hl7-fhir-r5-core.value-set.characteristic-combination
+          hl7-fhir-r5-core.canonical
+          hl7-fhir-r5-core.RelatedArtifact
+          hl7-fhir-r5-core.value-set.evidence-variable-event
+          hl7-fhir-r5-core.Coding
+          hl7-fhir-r5-core.Range
+          hl7-fhir-r5-core.Quantity
+          hl7-fhir-r5-core.Expression
+          hl7-fhir-r5-core.id
+          hl7-terminology-r5.value-set.usage-context-type
+          hl7-fhir-r5-core.uri
+          hl7-fhir-r5-core.DeviceMetric
+          hl7-fhir-r5-core.value-set.characteristic-offset
+          hl7-fhir-r5-core.ContactDetail
+          hl7-fhir-r5-core.value-set.variable-handling},
+ characteristic-schema {:zen/tags #{zen/schema
+                                    zen.fhir/structure-schema},
+                        :zen.fhir/version "0.6.21-2",
+                        :confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                        :type zen/map,
+                        :keys {:description {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                                             :zen/desc "Natural language description of the characteristic"},
+                               :exclude {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                                         :zen/desc "Whether the characteristic is an inclusion criterion or exclusion criterion"},
+                               :definitionByCombination {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                                         :type zen/map,
+                                                         :keys {:code {:confirms #{hl7-fhir-r5-core.code/schema},
+                                                                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.characteristic-combination/value-set,
+                                                                                            :strength :required},
+                                                                       :zen/desc "all-of | any-of | at-least | at-most | statistical | net-effect | dataset"},
+                                                                :_code {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                                :threshold {:confirms #{hl7-fhir-r5-core.positiveInt/schema},
+                                                                            :zen/desc "Provides the value of \"n\" when \"at-least\" or \"at-most\" codes are used"},
+                                                                :_threshold {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                                :characteristic {:type zen/vector,
+                                                                                 :every {:confirms #{hl7-fhir-r5-core.EvidenceVariable/characteristic-schema},
+                                                                                         :zen/desc "A defining factor of the characteristic"},
+                                                                                 :minItems 1}},
+                                                         :require #{:characteristic
+                                                                    :code},
+                                                         :zen/desc "Used to specify how two or more characteristics are combined"},
+                               :linkId {:confirms #{hl7-fhir-r5-core.id/schema},
+                                        :zen/desc "Label for internal linking"},
+                               :definitionExpression {:confirms #{hl7-fhir-r5-core.Expression/schema},
+                                                      :fhir/flags #{:SU},
+                                                      :zen/desc "Defines the characteristic (without using type and value) by an expression"},
+                               :definitionByTypeAndValue {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                                          :type zen/map,
+                                                          :keys {:type {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                        :fhir/flags #{:SU},
+                                                                        :zen.fhir/value-set {:symbol hl7-terminology-r5.value-set.usage-context-type/value-set,
+                                                                                             :strength :example},
+                                                                        :zen/desc "Expresses the type of characteristic"},
+                                                                 :method {:type zen/vector,
+                                                                          :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                                  :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.definition-method/value-set,
+                                                                                                       :strength :example},
+                                                                                  :zen/desc "Method for how the characteristic value was determined"}},
+                                                                 :device {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                                      zen.fhir/Reference},
+                                                                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Device/schema
+                                                                                                         hl7-fhir-r5-core.DeviceMetric/schema}},
+                                                                          :zen/desc "Device used for determining characteristic"},
+                                                                 :value {:fhir/polymorphic true,
+                                                                         :type zen/map,
+                                                                         :exclusive-keys #{#{:Range
+                                                                                             :id
+                                                                                             :CodeableConcept
+                                                                                             :Quantity
+                                                                                             :boolean
+                                                                                             :Reference}},
+                                                                         :keys {:CodeableConcept {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema}},
+                                                                                :boolean {:confirms #{hl7-fhir-r5-core.boolean/schema}},
+                                                                                :_boolean {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                                                :Quantity {:confirms #{hl7-fhir-r5-core.Quantity/schema}},
+                                                                                :Range {:confirms #{hl7-fhir-r5-core.Range/schema}},
+                                                                                :Reference {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                                                        zen.fhir/Reference},
+                                                                                            :zen.fhir/reference {:refers #{}}},
+                                                                                :id {:confirms #{hl7-fhir-r5-core.id/schema}},
+                                                                                :_id {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                                                         :fhir/flags #{:SU},
+                                                                         :zen/desc "Defines the characteristic when coupled with characteristic.type"},
+                                                                 :offset {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                          :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.characteristic-offset/value-set,
+                                                                                               :strength :example},
+                                                                          :zen/desc "Reference point for valueQuantity or valueRange"}},
+                                                          :require #{:value
+                                                                     :type},
+                                                          :fhir/flags #{:SU},
+                                                          :zen/desc "Defines the characteristic using type and value"},
+                               :definitionCanonical {:confirms #{hl7-fhir-r5-core.canonical/schema},
+                                                     :fhir/flags #{:SU},
+                                                     :zen/desc "Defines the characteristic (without using type and value) by a Canonical"},
+                               :definitionReference {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                 zen.fhir/Reference},
+                                                     :fhir/flags #{:SU},
+                                                     :zen.fhir/reference {:refers #{hl7-fhir-r5-core.EvidenceVariable/schema
+                                                                                    hl7-fhir-r5-core.Evidence/schema
+                                                                                    hl7-fhir-r5-core.Group/schema}},
+                                                     :zen/desc "Defines the characteristic (without using type and value) by a Reference"},
+                               :duration {:fhir/polymorphic true,
+                                          :type zen/map,
+                                          :exclusive-keys #{#{:Range
+                                                              :Quantity}},
+                                          :keys {:Quantity {:confirms #{hl7-fhir-r5-core.Quantity/schema}},
+                                                 :Range {:confirms #{hl7-fhir-r5-core.Range/schema}}},
+                                          :zen/desc "Length of time in which the characteristic is met"},
+                               :definitionId {:confirms #{hl7-fhir-r5-core.id/schema},
+                                              :fhir/flags #{:SU},
+                                              :zen/desc "Defines the characteristic (without using type and value) by an id"},
+                               :_linkId {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                               :_description {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                               :_definitionId {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                               :note {:type zen/vector,
+                                      :every {:confirms #{hl7-fhir-r5-core.Annotation/schema},
+                                              :zen/desc "Used for footnotes or explanatory notes"}},
+                               :_definitionCanonical {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                               :instances {:fhir/polymorphic true,
+                                           :type zen/map,
+                                           :exclusive-keys #{#{:Range
+                                                               :Quantity}},
+                                           :keys {:Quantity {:confirms #{hl7-fhir-r5-core.Quantity/schema}},
+                                                  :Range {:confirms #{hl7-fhir-r5-core.Range/schema}}},
+                                           :zen/desc "Number of occurrences meeting the characteristic"},
+                               :definitionCodeableConcept {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                           :fhir/flags #{:SU},
+                                                           :zen/desc "Defines the characteristic (without using type and value) by a CodeableConcept"},
+                               :_exclude {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                               :timeFromEvent {:type zen/vector,
+                                               :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                                       :type zen/map,
+                                                       :keys {:description {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                                                                            :zen/desc "Human readable description"},
+                                                              :_description {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                              :note {:type zen/vector,
+                                                                     :every {:confirms #{hl7-fhir-r5-core.Annotation/schema},
+                                                                             :zen/desc "Used for footnotes or explanatory notes"}},
+                                                              :event {:fhir/polymorphic true,
+                                                                      :type zen/map,
+                                                                      :exclusive-keys #{#{:dateTime
+                                                                                          :id
+                                                                                          :CodeableConcept
+                                                                                          :Reference}},
+                                                                      :keys {:CodeableConcept {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema}},
+                                                                             :Reference {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                                                     zen.fhir/Reference},
+                                                                                         :zen.fhir/reference {:refers #{}}},
+                                                                             :dateTime {:confirms #{hl7-fhir-r5-core.dateTime/schema}},
+                                                                             :_dateTime {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                                             :id {:confirms #{hl7-fhir-r5-core.id/schema}},
+                                                                             :_id {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                                                      :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.evidence-variable-event/value-set,
+                                                                                           :strength :example},
+                                                                      :zen/desc "The event used as a base point (reference point) in time"},
+                                                              :quantity {:confirms #{hl7-fhir-r5-core.Quantity/schema},
+                                                                         :zen/desc "Used to express the observation at a defined amount of time before or after the event"},
+                                                              :range {:confirms #{hl7-fhir-r5-core.Range/schema},
+                                                                      :zen/desc "Used to express the observation within a period before and/or after the event"}},
+                                                       :zen/desc "Timing in which the characteristic is determined"}}},
+                        :fhir/flags #{:SU},
+                        :zen/desc "A defining factor of the EvidenceVariable"},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/EvidenceVariable",
+         :require #{:status},
+         :type zen/map,
+         :zen/desc "The EvidenceVariable resource describes an element that knowledge (Evidence) is about.",
+         :keys {:description {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                              :fhir/flags #{:SU},
+                              :zen/desc "Natural language description of the evidence variable"},
+                :category {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                   :type zen/map,
+                                   :keys {:name {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                 :zen/desc "Description of the grouping"},
+                                          :_name {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                          :value {:fhir/polymorphic true,
+                                                  :type zen/map,
+                                                  :exclusive-keys #{#{:Range
+                                                                      :CodeableConcept
+                                                                      :Quantity}},
+                                                  :keys {:CodeableConcept {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema}},
+                                                         :Quantity {:confirms #{hl7-fhir-r5-core.Quantity/schema}},
+                                                         :Range {:confirms #{hl7-fhir-r5-core.Range/schema}}},
+                                                  :zen/desc "Definition of the grouping"}},
+                                   :zen/desc "A grouping for ordinal or polychotomous variables"}},
+                :date {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "Date last changed"},
+                :endorser {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.ContactDetail/schema},
+                                   :zen/desc "Who endorsed the content"}},
+                :publisher {:confirms #{hl7-fhir-r5-core.string/schema},
+                            :fhir/flags #{:SU},
+                            :zen/desc "Name of the publisher/steward (organization or individual)"},
+                :_handling {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :approvalDate {:confirms #{hl7-fhir-r5-core.date/schema},
+                               :zen/desc "When the resource was approved by publisher"},
+                :_publisher {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_copyrightLabel {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :purpose {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                          :zen/desc "Why this EvidenceVariable is defined"},
+                :_date {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :name {:confirms #{hl7-fhir-r5-core.string/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "Name for this evidence variable (computer friendly)"},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :copyrightLabel {:confirms #{hl7-fhir-r5-core.string/schema},
+                                 :zen/desc "Copyright holder and year(s)"},
+                :_experimental {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :useContext {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.UsageContext/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "The context that the content is intended to support"}},
+                :copyright {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                            :zen/desc "Use and/or publishing restrictions"},
+                :versionAlgorithm {:fhir/polymorphic true,
+                                   :type zen/map,
+                                   :exclusive-keys #{#{:string
+                                                       :Coding}},
+                                   :keys {:string {:confirms #{hl7-fhir-r5-core.string/schema}},
+                                          :_string {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                          :Coding {:confirms #{hl7-fhir-r5-core.Coding/schema}}},
+                                   :fhir/flags #{:SU},
+                                   :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.version-algorithm/value-set,
+                                                        :strength :extensible},
+                                   :zen/desc "How to compare versions"},
+                :_approvalDate {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :experimental {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                               :zen/desc "For testing purposes, not real usage"},
+                :title {:confirms #{hl7-fhir-r5-core.string/schema},
+                        :fhir/flags #{:SU},
+                        :zen/desc "Name for this evidence variable (human friendly)"},
+                :_description {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :note {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.Annotation/schema},
+                               :zen/desc "Used for footnotes or explanatory notes"}},
+                :author {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.ContactDetail/schema},
+                                 :zen/desc "Who authored the content"}},
+                :characteristic {:type zen/vector,
+                                 :every {:confirms #{hl7-fhir-r5-core.EvidenceVariable/characteristic-schema}}},
+                :_purpose {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_lastReviewDate {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :handling {:confirms #{hl7-fhir-r5-core.code/schema},
+                           :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.variable-handling/value-set,
+                                                :strength :required},
+                           :zen/desc "continuous | dichotomous | ordinal | polychotomous"},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.publication-status/value-set,
+                                              :strength :required},
+                         :zen/desc "draft | active | retired | unknown"},
+                :_name {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :url {:confirms #{hl7-fhir-r5-core.uri/schema},
+                      :fhir/flags #{:SU},
+                      :zen/desc "Canonical identifier for this evidence variable, represented as a URI (globally unique)"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Additional identifier for the evidence variable"}},
+                :lastReviewDate {:confirms #{hl7-fhir-r5-core.date/schema},
+                                 :zen/desc "When the resource was last reviewed by the publisher"},
+                :editor {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.ContactDetail/schema},
+                                 :zen/desc "Who edited the content"}},
+                :_copyright {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_shortTitle {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_title {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_actual {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :reviewer {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.ContactDetail/schema},
+                                   :zen/desc "Who reviewed the content"}},
+                :shortTitle {:confirms #{hl7-fhir-r5-core.string/schema},
+                             :fhir/flags #{:SU},
+                             :zen/desc "Title for use in informal contexts"},
+                :version {:confirms #{hl7-fhir-r5-core.string/schema},
+                          :fhir/flags #{:SU},
+                          :zen/desc "Business version of the evidence variable"},
+                :_version {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :relatedArtifact {:type zen/vector,
+                                  :every {:confirms #{hl7-fhir-r5-core.RelatedArtifact/schema},
+                                          :zen/desc "Additional documentation, citations, etc"}},
+                :actual {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                         :zen/desc "Actual or conceptual"},
+                :contact {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.ContactDetail/schema},
+                                  :fhir/flags #{:SU},
+                                  :zen/desc "Contact details for the publisher"}},
+                :_url {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :effectivePeriod {:confirms #{hl7-fhir-r5-core.Period/schema},
+                                  :zen/desc "When the resource is expected to be used"}},
+         :zen.fhir/type "EvidenceVariable"}}

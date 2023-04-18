@@ -1,0 +1,11 @@
+{ns hl7-fhir-r5-core.search.DocumentReference-event-reference,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "DocumentReference-event-reference",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/DocumentReference-event-reference",
+         :fhir/type "reference",
+         :name "event-reference",
+         :expr {:DocumentReference {:knife [["event" "reference"]],
+                                    :jsonpath ["$.\"event\".\"reference\"[*]"],
+                                    :data-types #{},
+                                    :template :reference}}}}

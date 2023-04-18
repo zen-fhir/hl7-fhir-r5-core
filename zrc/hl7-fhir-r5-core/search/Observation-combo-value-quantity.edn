@@ -1,0 +1,98 @@
+{ns hl7-fhir-r5-core.search.Observation-combo-value-quantity,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Observation-combo-value-quantity",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Observation-combo-value-quantity",
+         :fhir/type "quantity",
+         :name "combo-value-quantity",
+         :expr {:Observation {:knife [["value" "ofType(Quantity"]
+                                      ["value" "ofType(SampledData"]
+                                      ["component"
+                                       "value"
+                                       "ofType(Quantity"]
+                                      ["component"
+                                       "value"
+                                       "ofType(SampledData"]],
+                              :jsonpath ["$.\"value\".\"ofType(Quantity\"[*]"
+                                         "$.\"value\".\"ofType(SampledData\"[*]"
+                                         "$.\"component\".\"value\".\"ofType(Quantity\"[*]"
+                                         "$.\"component\".\"value\".\"ofType(SampledData\"[*]"],
+                              :data-types #{},
+                              :template :quantity,
+                              :sql {:where [:or
+                                            [:and
+                                             [:>=
+                                              [:pg/call
+                                               :jsonpath_extract_max_numeric
+                                               [:pg/sql
+                                                "{{table}}.resource"]
+                                               "$.\"value\".\"ofType(Quantity\"[*].\"value\""]
+                                              [:pg/cast
+                                               [:pg/sql "{{param}}"]
+                                               :numeric]]
+                                             [:<=
+                                              [:pg/call
+                                               :jsonpath_extract_min_numeric
+                                               [:pg/sql
+                                                "{{table}}.resource"]
+                                               "$.\"value\".\"ofType(Quantity\"[*].\"value\""]
+                                              [:pg/cast
+                                               [:pg/sql "{{param}}"]
+                                               :numeric]]]
+                                            [:and
+                                             [:>=
+                                              [:pg/call
+                                               :jsonpath_extract_max_numeric
+                                               [:pg/sql
+                                                "{{table}}.resource"]
+                                               "$.\"value\".\"ofType(SampledData\"[*].\"value\""]
+                                              [:pg/cast
+                                               [:pg/sql "{{param}}"]
+                                               :numeric]]
+                                             [:<=
+                                              [:pg/call
+                                               :jsonpath_extract_min_numeric
+                                               [:pg/sql
+                                                "{{table}}.resource"]
+                                               "$.\"value\".\"ofType(SampledData\"[*].\"value\""]
+                                              [:pg/cast
+                                               [:pg/sql "{{param}}"]
+                                               :numeric]]]
+                                            [:and
+                                             [:>=
+                                              [:pg/call
+                                               :jsonpath_extract_max_numeric
+                                               [:pg/sql
+                                                "{{table}}.resource"]
+                                               "$.\"component\".\"value\".\"ofType(Quantity\"[*].\"value\""]
+                                              [:pg/cast
+                                               [:pg/sql "{{param}}"]
+                                               :numeric]]
+                                             [:<=
+                                              [:pg/call
+                                               :jsonpath_extract_min_numeric
+                                               [:pg/sql
+                                                "{{table}}.resource"]
+                                               "$.\"component\".\"value\".\"ofType(Quantity\"[*].\"value\""]
+                                              [:pg/cast
+                                               [:pg/sql "{{param}}"]
+                                               :numeric]]]
+                                            [:and
+                                             [:>=
+                                              [:pg/call
+                                               :jsonpath_extract_max_numeric
+                                               [:pg/sql
+                                                "{{table}}.resource"]
+                                               "$.\"component\".\"value\".\"ofType(SampledData\"[*].\"value\""]
+                                              [:pg/cast
+                                               [:pg/sql "{{param}}"]
+                                               :numeric]]
+                                             [:<=
+                                              [:pg/call
+                                               :jsonpath_extract_min_numeric
+                                               [:pg/sql
+                                                "{{table}}.resource"]
+                                               "$.\"component\".\"value\".\"ofType(SampledData\"[*].\"value\""]
+                                              [:pg/cast
+                                               [:pg/sql "{{param}}"]
+                                               :numeric]]]]}}}}}

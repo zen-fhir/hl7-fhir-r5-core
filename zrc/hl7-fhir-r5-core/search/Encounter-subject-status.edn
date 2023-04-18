@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Encounter-subject-status,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Encounter-subject-status",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Encounter-subject-status",
+         :fhir/type "token",
+         :name "subject-status",
+         :expr {:Encounter {:knife [["subjectStatus"]],
+                            :jsonpath ["$.\"subjectStatus\"[*]"],
+                            :data-types #{{:type "CodeableConcept",
+                                           :polymorphic? false}},
+                            :template :token}}}}

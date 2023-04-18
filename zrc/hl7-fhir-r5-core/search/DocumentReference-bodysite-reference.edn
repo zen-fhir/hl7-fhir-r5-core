@@ -1,0 +1,11 @@
+{ns hl7-fhir-r5-core.search.DocumentReference-bodysite-reference,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "DocumentReference-bodysite-reference",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/DocumentReference-bodysite-reference",
+         :fhir/type "reference",
+         :name "bodysite-reference",
+         :expr {:DocumentReference {:knife [["bodySite" "reference"]],
+                                    :jsonpath ["$.\"bodySite\".\"reference\"[*]"],
+                                    :data-types #{},
+                                    :template :reference}}}}

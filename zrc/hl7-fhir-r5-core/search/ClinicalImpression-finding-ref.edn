@@ -1,0 +1,13 @@
+{ns hl7-fhir-r5-core.search.ClinicalImpression-finding-ref,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "ClinicalImpression-finding-ref",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/ClinicalImpression-finding-ref",
+         :fhir/type "reference",
+         :name "finding-ref",
+         :expr {:ClinicalImpression {:knife [["finding"
+                                              "item"
+                                              "reference"]],
+                                     :jsonpath ["$.\"finding\".\"item\".\"reference\"[*]"],
+                                     :data-types #{},
+                                     :template :reference}}}}

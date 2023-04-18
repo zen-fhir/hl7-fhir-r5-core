@@ -1,0 +1,14 @@
+{ns hl7-fhir-r5-core.search.InventoryReport-item-reference,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "InventoryReport-item-reference",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/InventoryReport-item-reference",
+         :fhir/type "reference",
+         :name "item-reference",
+         :expr {:InventoryReport {:knife [["inventoryListing"
+                                           "item"
+                                           "item"
+                                           "reference"]],
+                                  :jsonpath ["$.\"inventoryListing\".\"item\".\"item\".\"reference\"[*]"],
+                                  :data-types #{},
+                                  :template :reference}}}}

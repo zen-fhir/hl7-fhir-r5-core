@@ -1,0 +1,132 @@
+{ns hl7-fhir-r5-core.BiologicallyDerivedProduct,
+ import #{hl7-fhir-r5-core.BiologicallyDerivedProduct
+          hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.boolean
+          hl7-fhir-r5-core.Ratio
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.value-set.product-category
+          hl7-fhir-r5-core.Attachment
+          hl7-fhir-r5-core.value-set.biologicallyderived-product-property-type-codes
+          hl7-fhir-r5-core.Practitioner
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.integer
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.PractitionerRole
+          hl7-fhir-r5-core.Period
+          hl7-fhir-r5-core.Coding
+          hl7-fhir-r5-core.Range
+          hl7-fhir-r5-core.Quantity
+          hl7-fhir-r5-core.ServiceRequest
+          hl7-fhir-r5-core.value-set.biologicallyderived-productcodes
+          hl7-fhir-r5-core.Patient
+          hl7-fhir-r5-core.value-set.biologicallyderived-product-status},
+ schema {:zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen/desc "A biological material originating from a biological entity intended to be transplanted or infused into another (possibly the same) biological entity.",
+         :zen.fhir/type "BiologicallyDerivedProduct",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/BiologicallyDerivedProduct",
+         :zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :type zen/map,
+         :keys {:request {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                              zen.fhir/Reference},
+                                  :zen.fhir/reference {:refers #{hl7-fhir-r5-core.ServiceRequest/schema}},
+                                  :zen/desc "Request to obtain and/or infuse this product"}},
+                :parent {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                             zen.fhir/Reference},
+                                 :zen.fhir/reference {:refers #{hl7-fhir-r5-core.BiologicallyDerivedProduct/schema}},
+                                 :zen/desc "The parent biologically-derived product"}},
+                :division {:confirms #{hl7-fhir-r5-core.string/schema},
+                           :zen/desc "A unique identifier for an aliquot of a product"},
+                :property {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                   :type zen/map,
+                                   :keys {:type {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                 :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.biologicallyderived-product-property-type-codes/value-set,
+                                                                      :strength :example},
+                                                 :zen/desc "Code that specifies the property"},
+                                          :value {:fhir/polymorphic true,
+                                                  :type zen/map,
+                                                  :exclusive-keys #{#{:string
+                                                                      :Range
+                                                                      :integer
+                                                                      :Ratio
+                                                                      :Attachment
+                                                                      :Period
+                                                                      :CodeableConcept
+                                                                      :Quantity
+                                                                      :boolean}},
+                                                  :keys {:string {:confirms #{hl7-fhir-r5-core.string/schema}},
+                                                         :Range {:confirms #{hl7-fhir-r5-core.Range/schema}},
+                                                         :integer {:confirms #{hl7-fhir-r5-core.integer/schema}},
+                                                         :Ratio {:confirms #{hl7-fhir-r5-core.Ratio/schema}},
+                                                         :_boolean {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                         :Attachment {:confirms #{hl7-fhir-r5-core.Attachment/schema}},
+                                                         :Period {:confirms #{hl7-fhir-r5-core.Period/schema}},
+                                                         :_integer {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                         :CodeableConcept {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema}},
+                                                         :Quantity {:confirms #{hl7-fhir-r5-core.Quantity/schema}},
+                                                         :boolean {:confirms #{hl7-fhir-r5-core.boolean/schema}},
+                                                         :_string {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                                  :zen/desc "Property values"}},
+                                   :require #{:value :type},
+                                   :zen/desc "A property that is specific to this BiologicallyDerviedProduct instance"}},
+                :processingFacility {:type zen/vector,
+                                     :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                         zen.fhir/Reference},
+                                             :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Organization/schema}},
+                                             :zen/desc "Processing facilities responsible for the labeling and distribution of this biologically derived product"}},
+                :storageTempRequirements {:confirms #{hl7-fhir-r5-core.Range/schema},
+                                          :zen/desc "Product storage temperature requirements"},
+                :productStatus {:confirms #{hl7-fhir-r5-core.Coding/schema},
+                                :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.biologicallyderived-product-status/value-set,
+                                                     :strength :example},
+                                :zen/desc "available | unavailable"},
+                :_expirationDate {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :biologicalSourceEvent {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                        :fhir/flags #{:SU},
+                                        :zen/desc "An identifier that supports traceability to the event during which material in this product from one or more biological entities was obtained or pooled"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Instance identifier"}},
+                :productCode {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                              :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.biologicallyderived-productcodes/value-set,
+                                                   :strength :example},
+                              :zen/desc "A code that identifies the kind of this biologically derived product"},
+                :productCategory {:confirms #{hl7-fhir-r5-core.Coding/schema},
+                                  :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.product-category/value-set,
+                                                       :strength :example},
+                                  :zen/desc "organ | tissue | fluid | cells | biologicalAgent"},
+                :_division {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :collection {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                             :type zen/map,
+                             :keys {:collector {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                            zen.fhir/Reference},
+                                                :zen.fhir/reference {:refers #{hl7-fhir-r5-core.PractitionerRole/schema
+                                                                               hl7-fhir-r5-core.Practitioner/schema}},
+                                                :zen/desc "Individual performing collection"},
+                                    :source {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                         zen.fhir/Reference},
+                                             :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                                            hl7-fhir-r5-core.Organization/schema}},
+                                             :zen/desc "The patient who underwent the medical procedure to collect the product or the organization that facilitated the collection"},
+                                    :collected {:fhir/polymorphic true,
+                                                :type zen/map,
+                                                :exclusive-keys #{#{:dateTime
+                                                                    :Period}},
+                                                :keys {:dateTime {:confirms #{hl7-fhir-r5-core.dateTime/schema}},
+                                                       :_dateTime {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                       :Period {:confirms #{hl7-fhir-r5-core.Period/schema}}},
+                                                :zen/desc "Time of product collection"}},
+                             :zen/desc "How this product was collected"},
+                :expirationDate {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                                 :zen/desc "Date, and where relevant time, of expiration"}}}}

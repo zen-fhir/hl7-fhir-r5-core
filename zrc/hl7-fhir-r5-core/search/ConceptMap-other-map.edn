@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.ConceptMap-other-map,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "ConceptMap-other-map",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/ConceptMap-other-map",
+         :fhir/type "reference",
+         :name "other-map",
+         :expr {:ConceptMap {:knife [["group" "unmapped" "otherMap"]],
+                             :jsonpath ["$.\"group\".\"unmapped\".\"otherMap\"[*]"],
+                             :data-types #{{:type "canonical",
+                                            :polymorphic? false}},
+                             :template :reference}}}}

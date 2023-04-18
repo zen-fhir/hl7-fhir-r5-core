@@ -1,0 +1,20 @@
+{ns hl7-fhir-r5-core.example-composition,
+ import #{zen.fhir
+          hl7-fhir-r5-core.Composition
+          hl7-fhir-r5-core.example-composition},
+ schema {:zen/tags #{zen.fhir/profile-schema zen/schema},
+         :zen/desc "Document Structure (For testing section templates)",
+         :zen.fhir/type "Composition",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/example-composition",
+         :zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.Composition/schema
+                     zen.fhir/Resource},
+         :type zen/map,
+         :keys {:section {:type zen/vector,
+                          :slicing {:slices {}},
+                          :every {:confirms #{hl7-fhir-r5-core.example-composition/section-schema}}}}},
+ section-schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
+                 :zen.fhir/version "0.6.21-2",
+                 :type zen/map,
+                 :keys {:section {:type zen/vector,
+                                  :every {:confirms #{hl7-fhir-r5-core.example-composition/section-schema}}}}}}

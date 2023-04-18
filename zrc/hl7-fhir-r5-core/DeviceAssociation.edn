@@ -1,0 +1,89 @@
+{ns hl7-fhir-r5-core.DeviceAssociation,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.BackboneElement
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.Group
+          hl7-fhir-r5-core.value-set.deviceassociation-operationstatus
+          hl7-fhir-r5-core.Practitioner
+          hl7-fhir-r5-core.Device
+          hl7-fhir-r5-core.value-set.deviceassociation-status
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.value-set.deviceassociation-status-reason
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.RelatedPerson
+          hl7-fhir-r5-core.Period
+          hl7-fhir-r5-core.BodyStructure
+          hl7-fhir-r5-core.Patient},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/DeviceAssociation",
+         :require #{:status :device},
+         :type zen/map,
+         :zen/desc "A record of association of a device.",
+         :keys {:category {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                   :fhir/flags #{:SU},
+                                   :zen/desc "Describes the relationship between the device and subject"}},
+                :operation {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                    :type zen/map,
+                                    :keys {:status {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                    :fhir/flags #{:SU},
+                                                    :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.deviceassociation-operationstatus/value-set,
+                                                                         :strength :example},
+                                                    :zen/desc "Device operational condition"},
+                                           :operator {:type zen/vector,
+                                                      :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                          zen.fhir/Reference},
+                                                              :fhir/flags #{:SU},
+                                                              :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                                                             hl7-fhir-r5-core.Practitioner/schema
+                                                                                             hl7-fhir-r5-core.RelatedPerson/schema}},
+                                                              :zen/desc "The individual performing the action enabled by the device"}},
+                                           :period {:confirms #{hl7-fhir-r5-core.Period/schema},
+                                                    :fhir/flags #{:SU},
+                                                    :zen/desc "Begin and end dates and times for the device's operation"}},
+                                    :require #{:status},
+                                    :fhir/flags #{:SU},
+                                    :zen/desc "The details about the device when it is in use to describe its operation"}},
+                :statusReason {:type zen/vector,
+                               :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                       :fhir/flags #{:SU},
+                                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.deviceassociation-status-reason/value-set,
+                                                            :strength :required},
+                                       :zen/desc "The reasons given for the current association status"}},
+                :status {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                         :fhir/flags #{:SU},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.deviceassociation-status/value-set,
+                                              :strength :required},
+                         :zen/desc "implanted | explanted | attached | entered-in-error | unknown"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Instance identifier"}},
+                :device {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                     zen.fhir/Reference},
+                         :fhir/flags #{:SU},
+                         :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Device/schema}},
+                         :zen/desc "Reference to the devices associated with the patient or group"},
+                :period {:confirms #{hl7-fhir-r5-core.Period/schema},
+                         :fhir/flags #{:SU},
+                         :zen/desc "Begin and end dates and times for the device association"},
+                :bodyStructure {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                            zen.fhir/Reference},
+                                :fhir/flags #{:SU},
+                                :zen.fhir/reference {:refers #{hl7-fhir-r5-core.BodyStructure/schema}},
+                                :zen/desc "Current anatomical location of the device in/on subject"},
+                :subject {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                      zen.fhir/Reference},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                         hl7-fhir-r5-core.Device/schema
+                                                         hl7-fhir-r5-core.Practitioner/schema
+                                                         hl7-fhir-r5-core.Group/schema
+                                                         hl7-fhir-r5-core.RelatedPerson/schema}},
+                          :zen/desc "The individual, group of individuals or device that the device is on or associated with"}},
+         :zen.fhir/type "DeviceAssociation"}}

@@ -1,0 +1,43 @@
+{ns hl7-fhir-r5-core.search.MetadataResource-successor,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "MetadataResource-successor",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/MetadataResource-successor",
+         :fhir/type "reference",
+         :name "successor",
+         :expr {:ActivityDefinition {:knife [["relatedArtifact"
+                                              {:type "successor"}
+                                              "resource"]],
+                                     :jsonpath ["$.\"relatedArtifact\"?(@.\"type\"==\"successor\").\"resource\"[*]"],
+                                     :data-types #{},
+                                     :template :reference},
+                :EventDefinition {:knife [["relatedArtifact"
+                                           {:type "successor"}
+                                           "resource"]],
+                                  :jsonpath ["$.\"relatedArtifact\"?(@.\"type\"==\"successor\").\"resource\"[*]"],
+                                  :data-types #{},
+                                  :template :reference},
+                :EvidenceVariable {:knife [["relatedArtifact"
+                                            {:type "successor"}
+                                            "resource"]],
+                                   :jsonpath ["$.\"relatedArtifact\"?(@.\"type\"==\"successor\").\"resource\"[*]"],
+                                   :data-types #{},
+                                   :template :reference},
+                :Library {:knife [["relatedArtifact"
+                                   {:type "successor"}
+                                   "resource"]],
+                          :jsonpath ["$.\"relatedArtifact\"?(@.\"type\"==\"successor\").\"resource\"[*]"],
+                          :data-types #{},
+                          :template :reference},
+                :Measure {:knife [["relatedArtifact"
+                                   {:type "successor"}
+                                   "resource"]],
+                          :jsonpath ["$.\"relatedArtifact\"?(@.\"type\"==\"successor\").\"resource\"[*]"],
+                          :data-types #{},
+                          :template :reference},
+                :PlanDefinition {:knife [["relatedArtifact"
+                                          {:type "successor"}
+                                          "resource"]],
+                                 :jsonpath ["$.\"relatedArtifact\"?(@.\"type\"==\"successor\").\"resource\"[*]"],
+                                 :data-types #{},
+                                 :template :reference}}}}

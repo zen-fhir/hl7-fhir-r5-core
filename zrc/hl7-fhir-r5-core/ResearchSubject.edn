@@ -1,0 +1,101 @@
+{ns hl7-fhir-r5-core.ResearchSubject,
+ import #{hl7-fhir-r5-core.BiologicallyDerivedProduct
+          hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.Medication
+          hl7-fhir-r5-core.Substance
+          hl7-fhir-r5-core.BackboneElement
+          hl7-terminology-r5.value-set.state-change-reason
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.Group
+          hl7-fhir-r5-core.Consent
+          hl7-fhir-r5-core.value-set.research-subject-state-type
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.value-set.research-subject-state
+          hl7-fhir-r5-core.value-set.research-subject-milestone
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.Device
+          hl7-fhir-r5-core.Specimen
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.ResearchStudy
+          hl7-fhir-r5-core.Period
+          hl7-fhir-r5-core.value-set.publication-status
+          hl7-fhir-r5-core.id
+          hl7-fhir-r5-core.Patient},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/ResearchSubject",
+         :require #{:study :status :subject},
+         :type zen/map,
+         :zen/desc "A ResearchSubject is a participant or object which is the recipient of investigative activities in a research study.",
+         :keys {:assignedComparisonGroup {:confirms #{hl7-fhir-r5-core.id/schema},
+                                          :zen/desc "What path should be followed"},
+                :study {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                    zen.fhir/Reference},
+                        :fhir/flags #{:SU},
+                        :zen.fhir/reference {:refers #{hl7-fhir-r5-core.ResearchStudy/schema}},
+                        :zen/desc "Study subject is part of"},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_assignedComparisonGroup {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :consent {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                              zen.fhir/Reference},
+                                  :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Consent/schema}},
+                                  :zen/desc "Agreement to participate in study"}},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.publication-status/value-set,
+                                              :strength :required},
+                         :zen/desc "draft | active | retired | unknown"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Business Identifier for research subject in a study"}},
+                :_actualComparisonGroup {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :period {:confirms #{hl7-fhir-r5-core.Period/schema},
+                         :fhir/flags #{:SU},
+                         :zen/desc "Start and end of participation"},
+                :progress {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                   :type zen/map,
+                                   :keys {:type {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                 :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.research-subject-state-type/value-set,
+                                                                      :strength :example},
+                                                 :zen/desc "state | milestone"},
+                                          :subjectState {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.research-subject-state/value-set,
+                                                                              :strength :required},
+                                                         :zen/desc "candidate | eligible | follow-up | ineligible | not-registered | off-study | on-study | on-study-intervention | on-study-observation | pending-on-study | potential-candidate | screening | withdrawn"},
+                                          :milestone {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                      :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.research-subject-milestone/value-set,
+                                                                           :strength :example},
+                                                      :zen/desc "SignedUp | Screened | Randomized"},
+                                          :reason {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                   :zen.fhir/value-set {:symbol hl7-terminology-r5.value-set.state-change-reason/value-set,
+                                                                        :strength :example},
+                                                   :zen/desc "State change reason"},
+                                          :startDate {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                                                      :zen/desc "State change date"},
+                                          :_startDate {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                          :endDate {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                                                    :zen/desc "State change date"},
+                                          :_endDate {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                   :zen/desc "Subject status"}},
+                :subject {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                      zen.fhir/Reference},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                         hl7-fhir-r5-core.Medication/schema
+                                                         hl7-fhir-r5-core.Substance/schema
+                                                         hl7-fhir-r5-core.Device/schema
+                                                         hl7-fhir-r5-core.BiologicallyDerivedProduct/schema
+                                                         hl7-fhir-r5-core.Group/schema
+                                                         hl7-fhir-r5-core.Specimen/schema}},
+                          :zen/desc "Who or what is part of study"},
+                :actualComparisonGroup {:confirms #{hl7-fhir-r5-core.id/schema},
+                                        :zen/desc "What path was followed"}},
+         :zen.fhir/type "ResearchSubject"}}

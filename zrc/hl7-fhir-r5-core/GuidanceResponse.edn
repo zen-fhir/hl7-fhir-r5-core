@@ -1,0 +1,129 @@
+{ns hl7-fhir-r5-core.GuidanceResponse,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.Appointment
+          hl7-fhir-r5-core.Parameters
+          hl7-fhir-r5-core.DataRequirement
+          hl7-fhir-r5-core.CodeableReference
+          hl7-fhir-r5-core.OperationOutcome
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.Group
+          hl7-fhir-r5-core.VisionPrescription
+          hl7-fhir-r5-core.RequestOrchestration
+          hl7-fhir-r5-core.CoverageEligibilityRequest
+          hl7-fhir-r5-core.Annotation
+          hl7-fhir-r5-core.ImmunizationRecommendation
+          hl7-fhir-r5-core.AppointmentResponse
+          hl7-fhir-r5-core.MedicationRequest
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.Encounter
+          hl7-fhir-r5-core.DeviceRequest
+          hl7-fhir-r5-core.Claim
+          hl7-fhir-r5-core.Contract
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.Device
+          hl7-fhir-r5-core.CarePlan
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.value-set.guidance-response-status
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.SupplyRequest
+          hl7-fhir-r5-core.canonical
+          hl7-fhir-r5-core.NutritionOrder
+          hl7-fhir-r5-core.ServiceRequest
+          hl7-fhir-r5-core.uri
+          hl7-fhir-r5-core.EnrollmentRequest
+          hl7-fhir-r5-core.Task
+          hl7-fhir-r5-core.value-set.guidance-module-code
+          hl7-fhir-r5-core.Patient
+          hl7-fhir-r5-core.CommunicationRequest},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/GuidanceResponse",
+         :require #{:module :status},
+         :type zen/map,
+         :zen/desc "A guidance response is the formal response to a guidance request, including any output parameters returned by the evaluation, as well as the description of any proposed actions to be taken.",
+         :keys {:dataRequirement {:type zen/vector,
+                                  :every {:confirms #{hl7-fhir-r5-core.DataRequirement/schema},
+                                          :zen/desc "Additional required data"}},
+                :encounter {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                        zen.fhir/Reference},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Encounter/schema}},
+                            :zen/desc "Encounter during which the response was returned"},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :outputParameters {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                               zen.fhir/Reference},
+                                   :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Parameters/schema}},
+                                   :zen/desc "The output parameters of the evaluation, if any"},
+                :evaluationMessage {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                zen.fhir/Reference},
+                                    :zen.fhir/reference {:refers #{hl7-fhir-r5-core.OperationOutcome/schema}},
+                                    :zen/desc "Messages resulting from the evaluation of the artifact or artifacts"},
+                :requestIdentifier {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                    :fhir/flags #{:SU},
+                                    :zen/desc "The identifier of the request associated with this response, if any"},
+                :module {:fhir/polymorphic true,
+                         :type zen/map,
+                         :exclusive-keys #{#{:canonical
+                                             :uri
+                                             :CodeableConcept}},
+                         :keys {:uri {:confirms #{hl7-fhir-r5-core.uri/schema}},
+                                :_uri {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                :canonical {:confirms #{hl7-fhir-r5-core.canonical/schema}},
+                                :_canonical {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                :CodeableConcept {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema}}},
+                         :fhir/flags #{:SU},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.guidance-module-code/value-set,
+                                              :strength :example},
+                         :zen/desc "What guidance was requested"},
+                :note {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.Annotation/schema},
+                               :zen/desc "Additional notes about the response"}},
+                :reason {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                 :zen/desc "Why guidance is needed"}},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.guidance-response-status/value-set,
+                                              :strength :required},
+                         :zen/desc "success | data-requested | data-required | in-progress | failure | entered-in-error"},
+                :result {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                             zen.fhir/Reference},
+                                 :zen.fhir/reference {:refers #{hl7-fhir-r5-core.CoverageEligibilityRequest/schema
+                                                                hl7-fhir-r5-core.EnrollmentRequest/schema
+                                                                hl7-fhir-r5-core.RequestOrchestration/schema
+                                                                hl7-fhir-r5-core.Contract/schema
+                                                                hl7-fhir-r5-core.NutritionOrder/schema
+                                                                hl7-fhir-r5-core.CommunicationRequest/schema
+                                                                hl7-fhir-r5-core.ImmunizationRecommendation/schema
+                                                                hl7-fhir-r5-core.ServiceRequest/schema
+                                                                hl7-fhir-r5-core.CarePlan/schema
+                                                                hl7-fhir-r5-core.DeviceRequest/schema
+                                                                hl7-fhir-r5-core.VisionPrescription/schema
+                                                                hl7-fhir-r5-core.Claim/schema
+                                                                hl7-fhir-r5-core.Task/schema
+                                                                hl7-fhir-r5-core.Appointment/schema
+                                                                hl7-fhir-r5-core.SupplyRequest/schema
+                                                                hl7-fhir-r5-core.AppointmentResponse/schema
+                                                                hl7-fhir-r5-core.MedicationRequest/schema}},
+                                 :zen/desc "Proposed actions, if any"}},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Business identifier"}},
+                :occurrenceDateTime {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                                     :zen/desc "When the guidance response was processed"},
+                :subject {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                      zen.fhir/Reference},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                         hl7-fhir-r5-core.Group/schema}},
+                          :zen/desc "Patient the request was performed for"},
+                :performer {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                        zen.fhir/Reference},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Device/schema}},
+                            :zen/desc "Device returning the guidance"},
+                :_occurrenceDateTime {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+         :zen.fhir/type "GuidanceResponse"}}

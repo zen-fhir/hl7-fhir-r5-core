@@ -1,0 +1,43 @@
+{ns hl7-fhir-r5-core.Annotation,
+ import #{hl7-fhir-r5-core.markdown
+          zen.fhir
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.Practitioner
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.RelatedPerson
+          hl7-fhir-r5-core.PractitionerRole
+          hl7-fhir-r5-core.DataType
+          hl7-fhir-r5-core.Patient},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DataType/schema},
+         :zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Annotation",
+         :require #{:text},
+         :type zen/map,
+         :zen/desc "Annotation Type: A  text note which also  contains information about who made the statement and when.",
+         :keys {:author {:fhir/polymorphic true,
+                         :type zen/map,
+                         :exclusive-keys #{#{:string :Reference}},
+                         :keys {:Reference {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                        zen.fhir/Reference},
+                                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                                           hl7-fhir-r5-core.PractitionerRole/schema
+                                                                           hl7-fhir-r5-core.Organization/schema
+                                                                           hl7-fhir-r5-core.Practitioner/schema
+                                                                           hl7-fhir-r5-core.RelatedPerson/schema}}},
+                                :string {:confirms #{hl7-fhir-r5-core.string/schema}},
+                                :_string {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                         :fhir/flags #{:SU},
+                         :zen/desc "Individual responsible for the annotation"},
+                :time {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "When the annotation was made"},
+                :_time {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :text {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "The annotation  - text content (as markdown)"},
+                :_text {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+         :zen.fhir/type "Annotation"}}

@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.ConceptMap-target-group-system,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "ConceptMap-target-group-system",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/ConceptMap-target-group-system",
+         :fhir/type "reference",
+         :name "target-group-system",
+         :expr {:ConceptMap {:knife [["group" "target"]],
+                             :jsonpath ["$.\"group\".\"target\"[*]"],
+                             :data-types #{{:type "canonical",
+                                            :polymorphic? false}},
+                             :template :reference}}}}

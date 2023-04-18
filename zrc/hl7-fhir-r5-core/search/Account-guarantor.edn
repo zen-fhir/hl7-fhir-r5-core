@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Account-guarantor,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Account-guarantor",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Account-guarantor",
+         :fhir/type "reference",
+         :name "guarantor",
+         :expr {:Account {:knife [["guarantor" "party"]],
+                          :jsonpath ["$.\"guarantor\".\"party\"[*]"],
+                          :data-types #{{:type "Reference",
+                                         :polymorphic? false}},
+                          :template :reference}}}}

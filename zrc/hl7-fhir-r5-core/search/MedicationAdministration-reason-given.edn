@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.MedicationAdministration-reason-given,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "MedicationAdministration-reason-given",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/MedicationAdministration-reason-given",
+         :fhir/type "reference",
+         :name "reason-given",
+         :expr {:MedicationAdministration {:knife [["reason"
+                                                    "reference"]],
+                                           :jsonpath ["$.\"reason\".\"reference\"[*]"],
+                                           :data-types #{},
+                                           :template :reference}}}}

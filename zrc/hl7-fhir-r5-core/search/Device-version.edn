@@ -1,0 +1,24 @@
+{ns hl7-fhir-r5-core.search.Device-version,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Device-version",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Device-version",
+         :fhir/type "string",
+         :name "version",
+         :expr {:Device {:knife [["version" "value"]],
+                         :jsonpath ["$.\"version\".\"value\"[*]"],
+                         :data-types #{{:type "string",
+                                        :polymorphic? false}},
+                         :template :string,
+                         :sql {:where [:or
+                                       [:ilike
+                                        [:pg/cast
+                                         [:pg/jsonb-path-query-array
+                                          [:pg/sql
+                                           "{{table}}.resource"]
+                                          [:pg/cast
+                                           "($.\"version\".\"value\"[*]).** ? (@.type() == \"string\")"
+                                           :jsonpath]]
+                                         :text]
+                                        [:pg/sql "{{param}}"]]],
+                               :parameter-format "%\"?%"}}}}}

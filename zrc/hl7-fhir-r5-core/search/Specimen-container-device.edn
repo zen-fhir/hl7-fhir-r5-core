@@ -1,0 +1,14 @@
+{ns hl7-fhir-r5-core.search.Specimen-container-device,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Specimen-container-device",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Specimen-container-device",
+         :fhir/type "reference",
+         :name "container-device",
+         :expr {:Specimen {:knife [["container"
+                                    "device"
+                                    {:resourceType "Device"}]],
+                           :jsonpath ["$.\"container\".\"device\"?(@.\"resourceType\"==\"Device\")[*]"],
+                           :data-types #{{:type "Reference",
+                                          :polymorphic? false}},
+                           :template :reference}}}}

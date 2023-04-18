@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.MedicationAdministration-device,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "MedicationAdministration-device",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/MedicationAdministration-device",
+         :fhir/type "reference",
+         :name "device",
+         :expr {:MedicationAdministration {:knife [["device"
+                                                    "reference"]],
+                                           :jsonpath ["$.\"device\".\"reference\"[*]"],
+                                           :data-types #{},
+                                           :template :reference}}}}

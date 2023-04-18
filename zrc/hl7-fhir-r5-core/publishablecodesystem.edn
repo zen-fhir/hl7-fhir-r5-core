@@ -1,0 +1,37 @@
+{ns hl7-fhir-r5-core.publishablecodesystem,
+ import #{zen.fhir
+          hl7-fhir-uv-extensions-r5.codesystem-sourceReference
+          hl7-fhir-r5-core.shareablecodesystem
+          hl7-fhir-r5-core.publishablecodesystem
+          hl7-fhir-uv-extensions-r5.codesystem-otherName},
+ concept-schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
+                 :zen.fhir/version "0.6.21-2"},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.shareablecodesystem/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen.fhir/profile-schema zen/schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/publishablecodesystem",
+         :require #{:date},
+         :type zen/map,
+         :zen/desc "Defines and enforces the minimum expectations for publication and distribution of a code system, typically as part of an artifact repository or implementation guide publication",
+         :keys {:otherName {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-uv-extensions-r5.codesystem-otherName/schema},
+                                    :fhir/extensionUri "http://hl7.org/fhir/StructureDefinition/codesystem-otherName"}},
+                :date {:fhir/flags #{:MS}},
+                :jurisdiction {:type zen/vector,
+                               :every {:fhir/flags #{:MS}}},
+                :purpose {:fhir/flags #{:MS}},
+                :copyrightLabel {:fhir/flags #{:MS}},
+                :useContext {:type zen/vector,
+                             :every {:fhir/flags #{:MS}}},
+                :copyright {:fhir/flags #{:MS}},
+                :topic {:type zen/vector, :every {:fhir/flags #{:MS}}},
+                :sourceReference {:confirms #{hl7-fhir-uv-extensions-r5.codesystem-sourceReference/schema},
+                                  :fhir/extensionUri "http://hl7.org/fhir/StructureDefinition/codesystem-sourceReference"},
+                :identifier {:type zen/vector,
+                             :every {:fhir/flags #{:MS}}},
+                :concept {:confirms #{hl7-fhir-r5-core.publishablecodesystem/concept-schema}},
+                :contact {:type zen/vector,
+                          :every {:fhir/flags #{:MS}}},
+                :effectivePeriod {:fhir/flags #{:MS}}},
+         :zen.fhir/type "CodeSystem"}}

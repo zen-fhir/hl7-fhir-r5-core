@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.GenomicStudy-focus,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "GenomicStudy-focus",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/GenomicStudy-focus",
+         :fhir/type "reference",
+         :name "focus",
+         :expr {:GenomicStudy {:knife [["analysis" "focus"]],
+                               :jsonpath ["$.\"analysis\".\"focus\"[*]"],
+                               :data-types #{{:type "Reference",
+                                              :polymorphic? false}},
+                               :template :reference}}}}

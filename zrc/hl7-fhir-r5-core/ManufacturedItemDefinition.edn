@@ -1,0 +1,160 @@
+{ns hl7-fhir-r5-core.ManufacturedItemDefinition,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.value-set.product-characteristic-codes
+          hl7-fhir-r5-core.markdown
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.CodeableReference
+          hl7-fhir-r5-core.boolean
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.MarketingStatus
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.Attachment
+          hl7-fhir-r5-core.ManufacturedItemDefinition
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.value-set.manufactured-dose-form
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.date
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.value-set.publication-status
+          hl7-fhir-r5-core.value-set.unit-of-presentation
+          hl7-fhir-r5-core.Quantity
+          hl7-fhir-r5-core.Binary
+          hl7-fhir-r5-core.value-set.substance-codes},
+ component-schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
+                   :zen.fhir/version "0.6.21-2",
+                   :confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                   :type zen/map,
+                   :keys {:type {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                 :fhir/flags #{:SU},
+                                 :zen/desc "Defining type of the component e.g. shell, layer, ink"},
+                          :function {:type zen/vector,
+                                     :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                             :fhir/flags #{:SU},
+                                             :zen/desc "The function of this component within the item e.g. delivers active ingredient, masks taste"}},
+                          :amount {:type zen/vector,
+                                   :every {:confirms #{hl7-fhir-r5-core.Quantity/schema},
+                                           :fhir/flags #{:SU},
+                                           :zen/desc "The measurable amount of total quantity of all substances in the component, expressable in different ways (e.g. by mass or volume)"}},
+                          :constituent {:type zen/vector,
+                                        :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                                :type zen/map,
+                                                :keys {:amount {:type zen/vector,
+                                                                :every {:confirms #{hl7-fhir-r5-core.Quantity/schema},
+                                                                        :fhir/flags #{:SU},
+                                                                        :zen/desc "The measurable amount of the substance, expressable in different ways (e.g. by mass or volume)"}},
+                                                       :location {:type zen/vector,
+                                                                  :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                          :fhir/flags #{:SU},
+                                                                          :zen/desc "The physical location of the constituent/ingredient within the component"}},
+                                                       :function {:type zen/vector,
+                                                                  :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                          :fhir/flags #{:SU},
+                                                                          :zen/desc "The function of this constituent within the component e.g. binder"}},
+                                                       :hasIngredient {:type zen/vector,
+                                                                       :every {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                                                               :fhir/flags #{:SU},
+                                                                               :zen/desc "The ingredient that is the constituent of the given component"}}},
+                                                :fhir/flags #{:SU},
+                                                :zen/desc "A reference to a constituent of the manufactured item as a whole, linked here so that its component location within the item can be indicated. This not where the item's ingredient are primarily stated (for which see Ingredient.for or ManufacturedItemDefinition.ingredient)"}},
+                          :property {:type zen/vector,
+                                     :every {:fhir/flags #{:SU},
+                                             :confirms #{hl7-fhir-r5-core.ManufacturedItemDefinition/property-schema},
+                                             :zen/desc "General characteristics of this component"}},
+                          :component {:type zen/vector,
+                                      :every {:fhir/flags #{:SU},
+                                              :confirms #{hl7-fhir-r5-core.ManufacturedItemDefinition/component-schema},
+                                              :zen/desc "A component that this component contains or is made from"}}},
+                   :require #{:type},
+                   :fhir/flags #{:SU},
+                   :zen/desc "Physical parts of the manufactured item, that it is intrisically made from. This is distinct from the ingredients that are part of its chemical makeup"},
+ property-schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
+                  :zen.fhir/version "0.6.21-2",
+                  :confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                  :type zen/map,
+                  :keys {:type {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                :fhir/flags #{:SU},
+                                :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.product-characteristic-codes/value-set,
+                                                     :strength :example},
+                                :zen/desc "A code expressing the type of characteristic"},
+                         :value {:fhir/polymorphic true,
+                                 :type zen/map,
+                                 :exclusive-keys #{#{:markdown
+                                                     :date
+                                                     :Attachment
+                                                     :CodeableConcept
+                                                     :Quantity
+                                                     :boolean
+                                                     :Reference}},
+                                 :keys {:markdown {:confirms #{hl7-fhir-r5-core.markdown/schema}},
+                                        :date {:confirms #{hl7-fhir-r5-core.date/schema}},
+                                        :_date {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                        :_boolean {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                        :Attachment {:confirms #{hl7-fhir-r5-core.Attachment/schema}},
+                                        :_markdown {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                        :CodeableConcept {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema}},
+                                        :Quantity {:confirms #{hl7-fhir-r5-core.Quantity/schema}},
+                                        :boolean {:confirms #{hl7-fhir-r5-core.boolean/schema}},
+                                        :Reference {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                zen.fhir/Reference},
+                                                    :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Binary/schema}}}},
+                                 :fhir/flags #{:SU},
+                                 :zen/desc "A value for the characteristic"}},
+                  :require #{:type},
+                  :fhir/flags #{:SU},
+                  :zen/desc "General characteristics of this item"},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/ManufacturedItemDefinition",
+         :require #{:manufacturedDoseForm :status},
+         :type zen/map,
+         :zen/desc "The definition and characteristics of a medicinal manufactured item, such as a tablet or capsule, as contained in a packaged medicinal product.",
+         :keys {:manufacturedDoseForm {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                       :fhir/flags #{:SU},
+                                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.manufactured-dose-form/value-set,
+                                                            :strength :example},
+                                       :zen/desc "Dose form as manufactured (before any necessary transformation)"},
+                :property {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.ManufacturedItemDefinition/property-schema}}},
+                :name {:confirms #{hl7-fhir-r5-core.string/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "A descriptive name applied to this item"},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :unitOfPresentation {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.unit-of-presentation/value-set,
+                                                          :strength :example},
+                                     :zen/desc "The “real-world” units in which the quantity of the item is described"},
+                :component {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r5-core.ManufacturedItemDefinition/component-schema}}},
+                :marketingStatus {:type zen/vector,
+                                  :every {:confirms #{hl7-fhir-r5-core.MarketingStatus/schema},
+                                          :fhir/flags #{:SU},
+                                          :zen/desc "Allows specifying that an item is on the market for sale, or that it is not available, and the dates and locations associated"}},
+                :ingredient {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.substance-codes/value-set,
+                                                          :strength :example},
+                                     :zen/desc "The ingredients of this manufactured item. Only needed if these are not specified by incoming references from the Ingredient resource"}},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.publication-status/value-set,
+                                              :strength :required},
+                         :zen/desc "draft | active | retired | unknown"},
+                :_name {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Unique identifier"}},
+                :manufacturer {:type zen/vector,
+                               :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                   zen.fhir/Reference},
+                                       :fhir/flags #{:SU},
+                                       :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Organization/schema}},
+                                       :zen/desc "Manufacturer of the item, one of several possible"}}},
+         :zen.fhir/type "ManufacturedItemDefinition"}}

@@ -1,0 +1,38 @@
+{ns hl7-fhir-r5-core.catalog,
+ import #{hl7-fhir-uv-extensions-r5.cqm-ValidityPeriod
+          zen.fhir
+          hl7-fhir-r5-core.catalog
+          hl7-fhir-r5-core.value-set.catalogType
+          hl7-fhir-r5-core.Composition},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.Composition/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen.fhir/profile-schema zen/schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/catalog",
+         :require #{:category :type :ValidityPeriod},
+         :type zen/map,
+         :zen/desc "A set of resources composed into a single coherent clinical statement with clinical attestation",
+         :keys {:ValidityPeriod {:confirms #{hl7-fhir-uv-extensions-r5.cqm-ValidityPeriod/schema},
+                                 :fhir/extensionUri "http://hl7.org/fhir/StructureDefinition/cqm-ValidityPeriod",
+                                 :zen/desc "The validity of the catalog"},
+                :type {:const {:value {:text "Catalog"}},
+                       :zen/desc "The type of document - a Catalog"},
+                :category {:type zen/vector,
+                           :every {:zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.catalogType/value-set,
+                                                        :strength :example},
+                                   :zen/desc "The Content of the section"},
+                           :minItems 1,
+                           :maxItems 1},
+                :subject {:type zen/vector,
+                          :every {:confirms #{zen.fhir/Reference},
+                                  :zen.fhir/reference {:refers #{}},
+                                  :zen/desc "Who and/or what the composition is about"},
+                          :maxItems 0},
+                :section {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.catalog/section-schema}}}},
+         :zen.fhir/type "Composition"},
+ section-schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
+                 :zen.fhir/version "0.6.21-2",
+                 :type zen/map,
+                 :keys {:section {:type zen/vector,
+                                  :every {:confirms #{hl7-fhir-r5-core.catalog/section-schema}}}}}}

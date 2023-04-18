@@ -1,0 +1,143 @@
+{ns hl7-fhir-r5-core.HealthcareService,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.markdown
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.value-set.service-mode
+          hl7-fhir-r5-core.boolean
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.value-set.program
+          hl7-fhir-r5-core.Attachment
+          hl7-fhir-r5-core.value-set.service-category
+          hl7-fhir-r5-core.Location
+          hl7-fhir-r5-core.value-set.c80-practice-codes
+          hl7-fhir-r5-core.value-set.service-referral-method
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.value-set.service-provision-conditions
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.ExtendedContactDetail
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.value-set.service-type
+          hl7-fhir-r5-core.value-set.all-languages
+          hl7-fhir-r5-core.Availability
+          hl7-fhir-r5-core.HealthcareService
+          hl7-fhir-r5-core.Endpoint},
+ schema {:zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen/desc "The details of a healthcare service available at a location or in a catalog.  In the case where there is a hierarchy of services (for example, Lab -> Pathology -> Wound Cultures), this can be represented using a set of linked HealthcareServices.",
+         :zen.fhir/type "HealthcareService",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/HealthcareService",
+         :zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :type zen/map,
+         :keys {:coverageArea {:type zen/vector,
+                               :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                   zen.fhir/Reference},
+                                       :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Location/schema}},
+                                       :zen/desc "Location(s) service is intended for/available to"}},
+                :_active {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :category {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                   :fhir/flags #{:SU},
+                                   :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.service-category/value-set,
+                                                        :strength :example},
+                                   :zen/desc "Broad category of service being performed or delivered"}},
+                :availability {:type zen/vector,
+                               :every {:confirms #{hl7-fhir-r5-core.Availability/schema},
+                                       :zen/desc "Times the healthcare service is available (including exceptions)"}},
+                :_extraDetails {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :specialty {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                    :fhir/flags #{:SU},
+                                    :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.c80-practice-codes/value-set,
+                                                         :strength :preferred},
+                                    :zen/desc "Specialties handled by the HealthcareService"}},
+                :name {:confirms #{hl7-fhir-r5-core.string/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "Description of service as presented to a consumer while searching"},
+                :providedBy {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                         zen.fhir/Reference},
+                             :fhir/flags #{:SU},
+                             :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Organization/schema}},
+                             :zen/desc "Organization that provides this service"},
+                :type {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                               :fhir/flags #{:SU},
+                               :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.service-type/value-set,
+                                                    :strength :example},
+                               :zen/desc "Type of service that may be delivered or performed"}},
+                :eligibility {:type zen/vector,
+                              :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                      :type zen/map,
+                                      :keys {:code {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                    :zen/desc "Coded value for the eligibility"},
+                                             :comment {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                                                       :zen/desc "Describes the eligibility conditions for the service"},
+                                             :_comment {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                      :zen/desc "Specific eligibility requirements required to use the service"}},
+                :_appointmentRequired {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :extraDetails {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                               :zen/desc "Extra details about the service that can't be placed in the other fields"},
+                :characteristic {:type zen/vector,
+                                 :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.service-mode/value-set,
+                                                              :strength :example},
+                                         :zen/desc "Collection of characteristics (attributes)"}},
+                :photo {:confirms #{hl7-fhir-r5-core.Attachment/schema},
+                        :fhir/flags #{:SU},
+                        :zen/desc "Facilitates quick identification of the service"},
+                :active {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen/desc "Whether this HealthcareService record is in active use"},
+                :communication {:type zen/vector,
+                                :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                        :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.all-languages/value-set,
+                                                             :strength :required},
+                                        :zen/desc "The language that this service is offered in"}},
+                :comment {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                          :fhir/flags #{:SU},
+                          :zen/desc "Additional description and/or any specific issues not covered elsewhere"},
+                :_name {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "External identifiers for this item"}},
+                :serviceProvisionCode {:type zen/vector,
+                                       :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                               :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.service-provision-conditions/value-set,
+                                                                    :strength :example},
+                                               :zen/desc "Conditions under which service is available/offered"}},
+                :appointmentRequired {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                                      :zen/desc "If an appointment is required for access to this service"},
+                :offeredIn {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                zen.fhir/Reference},
+                                    :zen.fhir/reference {:refers #{hl7-fhir-r5-core.HealthcareService/schema}},
+                                    :zen/desc "The service within which this service is offered"}},
+                :referralMethod {:type zen/vector,
+                                 :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.service-referral-method/value-set,
+                                                              :strength :example},
+                                         :zen/desc "Ways that the service accepts referrals"}},
+                :location {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                               zen.fhir/Reference},
+                                   :fhir/flags #{:SU},
+                                   :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Location/schema}},
+                                   :zen/desc "Location(s) where service may be provided"}},
+                :program {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                  :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.program/value-set,
+                                                       :strength :example},
+                                  :zen/desc "Programs that this service is applicable to"}},
+                :endpoint {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                               zen.fhir/Reference},
+                                   :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Endpoint/schema}},
+                                   :zen/desc "Technical endpoints providing access to electronic services operated for the healthcare service"}},
+                :contact {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.ExtendedContactDetail/schema},
+                                  :zen/desc "Official contact details for the HealthcareService"}},
+                :_comment {:confirms #{hl7-fhir-r5-core.Element/schema}}}}}

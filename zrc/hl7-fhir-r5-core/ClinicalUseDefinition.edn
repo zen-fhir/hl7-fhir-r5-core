@@ -1,0 +1,275 @@
+{ns hl7-fhir-r5-core.ClinicalUseDefinition,
+ import #{hl7-fhir-r5-core.value-set.warning-type
+          hl7-fhir-r5-core.BiologicallyDerivedProduct
+          hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.Medication
+          hl7-fhir-r5-core.Substance
+          hl7-fhir-r5-core.markdown
+          hl7-fhir-r5-core.value-set.therapy-relationship-type
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.CodeableReference
+          hl7-fhir-r5-core.PlanDefinition
+          zen.fhir
+          hl7-fhir-r5-core.value-set.interaction-type
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.value-set.undesirable-effect-classification
+          hl7-fhir-r5-core.value-set.therapy
+          hl7-fhir-r5-core.Group
+          hl7-fhir-r5-core.value-set.interactant
+          hl7-fhir-r5-core.value-set.disease-symptom-procedure
+          hl7-fhir-r5-core.ObservationDefinition
+          hl7-fhir-r5-core.ActivityDefinition
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.value-set.interaction-effect
+          hl7-fhir-r5-core.DeviceDefinition
+          hl7-fhir-r5-core.value-set.disease-status
+          hl7-fhir-r5-core.value-set.undesirable-effect-frequency
+          hl7-fhir-r5-core.value-set.interaction-management
+          hl7-fhir-r5-core.Device
+          hl7-fhir-r5-core.NutritionProduct
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.ClinicalUseDefinition
+          hl7-fhir-r5-core.value-set.clinical-use-definition-category
+          hl7-fhir-r5-core.value-set.clinical-use-definition-type
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.value-set.publication-status
+          hl7-fhir-r5-core.canonical
+          hl7-fhir-r5-core.value-set.undesirable-effect-symptom
+          hl7-fhir-r5-core.Range
+          hl7-fhir-r5-core.MedicinalProductDefinition
+          hl7-fhir-r5-core.Expression
+          hl7-fhir-r5-core.value-set.interaction-incidence
+          hl7-fhir-r5-core.value-set.product-intended-use},
+ contraindication-otherTherapy-schema {:zen/tags #{zen/schema
+                                                   zen.fhir/structure-schema},
+                                       :zen.fhir/version "0.6.21-2",
+                                       :confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                       :type zen/map,
+                                       :keys {:relationshipType {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                 :fhir/flags #{:SU},
+                                                                 :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.therapy-relationship-type/value-set,
+                                                                                      :strength :preferred},
+                                                                 :zen/desc "The type of relationship between the product indication/contraindication and another therapy"},
+                                              :treatment {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                                          :fhir/flags #{:SU},
+                                                          :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.therapy/value-set,
+                                                                               :strength :example},
+                                                          :zen/desc "Reference to a specific medication, substance etc. as part of an indication or contraindication"}},
+                                       :require #{:relationshipType
+                                                  :treatment},
+                                       :fhir/flags #{:SU},
+                                       :zen/desc "Information about use of the product in relation to other therapies described as part of the contraindication"},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/ClinicalUseDefinition",
+         :require #{:type},
+         :type zen/map,
+         :zen/desc "A single issue - either an indication, contraindication, interaction or an undesirable effect for a medicinal product, medication, device or procedure.",
+         :keys {:category {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                   :fhir/flags #{:SU},
+                                   :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.clinical-use-definition-category/value-set,
+                                                        :strength :preferred},
+                                   :zen/desc "A categorisation of the issue, primarily for dividing warnings into subject heading areas such as \"Pregnancy\", \"Overdose\""}},
+                :indication {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                             :type zen/map,
+                             :keys {:diseaseSymptomProcedure {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                                              :fhir/flags #{:SU},
+                                                              :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.disease-symptom-procedure/value-set,
+                                                                                   :strength :example},
+                                                              :zen/desc "The situation that is being documented as an indicaton for this item"},
+                                    :diseaseStatus {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                                    :fhir/flags #{:SU},
+                                                    :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.disease-status/value-set,
+                                                                         :strength :example},
+                                                    :zen/desc "The status of the disease or symptom for the indication"},
+                                    :comorbidity {:type zen/vector,
+                                                  :every {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                                          :fhir/flags #{:SU},
+                                                          :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.disease-symptom-procedure/value-set,
+                                                                               :strength :example},
+                                                          :zen/desc "A comorbidity or coinfection as part of the indication"}},
+                                    :intendedEffect {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                                     :fhir/flags #{:SU},
+                                                     :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.product-intended-use/value-set,
+                                                                          :strength :preferred},
+                                                     :zen/desc "The intended effect, aim or strategy to be achieved"},
+                                    :duration {:fhir/polymorphic true,
+                                               :type zen/map,
+                                               :exclusive-keys #{#{:string
+                                                                   :Range}},
+                                               :keys {:Range {:confirms #{hl7-fhir-r5-core.Range/schema}},
+                                                      :string {:confirms #{hl7-fhir-r5-core.string/schema}},
+                                                      :_string {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                               :fhir/flags #{:SU},
+                                               :zen/desc "Timing or duration information"},
+                                    :undesirableEffect {:type zen/vector,
+                                                        :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                            zen.fhir/Reference},
+                                                                :fhir/flags #{:SU},
+                                                                :zen.fhir/reference {:refers #{hl7-fhir-r5-core.ClinicalUseDefinition/schema}},
+                                                                :zen/desc "An unwanted side effect or negative outcome of the subject of this resource when being used for this indication"}},
+                                    :applicability {:confirms #{hl7-fhir-r5-core.Expression/schema},
+                                                    :zen/desc "An expression that returns true or false, indicating whether the indication is applicable or not, after having applied its other elements"},
+                                    :otherTherapy {:type zen/vector,
+                                                   :every {:fhir/flags #{:SU},
+                                                           :confirms #{hl7-fhir-r5-core.ClinicalUseDefinition/contraindication-otherTherapy-schema},
+                                                           :zen/desc "The use of the medicinal product in relation to other therapies described as part of the indication"}}},
+                             :fhir/flags #{:SU},
+                             :zen/desc "Specifics for when this is an indication"},
+                :_type {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :type {:confirms #{hl7-fhir-r5-core.code/schema},
+                       :fhir/flags #{:SU},
+                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.clinical-use-definition-type/value-set,
+                                            :strength :required},
+                       :zen/desc "indication | contraindication | interaction | undesirable-effect | warning"},
+                :interaction {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                              :type zen/map,
+                              :keys {:interactant {:type zen/vector,
+                                                   :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                                           :type zen/map,
+                                                           :keys {:item {:fhir/polymorphic true,
+                                                                         :type zen/map,
+                                                                         :exclusive-keys #{#{:CodeableConcept
+                                                                                             :Reference}},
+                                                                         :keys {:Reference {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                                                        zen.fhir/Reference},
+                                                                                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.MedicinalProductDefinition/schema
+                                                                                                                           hl7-fhir-r5-core.Medication/schema
+                                                                                                                           hl7-fhir-r5-core.NutritionProduct/schema
+                                                                                                                           hl7-fhir-r5-core.Substance/schema
+                                                                                                                           hl7-fhir-r5-core.BiologicallyDerivedProduct/schema
+                                                                                                                           hl7-fhir-r5-core.ObservationDefinition/schema}}},
+                                                                                :CodeableConcept {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema}}},
+                                                                         :fhir/flags #{:SU},
+                                                                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.interactant/value-set,
+                                                                                              :strength :example},
+                                                                         :zen/desc "The specific medication, product, food etc. or laboratory test that interacts"}},
+                                                           :require #{:item},
+                                                           :fhir/flags #{:SU},
+                                                           :zen/desc "The specific medication, product, food etc. or laboratory test that interacts"}},
+                                     :type {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                            :fhir/flags #{:SU},
+                                            :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.interaction-type/value-set,
+                                                                 :strength :example},
+                                            :zen/desc "The type of the interaction e.g. drug-drug interaction, drug-lab test interaction"},
+                                     :effect {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                              :fhir/flags #{:SU},
+                                              :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.interaction-effect/value-set,
+                                                                   :strength :example},
+                                              :zen/desc "The effect of the interaction, for example \"reduced gastric absorption of primary medication\""},
+                                     :incidence {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                 :fhir/flags #{:SU},
+                                                 :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.interaction-incidence/value-set,
+                                                                      :strength :example},
+                                                 :zen/desc "The incidence of the interaction, e.g. theoretical, observed"},
+                                     :management {:type zen/vector,
+                                                  :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                          :fhir/flags #{:SU},
+                                                          :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.interaction-management/value-set,
+                                                                               :strength :example},
+                                                          :zen/desc "Actions for managing the interaction"}}},
+                              :fhir/flags #{:SU},
+                              :zen/desc "Specifics for when this is an interaction"},
+                :undesirableEffect {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                    :type zen/map,
+                                    :keys {:symptomConditionEffect {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                                                    :fhir/flags #{:SU},
+                                                                    :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.undesirable-effect-symptom/value-set,
+                                                                                         :strength :example},
+                                                                    :zen/desc "The situation in which the undesirable effect may manifest"},
+                                           :classification {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                            :fhir/flags #{:SU},
+                                                            :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.undesirable-effect-classification/value-set,
+                                                                                 :strength :example},
+                                                            :zen/desc "High level classification of the effect"},
+                                           :frequencyOfOccurrence {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                   :fhir/flags #{:SU},
+                                                                   :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.undesirable-effect-frequency/value-set,
+                                                                                        :strength :example},
+                                                                   :zen/desc "How often the effect is seen"}},
+                                    :fhir/flags #{:SU},
+                                    :zen/desc "A possible negative outcome from the use of this treatment"},
+                :library {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.canonical/schema},
+                                  :fhir/flags #{:SU},
+                                  :zen/desc "Logic used by the clinical use definition"}},
+                :warning {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                          :type zen/map,
+                          :keys {:description {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                                               :fhir/flags #{:SU},
+                                               :zen/desc "A textual definition of this warning, with formatting"},
+                                 :_description {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                 :code {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                        :fhir/flags #{:SU},
+                                        :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.warning-type/value-set,
+                                                             :strength :example},
+                                        :zen/desc "A coded or unformatted textual definition of this warning"}},
+                          :fhir/flags #{:SU},
+                          :zen/desc "Critical environmental, health or physical risks or hazards. For example 'Do not operate heavy machinery', 'May cause drowsiness'"},
+                :contraindication {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                   :type zen/map,
+                                   :keys {:diseaseSymptomProcedure {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                                                    :fhir/flags #{:SU},
+                                                                    :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.disease-symptom-procedure/value-set,
+                                                                                         :strength :example},
+                                                                    :zen/desc "The situation that is being documented as contraindicating against this item"},
+                                          :diseaseStatus {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                                          :fhir/flags #{:SU},
+                                                          :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.disease-status/value-set,
+                                                                               :strength :example},
+                                                          :zen/desc "The status of the disease or symptom for the contraindication"},
+                                          :comorbidity {:type zen/vector,
+                                                        :every {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                                                :fhir/flags #{:SU},
+                                                                :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.disease-symptom-procedure/value-set,
+                                                                                     :strength :example},
+                                                                :zen/desc "A comorbidity (concurrent condition) or coinfection"}},
+                                          :indication {:type zen/vector,
+                                                       :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                           zen.fhir/Reference},
+                                                               :fhir/flags #{:SU},
+                                                               :zen.fhir/reference {:refers #{hl7-fhir-r5-core.ClinicalUseDefinition/schema}},
+                                                               :zen/desc "The indication which this is a contraidication for"}},
+                                          :applicability {:confirms #{hl7-fhir-r5-core.Expression/schema},
+                                                          :zen/desc "An expression that returns true or false, indicating whether the indication is applicable or not, after having applied its other elements"},
+                                          :otherTherapy {:type zen/vector,
+                                                         :every {:confirms #{hl7-fhir-r5-core.ClinicalUseDefinition/contraindication-otherTherapy-schema}}}},
+                                   :fhir/flags #{:SU},
+                                   :zen/desc "Specifics for when this is a contraindication"},
+                :status {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                         :fhir/flags #{:SU},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.publication-status/value-set,
+                                              :strength :preferred},
+                         :zen/desc "Whether this is a current issue or one that has been retired etc"},
+                :population {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                 zen.fhir/Reference},
+                                     :fhir/flags #{:SU},
+                                     :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Group/schema}},
+                                     :zen/desc "The population group to which this applies"}},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Business identifier for this issue"}},
+                :_library {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                :subject {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                              zen.fhir/Reference},
+                                  :fhir/flags #{:SU},
+                                  :zen.fhir/reference {:refers #{hl7-fhir-r5-core.MedicinalProductDefinition/schema
+                                                                 hl7-fhir-r5-core.Medication/schema
+                                                                 hl7-fhir-r5-core.NutritionProduct/schema
+                                                                 hl7-fhir-r5-core.Substance/schema
+                                                                 hl7-fhir-r5-core.Device/schema
+                                                                 hl7-fhir-r5-core.PlanDefinition/schema
+                                                                 hl7-fhir-r5-core.BiologicallyDerivedProduct/schema
+                                                                 hl7-fhir-r5-core.ActivityDefinition/schema
+                                                                 hl7-fhir-r5-core.DeviceDefinition/schema}},
+                                  :zen/desc "The medication, product, substance, device, procedure etc. for which this is an indication"}}},
+         :zen.fhir/type "ClinicalUseDefinition"}}

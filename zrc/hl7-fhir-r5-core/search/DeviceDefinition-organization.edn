@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.DeviceDefinition-organization,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "DeviceDefinition-organization",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/DeviceDefinition-organization",
+         :fhir/type "reference",
+         :name "organization",
+         :expr {:DeviceDefinition {:knife [["owner"]],
+                                   :jsonpath ["$.\"owner\"[*]"],
+                                   :data-types #{{:type "Reference",
+                                                  :polymorphic? false}},
+                                   :template :reference}}}}

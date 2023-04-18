@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.TestPlan-scope,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "TestPlan-scope",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/TestPlan-scope",
+         :fhir/type "reference",
+         :name "scope",
+         :expr {:TestPlan {:knife [["scope"]],
+                           :jsonpath ["$.\"scope\"[*]"],
+                           :data-types #{{:type "Reference",
+                                          :polymorphic? false}},
+                           :template :reference}}}}

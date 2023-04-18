@@ -1,0 +1,14 @@
+{ns hl7-fhir-r5-core.search.Observation-value-date,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Observation-value-date",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Observation-value-date",
+         :fhir/type "date",
+         :name "value-date",
+         :expr {:Observation {:knife [["value" "ofType(dateTime"]
+                                      ["value" "ofType(Period"]],
+                              :jsonpath ["$.\"value\".\"ofType(dateTime\"[*]"
+                                         "$.\"value\".\"ofType(Period\"[*]"],
+                              :data-types #{},
+                              :template :date,
+                              :sql {:where [:or]}}}}}

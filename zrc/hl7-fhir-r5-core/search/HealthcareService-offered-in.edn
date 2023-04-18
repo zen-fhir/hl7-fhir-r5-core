@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.HealthcareService-offered-in,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "HealthcareService-offered-in",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/HealthcareService-offered-in",
+         :fhir/type "reference",
+         :name "offered-in",
+         :expr {:HealthcareService {:knife [["offeredIn"]],
+                                    :jsonpath ["$.\"offeredIn\"[*]"],
+                                    :data-types #{{:type "Reference",
+                                                   :polymorphic? false}},
+                                    :template :reference}}}}

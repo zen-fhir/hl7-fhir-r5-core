@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.ManufacturedItemDefinition-ingredient,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "ManufacturedItemDefinition-ingredient",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/ManufacturedItemDefinition-ingredient",
+         :fhir/type "token",
+         :name "ingredient",
+         :expr {:ManufacturedItemDefinition {:knife [["ingredient"]],
+                                             :jsonpath ["$.\"ingredient\"[*]"],
+                                             :data-types #{{:type "CodeableConcept",
+                                                            :polymorphic? false}},
+                                             :template :token}}}}

@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.MedicinalProductDefinition-type,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "MedicinalProductDefinition-type",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/MedicinalProductDefinition-type",
+         :fhir/type "token",
+         :name "type",
+         :expr {:MedicinalProductDefinition {:knife [["type"]],
+                                             :jsonpath ["$.\"type\"[*]"],
+                                             :data-types #{{:type "CodeableConcept",
+                                                            :polymorphic? false}},
+                                             :template :token}}}}

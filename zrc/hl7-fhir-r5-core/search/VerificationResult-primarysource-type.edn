@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.VerificationResult-primarysource-type,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "VerificationResult-primarysource-type",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/VerificationResult-primarysource-type",
+         :fhir/type "token",
+         :name "primarysource-type",
+         :expr {:VerificationResult {:knife [["primarySource" "type"]],
+                                     :jsonpath ["$.\"primarySource\".\"type\"[*]"],
+                                     :data-types #{{:type "CodeableConcept",
+                                                    :polymorphic? false}},
+                                     :template :token}}}}

@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.CapabilityStatement-fhirversion,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "CapabilityStatement-fhirversion",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/CapabilityStatement-fhirversion",
+         :fhir/type "token",
+         :name "fhirversion",
+         :expr {:CapabilityStatement {:knife [["fhirVersion"]],
+                                      :jsonpath ["$.\"fhirVersion\"[*]"],
+                                      :data-types #{{:type "code",
+                                                     :polymorphic? false}},
+                                      :template :token}}}}

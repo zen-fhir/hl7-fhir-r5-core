@@ -1,0 +1,19 @@
+{ns hl7-fhir-r5-core.search.RequestOrchestration-participant,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "RequestOrchestration-participant",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/RequestOrchestration-participant",
+         :fhir/type "reference",
+         :name "participant",
+         :expr {:RequestOrchestration {:knife [["action"
+                                                "participant"
+                                                "actor"
+                                                "ofType(Reference"]
+                                               ["action"
+                                                "participant"
+                                                "actor"
+                                                "ofType(canonical"]],
+                                       :jsonpath ["$.\"action\".\"participant\".\"actor\".\"ofType(Reference\"[*]"
+                                                  "$.\"action\".\"participant\".\"actor\".\"ofType(canonical\"[*]"],
+                                       :data-types #{},
+                                       :template :reference}}}}

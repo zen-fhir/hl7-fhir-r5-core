@@ -1,0 +1,11 @@
+{ns hl7-fhir-r5-core.search.example-constraint,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "example-constraint",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/example-constraint",
+         :fhir/type "reference",
+         :name "example-constraint",
+         :expr {:Bundle {:knife [],
+                         :jsonpath [],
+                         :data-types #{},
+                         :template :reference}}}}

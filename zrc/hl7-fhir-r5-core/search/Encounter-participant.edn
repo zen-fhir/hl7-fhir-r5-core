@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Encounter-participant,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Encounter-participant",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Encounter-participant",
+         :fhir/type "reference",
+         :name "participant",
+         :expr {:Encounter {:knife [["participant" "actor"]],
+                            :jsonpath ["$.\"participant\".\"actor\"[*]"],
+                            :data-types #{{:type "Reference",
+                                           :polymorphic? false}},
+                            :template :reference}}}}

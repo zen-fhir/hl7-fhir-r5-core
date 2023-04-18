@@ -1,0 +1,281 @@
+{ns hl7-fhir-r5-core.Consent,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.boolean
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.value-set.resource-types
+          hl7-fhir-r5-core.Group
+          hl7-fhir-r5-core.QuestionnaireResponse
+          hl7-fhir-r5-core.value-set.participation-role-type
+          hl7-fhir-r5-core.Consent
+          hl7-fhir-r5-core.value-set.consent-category
+          hl7-fhir-r5-core.url
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.Attachment
+          hl7-fhir-r5-core.Contract
+          hl7-fhir-r5-core.Practitioner
+          hl7-fhir-r5-core.value-set.security-label-examples
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.value-set.consent-provision-type
+          hl7-fhir-r5-core.value-set.consent-verification
+          hl7-fhir-r5-core.Device
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.date
+          hl7-fhir-r5-core.CareTeam
+          hl7-fhir-r5-core.value-set.consent-policy
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.value-set.consent-content-class
+          hl7-fhir-r5-core.value-set.consent-state-codes
+          hl7-fhir-r5-core.RelatedPerson
+          hl7-fhir-r5-core.PractitionerRole
+          hl7-fhir-r5-core.Period
+          hl7-fhir-r5-core.Coding
+          hl7-fhir-r5-core.value-set.consent-content-code
+          hl7-fhir-r5-core.value-set.consent-action
+          hl7-terminology-r5.value-set.v3-PurposeOfUse
+          hl7-fhir-r5-core.Expression
+          hl7-fhir-r5-core.HealthcareService
+          hl7-fhir-r5-core.DocumentReference
+          hl7-fhir-r5-core.Patient
+          hl7-fhir-r5-core.value-set.consent-data-meaning},
+ provision-schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
+                   :zen.fhir/version "0.6.21-2",
+                   :confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                   :type zen/map,
+                   :keys {:provision {:type zen/vector,
+                                      :every {:confirms #{hl7-fhir-r5-core.Consent/provision-schema},
+                                              :zen/desc "Nested Exception Provisions"}},
+                          :expression {:confirms #{hl7-fhir-r5-core.Expression/schema},
+                                       :zen/desc "A computable expression of the consent"},
+                          :purpose {:type zen/vector,
+                                    :every {:confirms #{hl7-fhir-r5-core.Coding/schema},
+                                            :fhir/flags #{:SU},
+                                            :zen.fhir/value-set {:symbol hl7-terminology-r5.value-set.v3-PurposeOfUse/value-set,
+                                                                 :strength :extensible},
+                                            :zen/desc "Context of activities covered by this provision"}},
+                          :dataPeriod {:confirms #{hl7-fhir-r5-core.Period/schema},
+                                       :fhir/flags #{:SU},
+                                       :zen/desc "Timeframe for data controlled by this provision"},
+                          :resourceType {:type zen/vector,
+                                         :every {:confirms #{hl7-fhir-r5-core.Coding/schema},
+                                                 :fhir/flags #{:SU},
+                                                 :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.resource-types/value-set,
+                                                                      :strength :extensible},
+                                                 :zen/desc "e.g. Resource Type, Profile, etc"}},
+                          :documentType {:type zen/vector,
+                                         :every {:confirms #{hl7-fhir-r5-core.Coding/schema},
+                                                 :fhir/flags #{:SU},
+                                                 :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.consent-content-class/value-set,
+                                                                      :strength :preferred},
+                                                 :zen/desc "e.g. Resource Type, Profile, CDA, etc"}},
+                          :code {:type zen/vector,
+                                 :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                         :fhir/flags #{:SU},
+                                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.consent-content-code/value-set,
+                                                              :strength :example},
+                                         :zen/desc "e.g. LOINC or SNOMED CT code, etc. in the content"}},
+                          :action {:type zen/vector,
+                                   :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                           :fhir/flags #{:SU},
+                                           :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.consent-action/value-set,
+                                                                :strength :example},
+                                           :zen/desc "Actions controlled by this provision"}},
+                          :period {:confirms #{hl7-fhir-r5-core.Period/schema},
+                                   :fhir/flags #{:SU},
+                                   :zen/desc "Timeframe for this provision"},
+                          :securityLabel {:type zen/vector,
+                                          :every {:confirms #{hl7-fhir-r5-core.Coding/schema},
+                                                  :fhir/flags #{:SU},
+                                                  :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.security-label-examples/value-set,
+                                                                       :strength :example},
+                                                  :zen/desc "Security Labels that define affected resources"}},
+                          :actor {:type zen/vector,
+                                  :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                          :type zen/map,
+                                          :keys {:role {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                        :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.participation-role-type/value-set,
+                                                                             :strength :extensible},
+                                                        :zen/desc "How the actor is involved"},
+                                                 :reference {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                         zen.fhir/Reference},
+                                                             :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                                                            hl7-fhir-r5-core.CareTeam/schema
+                                                                                            hl7-fhir-r5-core.PractitionerRole/schema
+                                                                                            hl7-fhir-r5-core.Organization/schema
+                                                                                            hl7-fhir-r5-core.Device/schema
+                                                                                            hl7-fhir-r5-core.Practitioner/schema
+                                                                                            hl7-fhir-r5-core.Group/schema
+                                                                                            hl7-fhir-r5-core.RelatedPerson/schema}},
+                                                             :zen/desc "Resource for the actor (or group, by role)"}},
+                                          :zen/desc "Who|what controlled by this provision (or group, by role)"}},
+                          :data {:type zen/vector,
+                                 :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                         :type zen/map,
+                                         :keys {:meaning {:confirms #{hl7-fhir-r5-core.code/schema},
+                                                          :fhir/flags #{:SU},
+                                                          :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.consent-data-meaning/value-set,
+                                                                               :strength :required},
+                                                          :zen/desc "instance | related | dependents | authoredby"},
+                                                :_meaning {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                :reference {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                        zen.fhir/Reference},
+                                                            :fhir/flags #{:SU},
+                                                            :zen.fhir/reference {:refers #{}},
+                                                            :zen/desc "The actual data reference"}},
+                                         :require #{:reference
+                                                    :meaning},
+                                         :fhir/flags #{:SU},
+                                         :zen/desc "Data controlled by this provision"}}},
+                   :fhir/flags #{:SU},
+                   :zen/desc "Constraints to the base Consent.policyRule/Consent.policy"},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Consent",
+         :require #{:status},
+         :type zen/map,
+         :zen/desc "A record of a healthcare consumer’s  choices  or choices made on their behalf by a third party, which permits or denies identified recipient(s) or recipient role(s) to perform one or more actions within a given policy context, for specific purposes and periods of time.",
+         :keys {:category {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                   :fhir/flags #{:SU},
+                                   :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.consent-category/value-set,
+                                                        :strength :example},
+                                   :zen/desc "Classification of the consent statement - for indexing/retrieval"}},
+                :provision {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r5-core.Consent/provision-schema}}},
+                :date {:confirms #{hl7-fhir-r5-core.date/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "Fully executed date of the consent"},
+                :controller {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                 zen.fhir/Reference},
+                                     :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                                    hl7-fhir-r5-core.HealthcareService/schema
+                                                                    hl7-fhir-r5-core.Organization/schema
+                                                                    hl7-fhir-r5-core.Practitioner/schema}},
+                                     :zen/desc "Consent Enforcer"}},
+                :policyBasis {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                              :type zen/map,
+                              :keys {:reference {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                             zen.fhir/Reference},
+                                                 :zen.fhir/reference {:refers #{}},
+                                                 :zen/desc "Reference backing policy resource"},
+                                     :url {:confirms #{hl7-fhir-r5-core.url/schema},
+                                           :zen/desc "URL to a computable backing policy"},
+                                     :_url {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                              :zen/desc "Computable version of the backing policy"},
+                :_date {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :regulatoryBasis {:type zen/vector,
+                                  :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                          :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.consent-policy/value-set,
+                                                               :strength :example},
+                                          :zen/desc "Regulations establishing base Consent"}},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :sourceAttachment {:type zen/vector,
+                                   :every {:confirms #{hl7-fhir-r5-core.Attachment/schema},
+                                           :zen/desc "Source from which this consent is taken"}},
+                :verification {:type zen/vector,
+                               :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                       :type zen/map,
+                                       :keys {:verified {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                                                         :fhir/flags #{:SU},
+                                                         :zen/desc "Has been verified"},
+                                              :_verified {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                              :verificationType {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                 :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.consent-verification/value-set,
+                                                                                      :strength :example},
+                                                                 :zen/desc "Business case of verification"},
+                                              :verifiedBy {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                       zen.fhir/Reference},
+                                                           :zen.fhir/reference {:refers #{hl7-fhir-r5-core.PractitionerRole/schema
+                                                                                          hl7-fhir-r5-core.Organization/schema
+                                                                                          hl7-fhir-r5-core.Practitioner/schema}},
+                                                           :zen/desc "Person conducting verification"},
+                                              :verifiedWith {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                         zen.fhir/Reference},
+                                                             :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                                                            hl7-fhir-r5-core.RelatedPerson/schema}},
+                                                             :zen/desc "Person who verified"},
+                                              :verificationDate {:type zen/vector,
+                                                                 :every {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                                                                         :zen/desc "When consent verified"}},
+                                              :_verificationDate {:type zen/vector,
+                                                                  :every {:confirms #{hl7-fhir-r5-core.Element/schema}}}},
+                                       :require #{:verified},
+                                       :fhir/flags #{:SU},
+                                       :zen/desc "Consent Verified by patient or family"}},
+                :_decision {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :grantor {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                              zen.fhir/Reference},
+                                  :fhir/flags #{:SU},
+                                  :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                                 hl7-fhir-r5-core.CareTeam/schema
+                                                                 hl7-fhir-r5-core.HealthcareService/schema
+                                                                 hl7-fhir-r5-core.PractitionerRole/schema
+                                                                 hl7-fhir-r5-core.Organization/schema
+                                                                 hl7-fhir-r5-core.Practitioner/schema
+                                                                 hl7-fhir-r5-core.RelatedPerson/schema}},
+                                  :zen/desc "Who is granting rights according to the policy and rules"}},
+                :sourceReference {:type zen/vector,
+                                  :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                      zen.fhir/Reference},
+                                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.QuestionnaireResponse/schema
+                                                                         hl7-fhir-r5-core.Contract/schema
+                                                                         hl7-fhir-r5-core.DocumentReference/schema
+                                                                         hl7-fhir-r5-core.Consent/schema}},
+                                          :zen/desc "Source from which this consent is taken"}},
+                :manager {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                              zen.fhir/Reference},
+                                  :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                                 hl7-fhir-r5-core.HealthcareService/schema
+                                                                 hl7-fhir-r5-core.Organization/schema
+                                                                 hl7-fhir-r5-core.Practitioner/schema}},
+                                  :zen/desc "Consent workflow management"}},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.consent-state-codes/value-set,
+                                              :strength :required},
+                         :zen/desc "draft | active | inactive | not-done | entered-in-error | unknown"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Identifier for this record (external references)"}},
+                :period {:confirms #{hl7-fhir-r5-core.Period/schema},
+                         :fhir/flags #{:SU},
+                         :zen/desc "Effective period for this Consent"},
+                :grantee {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                              zen.fhir/Reference},
+                                  :fhir/flags #{:SU},
+                                  :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                                 hl7-fhir-r5-core.CareTeam/schema
+                                                                 hl7-fhir-r5-core.HealthcareService/schema
+                                                                 hl7-fhir-r5-core.PractitionerRole/schema
+                                                                 hl7-fhir-r5-core.Organization/schema
+                                                                 hl7-fhir-r5-core.Practitioner/schema
+                                                                 hl7-fhir-r5-core.RelatedPerson/schema}},
+                                  :zen/desc "Who is agreeing to the policy and rules"}},
+                :policyText {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                 zen.fhir/Reference},
+                                     :zen.fhir/reference {:refers #{hl7-fhir-r5-core.DocumentReference/schema}},
+                                     :zen/desc "Human Readable Policy"}},
+                :subject {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                      zen.fhir/Reference},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                         hl7-fhir-r5-core.Practitioner/schema
+                                                         hl7-fhir-r5-core.Group/schema}},
+                          :zen/desc "Who the consent applies to"},
+                :decision {:confirms #{hl7-fhir-r5-core.code/schema},
+                           :fhir/flags #{:SU :?!},
+                           :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.consent-provision-type/value-set,
+                                                :strength :required},
+                           :zen/desc "deny | permit"}},
+         :zen.fhir/type "Consent"}}

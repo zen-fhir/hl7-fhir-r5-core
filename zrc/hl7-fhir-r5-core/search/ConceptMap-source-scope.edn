@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.ConceptMap-source-scope,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "ConceptMap-source-scope",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/ConceptMap-source-scope",
+         :fhir/type "reference",
+         :name "source-scope",
+         :expr {:ConceptMap {:knife [["sourceScope" "canonical"]],
+                             :jsonpath ["$.\"sourceScope\".\"canonical\"[*]"],
+                             :data-types #{{:type "canonical",
+                                            :polymorphic? false}},
+                             :template :reference}}}}

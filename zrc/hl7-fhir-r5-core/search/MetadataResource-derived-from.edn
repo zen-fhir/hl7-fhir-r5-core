@@ -1,0 +1,67 @@
+{ns hl7-fhir-r5-core.search.MetadataResource-derived-from,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "MetadataResource-derived-from",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/MetadataResource-derived-from",
+         :fhir/type "reference",
+         :name "derived-from",
+         :expr {:EvidenceVariable {:knife [["relatedArtifact"
+                                            {:type "derived-from"}
+                                            "resource"]],
+                                   :jsonpath ["$.\"relatedArtifact\"?(@.\"type\"==\"derived-from\").\"resource\"[*]"],
+                                   :data-types #{},
+                                   :template :reference},
+                :CodeSystem {:knife [["relatedArtifact"
+                                      {:type "derived-from"}
+                                      "resource"]],
+                             :jsonpath ["$.\"relatedArtifact\"?(@.\"type\"==\"derived-from\").\"resource\"[*]"],
+                             :data-types #{},
+                             :template :reference},
+                :PlanDefinition {:knife [["relatedArtifact"
+                                          {:type "derived-from"}
+                                          "resource"]],
+                                 :jsonpath ["$.\"relatedArtifact\"?(@.\"type\"==\"derived-from\").\"resource\"[*]"],
+                                 :data-types #{},
+                                 :template :reference},
+                :Library {:knife [["relatedArtifact"
+                                   {:type "derived-from"}
+                                   "resource"]],
+                          :jsonpath ["$.\"relatedArtifact\"?(@.\"type\"==\"derived-from\").\"resource\"[*]"],
+                          :data-types #{},
+                          :template :reference},
+                :ActivityDefinition {:knife [["relatedArtifact"
+                                              {:type "derived-from"}
+                                              "resource"]],
+                                     :jsonpath ["$.\"relatedArtifact\"?(@.\"type\"==\"derived-from\").\"resource\"[*]"],
+                                     :data-types #{},
+                                     :template :reference},
+                :NamingSystem {:knife [["relatedArtifact"
+                                        {:type "derived-from"}
+                                        "resource"]],
+                               :jsonpath ["$.\"relatedArtifact\"?(@.\"type\"==\"derived-from\").\"resource\"[*]"],
+                               :data-types #{},
+                               :template :reference},
+                :EventDefinition {:knife [["relatedArtifact"
+                                           {:type "derived-from"}
+                                           "resource"]],
+                                  :jsonpath ["$.\"relatedArtifact\"?(@.\"type\"==\"derived-from\").\"resource\"[*]"],
+                                  :data-types #{},
+                                  :template :reference},
+                :ValueSet {:knife [["relatedArtifact"
+                                    {:type "derived-from"}
+                                    "resource"]],
+                           :jsonpath ["$.\"relatedArtifact\"?(@.\"type\"==\"derived-from\").\"resource\"[*]"],
+                           :data-types #{},
+                           :template :reference},
+                :Measure {:knife [["relatedArtifact"
+                                   {:type "derived-from"}
+                                   "resource"]],
+                          :jsonpath ["$.\"relatedArtifact\"?(@.\"type\"==\"derived-from\").\"resource\"[*]"],
+                          :data-types #{},
+                          :template :reference},
+                :ConceptMap {:knife [["relatedArtifact"
+                                      {:type "derived-from"}
+                                      "resource"]],
+                             :jsonpath ["$.\"relatedArtifact\"?(@.\"type\"==\"derived-from\").\"resource\"[*]"],
+                             :data-types #{},
+                             :template :reference}}}}

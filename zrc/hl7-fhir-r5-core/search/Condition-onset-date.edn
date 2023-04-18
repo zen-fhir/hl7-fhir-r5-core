@@ -1,0 +1,14 @@
+{ns hl7-fhir-r5-core.search.Condition-onset-date,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Condition-onset-date",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Condition-onset-date",
+         :fhir/type "date",
+         :name "onset-date",
+         :expr {:Condition {:knife [["onset" "ofType(dateTime"]
+                                    ["onset" "ofType(Period"]],
+                            :jsonpath ["$.\"onset\".\"ofType(dateTime\"[*]"
+                                       "$.\"onset\".\"ofType(Period\"[*]"],
+                            :data-types #{},
+                            :template :date,
+                            :sql {:where [:or]}}}}}

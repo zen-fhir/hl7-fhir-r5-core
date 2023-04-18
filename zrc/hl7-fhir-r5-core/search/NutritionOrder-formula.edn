@@ -1,0 +1,13 @@
+{ns hl7-fhir-r5-core.search.NutritionOrder-formula,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "NutritionOrder-formula",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/NutritionOrder-formula",
+         :fhir/type "token",
+         :name "formula",
+         :expr {:NutritionOrder {:knife [["enteralFormula"
+                                          "baseFormulaType"
+                                          "concept"]],
+                                 :jsonpath ["$.\"enteralFormula\".\"baseFormulaType\".\"concept\"[*]"],
+                                 :data-types #{},
+                                 :template :token}}}}

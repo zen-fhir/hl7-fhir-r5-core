@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Ingredient-function,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Ingredient-function",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Ingredient-function",
+         :fhir/type "token",
+         :name "function",
+         :expr {:Ingredient {:knife [["function"]],
+                             :jsonpath ["$.\"function\"[*]"],
+                             :data-types #{{:type "CodeableConcept",
+                                            :polymorphic? false}},
+                             :template :token}}}}

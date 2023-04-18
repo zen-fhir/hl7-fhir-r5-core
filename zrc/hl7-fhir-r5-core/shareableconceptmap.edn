@@ -1,0 +1,33 @@
+{ns hl7-fhir-r5-core.shareableconceptmap,
+ import #{zen.fhir
+          hl7-fhir-uv-extensions-r5.cqf-knowledgeRepresentationLevel
+          hl7-fhir-r5-core.ConceptMap
+          hl7-fhir-r5-core.shareableconceptmap},
+ group-element-target-dependsOn-schema {:zen/tags #{zen/schema
+                                                    zen.fhir/structure-schema},
+                                        :zen.fhir/version "0.6.21-2"},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.ConceptMap/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen.fhir/profile-schema zen/schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/shareableconceptmap",
+         :require #{:description :experimental :title :url :version},
+         :type zen/map,
+         :zen/desc "Enforces the minimum information set for the concept map metadata required by HL7 and other organizations that share and publish concept maps",
+         :keys {:description {:fhir/flags #{:MS}},
+                :group {:every {:keys {:element {:every {:keys {:target {:every {:keys {:dependsOn {:confirms #{hl7-fhir-r5-core.shareableconceptmap/group-element-target-dependsOn-schema}}}}}}}}}}},
+                :publisher {:fhir/flags #{:MS}},
+                :name {:fhir/flags #{:MS}},
+                :versionAlgorithm {:fhir/polymorphic true,
+                                   :type zen/map,
+                                   :fhir/flags #{:MS}},
+                :experimental {:fhir/flags #{:MS}},
+                :title {:fhir/flags #{:MS}},
+                :knowledgeRepresentationLevel {:type zen/vector,
+                                               :every {:confirms #{hl7-fhir-uv-extensions-r5.cqf-knowledgeRepresentationLevel/schema},
+                                                       :fhir/extensionUri "http://hl7.org/fhir/StructureDefinition/cqf-knowledgeRepresentationLevel",
+                                                       :fhir/flags #{:MS}}},
+                :status {:fhir/flags #{:MS}},
+                :url {:fhir/flags #{:MS}},
+                :version {:fhir/flags #{:MS}}},
+         :zen.fhir/type "ConceptMap"}}

@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.VerificationResult-attestation-who,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "VerificationResult-attestation-who",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/VerificationResult-attestation-who",
+         :fhir/type "reference",
+         :name "attestation-who",
+         :expr {:VerificationResult {:knife [["attestation" "who"]],
+                                     :jsonpath ["$.\"attestation\".\"who\"[*]"],
+                                     :data-types #{{:type "Reference",
+                                                    :polymorphic? false}},
+                                     :template :reference}}}}

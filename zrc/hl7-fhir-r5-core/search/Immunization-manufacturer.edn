@@ -1,0 +1,11 @@
+{ns hl7-fhir-r5-core.search.Immunization-manufacturer,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Immunization-manufacturer",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Immunization-manufacturer",
+         :fhir/type "reference",
+         :name "manufacturer",
+         :expr {:Immunization {:knife [["manufacturer" "reference"]],
+                               :jsonpath ["$.\"manufacturer\".\"reference\"[*]"],
+                               :data-types #{},
+                               :template :reference}}}}

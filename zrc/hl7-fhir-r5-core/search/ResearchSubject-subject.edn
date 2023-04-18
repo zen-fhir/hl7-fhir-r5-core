@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.ResearchSubject-subject,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "ResearchSubject-subject",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/ResearchSubject-subject",
+         :fhir/type "reference",
+         :name "subject",
+         :expr {:ResearchSubject {:knife [["subject"]],
+                                  :jsonpath ["$.\"subject\"[*]"],
+                                  :data-types #{{:type "Reference",
+                                                 :polymorphic? false}},
+                                  :template :reference}}}}

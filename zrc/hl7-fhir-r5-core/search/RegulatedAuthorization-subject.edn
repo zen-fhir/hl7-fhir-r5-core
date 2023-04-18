@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.RegulatedAuthorization-subject,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "RegulatedAuthorization-subject",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/RegulatedAuthorization-subject",
+         :fhir/type "reference",
+         :name "subject",
+         :expr {:RegulatedAuthorization {:knife [["subject"]],
+                                         :jsonpath ["$.\"subject\"[*]"],
+                                         :data-types #{{:type "Reference",
+                                                        :polymorphic? false}},
+                                         :template :reference}}}}

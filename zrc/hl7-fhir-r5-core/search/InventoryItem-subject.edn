@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.InventoryItem-subject,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "InventoryItem-subject",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/InventoryItem-subject",
+         :fhir/type "reference",
+         :name "subject",
+         :expr {:InventoryItem {:knife [["instance" "subject"]],
+                                :jsonpath ["$.\"instance\".\"subject\"[*]"],
+                                :data-types #{{:type "Reference",
+                                               :polymorphic? false}},
+                                :template :reference}}}}

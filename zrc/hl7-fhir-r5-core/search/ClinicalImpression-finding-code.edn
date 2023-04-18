@@ -1,0 +1,13 @@
+{ns hl7-fhir-r5-core.search.ClinicalImpression-finding-code,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "ClinicalImpression-finding-code",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/ClinicalImpression-finding-code",
+         :fhir/type "token",
+         :name "finding-code",
+         :expr {:ClinicalImpression {:knife [["finding"
+                                              "item"
+                                              "concept"]],
+                                     :jsonpath ["$.\"finding\".\"item\".\"concept\"[*]"],
+                                     :data-types #{},
+                                     :template :token}}}}

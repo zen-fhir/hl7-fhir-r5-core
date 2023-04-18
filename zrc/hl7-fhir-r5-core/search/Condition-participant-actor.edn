@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Condition-participant-actor,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Condition-participant-actor",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Condition-participant-actor",
+         :fhir/type "reference",
+         :name "participant-actor",
+         :expr {:Condition {:knife [["participant" "actor"]],
+                            :jsonpath ["$.\"participant\".\"actor\"[*]"],
+                            :data-types #{{:type "Reference",
+                                           :polymorphic? false}},
+                            :template :reference}}}}

@@ -1,0 +1,226 @@
+{ns hl7-fhir-r5-core.ImagingStudy,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.value-set.procedure-reason
+          hl7-fhir-r5-core.Appointment
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.CodeableReference
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.Group
+          hl7-fhir-r5-core.value-set.body-site
+          hl7-fhir-r5-core.Annotation
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.AppointmentResponse
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.Encounter
+          hl7-fhir-r5-core.Location
+          hl7-fhir-r5-core.Practitioner
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.Device
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.CarePlan
+          hl7-fhir-r5-core.Specimen
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.value-set.series-performer-function
+          hl7-fhir-r5-core.CareTeam
+          hl7-fhir-r5-core.Procedure
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.RelatedPerson
+          hl7-fhir-r5-core.PractitionerRole
+          hl7-fhir-r5-core.value-set.imagingstudy-status
+          hl7-fhir-r5-core.Coding
+          hl7-fhir-r5-core.ServiceRequest
+          hl7-fhir-r5-core.id
+          hl7-fhir-r5-core.HealthcareService
+          hl7-fhir-r5-core.unsignedInt
+          hl7-fhir-r5-core.Task
+          hl7-fhir-r5-core.Endpoint
+          hl7-fhir-r5-core.Patient},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/ImagingStudy",
+         :require #{:status :subject},
+         :type zen/map,
+         :zen/desc "Representation of the content produced in a DICOM imaging study. A study comprises a set of series, each of which includes a set of Service-Object Pair Instances (SOP Instances - images or other data) acquired or produced in a common context.  A series is of only one modality (e.g. X-ray, CT, MR, ultrasound), but a study may have multiple series of different modalities.",
+         :keys {:description {:confirms #{hl7-fhir-r5-core.string/schema},
+                              :fhir/flags #{:SU},
+                              :zen/desc "Institution-generated description"},
+                :started {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                          :fhir/flags #{:SU},
+                          :zen/desc "When the study was started"},
+                :numberOfSeries {:confirms #{hl7-fhir-r5-core.unsignedInt/schema},
+                                 :fhir/flags #{:SU},
+                                 :zen/desc "Number of Study Related Series"},
+                :series {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                 :type zen/map,
+                                 :keys {:description {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                      :fhir/flags #{:SU},
+                                                      :zen/desc "A short human readable summary of the series"},
+                                        :started {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                                                  :fhir/flags #{:SU},
+                                                  :zen/desc "When the series started"},
+                                        :laterality {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                     :fhir/flags #{:SU},
+                                                     :zen/desc "Body part laterality"},
+                                        :instance {:type zen/vector,
+                                                   :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                                           :type zen/map,
+                                                           :keys {:uid {:confirms #{hl7-fhir-r5-core.id/schema},
+                                                                        :zen/desc "DICOM SOP Instance UID"},
+                                                                  :_uid {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                                  :sopClass {:confirms #{hl7-fhir-r5-core.Coding/schema},
+                                                                             :zen/desc "DICOM class type"},
+                                                                  :number {:confirms #{hl7-fhir-r5-core.unsignedInt/schema},
+                                                                           :zen/desc "The number of this instance in the series"},
+                                                                  :_number {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                                  :title {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                                          :zen/desc "Description of instance"},
+                                                                  :_title {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                                           :require #{:sopClass
+                                                                      :uid},
+                                                           :zen/desc "A single SOP instance from the series"}},
+                                        :number {:confirms #{hl7-fhir-r5-core.unsignedInt/schema},
+                                                 :fhir/flags #{:SU},
+                                                 :zen/desc "Numeric identifier of this series"},
+                                        :uid {:confirms #{hl7-fhir-r5-core.id/schema},
+                                              :fhir/flags #{:SU},
+                                              :zen/desc "DICOM Series Instance UID for the series"},
+                                        :specimen {:type zen/vector,
+                                                   :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                       zen.fhir/Reference},
+                                                           :fhir/flags #{:SU},
+                                                           :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Specimen/schema}},
+                                                           :zen/desc "Specimen imaged"}},
+                                        :_number {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                        :modality {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                   :fhir/flags #{:SU},
+                                                   :zen/desc "The modality used for this series"},
+                                        :_numberOfInstances {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                        :_description {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                        :_started {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                        :bodySite {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                                   :fhir/flags #{:SU},
+                                                   :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.body-site/value-set,
+                                                                        :strength :example},
+                                                   :zen/desc "Body part examined"},
+                                        :_uid {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                        :endpoint {:type zen/vector,
+                                                   :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                       zen.fhir/Reference},
+                                                           :fhir/flags #{:SU},
+                                                           :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Endpoint/schema}},
+                                                           :zen/desc "Series access endpoint"}},
+                                        :numberOfInstances {:confirms #{hl7-fhir-r5-core.unsignedInt/schema},
+                                                            :fhir/flags #{:SU},
+                                                            :zen/desc "Number of Series Related Instances"},
+                                        :performer {:type zen/vector,
+                                                    :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                                            :type zen/map,
+                                                            :keys {:function {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                              :fhir/flags #{:SU},
+                                                                              :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.series-performer-function/value-set,
+                                                                                                   :strength :extensible},
+                                                                              :zen/desc "Type of performance"},
+                                                                   :actor {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                                       zen.fhir/Reference},
+                                                                           :fhir/flags #{:SU},
+                                                                           :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                                                                          hl7-fhir-r5-core.CareTeam/schema
+                                                                                                          hl7-fhir-r5-core.HealthcareService/schema
+                                                                                                          hl7-fhir-r5-core.PractitionerRole/schema
+                                                                                                          hl7-fhir-r5-core.Organization/schema
+                                                                                                          hl7-fhir-r5-core.Device/schema
+                                                                                                          hl7-fhir-r5-core.Practitioner/schema
+                                                                                                          hl7-fhir-r5-core.RelatedPerson/schema}},
+                                                                           :zen/desc "Who performed the series"}},
+                                                            :require #{:actor},
+                                                            :fhir/flags #{:SU},
+                                                            :zen/desc "Who performed the series"}}},
+                                 :require #{:uid :modality},
+                                 :fhir/flags #{:SU},
+                                 :zen/desc "Each study has one or more series of instances"}},
+                :encounter {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                        zen.fhir/Reference},
+                            :fhir/flags #{:SU},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Encounter/schema}},
+                            :zen/desc "Encounter with which this imaging study is associated"},
+                :_numberOfSeries {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :procedure {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                    :fhir/flags #{:SU},
+                                    :zen/desc "The performed procedure or code"}},
+                :modality {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                   :fhir/flags #{:SU},
+                                   :zen/desc "All of the distinct values for series' modalities"}},
+                :_numberOfInstances {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_description {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :note {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.Annotation/schema},
+                               :fhir/flags #{:SU},
+                               :zen/desc "User-defined comments"}},
+                :reason {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                 :fhir/flags #{:SU},
+                                 :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.procedure-reason/value-set,
+                                                      :strength :example},
+                                 :zen/desc "Why the study was requested / performed"}},
+                :referrer {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                       zen.fhir/Reference},
+                           :fhir/flags #{:SU},
+                           :zen.fhir/reference {:refers #{hl7-fhir-r5-core.PractitionerRole/schema
+                                                          hl7-fhir-r5-core.Practitioner/schema}},
+                           :zen/desc "Referring physician"},
+                :_started {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.imagingstudy-status/value-set,
+                                              :strength :required},
+                         :zen/desc "registered | available | cancelled | entered-in-error | unknown"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Identifiers for the whole study"}},
+                :basedOn {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                              zen.fhir/Reference},
+                                  :fhir/flags #{:SU},
+                                  :zen.fhir/reference {:refers #{hl7-fhir-r5-core.ServiceRequest/schema
+                                                                 hl7-fhir-r5-core.CarePlan/schema
+                                                                 hl7-fhir-r5-core.Task/schema
+                                                                 hl7-fhir-r5-core.Appointment/schema
+                                                                 hl7-fhir-r5-core.AppointmentResponse/schema}},
+                                  :zen/desc "Request fulfilled"}},
+                :partOf {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                             zen.fhir/Reference},
+                                 :fhir/flags #{:SU},
+                                 :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Procedure/schema}},
+                                 :zen/desc "Part of referenced event"}},
+                :location {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                       zen.fhir/Reference},
+                           :fhir/flags #{:SU},
+                           :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Location/schema}},
+                           :zen/desc "Where ImagingStudy occurred"},
+                :endpoint {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                               zen.fhir/Reference},
+                                   :fhir/flags #{:SU},
+                                   :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Endpoint/schema}},
+                                   :zen/desc "Study access endpoint"}},
+                :subject {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                      zen.fhir/Reference},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                         hl7-fhir-r5-core.Device/schema
+                                                         hl7-fhir-r5-core.Group/schema}},
+                          :zen/desc "Who or what is the subject of the study"},
+                :numberOfInstances {:confirms #{hl7-fhir-r5-core.unsignedInt/schema},
+                                    :fhir/flags #{:SU},
+                                    :zen/desc "Number of Study Related Instances"}},
+         :zen.fhir/type "ImagingStudy"}}

@@ -1,0 +1,391 @@
+{ns hl7-fhir-r5-core.RequestOrchestration,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.markdown
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.value-set.action-participant-type
+          hl7-fhir-r5-core.Age
+          hl7-fhir-r5-core.DataRequirement
+          hl7-fhir-r5-core.CodeableReference
+          hl7-fhir-r5-core.value-set.request-status
+          zen.fhir
+          hl7-fhir-r5-core.value-set.action-code
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.Group
+          hl7-fhir-r5-core.value-set.action-cardinality-behavior
+          hl7-fhir-r5-core.RequestOrchestration
+          hl7-fhir-r5-core.Annotation
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.Encounter
+          hl7-fhir-r5-core.value-set.request-intent
+          hl7-fhir-r5-core.DeviceDefinition
+          hl7-fhir-r5-core.Location
+          hl7-fhir-r5-core.value-set.action-relationship-type
+          hl7-fhir-r5-core.value-set.action-condition-kind
+          hl7-fhir-r5-core.Practitioner
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.Device
+          hl7-terminology-r5.value-set.action-participant-role
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.value-set.action-grouping-behavior
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.CareTeam
+          hl7-fhir-r5-core.Timing
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.value-set.action-selection-behavior
+          hl7-fhir-r5-core.RelatedPerson
+          hl7-fhir-r5-core.PractitionerRole
+          hl7-fhir-r5-core.Period
+          hl7-fhir-r5-core.Goal
+          hl7-fhir-r5-core.value-set.action-reason-code
+          hl7-fhir-r5-core.canonical
+          hl7-fhir-r5-core.RelatedArtifact
+          hl7-fhir-r5-core.value-set.action-precheck-behavior
+          hl7-fhir-r5-core.Duration
+          hl7-fhir-r5-core.Range
+          hl7-fhir-r5-core.value-set.request-priority
+          hl7-fhir-r5-core.value-set.action-required-behavior
+          hl7-fhir-r5-core.value-set.action-participant-function
+          hl7-fhir-r5-core.Expression
+          hl7-fhir-r5-core.id
+          hl7-fhir-r5-core.value-set.action-type
+          hl7-fhir-r5-core.uri
+          hl7-fhir-r5-core.HealthcareService
+          hl7-fhir-r5-core.Endpoint
+          hl7-fhir-r5-core.Patient},
+ action-schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
+                :zen.fhir/version "0.6.21-2",
+                :confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                :type zen/map,
+                :keys {:_groupingBehavior {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                       :description {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Short description of the action"},
+                       :definition {:fhir/polymorphic true,
+                                    :type zen/map,
+                                    :exclusive-keys #{#{:canonical
+                                                        :uri}},
+                                    :keys {:canonical {:confirms #{hl7-fhir-r5-core.canonical/schema}},
+                                           :_canonical {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                           :uri {:confirms #{hl7-fhir-r5-core.uri/schema}},
+                                           :_uri {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                    :zen/desc "Description of the activity to be performed"},
+                       :linkId {:confirms #{hl7-fhir-r5-core.string/schema},
+                                :zen/desc "Pointer to specific item from the PlanDefinition"},
+                       :_precheckBehavior {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                       :transform {:confirms #{hl7-fhir-r5-core.canonical/schema},
+                                   :zen/desc "Transform to apply the template"},
+                       :textEquivalent {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                                        :fhir/flags #{:SU},
+                                        :zen/desc "Static text equivalent of the action, used if the dynamic aspects cannot be interpreted by the receiving system"},
+                       :_prefix {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                       :_requiredBehavior {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                       :relatedAction {:type zen/vector,
+                                       :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                               :type zen/map,
+                                               :keys {:targetId {:confirms #{hl7-fhir-r5-core.id/schema},
+                                                                 :zen/desc "What action this is related to"},
+                                                      :_targetId {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                      :relationship {:confirms #{hl7-fhir-r5-core.code/schema},
+                                                                     :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.action-relationship-type/value-set,
+                                                                                          :strength :required},
+                                                                     :zen/desc "before | before-start | before-end | concurrent | concurrent-with-start | concurrent-with-end | after | after-start | after-end"},
+                                                      :_relationship {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                      :endRelationship {:confirms #{hl7-fhir-r5-core.code/schema},
+                                                                        :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.action-relationship-type/value-set,
+                                                                                             :strength :required},
+                                                                        :zen/desc "before | before-start | before-end | concurrent | concurrent-with-start | concurrent-with-end | after | after-start | after-end"},
+                                                      :_endRelationship {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                      :offset {:fhir/polymorphic true,
+                                                               :type zen/map,
+                                                               :exclusive-keys #{#{:Range
+                                                                                   :Duration}},
+                                                               :keys {:Duration {:confirms #{hl7-fhir-r5-core.Duration/schema}},
+                                                                      :Range {:confirms #{hl7-fhir-r5-core.Range/schema}}},
+                                                               :zen/desc "Time offset for the relationship"}},
+                                               :require #{:targetId
+                                                          :relationship},
+                                               :zen/desc "Relationship to another action"}},
+                       :_priority {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                       :goal {:type zen/vector,
+                              :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                  zen.fhir/Reference},
+                                      :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Goal/schema}},
+                                      :zen/desc "What goals"}},
+                       :type {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                              :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.action-type/value-set,
+                                                   :strength :extensible},
+                              :zen/desc "create | update | remove | fire-event"},
+                       :_linkId {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                       :participant {:type zen/vector,
+                                     :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                             :type zen/map,
+                                             :keys {:type {:confirms #{hl7-fhir-r5-core.code/schema},
+                                                           :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.action-participant-type/value-set,
+                                                                                :strength :required},
+                                                           :zen/desc "careteam | device | group | healthcareservice | location | organization | patient | practitioner | practitionerrole | relatedperson"},
+                                                    :_type {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                    :typeCanonical {:confirms #{hl7-fhir-r5-core.canonical/schema},
+                                                                    :zen/desc "Who or what can participate"},
+                                                    :_typeCanonical {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                    :typeReference {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                                zen.fhir/Reference},
+                                                                    :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                                                                   hl7-fhir-r5-core.CareTeam/schema
+                                                                                                   hl7-fhir-r5-core.HealthcareService/schema
+                                                                                                   hl7-fhir-r5-core.PractitionerRole/schema
+                                                                                                   hl7-fhir-r5-core.Organization/schema
+                                                                                                   hl7-fhir-r5-core.Location/schema
+                                                                                                   hl7-fhir-r5-core.Endpoint/schema
+                                                                                                   hl7-fhir-r5-core.Device/schema
+                                                                                                   hl7-fhir-r5-core.Practitioner/schema
+                                                                                                   hl7-fhir-r5-core.Group/schema
+                                                                                                   hl7-fhir-r5-core.RelatedPerson/schema
+                                                                                                   hl7-fhir-r5-core.DeviceDefinition/schema}},
+                                                                    :zen/desc "Who or what can participate"},
+                                                    :role {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                           :zen.fhir/value-set {:symbol hl7-terminology-r5.value-set.action-participant-role/value-set,
+                                                                                :strength :example},
+                                                           :zen/desc "E.g. Nurse, Surgeon, Parent, etc"},
+                                                    :function {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                               :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.action-participant-function/value-set,
+                                                                                    :strength :example},
+                                                               :zen/desc "E.g. Author, Reviewer, Witness, etc"},
+                                                    :actor {:fhir/polymorphic true,
+                                                            :type zen/map,
+                                                            :exclusive-keys #{#{:canonical
+                                                                                :Reference}},
+                                                            :keys {:canonical {:confirms #{hl7-fhir-r5-core.canonical/schema}},
+                                                                   :_canonical {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                                   :Reference {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                                           zen.fhir/Reference},
+                                                                               :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                                                                              hl7-fhir-r5-core.CareTeam/schema
+                                                                                                              hl7-fhir-r5-core.HealthcareService/schema
+                                                                                                              hl7-fhir-r5-core.PractitionerRole/schema
+                                                                                                              hl7-fhir-r5-core.Organization/schema
+                                                                                                              hl7-fhir-r5-core.Location/schema
+                                                                                                              hl7-fhir-r5-core.Endpoint/schema
+                                                                                                              hl7-fhir-r5-core.Device/schema
+                                                                                                              hl7-fhir-r5-core.Practitioner/schema
+                                                                                                              hl7-fhir-r5-core.Group/schema
+                                                                                                              hl7-fhir-r5-core.RelatedPerson/schema
+                                                                                                              hl7-fhir-r5-core.DeviceDefinition/schema}}}},
+                                                            :zen/desc "Who/what is participating?"}},
+                                             :zen/desc "Who should perform the action"}},
+                       :output {:type zen/vector,
+                                :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                        :type zen/map,
+                                        :keys {:title {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                       :zen/desc "User-visible title"},
+                                               :_title {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                               :requirement {:confirms #{hl7-fhir-r5-core.DataRequirement/schema},
+                                                             :zen/desc "What data is provided"},
+                                               :relatedData {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                             :zen/desc "What data is provided"},
+                                               :_relatedData {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                        :zen/desc "Output data definition"}},
+                       :title {:confirms #{hl7-fhir-r5-core.string/schema},
+                               :zen/desc "User-visible title"},
+                       :_description {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                       :documentation {:type zen/vector,
+                                       :every {:confirms #{hl7-fhir-r5-core.RelatedArtifact/schema},
+                                               :zen/desc "Supporting documentation for the intended performer of the action"}},
+                       :prefix {:confirms #{hl7-fhir-r5-core.string/schema},
+                                :zen/desc "User-visible prefix for the action (e.g. 1. or A.)"},
+                       :selectionBehavior {:confirms #{hl7-fhir-r5-core.code/schema},
+                                           :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.action-selection-behavior/value-set,
+                                                                :strength :required},
+                                           :zen/desc "any | all | all-or-none | exactly-one | at-most-one | one-or-more"},
+                       :priority {:confirms #{hl7-fhir-r5-core.code/schema},
+                                  :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.request-priority/value-set,
+                                                       :strength :required},
+                                  :zen/desc "routine | urgent | asap | stat"},
+                       :_transform {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                       :requiredBehavior {:confirms #{hl7-fhir-r5-core.code/schema},
+                                          :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.action-required-behavior/value-set,
+                                                               :strength :required},
+                                          :zen/desc "must | could | must-unless-documented"},
+                       :condition {:type zen/vector,
+                                   :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                           :type zen/map,
+                                           :keys {:kind {:confirms #{hl7-fhir-r5-core.code/schema},
+                                                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.action-condition-kind/value-set,
+                                                                              :strength :required},
+                                                         :zen/desc "applicability | start | stop"},
+                                                  :_kind {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                  :expression {:confirms #{hl7-fhir-r5-core.Expression/schema},
+                                                               :zen/desc "Boolean-valued expression"}},
+                                           :require #{:kind},
+                                           :zen/desc "Whether or not the action is applicable"}},
+                       :resource {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                              zen.fhir/Reference},
+                                  :zen.fhir/reference {:refers #{}},
+                                  :zen/desc "The target of the action"},
+                       :timing {:fhir/polymorphic true,
+                                :type zen/map,
+                                :exclusive-keys #{#{:dateTime
+                                                    :Range
+                                                    :Period
+                                                    :Timing
+                                                    :Duration
+                                                    :Age}},
+                                :keys {:dateTime {:confirms #{hl7-fhir-r5-core.dateTime/schema}},
+                                       :_dateTime {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                       :Age {:confirms #{hl7-fhir-r5-core.Age/schema}},
+                                       :Period {:confirms #{hl7-fhir-r5-core.Period/schema}},
+                                       :Duration {:confirms #{hl7-fhir-r5-core.Duration/schema}},
+                                       :Range {:confirms #{hl7-fhir-r5-core.Range/schema}},
+                                       :Timing {:confirms #{hl7-fhir-r5-core.Timing/schema}}},
+                                :zen/desc "When the action should take place"},
+                       :groupingBehavior {:confirms #{hl7-fhir-r5-core.code/schema},
+                                          :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.action-grouping-behavior/value-set,
+                                                               :strength :required},
+                                          :zen/desc "visual-group | logical-group | sentence-group"},
+                       :dynamicValue {:type zen/vector,
+                                      :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                              :type zen/map,
+                                              :keys {:path {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                            :zen/desc "The path to the element to be set dynamically"},
+                                                     :_path {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                     :expression {:confirms #{hl7-fhir-r5-core.Expression/schema},
+                                                                  :zen/desc "An expression that provides the dynamic value for the customization"}},
+                                              :zen/desc "Dynamic aspects of the definition"}},
+                       :code {:type zen/vector,
+                              :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                      :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.action-code/value-set,
+                                                           :strength :example},
+                                      :zen/desc "Code representing the meaning of the action or sub-actions"}},
+                       :action {:type zen/vector,
+                                :every {:confirms #{hl7-fhir-r5-core.RequestOrchestration/action-schema},
+                                        :zen/desc "Sub action"}},
+                       :_selectionBehavior {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                       :precheckBehavior {:confirms #{hl7-fhir-r5-core.code/schema},
+                                          :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.action-precheck-behavior/value-set,
+                                                               :strength :required},
+                                          :zen/desc "yes | no"},
+                       :_title {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                       :input {:type zen/vector,
+                               :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                       :type zen/map,
+                                       :keys {:title {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                      :zen/desc "User-visible title"},
+                                              :_title {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                              :requirement {:confirms #{hl7-fhir-r5-core.DataRequirement/schema},
+                                                            :zen/desc "What data is provided"},
+                                              :relatedData {:confirms #{hl7-fhir-r5-core.id/schema},
+                                                            :zen/desc "What data is provided"},
+                                              :_relatedData {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                       :zen/desc "Input data requirements"}},
+                       :_cardinalityBehavior {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                       :location {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                  :zen/desc "Where it should happen"},
+                       :_textEquivalent {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                       :cardinalityBehavior {:confirms #{hl7-fhir-r5-core.code/schema},
+                                             :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.action-cardinality-behavior/value-set,
+                                                                  :strength :required},
+                                             :zen/desc "single | multiple"}},
+                :zen/desc "Proposed actions, if any"},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/RequestOrchestration",
+         :require #{:status :intent},
+         :type zen/map,
+         :zen/desc "A set of related requests that can be used to capture intended activities that have inter-dependencies such as \"give this medication after that one\".",
+         :keys {:instantiatesCanonical {:type zen/vector,
+                                        :every {:confirms #{hl7-fhir-r5-core.canonical/schema},
+                                                :fhir/flags #{:SU},
+                                                :zen/desc "Instantiates FHIR protocol or definition"}},
+                :instantiatesUri {:type zen/vector,
+                                  :every {:confirms #{hl7-fhir-r5-core.uri/schema},
+                                          :fhir/flags #{:SU},
+                                          :zen/desc "Instantiates external protocol or definition"}},
+                :_authoredOn {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :encounter {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                        zen.fhir/Reference},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Encounter/schema}},
+                            :zen/desc "Created as part of"},
+                :_priority {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :goal {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                           zen.fhir/Reference},
+                               :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Goal/schema}},
+                               :zen/desc "What goals"}},
+                :authoredOn {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                             :zen/desc "When the request orchestration was authored"},
+                :note {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.Annotation/schema},
+                               :zen/desc "Additional notes about the response"}},
+                :author {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                     zen.fhir/Reference},
+                         :zen.fhir/reference {:refers #{hl7-fhir-r5-core.PractitionerRole/schema
+                                                        hl7-fhir-r5-core.Device/schema
+                                                        hl7-fhir-r5-core.Practitioner/schema}},
+                         :zen/desc "Device or practitioner that authored the request orchestration"},
+                :_intent {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :reason {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                 :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.action-reason-code/value-set,
+                                                      :strength :example},
+                                 :zen/desc "Why the request orchestration is needed"}},
+                :priority {:confirms #{hl7-fhir-r5-core.code/schema},
+                           :fhir/flags #{:SU},
+                           :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.request-priority/value-set,
+                                                :strength :required},
+                           :zen/desc "routine | urgent | asap | stat"},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.request-status/value-set,
+                                              :strength :required},
+                         :zen/desc "draft | active | on-hold | revoked | completed | entered-in-error | unknown"},
+                :groupIdentifier {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                  :fhir/flags #{:SU},
+                                  :zen/desc "Composite request this is part of"},
+                :code {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                       :fhir/flags #{:SU},
+                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.action-code/value-set,
+                                            :strength :example},
+                       :zen/desc "What's being requested/ordered"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Business identifier"}},
+                :intent {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.request-intent/value-set,
+                                              :strength :required},
+                         :zen/desc "proposal | plan | directive | order | original-order | reflex-order | filler-order | instance-order | option"},
+                :action {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.RequestOrchestration/action-schema}}},
+                :replaces {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                               zen.fhir/Reference},
+                                   :zen.fhir/reference {:refers #{}},
+                                   :zen/desc "Request(s) replaced by this request"}},
+                :basedOn {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                              zen.fhir/Reference},
+                                  :zen.fhir/reference {:refers #{}},
+                                  :zen/desc "Fulfills plan, proposal, or order"}},
+                :_instantiatesCanonical {:type zen/vector,
+                                         :every {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                :subject {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                      zen.fhir/Reference},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                         hl7-fhir-r5-core.CareTeam/schema
+                                                         hl7-fhir-r5-core.HealthcareService/schema
+                                                         hl7-fhir-r5-core.PractitionerRole/schema
+                                                         hl7-fhir-r5-core.Organization/schema
+                                                         hl7-fhir-r5-core.Location/schema
+                                                         hl7-fhir-r5-core.Device/schema
+                                                         hl7-fhir-r5-core.Practitioner/schema
+                                                         hl7-fhir-r5-core.Group/schema
+                                                         hl7-fhir-r5-core.RelatedPerson/schema}},
+                          :zen/desc "Who the request orchestration is about"},
+                :_instantiatesUri {:type zen/vector,
+                                   :every {:confirms #{hl7-fhir-r5-core.Element/schema}}}},
+         :zen.fhir/type "RequestOrchestration"}}

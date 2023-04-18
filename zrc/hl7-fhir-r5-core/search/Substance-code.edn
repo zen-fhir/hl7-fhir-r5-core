@@ -1,0 +1,15 @@
+{ns hl7-fhir-r5-core.search.Substance-code,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Substance-code",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Substance-code",
+         :fhir/type "token",
+         :name "code",
+         :expr {:Substance {:knife [["code" "concept"]
+                                    ["ingredient"
+                                     "substance"
+                                     "ofType(CodeableConcept"]],
+                            :jsonpath ["$.\"code\".\"concept\"[*]"
+                                       "$.\"ingredient\".\"substance\".\"ofType(CodeableConcept\"[*]"],
+                            :data-types #{},
+                            :template :token}}}}

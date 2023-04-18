@@ -1,0 +1,111 @@
+{ns hl7-fhir-r5-core.CareTeam,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.value-set.care-team-category
+          hl7-fhir-r5-core.CodeableReference
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.Group
+          hl7-fhir-r5-core.Annotation
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.value-set.clinical-findings
+          hl7-fhir-r5-core.Practitioner
+          hl7-fhir-r5-core.value-set.care-team-status
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.CareTeam
+          hl7-fhir-r5-core.Timing
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.ContactPoint
+          hl7-fhir-r5-core.RelatedPerson
+          hl7-fhir-r5-core.PractitionerRole
+          hl7-fhir-r5-core.Period
+          hl7-fhir-r5-core.value-set.participant-role
+          hl7-fhir-r5-core.Patient},
+ schema {:zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen/desc "The Care Team includes all the people and organizations who plan to participate in the coordination and delivery of care.",
+         :zen.fhir/type "CareTeam",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/CareTeam",
+         :zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :type zen/map,
+         :keys {:category {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                   :fhir/flags #{:SU},
+                                   :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.care-team-category/value-set,
+                                                        :strength :example},
+                                   :zen/desc "Type of team"}},
+                :managingOrganization {:type zen/vector,
+                                       :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                           zen.fhir/Reference},
+                                               :fhir/flags #{:SU},
+                                               :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Organization/schema}},
+                                               :zen/desc "Organization responsible for the care team"}},
+                :name {:confirms #{hl7-fhir-r5-core.string/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "Name of the team, such as crisis assessment team"},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :participant {:type zen/vector,
+                              :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                      :type zen/map,
+                                      :keys {:role {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                    :fhir/flags #{:SU},
+                                                    :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.participant-role/value-set,
+                                                                         :strength :example},
+                                                    :zen/desc "Type of involvement"},
+                                             :member {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                  zen.fhir/Reference},
+                                                      :fhir/flags #{:SU},
+                                                      :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                                                     hl7-fhir-r5-core.CareTeam/schema
+                                                                                     hl7-fhir-r5-core.PractitionerRole/schema
+                                                                                     hl7-fhir-r5-core.Organization/schema
+                                                                                     hl7-fhir-r5-core.Practitioner/schema
+                                                                                     hl7-fhir-r5-core.RelatedPerson/schema}},
+                                                      :zen/desc "Who is involved"},
+                                             :onBehalfOf {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                      zen.fhir/Reference},
+                                                          :fhir/flags #{:SU},
+                                                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Organization/schema}},
+                                                          :zen/desc "Organization of the practitioner"},
+                                             :coverage {:fhir/polymorphic true,
+                                                        :type zen/map,
+                                                        :exclusive-keys #{#{:Period
+                                                                            :Timing}},
+                                                        :keys {:Period {:confirms #{hl7-fhir-r5-core.Period/schema}},
+                                                               :Timing {:confirms #{hl7-fhir-r5-core.Timing/schema}}},
+                                                        :zen/desc "When the member is generally available within this care team"}},
+                                      :zen/desc "Members of the team"}},
+                :note {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.Annotation/schema},
+                               :zen/desc "Comments made about the CareTeam"}},
+                :reason {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                 :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.clinical-findings/value-set,
+                                                      :strength :example},
+                                 :zen/desc "Why the care team exists"}},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.care-team-status/value-set,
+                                              :strength :required},
+                         :zen/desc "proposed | active | suspended | inactive | entered-in-error"},
+                :_name {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "External Ids for this team"}},
+                :telecom {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.ContactPoint/schema},
+                                  :zen/desc "A contact detail for the care team (that applies to all members)"}},
+                :period {:confirms #{hl7-fhir-r5-core.Period/schema},
+                         :fhir/flags #{:SU},
+                         :zen/desc "Time period team covers"},
+                :subject {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                      zen.fhir/Reference},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                         hl7-fhir-r5-core.Group/schema}},
+                          :zen/desc "Who care team is for"}}}}

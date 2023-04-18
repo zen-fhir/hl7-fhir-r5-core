@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.SubstanceDefinition-identifier,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "SubstanceDefinition-identifier",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/SubstanceDefinition-identifier",
+         :fhir/type "token",
+         :name "identifier",
+         :expr {:SubstanceDefinition {:knife [["identifier"]],
+                                      :jsonpath ["$.\"identifier\"[*]"],
+                                      :data-types #{{:type "Identifier",
+                                                     :polymorphic? false}},
+                                      :template :token}}}}

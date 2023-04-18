@@ -1,0 +1,13 @@
+{ns hl7-fhir-r5-core.search.SpecimenDefinition-is-derived,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "SpecimenDefinition-is-derived",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/SpecimenDefinition-is-derived",
+         :fhir/type "token",
+         :name "is-derived",
+         :expr {:SpecimenDefinition {:knife [["typeTested"
+                                              "isDerived"]],
+                                     :jsonpath ["$.\"typeTested\".\"isDerived\"[*]"],
+                                     :data-types #{{:type "boolean",
+                                                    :polymorphic? false}},
+                                     :template :token}}}}

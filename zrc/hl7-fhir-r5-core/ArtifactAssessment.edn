@@ -1,0 +1,144 @@
+{ns hl7-fhir-r5-core.ArtifactAssessment,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.markdown
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.boolean
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.value-set.certainty-type
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.ArtifactAssessment
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.Practitioner
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.Device
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.date
+          hl7-fhir-r5-core.value-set.artifactassessment-workflow-status
+          hl7-fhir-r5-core.Citation
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.PractitionerRole
+          hl7-fhir-r5-core.canonical
+          hl7-fhir-r5-core.RelatedArtifact
+          hl7-fhir-r5-core.value-set.artifactassessment-information-type
+          hl7-fhir-r5-core.Quantity
+          hl7-fhir-r5-core.value-set.artifactassessment-disposition
+          hl7-fhir-r5-core.uri
+          hl7-fhir-r5-core.value-set.certainty-rating
+          hl7-fhir-r5-core.Patient},
+ content-schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
+                 :zen.fhir/version "0.6.21-2",
+                 :confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                 :type zen/map,
+                 :keys {:path {:type zen/vector,
+                               :every {:confirms #{hl7-fhir-r5-core.uri/schema},
+                                       :zen/desc "What the comment is directed to"}},
+                        :_informationType {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                        :_path {:type zen/vector,
+                                :every {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                        :classifier {:type zen/vector,
+                                     :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                             :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.certainty-rating/value-set,
+                                                                  :strength :example},
+                                             :zen/desc "Rating, classifier, or assessment"}},
+                        :type {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                               :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.certainty-type/value-set,
+                                                    :strength :example},
+                               :zen/desc "What type of content"},
+                        :freeToShare {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                                      :zen/desc "Acceptable to publicly share the resource content"},
+                        :component {:type zen/vector,
+                                    :every {:confirms #{hl7-fhir-r5-core.ArtifactAssessment/content-schema},
+                                            :zen/desc "Contained content"}},
+                        :informationType {:confirms #{hl7-fhir-r5-core.code/schema},
+                                          :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.artifactassessment-information-type/value-set,
+                                                               :strength :required},
+                                          :zen/desc "comment | classifier | rating | container | response | change-request"},
+                        :author {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                             zen.fhir/Reference},
+                                 :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                                hl7-fhir-r5-core.PractitionerRole/schema
+                                                                hl7-fhir-r5-core.Organization/schema
+                                                                hl7-fhir-r5-core.Device/schema
+                                                                hl7-fhir-r5-core.Practitioner/schema}},
+                                 :zen/desc "Who authored the content"},
+                        :summary {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                                  :zen/desc "Brief summary of the content"},
+                        :_freeToShare {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                        :_summary {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                        :quantity {:confirms #{hl7-fhir-r5-core.Quantity/schema},
+                                   :zen/desc "Quantitative rating"},
+                        :relatedArtifact {:type zen/vector,
+                                          :every {:confirms #{hl7-fhir-r5-core.RelatedArtifact/schema},
+                                                  :zen/desc "Additional information"}}},
+                 :zen/desc "Comment, classifier, or rating content"},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/ArtifactAssessment",
+         :require #{:artifact},
+         :type zen/map,
+         :zen/desc "This Resource provides one or more comments, classifiers or ratings about a Resource and supports attribution and rights management metadata for the added content.",
+         :keys {:date {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "Date last changed"},
+                :approvalDate {:confirms #{hl7-fhir-r5-core.date/schema},
+                               :zen/desc "When the artifact assessment was approved by publisher"},
+                :_disposition {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :content {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.ArtifactAssessment/content-schema}}},
+                :_date {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :citeAs {:fhir/polymorphic true,
+                         :type zen/map,
+                         :exclusive-keys #{#{:markdown :Reference}},
+                         :keys {:Reference {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                        zen.fhir/Reference},
+                                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Citation/schema}}},
+                                :markdown {:confirms #{hl7-fhir-r5-core.markdown/schema}},
+                                :_markdown {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                         :zen/desc "How to cite the comment or rating"},
+                :copyright {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                            :zen/desc "Use and/or publishing restrictions"},
+                :_approvalDate {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :workflowStatus {:confirms #{hl7-fhir-r5-core.code/schema},
+                                 :fhir/flags #{:SU},
+                                 :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.artifactassessment-workflow-status/value-set,
+                                                      :strength :required},
+                                 :zen/desc "submitted | triaged | waiting-for-input | resolved-no-change | resolved-change-required | deferred | duplicate | applied | published | entered-in-error"},
+                :disposition {:confirms #{hl7-fhir-r5-core.code/schema},
+                              :fhir/flags #{:SU},
+                              :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.artifactassessment-disposition/value-set,
+                                                   :strength :required},
+                              :zen/desc "unresolved | not-persuasive | persuasive | persuasive-with-modification | not-persuasive-with-modification"},
+                :title {:confirms #{hl7-fhir-r5-core.string/schema},
+                        :fhir/flags #{:SU},
+                        :zen/desc "A short title for the assessment for use in displaying and selecting"},
+                :_lastReviewDate {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_workflowStatus {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Additional identifier for the artifact assessment"}},
+                :lastReviewDate {:confirms #{hl7-fhir-r5-core.date/schema},
+                                 :fhir/flags #{:SU},
+                                 :zen/desc "When the artifact assessment was last reviewed by the publisher"},
+                :_copyright {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_title {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :artifact {:fhir/polymorphic true,
+                           :type zen/map,
+                           :exclusive-keys #{#{:canonical
+                                               :uri
+                                               :Reference}},
+                           :keys {:Reference {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                          zen.fhir/Reference},
+                                              :zen.fhir/reference {:refers #{}}},
+                                  :canonical {:confirms #{hl7-fhir-r5-core.canonical/schema}},
+                                  :_canonical {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                  :uri {:confirms #{hl7-fhir-r5-core.uri/schema}},
+                                  :_uri {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                           :fhir/flags #{:SU},
+                           :zen/desc "The artifact assessed, commented upon or rated"}},
+         :zen.fhir/type "ArtifactAssessment"}}

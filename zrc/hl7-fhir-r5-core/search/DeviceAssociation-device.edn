@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.DeviceAssociation-device,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "DeviceAssociation-device",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/DeviceAssociation-device",
+         :fhir/type "reference",
+         :name "device",
+         :expr {:DeviceAssociation {:knife [["device"]],
+                                    :jsonpath ["$.\"device\"[*]"],
+                                    :data-types #{{:type "Reference",
+                                                   :polymorphic? false}},
+                                    :template :reference}}}}

@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Goal-target-measure,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Goal-target-measure",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Goal-target-measure",
+         :fhir/type "token",
+         :name "target-measure",
+         :expr {:Goal {:knife [["target" "measure"]],
+                       :jsonpath ["$.\"target\".\"measure\"[*]"],
+                       :data-types #{{:type "CodeableConcept",
+                                      :polymorphic? false}},
+                       :template :token}}}}

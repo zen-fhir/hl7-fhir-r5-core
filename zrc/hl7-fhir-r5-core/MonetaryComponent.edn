@@ -1,0 +1,33 @@
+{ns hl7-fhir-r5-core.MonetaryComponent,
+ import #{hl7-fhir-r5-core.decimal
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.value-set.price-component-type
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.Money
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.DataType},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DataType/schema},
+         :zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/MonetaryComponent",
+         :require #{:type},
+         :type zen/map,
+         :zen/desc "MonetaryComponent Type: Availability data for an {item}.",
+         :keys {:type {:confirms #{hl7-fhir-r5-core.code/schema},
+                       :fhir/flags #{:SU},
+                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.price-component-type/value-set,
+                                            :strength :required},
+                       :zen/desc "base | surcharge | deduction | discount | tax | informational"},
+                :_type {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :code {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "Codes may be used to differentiate between kinds of taxes, surcharges, discounts etc."},
+                :factor {:confirms #{hl7-fhir-r5-core.decimal/schema},
+                         :fhir/flags #{:SU},
+                         :zen/desc "Factor used for calculating this component"},
+                :_factor {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :amount {:confirms #{hl7-fhir-r5-core.Money/schema},
+                         :fhir/flags #{:SU},
+                         :zen/desc "Explicit value amount to be used"}},
+         :zen.fhir/type "MonetaryComponent"}}

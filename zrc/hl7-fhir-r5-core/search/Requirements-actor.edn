@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Requirements-actor,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Requirements-actor",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Requirements-actor",
+         :fhir/type "reference",
+         :name "actor",
+         :expr {:Requirements {:knife [["actor"]],
+                               :jsonpath ["$.\"actor\"[*]"],
+                               :data-types #{{:type "canonical",
+                                              :polymorphic? false}},
+                               :template :reference}}}}

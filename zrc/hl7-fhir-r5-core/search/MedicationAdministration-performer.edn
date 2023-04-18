@@ -1,0 +1,13 @@
+{ns hl7-fhir-r5-core.search.MedicationAdministration-performer,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "MedicationAdministration-performer",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/MedicationAdministration-performer",
+         :fhir/type "reference",
+         :name "performer",
+         :expr {:MedicationAdministration {:knife [["performer"
+                                                    "actor"
+                                                    "reference"]],
+                                           :jsonpath ["$.\"performer\".\"actor\".\"reference\"[*]"],
+                                           :data-types #{},
+                                           :template :reference}}}}

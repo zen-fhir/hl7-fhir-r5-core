@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.ResearchStudy-condition,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "ResearchStudy-condition",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/ResearchStudy-condition",
+         :fhir/type "token",
+         :name "condition",
+         :expr {:ResearchStudy {:knife [["condition"]],
+                                :jsonpath ["$.\"condition\"[*]"],
+                                :data-types #{{:type "CodeableConcept",
+                                               :polymorphic? false}},
+                                :template :token}}}}

@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.DeviceAssociation-status,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "DeviceAssociation-status",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/DeviceAssociation-status",
+         :fhir/type "token",
+         :name "status",
+         :expr {:DeviceAssociation {:knife [["status"]],
+                                    :jsonpath ["$.\"status\"[*]"],
+                                    :data-types #{{:type "CodeableConcept",
+                                                   :polymorphic? false}},
+                                    :template :token}}}}

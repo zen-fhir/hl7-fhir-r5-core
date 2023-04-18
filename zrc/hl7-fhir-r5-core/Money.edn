@@ -1,0 +1,24 @@
+{ns hl7-fhir-r5-core.Money,
+ import #{hl7-fhir-r5-core.decimal
+          zen.fhir
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.value-set.currencies
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.DataType},
+ schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen/desc "Money Type: An amount of economic utility in some recognized currency.",
+         :zen.fhir/type "Money",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Money",
+         :zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DataType/schema},
+         :type zen/map,
+         :keys {:value {:confirms #{hl7-fhir-r5-core.decimal/schema},
+                        :fhir/flags #{:SU},
+                        :zen/desc "Numerical value (with implicit precision)"},
+                :_value {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :currency {:confirms #{hl7-fhir-r5-core.code/schema},
+                           :fhir/flags #{:SU},
+                           :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.currencies/value-set,
+                                                :strength :required},
+                           :zen/desc "ISO 4217 Currency Code"},
+                :_currency {:confirms #{hl7-fhir-r5-core.Element/schema}}}}}

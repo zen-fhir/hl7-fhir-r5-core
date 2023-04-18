@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.ResearchStudy-study-design,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "ResearchStudy-study-design",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/ResearchStudy-study-design",
+         :fhir/type "token",
+         :name "study-design",
+         :expr {:ResearchStudy {:knife [["studyDesign"]],
+                                :jsonpath ["$.\"studyDesign\"[*]"],
+                                :data-types #{{:type "CodeableConcept",
+                                               :polymorphic? false}},
+                                :template :token}}}}

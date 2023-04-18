@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.ManufacturedItemDefinition-name,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "ManufacturedItemDefinition-name",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/ManufacturedItemDefinition-name",
+         :fhir/type "token",
+         :name "name",
+         :expr {:ManufacturedItemDefinition {:knife [["name"]],
+                                             :jsonpath ["$.\"name\"[*]"],
+                                             :data-types #{{:type "string",
+                                                            :polymorphic? false}},
+                                             :template :token}}}}

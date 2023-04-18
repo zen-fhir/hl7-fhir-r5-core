@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Practitioner-death-date,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Practitioner-death-date",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Practitioner-death-date",
+         :fhir/type "date",
+         :name "death-date",
+         :expr {:Practitioner {:knife [["deceased" "ofType(dateTime"]],
+                               :jsonpath ["$.\"deceased\".\"ofType(dateTime\"[*]"],
+                               :data-types #{},
+                               :template :date,
+                               :sql {:where [:or]}}}}}

@@ -1,0 +1,52 @@
+{ns hl7-fhir-r5-core.UsageContext,
+ import #{hl7-fhir-r5-core.PlanDefinition
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.Group
+          hl7-fhir-r5-core.InsurancePlan
+          hl7-fhir-r5-core.Location
+          hl7-fhir-r5-core.value-set.use-context
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.ResearchStudy
+          hl7-fhir-r5-core.Coding
+          hl7-fhir-r5-core.Range
+          hl7-fhir-r5-core.Quantity
+          hl7-fhir-r5-core.DataType
+          hl7-terminology-r5.value-set.usage-context-type
+          hl7-fhir-r5-core.HealthcareService},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DataType/schema},
+         :zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/UsageContext",
+         :require #{:value :code},
+         :type zen/map,
+         :zen/desc "UsageContext Type: Specifies clinical/business/etc. metadata that can be used to retrieve, index and/or categorize an artifact. This metadata can either be specific to the applicable population (e.g., age category, DRG) or the specific context of care (e.g., venue, care setting, provider of care).",
+         :keys {:code {:confirms #{hl7-fhir-r5-core.Coding/schema},
+                       :fhir/flags #{:SU},
+                       :zen.fhir/value-set {:symbol hl7-terminology-r5.value-set.usage-context-type/value-set,
+                                            :strength :extensible},
+                       :zen/desc "Type of context being specified"},
+                :value {:fhir/polymorphic true,
+                        :type zen/map,
+                        :exclusive-keys #{#{:Range
+                                            :CodeableConcept
+                                            :Quantity
+                                            :Reference}},
+                        :keys {:CodeableConcept {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema}},
+                               :Quantity {:confirms #{hl7-fhir-r5-core.Quantity/schema}},
+                               :Range {:confirms #{hl7-fhir-r5-core.Range/schema}},
+                               :Reference {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                       zen.fhir/Reference},
+                                           :zen.fhir/reference {:refers #{hl7-fhir-r5-core.HealthcareService/schema
+                                                                          hl7-fhir-r5-core.Organization/schema
+                                                                          hl7-fhir-r5-core.Location/schema
+                                                                          hl7-fhir-r5-core.ResearchStudy/schema
+                                                                          hl7-fhir-r5-core.PlanDefinition/schema
+                                                                          hl7-fhir-r5-core.Group/schema
+                                                                          hl7-fhir-r5-core.InsurancePlan/schema}}}},
+                        :fhir/flags #{:SU},
+                        :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.use-context/value-set,
+                                             :strength :example},
+                        :zen/desc "Value that defines the context"}},
+         :zen.fhir/type "UsageContext"}}

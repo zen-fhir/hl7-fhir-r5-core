@@ -1,0 +1,18 @@
+{ns hl7-fhir-r5-core.value-set.signature-type,
+ import #{zen.fhir},
+ value-set {:zen/tags #{zen.fhir/value-set},
+            :zen/desc "The Digital Signature Purposes, an indication of the reason an entity signs a document. This is included in the signed information and can be used when determining accountability for various actions concerning the document. Examples include: author, transcriptionist/recorder, and witness.",
+            :zen.fhir/version "0.6.21-2",
+            :fhir/code-systems #{{:fhir/url "urn:iso-astm:E1762-95:2013",
+                                  :zen.fhir/content :bundled}
+                                 {:fhir/url "http://uri.etsi.org/01903/v1.2.2",
+                                  :zen.fhir/content :bundled}},
+            :uri "http://hl7.org/fhir/ValueSet/signature-type",
+            :version "5.0.0",
+            :ftr {:module "hl7-fhir-r5-core",
+                  :source-url "https://storage.googleapis.com",
+                  :source-type :cloud-storage,
+                  :ftr-path "ftr",
+                  :tag "init",
+                  :validation-index {:type :nippy,
+                                     :file "index.nippy"}}}}

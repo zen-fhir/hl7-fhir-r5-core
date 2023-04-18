@@ -1,0 +1,14 @@
+{ns hl7-fhir-r5-core.search.Composition-section-text,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Composition-section-text",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Composition-section-text",
+         :fhir/type "special",
+         :name "section-text",
+         :expr {:Composition {:knife [["section" "text"]
+                                      ["section" "section" "text"]],
+                              :jsonpath ["$.\"section\".\"text\"[*]"
+                                         "$.\"section\".\"section\".\"text\"[*]"],
+                              :data-types #{{:type "Narrative",
+                                             :polymorphic? false}},
+                              :template :special}}}}

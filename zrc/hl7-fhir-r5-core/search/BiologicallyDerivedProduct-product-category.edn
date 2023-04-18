@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.BiologicallyDerivedProduct-product-category,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "BiologicallyDerivedProduct-product-category",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/BiologicallyDerivedProduct-product-category",
+         :fhir/type "token",
+         :name "product-category",
+         :expr {:BiologicallyDerivedProduct {:knife [["productCategory"]],
+                                             :jsonpath ["$.\"productCategory\"[*]"],
+                                             :data-types #{{:type "Coding",
+                                                            :polymorphic? false}},
+                                             :template :token}}}}

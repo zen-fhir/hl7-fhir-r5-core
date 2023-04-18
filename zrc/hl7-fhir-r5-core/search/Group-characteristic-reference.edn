@@ -1,0 +1,13 @@
+{ns hl7-fhir-r5-core.search.Group-characteristic-reference,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Group-characteristic-reference",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Group-characteristic-reference",
+         :fhir/type "reference",
+         :name "characteristic-reference",
+         :expr {:Group {:knife [["characteristic"
+                                 "value"
+                                 "ofType(Reference"]],
+                        :jsonpath ["$.\"characteristic\".\"value\".\"ofType(Reference\"[*]"],
+                        :data-types #{},
+                        :template :reference}}}}

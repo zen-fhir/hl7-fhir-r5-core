@@ -1,0 +1,17 @@
+{ns hl7-fhir-r5-core.search.MedicinalProductDefinition-characteristic,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "MedicinalProductDefinition-characteristic",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/MedicinalProductDefinition-characteristic",
+         :fhir/type "token",
+         :name "characteristic",
+         :expr {:MedicinalProductDefinition {:knife [["characteristic"
+                                                      "value"
+                                                      "ofType(Quantity"]
+                                                     ["characteristic"
+                                                      "value"
+                                                      "ofType(CodeableConcept"]],
+                                             :jsonpath ["$.\"characteristic\".\"value\".\"ofType(Quantity\"[*]"
+                                                        "$.\"characteristic\".\"value\".\"ofType(CodeableConcept\"[*]"],
+                                             :data-types #{},
+                                             :template :token}}}}

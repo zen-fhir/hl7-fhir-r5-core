@@ -1,0 +1,313 @@
+{ns hl7-fhir-r5-core.ServiceRequest,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.value-set.procedure-reason
+          hl7-fhir-r5-core.markdown
+          hl7-fhir-r5-core.Provenance
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.CodeableReference
+          hl7-fhir-r5-core.boolean
+          hl7-fhir-r5-core.value-set.request-status
+          hl7-fhir-r5-core.Ratio
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.Group
+          hl7-fhir-r5-core.value-set.body-site
+          hl7-fhir-r5-core.Annotation
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.MedicationRequest
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.value-set.procedure-code
+          hl7-fhir-r5-core.Encounter
+          hl7-fhir-r5-core.value-set.request-intent
+          hl7-fhir-r5-core.Location
+          hl7-fhir-r5-core.value-set.servicerequest-category
+          hl7-fhir-r5-core.Practitioner
+          hl7-fhir-r5-core.value-set.servicerequest-orderdetail-parameter-code
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.Device
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.CarePlan
+          hl7-fhir-r5-core.Specimen
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.ClaimResponse
+          hl7-fhir-r5-core.CareTeam
+          hl7-fhir-r5-core.Coverage
+          hl7-fhir-r5-core.Timing
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.RelatedPerson
+          hl7-fhir-r5-core.PractitionerRole
+          hl7-fhir-r5-core.Period
+          hl7-fhir-r5-core.BodyStructure
+          hl7-fhir-r5-core.canonical
+          hl7-fhir-r5-core.value-set.medication-as-needed-reason
+          hl7-fhir-r5-core.Range
+          hl7-fhir-r5-core.value-set.request-priority
+          hl7-fhir-r5-core.Quantity
+          hl7-fhir-r5-core.ServiceRequest
+          hl7-fhir-r5-core.value-set.participant-role
+          hl7-fhir-r5-core.uri
+          hl7-fhir-r5-core.HealthcareService
+          hl7-fhir-r5-core.DocumentReference
+          hl7-fhir-r5-core.Patient
+          hl7-terminology-r5.value-set.v3-ServiceDeliveryLocationRoleType},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/ServiceRequest",
+         :require #{:status :intent :subject},
+         :type zen/map,
+         :zen/desc "A record of a request for service such as diagnostic investigations, treatments, or operations to be performed.",
+         :keys {:performerType {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                :fhir/flags #{:SU},
+                                :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.participant-role/value-set,
+                                                     :strength :example},
+                                :zen/desc "Performer role"},
+                :category {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                   :fhir/flags #{:SU},
+                                   :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.servicerequest-category/value-set,
+                                                        :strength :example},
+                                   :zen/desc "Classification of service"}},
+                :insurance {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                zen.fhir/Reference},
+                                    :zen.fhir/reference {:refers #{hl7-fhir-r5-core.ClaimResponse/schema
+                                                                   hl7-fhir-r5-core.Coverage/schema}},
+                                    :zen/desc "Associated insurance coverage"}},
+                :instantiatesCanonical {:type zen/vector,
+                                        :every {:confirms #{hl7-fhir-r5-core.canonical/schema},
+                                                :fhir/flags #{:SU},
+                                                :zen/desc "Instantiates FHIR protocol or definition"}},
+                :instantiatesUri {:type zen/vector,
+                                  :every {:confirms #{hl7-fhir-r5-core.uri/schema},
+                                          :fhir/flags #{:SU},
+                                          :zen/desc "Instantiates external protocol or definition"}},
+                :relevantHistory {:type zen/vector,
+                                  :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                      zen.fhir/Reference},
+                                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Provenance/schema}},
+                                          :zen/desc "Request provenance"}},
+                :asNeeded {:fhir/polymorphic true,
+                           :type zen/map,
+                           :exclusive-keys #{#{:CodeableConcept
+                                               :boolean}},
+                           :keys {:boolean {:confirms #{hl7-fhir-r5-core.boolean/schema}},
+                                  :_boolean {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                  :CodeableConcept {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema}}},
+                           :fhir/flags #{:SU},
+                           :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.medication-as-needed-reason/value-set,
+                                                :strength :example},
+                           :zen/desc "Preconditions for service"},
+                :_authoredOn {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :supportingInfo {:type zen/vector,
+                                 :every {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                         :zen/desc "Additional clinical information"}},
+                :encounter {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                        zen.fhir/Reference},
+                            :fhir/flags #{:SU},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Encounter/schema}},
+                            :zen/desc "Encounter in which the request was created"},
+                :patientInstruction {:type zen/vector,
+                                     :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                             :type zen/map,
+                                             :keys {:instruction {:fhir/polymorphic true,
+                                                                  :type zen/map,
+                                                                  :exclusive-keys #{#{:markdown
+                                                                                      :Reference}},
+                                                                  :keys {:markdown {:confirms #{hl7-fhir-r5-core.markdown/schema}},
+                                                                         :_markdown {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                                         :Reference {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                                                 zen.fhir/Reference},
+                                                                                     :zen.fhir/reference {:refers #{hl7-fhir-r5-core.DocumentReference/schema}}}},
+                                                                  :fhir/flags #{:SU},
+                                                                  :zen/desc "Patient or consumer-oriented instructions"}},
+                                             :zen/desc "Patient or consumer-oriented instructions"}},
+                :_doNotPerform {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :specimen {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                               zen.fhir/Reference},
+                                   :fhir/flags #{:SU},
+                                   :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Specimen/schema}},
+                                   :zen/desc "Procedure Samples"}},
+                :_priority {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :authoredOn {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                             :fhir/flags #{:SU},
+                             :zen/desc "Date request signed"},
+                :note {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.Annotation/schema},
+                               :zen/desc "Comments"}},
+                :_intent {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :requisition {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                              :fhir/flags #{:SU},
+                              :zen/desc "Composite Request ID"},
+                :reason {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                 :fhir/flags #{:SU},
+                                 :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.procedure-reason/value-set,
+                                                      :strength :example},
+                                 :zen/desc "Explanation/Justification for procedure or service"}},
+                :requester {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                        zen.fhir/Reference},
+                            :fhir/flags #{:SU},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                           hl7-fhir-r5-core.PractitionerRole/schema
+                                                           hl7-fhir-r5-core.Organization/schema
+                                                           hl7-fhir-r5-core.Device/schema
+                                                           hl7-fhir-r5-core.Practitioner/schema
+                                                           hl7-fhir-r5-core.RelatedPerson/schema}},
+                            :zen/desc "Who/what is requesting service"},
+                :priority {:confirms #{hl7-fhir-r5-core.code/schema},
+                           :fhir/flags #{:SU},
+                           :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.request-priority/value-set,
+                                                :strength :required},
+                           :zen/desc "routine | urgent | asap | stat"},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.request-status/value-set,
+                                              :strength :required},
+                         :zen/desc "draft | active | on-hold | revoked | completed | entered-in-error | unknown"},
+                :code {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                       :fhir/flags #{:SU},
+                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.procedure-code/value-set,
+                                            :strength :example},
+                       :zen/desc "What is being requested/ordered"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Identifiers assigned to this order"}},
+                :doNotPerform {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                               :fhir/flags #{:SU :?!},
+                               :zen/desc "True if service/procedure should not be performed"},
+                :bodySite {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                   :fhir/flags #{:SU},
+                                   :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.body-site/value-set,
+                                                        :strength :example},
+                                   :zen/desc "Coded location on Body"}},
+                :intent {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.request-intent/value-set,
+                                              :strength :required},
+                         :zen/desc "proposal | plan | directive | order +"},
+                :focus {:type zen/vector,
+                        :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                            zen.fhir/Reference},
+                                :fhir/flags #{:SU},
+                                :zen.fhir/reference {:refers #{}},
+                                :zen/desc "What the service request is about, when it is not about the subject of record"}},
+                :replaces {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                               zen.fhir/Reference},
+                                   :fhir/flags #{:SU},
+                                   :zen.fhir/reference {:refers #{hl7-fhir-r5-core.ServiceRequest/schema}},
+                                   :zen/desc "What request replaces"}},
+                :orderDetail {:type zen/vector,
+                              :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                      :type zen/map,
+                                      :keys {:parameterFocus {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                                              :zen/desc "The context of the order details by reference"},
+                                             :parameter {:type zen/vector,
+                                                         :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                                                 :type zen/map,
+                                                                 :keys {:code {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                               :fhir/flags #{:SU},
+                                                                               :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.servicerequest-orderdetail-parameter-code/value-set,
+                                                                                                    :strength :example},
+                                                                               :zen/desc "The detail of the order being requested"},
+                                                                        :value {:fhir/polymorphic true,
+                                                                                :type zen/map,
+                                                                                :exclusive-keys #{#{:string
+                                                                                                    :Range
+                                                                                                    :Ratio
+                                                                                                    :Period
+                                                                                                    :CodeableConcept
+                                                                                                    :Quantity
+                                                                                                    :boolean}},
+                                                                                :keys {:string {:confirms #{hl7-fhir-r5-core.string/schema}},
+                                                                                       :Range {:confirms #{hl7-fhir-r5-core.Range/schema}},
+                                                                                       :Ratio {:confirms #{hl7-fhir-r5-core.Ratio/schema}},
+                                                                                       :_boolean {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                                                       :Period {:confirms #{hl7-fhir-r5-core.Period/schema}},
+                                                                                       :CodeableConcept {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema}},
+                                                                                       :Quantity {:confirms #{hl7-fhir-r5-core.Quantity/schema}},
+                                                                                       :boolean {:confirms #{hl7-fhir-r5-core.boolean/schema}},
+                                                                                       :_string {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                                                                :fhir/flags #{:SU},
+                                                                                :zen/desc "The value for the order detail"}},
+                                                                 :require #{:value
+                                                                            :code},
+                                                                 :fhir/flags #{:SU},
+                                                                 :zen/desc "The parameter details for the service being requested"},
+                                                         :minItems 1}},
+                                      :require #{:parameter},
+                                      :fhir/flags #{:SU},
+                                      :zen/desc "Additional order information"}},
+                :basedOn {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                              zen.fhir/Reference},
+                                  :fhir/flags #{:SU},
+                                  :zen.fhir/reference {:refers #{hl7-fhir-r5-core.ServiceRequest/schema
+                                                                 hl7-fhir-r5-core.CarePlan/schema
+                                                                 hl7-fhir-r5-core.MedicationRequest/schema}},
+                                  :zen/desc "What request fulfills"}},
+                :quantity {:fhir/polymorphic true,
+                           :type zen/map,
+                           :exclusive-keys #{#{:Range
+                                               :Ratio
+                                               :Quantity}},
+                           :keys {:Quantity {:confirms #{hl7-fhir-r5-core.Quantity/schema}},
+                                  :Ratio {:confirms #{hl7-fhir-r5-core.Ratio/schema}},
+                                  :Range {:confirms #{hl7-fhir-r5-core.Range/schema}}},
+                           :fhir/flags #{:SU},
+                           :zen/desc "Service amount"},
+                :bodyStructure {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                            zen.fhir/Reference},
+                                :fhir/flags #{:SU},
+                                :zen.fhir/reference {:refers #{hl7-fhir-r5-core.BodyStructure/schema}},
+                                :zen/desc "BodyStructure-based location on the body"},
+                :location {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                   :fhir/flags #{:SU},
+                                   :zen.fhir/value-set {:symbol hl7-terminology-r5.value-set.v3-ServiceDeliveryLocationRoleType/value-set,
+                                                        :strength :example},
+                                   :zen/desc "Requested location"}},
+                :_instantiatesCanonical {:type zen/vector,
+                                         :every {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                :subject {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                      zen.fhir/Reference},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                         hl7-fhir-r5-core.Location/schema
+                                                         hl7-fhir-r5-core.Device/schema
+                                                         hl7-fhir-r5-core.Group/schema}},
+                          :zen/desc "Individual or Entity the service is ordered for"},
+                :occurrence {:fhir/polymorphic true,
+                             :type zen/map,
+                             :exclusive-keys #{#{:dateTime
+                                                 :Period
+                                                 :Timing}},
+                             :keys {:dateTime {:confirms #{hl7-fhir-r5-core.dateTime/schema}},
+                                    :_dateTime {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                    :Period {:confirms #{hl7-fhir-r5-core.Period/schema}},
+                                    :Timing {:confirms #{hl7-fhir-r5-core.Timing/schema}}},
+                             :fhir/flags #{:SU},
+                             :zen/desc "When service should occur"},
+                :performer {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                zen.fhir/Reference},
+                                    :fhir/flags #{:SU},
+                                    :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                                   hl7-fhir-r5-core.CareTeam/schema
+                                                                   hl7-fhir-r5-core.HealthcareService/schema
+                                                                   hl7-fhir-r5-core.PractitionerRole/schema
+                                                                   hl7-fhir-r5-core.Organization/schema
+                                                                   hl7-fhir-r5-core.Device/schema
+                                                                   hl7-fhir-r5-core.Practitioner/schema
+                                                                   hl7-fhir-r5-core.RelatedPerson/schema}},
+                                    :zen/desc "Requested performer"}},
+                :_instantiatesUri {:type zen/vector,
+                                   :every {:confirms #{hl7-fhir-r5-core.Element/schema}}}},
+         :zen.fhir/type "ServiceRequest"}}

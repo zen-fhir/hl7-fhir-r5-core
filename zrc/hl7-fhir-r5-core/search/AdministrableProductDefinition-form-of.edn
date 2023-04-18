@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.AdministrableProductDefinition-form-of,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "AdministrableProductDefinition-form-of",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/AdministrableProductDefinition-form-of",
+         :fhir/type "reference",
+         :name "form-of",
+         :expr {:AdministrableProductDefinition {:knife [["formOf"]],
+                                                 :jsonpath ["$.\"formOf\"[*]"],
+                                                 :data-types #{{:type "Reference",
+                                                                :polymorphic? false}},
+                                                 :template :reference}}}}

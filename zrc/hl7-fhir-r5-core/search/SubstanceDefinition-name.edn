@@ -1,0 +1,25 @@
+{ns hl7-fhir-r5-core.search.SubstanceDefinition-name,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "SubstanceDefinition-name",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/SubstanceDefinition-name",
+         :fhir/type "string",
+         :name "name",
+         :expr {:SubstanceDefinition {:knife [["name" "name"]],
+                                      :jsonpath ["$.\"name\".\"name\"[*]"],
+                                      :data-types #{{:type "string",
+                                                     :polymorphic? false}},
+                                      :template :string,
+                                      :sql {:where [:or
+                                                    [:ilike
+                                                     [:pg/cast
+                                                      [:pg/jsonb-path-query-array
+                                                       [:pg/sql
+                                                        "{{table}}.resource"]
+                                                       [:pg/cast
+                                                        "($.\"name\".\"name\"[*]).** ? (@.type() == \"string\")"
+                                                        :jsonpath]]
+                                                      :text]
+                                                     [:pg/sql
+                                                      "{{param}}"]]],
+                                            :parameter-format "%\"?%"}}}}}

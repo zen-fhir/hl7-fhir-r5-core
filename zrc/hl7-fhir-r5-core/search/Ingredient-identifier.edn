@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Ingredient-identifier,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Ingredient-identifier",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Ingredient-identifier",
+         :fhir/type "token",
+         :name "identifier",
+         :expr {:Ingredient {:knife [["identifier"]],
+                             :jsonpath ["$.\"identifier\"[*]"],
+                             :data-types #{{:type "Identifier",
+                                            :polymorphic? false}},
+                             :template :token}}}}

@@ -1,0 +1,101 @@
+{ns hl7-fhir-r5-core.Practitioner,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.value-set.administrative-gender
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.boolean
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.Element
+          hl7-terminology-r5.value-set.v2-0360
+          hl7-fhir-r5-core.Attachment
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.date
+          hl7-fhir-r5-core.Address
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.ContactPoint
+          hl7-fhir-r5-core.Period
+          hl7-fhir-r5-core.value-set.all-languages
+          hl7-fhir-r5-core.HumanName},
+ schema {:zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen/desc "A person who is directly or indirectly involved in the provisioning of healthcare or related services.",
+         :zen.fhir/type "Practitioner",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Practitioner",
+         :zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :type zen/map,
+         :keys {:_active {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :address {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.Address/schema},
+                                  :fhir/flags #{:SU},
+                                  :zen/desc "Address(es) of the practitioner that are not role specific (typically home address)"}},
+                :name {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.HumanName/schema},
+                               :fhir/flags #{:SU},
+                               :zen/desc "The name(s) associated with the practitioner"}},
+                :_gender {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :birthDate {:confirms #{hl7-fhir-r5-core.date/schema},
+                            :fhir/flags #{:SU},
+                            :zen/desc "The date  on which the practitioner was born"},
+                :_birthDate {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :deceased {:fhir/polymorphic true,
+                           :type zen/map,
+                           :exclusive-keys #{#{:dateTime :boolean}},
+                           :keys {:boolean {:confirms #{hl7-fhir-r5-core.boolean/schema}},
+                                  :_boolean {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                  :dateTime {:confirms #{hl7-fhir-r5-core.dateTime/schema}},
+                                  :_dateTime {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                           :fhir/flags #{:SU},
+                           :zen/desc "Indicates if the practitioner is deceased or not"},
+                :photo {:type zen/vector,
+                        :every {:confirms #{hl7-fhir-r5-core.Attachment/schema},
+                                :zen/desc "Image of the person"}},
+                :active {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen/desc "Whether this practitioner's record is in active use"},
+                :communication {:type zen/vector,
+                                :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                        :type zen/map,
+                                        :keys {:language {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                          :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.all-languages/value-set,
+                                                                               :strength :required},
+                                                          :zen/desc "The language code used to communicate with the practitioner"},
+                                               :preferred {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                                                           :zen/desc "Language preference indicator"},
+                                               :_preferred {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                        :require #{:language},
+                                        :zen/desc "A language which may be used to communicate with the practitioner"}},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "An identifier for the person as this agent"}},
+                :qualification {:type zen/vector,
+                                :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                        :type zen/map,
+                                        :keys {:identifier {:type zen/vector,
+                                                            :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                                                    :zen/desc "An identifier for this qualification for the practitioner"}},
+                                               :code {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                      :zen.fhir/value-set {:symbol hl7-terminology-r5.value-set.v2-0360/value-set,
+                                                                           :strength :example},
+                                                      :zen/desc "Coded representation of the qualification"},
+                                               :period {:confirms #{hl7-fhir-r5-core.Period/schema},
+                                                        :zen/desc "Period during which the qualification is valid"},
+                                               :issuer {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                    zen.fhir/Reference},
+                                                        :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Organization/schema}},
+                                                        :zen/desc "Organization that regulates and issues the qualification"}},
+                                        :require #{:code},
+                                        :zen/desc "Qualifications, certifications, accreditations, licenses, training, etc. pertaining to the provision of care"}},
+                :telecom {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.ContactPoint/schema},
+                                  :fhir/flags #{:SU},
+                                  :zen/desc "A contact detail for the practitioner (that apply to all roles)"}},
+                :gender {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.administrative-gender/value-set,
+                                              :strength :required},
+                         :zen/desc "male | female | other | unknown"}}}}

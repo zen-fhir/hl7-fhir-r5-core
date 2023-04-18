@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.ResearchStudy-classifier,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "ResearchStudy-classifier",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/ResearchStudy-classifier",
+         :fhir/type "token",
+         :name "classifier",
+         :expr {:ResearchStudy {:knife [["classifier"]],
+                                :jsonpath ["$.\"classifier\"[*]"],
+                                :data-types #{{:type "CodeableConcept",
+                                               :polymorphic? false}},
+                                :template :token}}}}

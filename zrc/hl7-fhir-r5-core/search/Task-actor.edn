@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Task-actor,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Task-actor",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Task-actor",
+         :fhir/type "reference",
+         :name "actor",
+         :expr {:Task {:knife [["performer" "actor"]],
+                       :jsonpath ["$.\"performer\".\"actor\"[*]"],
+                       :data-types #{{:type "Reference",
+                                      :polymorphic? false}},
+                       :template :reference}}}}

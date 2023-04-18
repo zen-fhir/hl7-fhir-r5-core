@@ -1,0 +1,224 @@
+{ns hl7-fhir-r5-core.Immunization,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.value-set.immunization-function
+          hl7-fhir-r5-core.value-set.immunization-program-eligibility
+          hl7-fhir-r5-core.value-set.immunization-status
+          hl7-fhir-r5-core.value-set.immunization-route
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.value-set.immunization-target-disease
+          hl7-fhir-r5-core.CodeableReference
+          hl7-fhir-r5-core.boolean
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.value-set.immunization-funding-source
+          hl7-fhir-r5-core.Annotation
+          hl7-fhir-r5-core.SimpleQuantity
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.ImmunizationRecommendation
+          hl7-fhir-r5-core.MedicationRequest
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.value-set.immunization-subpotent-reason
+          hl7-fhir-r5-core.Encounter
+          hl7-fhir-r5-core.value-set.immunization-status-reason
+          hl7-fhir-r5-core.value-set.immunization-vaccine-funding-program
+          hl7-fhir-r5-core.Location
+          hl7-fhir-r5-core.Practitioner
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.CarePlan
+          hl7-fhir-r5-core.value-set.vaccine-code
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.date
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.RelatedPerson
+          hl7-fhir-r5-core.PractitionerRole
+          hl7-fhir-r5-core.Quantity
+          hl7-fhir-r5-core.ServiceRequest
+          hl7-fhir-r5-core.value-set.immunization-site
+          hl7-fhir-r5-core.value-set.immunization-reason
+          hl7-fhir-r5-core.value-set.immunization-origin
+          hl7-fhir-r5-core.Patient},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Immunization",
+         :require #{:patient :vaccineCode :status :occurrence},
+         :type zen/map,
+         :zen/desc "Describes the event of a patient being administered a vaccine or a record of an immunization as reported by a patient, a clinician or another party.",
+         :keys {:patient {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                      zen.fhir/Reference},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema}},
+                          :zen/desc "Who was immunized"},
+                :isSubpotent {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                              :fhir/flags #{:SU :?!},
+                              :zen/desc "Dose potency"},
+                :protocolApplied {:type zen/vector,
+                                  :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                          :type zen/map,
+                                          :keys {:series {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                          :zen/desc "Name of vaccine series"},
+                                                 :_series {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                 :authority {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                         zen.fhir/Reference},
+                                                             :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Organization/schema}},
+                                                             :zen/desc "Who is responsible for publishing the recommendations"},
+                                                 :targetDisease {:type zen/vector,
+                                                                 :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.immunization-target-disease/value-set,
+                                                                                              :strength :example},
+                                                                         :zen/desc "Vaccine preventatable disease being targeted"}},
+                                                 :doseNumber {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                              :zen/desc "Dose number within series"},
+                                                 :_doseNumber {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                 :seriesDoses {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                               :zen/desc "Recommended number of doses for immunity"},
+                                                 :_seriesDoses {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                          :require #{:doseNumber},
+                                          :zen/desc "Protocol followed by the provider"}},
+                :site {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.immunization-site/value-set,
+                                            :strength :example},
+                       :zen/desc "Body site vaccine  was administered"},
+                :_isSubpotent {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :encounter {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                        zen.fhir/Reference},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Encounter/schema}},
+                            :zen/desc "Encounter immunization was part of"},
+                :vaccineCode {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                              :fhir/flags #{:SU},
+                              :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.vaccine-code/value-set,
+                                                   :strength :example},
+                              :zen/desc "Vaccine administered"},
+                :doseQuantity {:confirms #{hl7-fhir-r5-core.Quantity/schema
+                                           hl7-fhir-r5-core.SimpleQuantity/schema},
+                               :zen/desc "Amount of vaccine administered"},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :statusReason {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                               :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.immunization-status-reason/value-set,
+                                                    :strength :example},
+                               :zen/desc "Reason for current status"},
+                :route {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                        :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.immunization-route/value-set,
+                                             :strength :example},
+                        :zen/desc "How vaccine entered body"},
+                :_expirationDate {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :programEligibility {:type zen/vector,
+                                     :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                             :type zen/map,
+                                             :keys {:program {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                              :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.immunization-vaccine-funding-program/value-set,
+                                                                                   :strength :example},
+                                                              :zen/desc "The program that eligibility is declared for"},
+                                                    :programStatus {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                    :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.immunization-program-eligibility/value-set,
+                                                                                         :strength :example},
+                                                                    :zen/desc "The patient's eligibility status for the program"}},
+                                             :require #{:programStatus
+                                                        :program},
+                                             :zen/desc "Patient eligibility for a specific vaccination program"}},
+                :note {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.Annotation/schema},
+                               :fhir/flags #{:SU},
+                               :zen/desc "Additional immunization notes"}},
+                :reason {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                 :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.immunization-reason/value-set,
+                                                      :strength :example},
+                                 :zen/desc "Why immunization occurred"}},
+                :supportingInformation {:type zen/vector,
+                                        :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                            zen.fhir/Reference},
+                                                :zen.fhir/reference {:refers #{}},
+                                                :zen/desc "Additional information in support of the immunization"}},
+                :primarySource {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                                :fhir/flags #{:SU},
+                                :zen/desc "Indicates context the data was captured in"},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.immunization-status/value-set,
+                                              :strength :required},
+                         :zen/desc "completed | entered-in-error | not-done"},
+                :lotNumber {:confirms #{hl7-fhir-r5-core.string/schema},
+                            :zen/desc "Vaccine lot number"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :zen/desc "Business identifier"}},
+                :manufacturer {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                               :zen/desc "Vaccine manufacturer"},
+                :_primarySource {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :administeredProduct {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                      :zen/desc "Product that was administered"},
+                :basedOn {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                              zen.fhir/Reference},
+                                  :fhir/flags #{:SU},
+                                  :zen.fhir/reference {:refers #{hl7-fhir-r5-core.ImmunizationRecommendation/schema
+                                                                 hl7-fhir-r5-core.ServiceRequest/schema
+                                                                 hl7-fhir-r5-core.CarePlan/schema
+                                                                 hl7-fhir-r5-core.MedicationRequest/schema}},
+                                  :zen/desc "Authority that the immunization event is based on"}},
+                :informationSource {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                    :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.immunization-origin/value-set,
+                                                         :strength :example},
+                                    :zen/desc "Indicates the source of a  reported record"},
+                :_lotNumber {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :reaction {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                   :type zen/map,
+                                   :keys {:date {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                                                 :zen/desc "When reaction started"},
+                                          :_date {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                          :manifestation {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                                          :zen/desc "Additional information on reaction"},
+                                          :reported {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                                                     :zen/desc "Indicates self-reported reaction"},
+                                          :_reported {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                   :zen/desc "Details of a reaction that follows immunization"}},
+                :location {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                       zen.fhir/Reference},
+                           :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Location/schema}},
+                           :zen/desc "Where immunization occurred"},
+                :fundingSource {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.immunization-funding-source/value-set,
+                                                     :strength :example},
+                                :zen/desc "Funding source for the vaccine"},
+                :subpotentReason {:type zen/vector,
+                                  :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                          :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.immunization-subpotent-reason/value-set,
+                                                               :strength :example},
+                                          :zen/desc "Reason for being subpotent"}},
+                :occurrence {:fhir/polymorphic true,
+                             :type zen/map,
+                             :exclusive-keys #{#{:string :dateTime}},
+                             :keys {:dateTime {:confirms #{hl7-fhir-r5-core.dateTime/schema}},
+                                    :_dateTime {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                    :string {:confirms #{hl7-fhir-r5-core.string/schema}},
+                                    :_string {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                             :fhir/flags #{:SU},
+                             :zen/desc "Vaccine administration date"},
+                :expirationDate {:confirms #{hl7-fhir-r5-core.date/schema},
+                                 :zen/desc "Vaccine expiration date"},
+                :performer {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                    :type zen/map,
+                                    :keys {:function {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                      :fhir/flags #{:SU},
+                                                      :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.immunization-function/value-set,
+                                                                           :strength :extensible},
+                                                      :zen/desc "What type of performance was done"},
+                                           :actor {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                               zen.fhir/Reference},
+                                                   :fhir/flags #{:SU},
+                                                   :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                                                  hl7-fhir-r5-core.PractitionerRole/schema
+                                                                                  hl7-fhir-r5-core.Organization/schema
+                                                                                  hl7-fhir-r5-core.Practitioner/schema
+                                                                                  hl7-fhir-r5-core.RelatedPerson/schema}},
+                                                   :zen/desc "Individual or organization who was performing"}},
+                                    :require #{:actor},
+                                    :fhir/flags #{:SU},
+                                    :zen/desc "Who performed event"}}},
+         :zen.fhir/type "Immunization"}}

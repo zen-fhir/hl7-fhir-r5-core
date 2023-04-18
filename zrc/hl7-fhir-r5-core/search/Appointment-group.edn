@@ -1,0 +1,17 @@
+{ns hl7-fhir-r5-core.search.Appointment-group,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Appointment-group",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Appointment-group",
+         :fhir/type "reference",
+         :name "group",
+         :expr {:Appointment {:knife [["participant"
+                                       "actor"
+                                       {:resourceType "Group"}]
+                                      ["subject"
+                                       {:resourceType "Group"}]],
+                              :jsonpath ["$.\"participant\".\"actor\"?(@.\"resourceType\"==\"Group\")[*]"
+                                         "$.\"subject\"?(@.\"resourceType\"==\"Group\")[*]"],
+                              :data-types #{{:type "Reference",
+                                             :polymorphic? false}},
+                              :template :reference}}}}

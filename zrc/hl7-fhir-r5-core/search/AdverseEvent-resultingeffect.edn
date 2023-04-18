@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.AdverseEvent-resultingeffect,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "AdverseEvent-resultingeffect",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/AdverseEvent-resultingeffect",
+         :fhir/type "reference",
+         :name "resultingeffect",
+         :expr {:AdverseEvent {:knife [["resultingEffect"]],
+                               :jsonpath ["$.\"resultingEffect\"[*]"],
+                               :data-types #{{:type "Reference",
+                                              :polymorphic? false}},
+                               :template :reference}}}}

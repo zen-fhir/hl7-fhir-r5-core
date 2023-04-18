@@ -1,0 +1,11 @@
+{ns hl7-fhir-r5-core.search.DeviceDispense-code,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "DeviceDispense-code",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/DeviceDispense-code",
+         :fhir/type "token",
+         :name "code",
+         :expr {:DeviceDispense {:knife [["device" "concept"]],
+                                 :jsonpath ["$.\"device\".\"concept\"[*]"],
+                                 :data-types #{},
+                                 :template :token}}}}

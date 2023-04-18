@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Group-membership,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Group-membership",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Group-membership",
+         :fhir/type "token",
+         :name "membership",
+         :expr {:Group {:knife [["membership"]],
+                        :jsonpath ["$.\"membership\"[*]"],
+                        :data-types #{{:type "code",
+                                       :polymorphic? false}},
+                        :template :token}}}}

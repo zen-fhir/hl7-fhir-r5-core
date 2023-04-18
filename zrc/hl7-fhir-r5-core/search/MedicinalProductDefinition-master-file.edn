@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.MedicinalProductDefinition-master-file,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "MedicinalProductDefinition-master-file",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/MedicinalProductDefinition-master-file",
+         :fhir/type "reference",
+         :name "master-file",
+         :expr {:MedicinalProductDefinition {:knife [["masterFile"]],
+                                             :jsonpath ["$.\"masterFile\"[*]"],
+                                             :data-types #{{:type "Reference",
+                                                            :polymorphic? false}},
+                                             :template :reference}}}}

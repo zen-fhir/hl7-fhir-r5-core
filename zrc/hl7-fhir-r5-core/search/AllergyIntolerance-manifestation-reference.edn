@@ -1,0 +1,13 @@
+{ns hl7-fhir-r5-core.search.AllergyIntolerance-manifestation-reference,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "AllergyIntolerance-manifestation-reference",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/AllergyIntolerance-manifestation-reference",
+         :fhir/type "reference",
+         :name "manifestation-reference",
+         :expr {:AllergyIntolerance {:knife [["reaction"
+                                              "manifestation"
+                                              "reference"]],
+                                     :jsonpath ["$.\"reaction\".\"manifestation\".\"reference\"[*]"],
+                                     :data-types #{},
+                                     :template :reference}}}}

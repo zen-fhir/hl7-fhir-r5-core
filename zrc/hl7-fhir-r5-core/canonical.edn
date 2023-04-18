@@ -1,0 +1,9 @@
+{ns hl7-fhir-r5-core.canonical,
+ import #{zen.fhir hl7-fhir-r5-core.uri},
+ schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen/desc "canonical type: A URI that is a reference to a canonical URL on a FHIR resource",
+         :zen.fhir/type "canonical",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/canonical",
+         :zen.fhir/version "0.6.21-2",
+         :type zen/string,
+         :confirms #{hl7-fhir-r5-core.uri/schema}}}

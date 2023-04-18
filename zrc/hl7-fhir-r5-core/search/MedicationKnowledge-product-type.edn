@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.MedicationKnowledge-product-type,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "MedicationKnowledge-product-type",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/MedicationKnowledge-product-type",
+         :fhir/type "token",
+         :name "product-type",
+         :expr {:MedicationKnowledge {:knife [["productType"]],
+                                      :jsonpath ["$.\"productType\"[*]"],
+                                      :data-types #{{:type "CodeableConcept",
+                                                     :polymorphic? false}},
+                                      :template :token}}}}

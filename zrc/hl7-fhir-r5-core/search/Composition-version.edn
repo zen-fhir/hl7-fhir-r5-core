@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Composition-version,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Composition-version",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Composition-version",
+         :fhir/type "token",
+         :name "version",
+         :expr {:Composition {:knife [["version"]],
+                              :jsonpath ["$.\"version\"[*]"],
+                              :data-types #{{:type "string",
+                                             :polymorphic? false}},
+                              :template :token}}}}

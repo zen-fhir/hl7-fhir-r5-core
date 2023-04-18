@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.TestScript-scope-artifact,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "TestScript-scope-artifact",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/TestScript-scope-artifact",
+         :fhir/type "reference",
+         :name "scope-artifact",
+         :expr {:TestScript {:knife [["scope" "artifact"]],
+                             :jsonpath ["$.\"scope\".\"artifact\"[*]"],
+                             :data-types #{{:type "canonical",
+                                            :polymorphic? false}},
+                             :template :reference}}}}

@@ -1,0 +1,253 @@
+{ns hl7-fhir-r5-core.Device,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.value-set.device-category
+          hl7-fhir-r5-core.value-set.device-type
+          hl7-fhir-r5-core.value-set.udi-entry-type
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.CodeableReference
+          hl7-fhir-r5-core.boolean
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.value-set.device-versiontype
+          hl7-fhir-r5-core.Annotation
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.Attachment
+          hl7-fhir-r5-core.base64Binary
+          hl7-fhir-r5-core.value-set.device-specification-type
+          hl7-fhir-r5-core.value-set.device-property-type
+          hl7-fhir-r5-core.Location
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.Device
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.integer
+          hl7-fhir-r5-core.value-set.device-operation-mode
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.ContactPoint
+          hl7-fhir-r5-core.value-set.device-specification-category
+          hl7-fhir-r5-core.Duration
+          hl7-fhir-r5-core.Count
+          hl7-fhir-r5-core.Range
+          hl7-fhir-r5-core.Quantity
+          hl7-fhir-r5-core.value-set.device-nametype
+          hl7-fhir-r5-core.value-set.device-availability-status
+          hl7-fhir-r5-core.uri
+          hl7-fhir-r5-core.value-set.device-safety
+          hl7-fhir-r5-core.value-set.device-status
+          hl7-fhir-r5-core.Endpoint},
+ schema {:zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen/desc "This resource describes the properties (regulated, has real time clock, etc.), adminstrative (manufacturer name, model number, serial number, firmware, etc.), and type (knee replacement, blood pressure cuff, MRI, etc.) of a physical unit (these values do not change much within a given module, for example the serail number, manufacturer name, and model number). An actual unit may consist of several modules in a distinct hierarchy and these are represented by multiple Device resources and bound through the 'parent' element.",
+         :zen.fhir/type "Device",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Device",
+         :zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :type zen/map,
+         :keys {:category {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                   :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.device-category/value-set,
+                                                        :strength :example},
+                                   :zen/desc "Indicates a high-level grouping of the device"}},
+                :definition {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                             :zen/desc "The reference to the definition for the device"},
+                :serialNumber {:confirms #{hl7-fhir-r5-core.string/schema},
+                               :zen/desc "Serial number assigned by the manufacturer"},
+                :cycle {:confirms #{hl7-fhir-r5-core.Count/schema},
+                        :zen/desc "The series of occurrences that repeats during the operation of the device"},
+                :parent {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                     zen.fhir/Reference},
+                         :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Device/schema}},
+                         :zen/desc "The higher level or encompassing device that this device is a logical part of"},
+                :_partNumber {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :displayName {:confirms #{hl7-fhir-r5-core.string/schema},
+                              :zen/desc "The name used to display by default when the device is referenced"},
+                :property {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                   :type zen/map,
+                                   :keys {:type {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                 :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.device-property-type/value-set,
+                                                                      :strength :example},
+                                                 :zen/desc "Code that specifies the property being represented"},
+                                          :value {:fhir/polymorphic true,
+                                                  :type zen/map,
+                                                  :exclusive-keys #{#{:string
+                                                                      :Range
+                                                                      :integer
+                                                                      :Attachment
+                                                                      :CodeableConcept
+                                                                      :Quantity
+                                                                      :boolean}},
+                                                  :keys {:string {:confirms #{hl7-fhir-r5-core.string/schema}},
+                                                         :Range {:confirms #{hl7-fhir-r5-core.Range/schema}},
+                                                         :integer {:confirms #{hl7-fhir-r5-core.integer/schema}},
+                                                         :_boolean {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                         :Attachment {:confirms #{hl7-fhir-r5-core.Attachment/schema}},
+                                                         :_integer {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                         :CodeableConcept {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema}},
+                                                         :Quantity {:confirms #{hl7-fhir-r5-core.Quantity/schema}},
+                                                         :boolean {:confirms #{hl7-fhir-r5-core.boolean/schema}},
+                                                         :_string {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                                  :zen/desc "Value of the property"}},
+                                   :require #{:value :type},
+                                   :zen/desc "Inherent, essentially fixed, characteristics of the device.  e.g., time properties, size, material, etc."}},
+                :name {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                               :type zen/map,
+                               :keys {:value {:confirms #{hl7-fhir-r5-core.string/schema},
+                                              :fhir/flags #{:SU},
+                                              :zen/desc "The term that names the device"},
+                                      :_value {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                      :type {:confirms #{hl7-fhir-r5-core.code/schema},
+                                             :fhir/flags #{:SU},
+                                             :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.device-nametype/value-set,
+                                                                  :strength :required},
+                                             :zen/desc "registered-name | user-friendly-name | patient-reported-name"},
+                                      :_type {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                      :display {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                                                :fhir/flags #{:SU :?!},
+                                                :zen/desc "The preferred device name"},
+                                      :_display {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                               :require #{:value :type},
+                               :zen/desc "The name or names of the device as known to the manufacturer and/or patient"}},
+                :_modelNumber {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :mode {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.device-operation-mode/value-set,
+                                            :strength :example},
+                       :zen/desc "The designated condition for performing a task"},
+                :partNumber {:confirms #{hl7-fhir-r5-core.string/schema},
+                             :zen/desc "The part number or catalog number of the device"},
+                :modelNumber {:confirms #{hl7-fhir-r5-core.string/schema},
+                              :zen/desc "The manufacturer's model number for the device"},
+                :_manufactureDate {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :type {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                               :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.device-type/value-set,
+                                                    :strength :example},
+                               :zen/desc "The kind or type of device"}},
+                :duration {:confirms #{hl7-fhir-r5-core.Duration/schema},
+                           :zen/desc "A measurement of time during the device's operation (e.g., days, hours, mins, etc.)"},
+                :_expirationDate {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :gateway {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                  :zen/desc "Linked device acting as a communication/data collector, translator or controller"}},
+                :note {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.Annotation/schema},
+                               :zen/desc "Device notes and comments"}},
+                :biologicalSourceEvent {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                        :zen/desc "An identifier that supports traceability to the event during which material in this product from one or more biological entities was obtained or pooled"},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.device-status/value-set,
+                                              :strength :required},
+                         :zen/desc "active | inactive | entered-in-error"},
+                :safety {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                 :fhir/flags #{:SU},
+                                 :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.device-safety/value-set,
+                                                      :strength :example},
+                                 :zen/desc "Safety Characteristics of Device"}},
+                :lotNumber {:confirms #{hl7-fhir-r5-core.string/schema},
+                            :zen/desc "Lot number of manufacture"},
+                :conformsTo {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                     :type zen/map,
+                                     :keys {:category {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.device-specification-category/value-set,
+                                                                            :strength :example},
+                                                       :zen/desc "Describes the common type of the standard, specification, or formal guidance.  communication | performance | measurement"},
+                                            :specification {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                            :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.device-specification-type/value-set,
+                                                                                 :strength :example},
+                                                            :zen/desc "Identifies the standard, specification, or formal guidance that the device adheres to"},
+                                            :version {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                      :zen/desc "Specific form or variant of the standard"},
+                                            :_version {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                     :require #{:specification},
+                                     :zen/desc "Identifies the standards, specifications, or formal guidances for the capabilities supported by the device"}},
+                :url {:confirms #{hl7-fhir-r5-core.uri/schema},
+                      :zen/desc "Network address to contact device"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :zen/desc "Instance identifier"}},
+                :availabilityStatus {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                     :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.device-availability-status/value-set,
+                                                          :strength :extensible},
+                                     :zen/desc "lost | damaged | destroyed | available"},
+                :manufacturer {:confirms #{hl7-fhir-r5-core.string/schema},
+                               :zen/desc "Name of device manufacturer"},
+                :_manufacturer {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_serialNumber {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :version {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                  :type zen/map,
+                                  :keys {:type {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.device-versiontype/value-set,
+                                                                     :strength :example},
+                                                :zen/desc "The type of the device version, e.g. manufacturer, approved, internal"},
+                                         :component {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                                     :zen/desc "The hardware or software module of the device to which the version applies"},
+                                         :installDate {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                                                       :zen/desc "The date the version was installed on the device"},
+                                         :_installDate {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                         :value {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                 :zen/desc "The version text"},
+                                         :_value {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                  :require #{:value},
+                                  :zen/desc "The actual design of the device or software version running on the device"}},
+                :_lotNumber {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :location {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                       zen.fhir/Reference},
+                           :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Location/schema}},
+                           :zen/desc "Where the device is found"},
+                :endpoint {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                               zen.fhir/Reference},
+                                   :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Endpoint/schema}},
+                                   :zen/desc "Technical endpoints providing access to electronic services provided by the device"}},
+                :contact {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.ContactPoint/schema},
+                                  :zen/desc "Details for human/organization for support"}},
+                :manufactureDate {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                                  :zen/desc "Date when the device was made"},
+                :owner {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                    zen.fhir/Reference},
+                        :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Organization/schema}},
+                        :zen/desc "Organization responsible for device"},
+                :_url {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_displayName {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :expirationDate {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                                 :zen/desc "Date and time of expiry of this device (if applicable)"},
+                :udiCarrier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                     :type zen/map,
+                                     :keys {:_jurisdiction {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                            :deviceIdentifier {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                               :fhir/flags #{:SU},
+                                                               :zen/desc "Mandatory fixed portion of UDI"},
+                                            :_entryType {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                            :jurisdiction {:confirms #{hl7-fhir-r5-core.uri/schema},
+                                                           :zen/desc "Regional UDI authority"},
+                                            :entryType {:confirms #{hl7-fhir-r5-core.code/schema},
+                                                        :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.udi-entry-type/value-set,
+                                                                             :strength :required},
+                                                        :zen/desc "barcode | rfid | manual | card | self-reported | electronic-transmission | unknown"},
+                                            :issuer {:confirms #{hl7-fhir-r5-core.uri/schema},
+                                                     :fhir/flags #{:SU},
+                                                     :zen/desc "UDI Issuing Organization"},
+                                            :_deviceIdentifier {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                            :carrierAIDC {:confirms #{hl7-fhir-r5-core.base64Binary/schema},
+                                                          :fhir/flags #{:SU},
+                                                          :zen/desc "UDI Machine Readable Barcode String"},
+                                            :_carrierHRF {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                            :_carrierAIDC {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                            :_issuer {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                            :carrierHRF {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                         :fhir/flags #{:SU},
+                                                         :zen/desc "UDI Human Readable Barcode String"}},
+                                     :require #{:deviceIdentifier
+                                                :issuer},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Unique Device Identifier (UDI) Barcode string"}}}}}

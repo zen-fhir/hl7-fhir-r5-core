@@ -1,0 +1,13 @@
+{ns hl7-fhir-r5-core.search.ClinicalUseDefinition-indication,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "ClinicalUseDefinition-indication",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/ClinicalUseDefinition-indication",
+         :fhir/type "token",
+         :name "indication",
+         :expr {:ClinicalUseDefinition {:knife [["indication"
+                                                 "diseaseSymptomProcedure"
+                                                 "concept"]],
+                                        :jsonpath ["$.\"indication\".\"diseaseSymptomProcedure\".\"concept\"[*]"],
+                                        :data-types #{},
+                                        :template :token}}}}

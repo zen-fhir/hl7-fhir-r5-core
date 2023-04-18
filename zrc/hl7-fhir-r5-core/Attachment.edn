@@ -1,0 +1,71 @@
+{ns hl7-fhir-r5-core.Attachment,
+ import #{hl7-fhir-r5-core.decimal
+          zen.fhir
+          hl7-fhir-r5-core.positiveInt
+          hl7-fhir-r5-core.integer64
+          hl7-fhir-r5-core.value-set.mimetypes
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.url
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.base64Binary
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.value-set.all-languages
+          hl7-fhir-r5-core.DataType},
+ schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen/desc "Attachment Type: For referring to data content defined in other formats.",
+         :zen.fhir/type "Attachment",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Attachment",
+         :zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DataType/schema},
+         :type zen/map,
+         :keys {:creation {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                           :fhir/flags #{:SU},
+                           :zen/desc "Date attachment was first created"},
+                :_data {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :hash {:confirms #{hl7-fhir-r5-core.base64Binary/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "Hash of the data (sha-1, base64ed)"},
+                :_width {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_duration {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :frames {:confirms #{hl7-fhir-r5-core.positiveInt/schema},
+                         :zen/desc "Number of frames if > 1 (photo)"},
+                :_contentType {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_language {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :width {:confirms #{hl7-fhir-r5-core.positiveInt/schema},
+                        :zen/desc "Width of the image in pixels (photo/video)"},
+                :_size {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :duration {:confirms #{hl7-fhir-r5-core.decimal/schema},
+                           :zen/desc "Length in seconds (audio / video)"},
+                :_frames {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :size {:confirms #{hl7-fhir-r5-core.integer64/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "Number of bytes of content (if url provided)"},
+                :title {:confirms #{hl7-fhir-r5-core.string/schema},
+                        :fhir/flags #{:SU},
+                        :zen/desc "Label to display in place of the data"},
+                :pages {:confirms #{hl7-fhir-r5-core.positiveInt/schema},
+                        :zen/desc "Number of printed pages"},
+                :_height {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_hash {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :language {:confirms #{hl7-fhir-r5-core.code/schema},
+                           :fhir/flags #{:SU},
+                           :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.all-languages/value-set,
+                                                :strength :required},
+                           :zen/desc "Human language of the content (BCP-47)"},
+                :_creation {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_pages {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :url {:confirms #{hl7-fhir-r5-core.url/schema},
+                      :fhir/flags #{:SU},
+                      :zen/desc "Uri where the data can be found"},
+                :_title {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :contentType {:confirms #{hl7-fhir-r5-core.code/schema},
+                              :fhir/flags #{:SU},
+                              :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.mimetypes/value-set,
+                                                   :strength :required},
+                              :zen/desc "Mime type of the content, with charset etc."},
+                :_url {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :height {:confirms #{hl7-fhir-r5-core.positiveInt/schema},
+                         :zen/desc "Height of the image in pixels (photo/video)"},
+                :data {:confirms #{hl7-fhir-r5-core.base64Binary/schema},
+                       :zen/desc "Data inline, base64ed"}}}}

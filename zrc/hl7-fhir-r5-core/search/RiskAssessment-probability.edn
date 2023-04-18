@@ -1,0 +1,14 @@
+{ns hl7-fhir-r5-core.search.RiskAssessment-probability,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "RiskAssessment-probability",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/RiskAssessment-probability",
+         :fhir/type "number",
+         :name "probability",
+         :expr {:RiskAssessment {:knife [["prediction"
+                                          "probability"
+                                          "ofType(decimal"]],
+                                 :jsonpath ["$.\"prediction\".\"probability\".\"ofType(decimal\"[*]"],
+                                 :data-types #{},
+                                 :template :number,
+                                 :sql {:where [:or]}}}}}

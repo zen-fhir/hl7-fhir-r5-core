@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.NutritionIntake-source,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "NutritionIntake-source",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/NutritionIntake-source",
+         :fhir/type "reference",
+         :name "source",
+         :expr {:NutritionIntake {:knife [["reported" "Reference"]],
+                                  :jsonpath ["$.\"reported\".\"Reference\"[*]"],
+                                  :data-types #{{:type "Reference",
+                                                 :polymorphic? false}},
+                                  :template :reference}}}}

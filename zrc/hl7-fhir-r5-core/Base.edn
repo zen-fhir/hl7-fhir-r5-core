@@ -1,0 +1,7 @@
+{ns hl7-fhir-r5-core.Base,
+ import #{zen.fhir},
+ schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen/desc "Base Type: Base definition for all types defined in FHIR type system.",
+         :zen.fhir/type "Base",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Base",
+         :zen.fhir/version "0.6.21-2"}}

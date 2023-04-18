@@ -1,0 +1,32 @@
+{ns hl7-fhir-r5-core.search.ResearchStudy-recruitment-actual,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "ResearchStudy-recruitment-actual",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/ResearchStudy-recruitment-actual",
+         :fhir/type "number",
+         :name "recruitment-actual",
+         :expr {:ResearchStudy {:knife [["recruitment" "actualNumber"]],
+                                :jsonpath ["$.\"recruitment\".\"actualNumber\"[*]"],
+                                :data-types #{{:type "unsignedInt",
+                                               :polymorphic? false}},
+                                :template :number,
+                                :sql {:where [:or
+                                              [:and
+                                               [:>=
+                                                [:pg/call
+                                                 :jsonpath_extract_max_numeric
+                                                 [:pg/sql
+                                                  "{{table}}.resource"]
+                                                 "$.\"recruitment\".\"actualNumber\"[*]"]
+                                                [:pg/cast
+                                                 [:pg/sql "{{param}}"]
+                                                 :numeric]]
+                                               [:<=
+                                                [:pg/call
+                                                 :jsonpath_extract_min_numeric
+                                                 [:pg/sql
+                                                  "{{table}}.resource"]
+                                                 "$.\"recruitment\".\"actualNumber\"[*]"]
+                                                [:pg/cast
+                                                 [:pg/sql "{{param}}"]
+                                                 :numeric]]]]}}}}}

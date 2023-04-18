@@ -1,0 +1,202 @@
+{ns hl7-fhir-r5-core.Composition,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-terminology-r5.value-set.v3-ActCode
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.CodeableReference
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.value-set.composition-attestation-mode
+          hl7-fhir-r5-core.Annotation
+          hl7-fhir-r5-core.value-set.list-empty-reason
+          hl7-fhir-r5-core.UsageContext
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.value-set.composition-status
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.Encounter
+          hl7-fhir-r5-core.Narrative
+          hl7-fhir-r5-core.value-set.doc-section-codes
+          hl7-fhir-r5-core.Practitioner
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.Device
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.value-set.referenced-item-category
+          hl7-fhir-r5-core.value-set.list-order
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.RelatedPerson
+          hl7-fhir-r5-core.PractitionerRole
+          hl7-fhir-r5-core.Period
+          hl7-fhir-r5-core.RelatedArtifact
+          hl7-fhir-r5-core.Composition
+          hl7-fhir-r5-core.uri
+          hl7-fhir-r5-core.value-set.doc-typecodes
+          hl7-fhir-r5-core.Patient},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Composition",
+         :require #{:date :type :title :author :status},
+         :type zen/map,
+         :zen/desc "A set of healthcare-related information that is assembled together into a single logical package that provides a single coherent statement of meaning, establishes its own context and that has clinical attestation with regard to who is making the statement. A Composition defines the structure and narrative content necessary for a document. However, a Composition alone does not constitute a document. Rather, the Composition must be the first entry in a Bundle where Bundle.type=document, and any other resources referenced from Composition must be included as subsequent entries in the Bundle (for example Patient, Practitioner, Encounter, etc.).",
+         :keys {:category {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                   :fhir/flags #{:SU},
+                                   :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.referenced-item-category/value-set,
+                                                        :strength :example},
+                                   :zen/desc "Categorization of Composition"}},
+                :date {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "Composition editing time"},
+                :encounter {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                        zen.fhir/Reference},
+                            :fhir/flags #{:SU},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Encounter/schema}},
+                            :zen/desc "Context of the Composition"},
+                :_date {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :name {:confirms #{hl7-fhir-r5-core.string/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "Name for this Composition (computer friendly)"},
+                :section {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.Composition/section-schema}}},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :useContext {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.UsageContext/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "The context that the content is intended to support"}},
+                :attester {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                   :type zen/map,
+                                   :keys {:mode {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                 :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.composition-attestation-mode/value-set,
+                                                                      :strength :preferred},
+                                                 :zen/desc "personal | professional | legal | official"},
+                                          :time {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                                                 :zen/desc "When the composition was attested"},
+                                          :_time {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                          :party {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                              zen.fhir/Reference},
+                                                  :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                                                 hl7-fhir-r5-core.PractitionerRole/schema
+                                                                                 hl7-fhir-r5-core.Organization/schema
+                                                                                 hl7-fhir-r5-core.Practitioner/schema
+                                                                                 hl7-fhir-r5-core.RelatedPerson/schema}},
+                                                  :zen/desc "Who attested the composition"}},
+                                   :require #{:mode},
+                                   :zen/desc "Attests to accuracy of composition"}},
+                :type {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                       :fhir/flags #{:SU},
+                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.doc-typecodes/value-set,
+                                            :strength :preferred},
+                       :zen/desc "Kind of composition (LOINC if possible)"},
+                :title {:confirms #{hl7-fhir-r5-core.string/schema},
+                        :fhir/flags #{:SU},
+                        :zen/desc "Human Readable name/title"},
+                :note {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.Annotation/schema},
+                               :zen/desc "For any additional notes"}},
+                :author {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                             zen.fhir/Reference},
+                                 :fhir/flags #{:SU},
+                                 :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                                hl7-fhir-r5-core.PractitionerRole/schema
+                                                                hl7-fhir-r5-core.Organization/schema
+                                                                hl7-fhir-r5-core.Device/schema
+                                                                hl7-fhir-r5-core.Practitioner/schema
+                                                                hl7-fhir-r5-core.RelatedPerson/schema}},
+                                 :zen/desc "Who and/or what authored the composition"},
+                         :minItems 1},
+                :event {:type zen/vector,
+                        :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                :type zen/map,
+                                :keys {:period {:confirms #{hl7-fhir-r5-core.Period/schema},
+                                                :fhir/flags #{:SU},
+                                                :zen/desc "The period covered by the documentation"},
+                                       :detail {:type zen/vector,
+                                                :every {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                                        :fhir/flags #{:SU},
+                                                        :zen.fhir/value-set {:symbol hl7-terminology-r5.value-set.v3-ActCode/value-set,
+                                                                             :strength :example},
+                                                        :zen/desc "The event(s) being documented, as code(s), reference(s), or both"}}},
+                                :fhir/flags #{:SU},
+                                :zen/desc "The clinical service(s) being documented"}},
+                :custodian {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                        zen.fhir/Reference},
+                            :fhir/flags #{:SU},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Organization/schema}},
+                            :zen/desc "Organization which maintains the composition"},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.composition-status/value-set,
+                                              :strength :required},
+                         :zen/desc "registered | partial | preliminary | final | amended | corrected | appended | cancelled | entered-in-error | deprecated | unknown"},
+                :_name {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :url {:confirms #{hl7-fhir-r5-core.uri/schema},
+                      :fhir/flags #{:SU},
+                      :zen/desc "Canonical identifier for this Composition, represented as a URI (globally unique)"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Version-independent identifier for the Composition"}},
+                :relatesTo {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r5-core.RelatedArtifact/schema},
+                                    :zen/desc "Relationships to other compositions/documents"}},
+                :_title {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :version {:confirms #{hl7-fhir-r5-core.string/schema},
+                          :fhir/flags #{:SU},
+                          :zen/desc "An explicitly assigned identifer of a variation of the content in the Composition"},
+                :_version {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :subject {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                              zen.fhir/Reference},
+                                  :fhir/flags #{:SU},
+                                  :zen.fhir/reference {:refers #{}},
+                                  :zen/desc "Who and/or what the composition is about"}},
+                :_url {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+         :zen.fhir/type "Composition"},
+ section-schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
+                 :zen.fhir/version "0.6.21-2",
+                 :confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                 :type zen/map,
+                 :keys {:orderedBy {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                    :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.list-order/value-set,
+                                                         :strength :preferred},
+                                    :zen/desc "Order of section entries"},
+                        :section {:type zen/vector,
+                                  :every {:confirms #{hl7-fhir-r5-core.Composition/section-schema},
+                                          :zen/desc "Nested Section"}},
+                        :title {:confirms #{hl7-fhir-r5-core.string/schema},
+                                :zen/desc "Label for section (e.g. for ToC)"},
+                        :emptyReason {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                      :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.list-empty-reason/value-set,
+                                                           :strength :preferred},
+                                      :zen/desc "Why the section is empty"},
+                        :author {:type zen/vector,
+                                 :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                     zen.fhir/Reference},
+                                         :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                                        hl7-fhir-r5-core.PractitionerRole/schema
+                                                                        hl7-fhir-r5-core.Organization/schema
+                                                                        hl7-fhir-r5-core.Device/schema
+                                                                        hl7-fhir-r5-core.Practitioner/schema
+                                                                        hl7-fhir-r5-core.RelatedPerson/schema}},
+                                         :zen/desc "Who and/or what authored the section"}},
+                        :code {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                               :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.doc-section-codes/value-set,
+                                                    :strength :example},
+                               :zen/desc "Classification of section (recommended)"},
+                        :focus {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                            zen.fhir/Reference},
+                                :zen.fhir/reference {:refers #{}},
+                                :zen/desc "Who/what the section is about, when it is not about the subject of composition"},
+                        :entry {:type zen/vector,
+                                :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                    zen.fhir/Reference},
+                                        :zen.fhir/reference {:refers #{}},
+                                        :zen/desc "A reference to data that supports this section"}},
+                        :_title {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                        :text {:confirms #{hl7-fhir-r5-core.Narrative/schema},
+                               :zen/desc "Text summary of the section, for human interpretation"}},
+                 :zen/desc "Composition is broken into sections"}}

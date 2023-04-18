@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.SubscriptionTopic-event,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "SubscriptionTopic-event",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/SubscriptionTopic-event",
+         :fhir/type "token",
+         :name "event",
+         :expr {:SubscriptionTopic {:knife [["eventTrigger" "event"]],
+                                    :jsonpath ["$.\"eventTrigger\".\"event\"[*]"],
+                                    :data-types #{{:type "CodeableConcept",
+                                                   :polymorphic? false}},
+                                    :template :token}}}}

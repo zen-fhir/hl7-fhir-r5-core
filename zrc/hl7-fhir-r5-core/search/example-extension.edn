@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.example-extension,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "example-extension",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/example-extension",
+         :fhir/type "reference",
+         :name "part-agree",
+         :expr {:Patient {:knife [["extension('http://example.org/fhir/StructureDefinition/participation-agreement'"
+                                   "value"]],
+                          :jsonpath ["$.\"extension('http://example.org/fhir/StructureDefinition/participation-agreement'\".\"value\"[*]"],
+                          :data-types #{},
+                          :template :reference}}}}

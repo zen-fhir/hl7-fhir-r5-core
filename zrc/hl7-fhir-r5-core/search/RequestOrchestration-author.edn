@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.RequestOrchestration-author,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "RequestOrchestration-author",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/RequestOrchestration-author",
+         :fhir/type "reference",
+         :name "author",
+         :expr {:RequestOrchestration {:knife [["author"]],
+                                       :jsonpath ["$.\"author\"[*]"],
+                                       :data-types #{{:type "Reference",
+                                                      :polymorphic? false}},
+                                       :template :reference}}}}

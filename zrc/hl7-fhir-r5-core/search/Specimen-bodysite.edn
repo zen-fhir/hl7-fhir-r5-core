@@ -1,0 +1,13 @@
+{ns hl7-fhir-r5-core.search.Specimen-bodysite,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Specimen-bodysite",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Specimen-bodysite",
+         :fhir/type "reference",
+         :name "bodysite",
+         :expr {:Specimen {:knife [["collection"
+                                    "bodySite"
+                                    "reference"]],
+                           :jsonpath ["$.\"collection\".\"bodySite\".\"reference\"[*]"],
+                           :data-types #{},
+                           :template :reference}}}}

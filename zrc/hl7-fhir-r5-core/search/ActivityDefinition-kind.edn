@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.ActivityDefinition-kind,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "ActivityDefinition-kind",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/ActivityDefinition-kind",
+         :fhir/type "token",
+         :name "kind",
+         :expr {:ActivityDefinition {:knife [["kind"]],
+                                     :jsonpath ["$.\"kind\"[*]"],
+                                     :data-types #{{:type "code",
+                                                    :polymorphic? false}},
+                                     :template :token}}}}

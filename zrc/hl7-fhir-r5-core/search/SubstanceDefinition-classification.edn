@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.SubstanceDefinition-classification,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "SubstanceDefinition-classification",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/SubstanceDefinition-classification",
+         :fhir/type "token",
+         :name "classification",
+         :expr {:SubstanceDefinition {:knife [["classification"]],
+                                      :jsonpath ["$.\"classification\"[*]"],
+                                      :data-types #{{:type "CodeableConcept",
+                                                     :polymorphic? false}},
+                                      :template :token}}}}

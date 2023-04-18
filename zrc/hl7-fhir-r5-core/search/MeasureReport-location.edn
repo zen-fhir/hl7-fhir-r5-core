@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.MeasureReport-location,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "MeasureReport-location",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/MeasureReport-location",
+         :fhir/type "reference",
+         :name "location",
+         :expr {:MeasureReport {:knife [["location"]],
+                                :jsonpath ["$.\"location\"[*]"],
+                                :data-types #{{:type "Reference",
+                                               :polymorphic? false}},
+                                :template :reference}}}}

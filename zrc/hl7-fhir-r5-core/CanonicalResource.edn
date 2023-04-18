@@ -1,0 +1,102 @@
+{ns hl7-fhir-r5-core.CanonicalResource,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.markdown
+          hl7-fhir-r5-core.boolean
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.UsageContext
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.value-set.version-algorithm
+          hl7-fhir-r5-core.value-set.jurisdiction
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.value-set.publication-status
+          hl7-fhir-r5-core.Coding
+          hl7-fhir-r5-core.uri
+          hl7-fhir-r5-core.ContactDetail},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/CanonicalResource",
+         :require #{:status},
+         :type zen/map,
+         :zen/desc "Common Interface declaration for conformance and knowledge artifact resources.",
+         :keys {:description {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                              :zen/desc "Natural language description of the {{title}}"},
+                :date {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "Date last changed"},
+                :publisher {:confirms #{hl7-fhir-r5-core.string/schema},
+                            :fhir/flags #{:SU},
+                            :zen/desc "Name of the publisher/steward (organization or individual)"},
+                :jurisdiction {:type zen/vector,
+                               :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                       :fhir/flags #{:SU},
+                                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.jurisdiction/value-set,
+                                                            :strength :extensible},
+                                       :zen/desc "Intended jurisdiction for {{title}} (if applicable)"}},
+                :_publisher {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_copyrightLabel {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :purpose {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                          :zen/desc "Why this {{title}} is defined"},
+                :_date {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :name {:confirms #{hl7-fhir-r5-core.string/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "Name for this {{title}} (computer friendly)"},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :copyrightLabel {:confirms #{hl7-fhir-r5-core.string/schema},
+                                 :zen/desc "Copyright holder and year(s)"},
+                :_experimental {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :useContext {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.UsageContext/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "The context that the content is intended to support"}},
+                :copyright {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                            :zen/desc "Use and/or publishing restrictions"},
+                :versionAlgorithm {:fhir/polymorphic true,
+                                   :type zen/map,
+                                   :exclusive-keys #{#{:string
+                                                       :Coding}},
+                                   :keys {:string {:confirms #{hl7-fhir-r5-core.string/schema}},
+                                          :_string {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                          :Coding {:confirms #{hl7-fhir-r5-core.Coding/schema}}},
+                                   :fhir/flags #{:SU},
+                                   :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.version-algorithm/value-set,
+                                                        :strength :extensible},
+                                   :zen/desc "How to compare versions"},
+                :experimental {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                               :fhir/flags #{:SU},
+                               :zen/desc "For testing purposes, not real usage"},
+                :title {:confirms #{hl7-fhir-r5-core.string/schema},
+                        :fhir/flags #{:SU},
+                        :zen/desc "Name for this {{title}} (human friendly)"},
+                :_description {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_purpose {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.publication-status/value-set,
+                                              :strength :required},
+                         :zen/desc "draft | active | retired | unknown"},
+                :_name {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :url {:confirms #{hl7-fhir-r5-core.uri/schema},
+                      :fhir/flags #{:SU},
+                      :zen/desc "Canonical identifier for this {{title}}, represented as an absolute URI (globally unique)"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Additional identifier for the {{title}}"}},
+                :_copyright {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_title {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :version {:confirms #{hl7-fhir-r5-core.string/schema},
+                          :fhir/flags #{:SU},
+                          :zen/desc "Business version of the {{title}}"},
+                :_version {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :contact {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.ContactDetail/schema},
+                                  :fhir/flags #{:SU},
+                                  :zen/desc "Contact details for the publisher"}},
+                :_url {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+         :zen.fhir/type "CanonicalResource"}}

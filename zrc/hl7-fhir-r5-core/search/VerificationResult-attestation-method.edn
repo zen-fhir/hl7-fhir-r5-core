@@ -1,0 +1,13 @@
+{ns hl7-fhir-r5-core.search.VerificationResult-attestation-method,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "VerificationResult-attestation-method",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/VerificationResult-attestation-method",
+         :fhir/type "token",
+         :name "attestation-method",
+         :expr {:VerificationResult {:knife [["attestation"
+                                              "communicationMethod"]],
+                                     :jsonpath ["$.\"attestation\".\"communicationMethod\"[*]"],
+                                     :data-types #{{:type "CodeableConcept",
+                                                    :polymorphic? false}},
+                                     :template :token}}}}

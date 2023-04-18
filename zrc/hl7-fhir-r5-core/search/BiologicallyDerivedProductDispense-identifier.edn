@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.BiologicallyDerivedProductDispense-identifier,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "BiologicallyDerivedProductDispense-identifier",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/BiologicallyDerivedProductDispense-identifier",
+         :fhir/type "token",
+         :name "identifier",
+         :expr {:BiologicallyDerivedProductDispense {:knife [["identifier"]],
+                                                     :jsonpath ["$.\"identifier\"[*]"],
+                                                     :data-types #{{:type "Identifier",
+                                                                    :polymorphic? false}},
+                                                     :template :token}}}}

@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.ResearchSubject-subjectstate,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "ResearchSubject-subjectstate",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/ResearchSubject-subjectstate",
+         :fhir/type "token",
+         :name "subject_state",
+         :expr {:ResearchSubject {:knife [["progress" "subjectState"]],
+                                  :jsonpath ["$.\"progress\".\"subjectState\"[*]"],
+                                  :data-types #{{:type "CodeableConcept",
+                                                 :polymorphic? false}},
+                                  :template :token}}}}

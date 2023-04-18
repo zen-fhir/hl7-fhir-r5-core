@@ -1,0 +1,21 @@
+{ns hl7-fhir-r5-core.search.SubscriptionTopic-resource,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "SubscriptionTopic-resource",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/SubscriptionTopic-resource",
+         :fhir/type "uri",
+         :name "resource",
+         :expr {:SubscriptionTopic {:knife [["resourceTrigger"
+                                             "resource"]
+                                            ["eventTrigger"
+                                             "resource"]
+                                            ["canFilterBy" "resource"]
+                                            ["notificationShape"
+                                             "resource"]],
+                                    :jsonpath ["$.\"resourceTrigger\".\"resource\"[*]"
+                                               "$.\"eventTrigger\".\"resource\"[*]"
+                                               "$.\"canFilterBy\".\"resource\"[*]"
+                                               "$.\"notificationShape\".\"resource\"[*]"],
+                                    :data-types #{{:type "uri",
+                                                   :polymorphic? false}},
+                                    :template :uri}}}}

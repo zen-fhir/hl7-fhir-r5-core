@@ -1,0 +1,31 @@
+{ns hl7-fhir-r5-core.publishableconceptmap,
+ import #{hl7-fhir-r5-core.publishableconceptmap
+          zen.fhir
+          hl7-fhir-r5-core.shareableconceptmap},
+ group-element-target-dependsOn-schema {:zen/tags #{zen/schema
+                                                    zen.fhir/structure-schema},
+                                        :zen.fhir/version "0.6.21-2"},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.shareableconceptmap/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen.fhir/profile-schema zen/schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/publishableconceptmap",
+         :require #{:date},
+         :type zen/map,
+         :zen/desc "Defines and enforces the minimum expectations for publication and distribution of a concept map, typically as part of an artifact repository or implementation guide publication",
+         :keys {:date {:fhir/flags #{:MS}},
+                :group {:every {:keys {:element {:every {:keys {:target {:every {:keys {:dependsOn {:confirms #{hl7-fhir-r5-core.publishableconceptmap/group-element-target-dependsOn-schema}}}}}}}}}}},
+                :jurisdiction {:type zen/vector,
+                               :every {:fhir/flags #{:MS}}},
+                :purpose {:fhir/flags #{:MS}},
+                :copyrightLabel {:fhir/flags #{:MS}},
+                :useContext {:type zen/vector,
+                             :every {:fhir/flags #{:MS}}},
+                :copyright {:fhir/flags #{:MS}},
+                :topic {:type zen/vector, :every {:fhir/flags #{:MS}}},
+                :identifier {:type zen/vector,
+                             :every {:fhir/flags #{:MS}}},
+                :contact {:type zen/vector,
+                          :every {:fhir/flags #{:MS}}},
+                :effectivePeriod {:fhir/flags #{:MS}}},
+         :zen.fhir/type "ConceptMap"}}

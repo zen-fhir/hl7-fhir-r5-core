@@ -1,0 +1,17 @@
+{ns hl7-fhir-r5-core.search.PlanDefinition-definition,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "PlanDefinition-definition",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/PlanDefinition-definition",
+         :fhir/type "reference",
+         :name "definition",
+         :expr {:PlanDefinition {:knife [["action"
+                                          "definition"
+                                          "ofType(canonical"]
+                                         ["action"
+                                          "definition"
+                                          "ofType(uri"]],
+                                 :jsonpath ["$.\"action\".\"definition\".\"ofType(canonical\"[*]"
+                                            "$.\"action\".\"definition\".\"ofType(uri\"[*]"],
+                                 :data-types #{},
+                                 :template :reference}}}}

@@ -1,0 +1,11 @@
+{ns hl7-fhir-r5-core.search.EpisodeOfCare-reason-reference,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "EpisodeOfCare-reason-reference",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/EpisodeOfCare-reason-reference",
+         :fhir/type "reference",
+         :name "reason-reference",
+         :expr {:EpisodeOfCare {:knife [["reason" "value" "reference"]],
+                                :jsonpath ["$.\"reason\".\"value\".\"reference\"[*]"],
+                                :data-types #{},
+                                :template :reference}}}}

@@ -1,0 +1,14 @@
+{ns hl7-fhir-r5-core.search.DocumentReference-format-code,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "DocumentReference-format-code",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/DocumentReference-format-code",
+         :fhir/type "token",
+         :name "format-code",
+         :expr {:DocumentReference {:knife [["content"
+                                             "profile"
+                                             "value"
+                                             "ofType(Coding"]],
+                                    :jsonpath ["$.\"content\".\"profile\".\"value\".\"ofType(Coding\"[*]"],
+                                    :data-types #{},
+                                    :template :token}}}}

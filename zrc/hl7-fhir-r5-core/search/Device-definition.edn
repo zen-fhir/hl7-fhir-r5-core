@@ -1,0 +1,11 @@
+{ns hl7-fhir-r5-core.search.Device-definition,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Device-definition",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Device-definition",
+         :fhir/type "reference",
+         :name "definition",
+         :expr {:Device {:knife [["definition" "reference"]],
+                         :jsonpath ["$.\"definition\".\"reference\"[*]"],
+                         :data-types #{},
+                         :template :reference}}}}

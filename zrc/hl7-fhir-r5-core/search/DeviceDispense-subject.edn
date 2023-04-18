@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.DeviceDispense-subject,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "DeviceDispense-subject",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/DeviceDispense-subject",
+         :fhir/type "reference",
+         :name "subject",
+         :expr {:DeviceDispense {:knife [["subject"]],
+                                 :jsonpath ["$.\"subject\"[*]"],
+                                 :data-types #{{:type "Reference",
+                                                :polymorphic? false}},
+                                 :template :reference}}}}

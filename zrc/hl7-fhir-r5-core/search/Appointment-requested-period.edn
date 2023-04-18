@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Appointment-requested-period,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Appointment-requested-period",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Appointment-requested-period",
+         :fhir/type "date",
+         :name "requested-period",
+         :expr {:Appointment {:knife [["requestedPeriod"]],
+                              :jsonpath ["$.\"requestedPeriod\"[*]"],
+                              :data-types #{},
+                              :template :date,
+                              :sql {:where [:or]}}}}}

@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.ClinicalImpression-performer,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "ClinicalImpression-performer",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/ClinicalImpression-performer",
+         :fhir/type "reference",
+         :name "performer",
+         :expr {:ClinicalImpression {:knife [["performer"]],
+                                     :jsonpath ["$.\"performer\"[*]"],
+                                     :data-types #{{:type "Reference",
+                                                    :polymorphic? false}},
+                                     :template :reference}}}}

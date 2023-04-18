@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.AllergyIntolerance-participant,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "AllergyIntolerance-participant",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/AllergyIntolerance-participant",
+         :fhir/type "reference",
+         :name "participant",
+         :expr {:AllergyIntolerance {:knife [["participant" "actor"]],
+                                     :jsonpath ["$.\"participant\".\"actor\"[*]"],
+                                     :data-types #{{:type "Reference",
+                                                    :polymorphic? false}},
+                                     :template :reference}}}}

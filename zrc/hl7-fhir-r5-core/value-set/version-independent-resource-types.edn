@@ -1,0 +1,18 @@
+{ns hl7-fhir-r5-core.value-set.version-independent-resource-types,
+ import #{zen.fhir},
+ value-set {:zen/tags #{zen.fhir/value-set},
+            :zen/desc "Current and past FHIR resource types (deleted or renamed)",
+            :zen.fhir/version "0.6.21-2",
+            :fhir/code-systems #{{:fhir/url "http://hl7.org/fhir/fhir-old-types",
+                                  :zen.fhir/content :bundled}
+                                 {:fhir/url "http://hl7.org/fhir/fhir-types",
+                                  :zen.fhir/content :bundled}},
+            :uri "http://hl7.org/fhir/ValueSet/version-independent-resource-types",
+            :version "5.0.0",
+            :ftr {:module "hl7-fhir-r5-core",
+                  :source-url "https://storage.googleapis.com",
+                  :source-type :cloud-storage,
+                  :ftr-path "ftr",
+                  :tag "init",
+                  :validation-index {:type :nippy,
+                                     :file "index.nippy"}}}}

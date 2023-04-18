@@ -1,0 +1,118 @@
+{ns hl7-fhir-r5-core.BodyStructure,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.markdown
+          hl7-fhir-r5-core.value-set.device-type
+          hl7-fhir-r5-core.value-set.bodystructure-relative-location
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.CodeableReference
+          hl7-fhir-r5-core.boolean
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.value-set.body-site
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.Attachment
+          hl7-fhir-r5-core.value-set.bodystructure-code
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.BodyStructure
+          hl7-fhir-r5-core.Quantity
+          hl7-fhir-r5-core.ImagingSelection
+          hl7-fhir-r5-core.value-set.bodystructure-bodylandmarkorientation-clockface-position
+          hl7-fhir-r5-core.Patient},
+ includedStructure-schema {:zen/tags #{zen/schema
+                                       zen.fhir/structure-schema},
+                           :zen.fhir/version "0.6.21-2",
+                           :confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                           :type zen/map,
+                           :keys {:structure {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                              :fhir/flags #{:SU},
+                                              :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.body-site/value-set,
+                                                                   :strength :example},
+                                              :zen/desc "Code that represents the included structure"},
+                                  :laterality {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                               :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.bodystructure-relative-location/value-set,
+                                                                    :strength :example},
+                                               :zen/desc "Code that represents the included structure laterality"},
+                                  :bodyLandmarkOrientation {:type zen/vector,
+                                                            :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                                                    :type zen/map,
+                                                                    :keys {:landmarkDescription {:type zen/vector,
+                                                                                                 :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                                                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.body-site/value-set,
+                                                                                                                              :strength :example},
+                                                                                                         :zen/desc "Body ]andmark description"}},
+                                                                           :clockFacePosition {:type zen/vector,
+                                                                                               :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                                                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.bodystructure-bodylandmarkorientation-clockface-position/value-set,
+                                                                                                                            :strength :example},
+                                                                                                       :zen/desc "Clockface orientation"}},
+                                                                           :distanceFromLandmark {:type zen/vector,
+                                                                                                  :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                                                                                          :type zen/map,
+                                                                                                          :keys {:device {:type zen/vector,
+                                                                                                                          :every {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                                                                                                                  :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.device-type/value-set,
+                                                                                                                                                       :strength :example},
+                                                                                                                                  :zen/desc "Measurement device"}},
+                                                                                                                 :value {:type zen/vector,
+                                                                                                                         :every {:confirms #{hl7-fhir-r5-core.Quantity/schema},
+                                                                                                                                 :zen/desc "Measured distance from body landmark"}}},
+                                                                                                          :zen/desc "Landmark relative location"}},
+                                                                           :surfaceOrientation {:type zen/vector,
+                                                                                                :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                                                        :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.bodystructure-relative-location/value-set,
+                                                                                                                             :strength :preferred},
+                                                                                                        :zen/desc "Relative landmark surface orientation"}}},
+                                                                    :zen/desc "Landmark relative location"}},
+                                  :spatialReference {:type zen/vector,
+                                                     :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                         zen.fhir/Reference},
+                                                             :zen.fhir/reference {:refers #{hl7-fhir-r5-core.ImagingSelection/schema}},
+                                                             :zen/desc "Cartesian reference for structure"}},
+                                  :qualifier {:type zen/vector,
+                                              :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                      :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.bodystructure-relative-location/value-set,
+                                                                           :strength :example},
+                                                      :zen/desc "Code that represents the included structure qualifier"}}},
+                           :require #{:structure},
+                           :zen/desc "Included anatomic location(s)"},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/BodyStructure",
+         :require #{:patient :includedStructure},
+         :type zen/map,
+         :zen/desc "Record details about an anatomical structure.  This resource may be used when a coded concept does not provide the necessary detail needed for the use case.",
+         :keys {:patient {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                      zen.fhir/Reference},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema}},
+                          :zen/desc "Who this is about"},
+                :description {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                              :fhir/flags #{:SU},
+                              :zen/desc "Text description"},
+                :_active {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :includedStructure {:type zen/vector,
+                                    :every {:confirms #{hl7-fhir-r5-core.BodyStructure/includedStructure-schema}},
+                                    :minItems 1},
+                :morphology {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                             :fhir/flags #{:SU},
+                             :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.bodystructure-code/value-set,
+                                                  :strength :example},
+                             :zen/desc "Kind of Structure"},
+                :_description {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :active {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen/desc "Whether this record is in active use"},
+                :excludedStructure {:type zen/vector,
+                                    :every {:confirms #{hl7-fhir-r5-core.BodyStructure/includedStructure-schema},
+                                            :zen/desc "Excluded anatomic locations(s)"}},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Bodystructure identifier"}},
+                :image {:type zen/vector,
+                        :every {:confirms #{hl7-fhir-r5-core.Attachment/schema},
+                                :zen/desc "Attached images"}}},
+         :zen.fhir/type "BodyStructure"}}

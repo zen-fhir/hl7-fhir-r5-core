@@ -1,0 +1,15 @@
+{ns hl7-fhir-r5-core.search.DeviceRequest-event-date,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "DeviceRequest-event-date",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/DeviceRequest-event-date",
+         :fhir/type "date",
+         :name "event-date",
+         :expr {:DeviceRequest {:knife [["occurrence"
+                                         "ofType(dateTime"]
+                                        ["occurrence" "ofType(Period"]],
+                                :jsonpath ["$.\"occurrence\".\"ofType(dateTime\"[*]"
+                                           "$.\"occurrence\".\"ofType(Period\"[*]"],
+                                :data-types #{},
+                                :template :date,
+                                :sql {:where [:or]}}}}}

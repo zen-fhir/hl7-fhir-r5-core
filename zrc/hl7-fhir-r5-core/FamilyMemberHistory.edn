@@ -1,0 +1,230 @@
+{ns hl7-fhir-r5-core.FamilyMemberHistory,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.value-set.history-absent-reason
+          hl7-fhir-r5-core.value-set.administrative-gender
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.Age
+          hl7-fhir-r5-core.CodeableReference
+          hl7-fhir-r5-core.boolean
+          zen.fhir
+          hl7-fhir-r5-core.value-set.condition-outcome
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-terminology-r5.value-set.v3-FamilyMember
+          hl7-fhir-r5-core.Annotation
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.value-set.participation-role-type
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.value-set.procedure-code
+          hl7-fhir-r5-core.value-set.clinical-findings
+          hl7-fhir-r5-core.Practitioner
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.Device
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.value-set.condition-code
+          hl7-fhir-r5-core.date
+          hl7-fhir-r5-core.CareTeam
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.RelatedPerson
+          hl7-fhir-r5-core.PractitionerRole
+          hl7-fhir-r5-core.Period
+          hl7-fhir-r5-core.canonical
+          hl7-fhir-r5-core.Range
+          hl7-fhir-r5-core.uri
+          hl7-fhir-r5-core.Patient
+          hl7-fhir-r5-core.value-set.history-status},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/FamilyMemberHistory",
+         :require #{:patient :relationship :status},
+         :type zen/map,
+         :zen/desc "Significant health conditions for a person related to the patient relevant in the context of care for the patient.",
+         :keys {:patient {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                      zen.fhir/Reference},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema}},
+                          :zen/desc "Patient history is about"},
+                :date {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "When history was recorded or last updated"},
+                :instantiatesCanonical {:type zen/vector,
+                                        :every {:confirms #{hl7-fhir-r5-core.canonical/schema},
+                                                :fhir/flags #{:SU},
+                                                :zen/desc "Instantiates FHIR protocol or definition"}},
+                :instantiatesUri {:type zen/vector,
+                                  :every {:confirms #{hl7-fhir-r5-core.uri/schema},
+                                          :fhir/flags #{:SU},
+                                          :zen/desc "Instantiates external protocol or definition"}},
+                :age {:fhir/polymorphic true,
+                      :type zen/map,
+                      :exclusive-keys #{#{:string :Range :Age}},
+                      :keys {:Age {:confirms #{hl7-fhir-r5-core.Age/schema}},
+                             :Range {:confirms #{hl7-fhir-r5-core.Range/schema}},
+                             :string {:confirms #{hl7-fhir-r5-core.string/schema}},
+                             :_string {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                      :fhir/flags #{:SU},
+                      :zen/desc "(approximate) age"},
+                :sex {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                      :fhir/flags #{:SU},
+                      :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.administrative-gender/value-set,
+                                           :strength :extensible},
+                      :zen/desc "male | female | other | unknown"},
+                :_date {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :name {:confirms #{hl7-fhir-r5-core.string/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "The family member described"},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :relationship {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                               :fhir/flags #{:SU},
+                               :zen.fhir/value-set {:symbol hl7-terminology-r5.value-set.v3-FamilyMember/value-set,
+                                                    :strength :example},
+                               :zen/desc "Relationship to the subject"},
+                :procedure {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                    :type zen/map,
+                                    :keys {:code {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                  :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.procedure-code/value-set,
+                                                                       :strength :example},
+                                                  :zen/desc "Procedures performed on the related person"},
+                                           :outcome {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                     :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.clinical-findings/value-set,
+                                                                          :strength :example},
+                                                     :zen/desc "What happened following the procedure"},
+                                           :contributedToDeath {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                                                                :zen/desc "Whether the procedure contributed to the cause of death"},
+                                           :_contributedToDeath {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                           :performed {:fhir/polymorphic true,
+                                                       :type zen/map,
+                                                       :exclusive-keys #{#{:string
+                                                                           :dateTime
+                                                                           :Range
+                                                                           :Period
+                                                                           :Age}},
+                                                       :keys {:Age {:confirms #{hl7-fhir-r5-core.Age/schema}},
+                                                              :Range {:confirms #{hl7-fhir-r5-core.Range/schema}},
+                                                              :Period {:confirms #{hl7-fhir-r5-core.Period/schema}},
+                                                              :string {:confirms #{hl7-fhir-r5-core.string/schema}},
+                                                              :_string {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                              :dateTime {:confirms #{hl7-fhir-r5-core.dateTime/schema}},
+                                                              :_dateTime {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                                       :zen/desc "When the procedure was performed"},
+                                           :note {:type zen/vector,
+                                                  :every {:confirms #{hl7-fhir-r5-core.Annotation/schema},
+                                                          :zen/desc "Extra information about the procedure"}}},
+                                    :require #{:code},
+                                    :zen/desc "Procedures that the related person had"}},
+                :_estimatedAge {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :participant {:type zen/vector,
+                              :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                      :type zen/map,
+                                      :keys {:function {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                        :fhir/flags #{:SU},
+                                                        :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.participation-role-type/value-set,
+                                                                             :strength :extensible},
+                                                        :zen/desc "Type of involvement"},
+                                             :actor {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                 zen.fhir/Reference},
+                                                     :fhir/flags #{:SU},
+                                                     :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                                                    hl7-fhir-r5-core.CareTeam/schema
+                                                                                    hl7-fhir-r5-core.PractitionerRole/schema
+                                                                                    hl7-fhir-r5-core.Organization/schema
+                                                                                    hl7-fhir-r5-core.Device/schema
+                                                                                    hl7-fhir-r5-core.Practitioner/schema
+                                                                                    hl7-fhir-r5-core.RelatedPerson/schema}},
+                                                     :zen/desc "Who or what participated in the activities related to the family member history"}},
+                                      :require #{:actor},
+                                      :fhir/flags #{:SU},
+                                      :zen/desc "Who or what participated in the activities related to the family member history and how they were involved"}},
+                :deceased {:fhir/polymorphic true,
+                           :type zen/map,
+                           :exclusive-keys #{#{:date
+                                               :string
+                                               :Range
+                                               :boolean
+                                               :Age}},
+                           :keys {:boolean {:confirms #{hl7-fhir-r5-core.boolean/schema}},
+                                  :_boolean {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                  :Age {:confirms #{hl7-fhir-r5-core.Age/schema}},
+                                  :Range {:confirms #{hl7-fhir-r5-core.Range/schema}},
+                                  :date {:confirms #{hl7-fhir-r5-core.date/schema}},
+                                  :_date {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                  :string {:confirms #{hl7-fhir-r5-core.string/schema}},
+                                  :_string {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                           :fhir/flags #{:SU},
+                           :zen/desc "Dead? How old/when?"},
+                :note {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.Annotation/schema},
+                               :zen/desc "General note about related person"}},
+                :reason {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                 :fhir/flags #{:SU},
+                                 :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.clinical-findings/value-set,
+                                                      :strength :example},
+                                 :zen/desc "Why was family member history performed?"}},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.history-status/value-set,
+                                              :strength :required},
+                         :zen/desc "partial | completed | entered-in-error | health-unknown"},
+                :condition {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                    :type zen/map,
+                                    :keys {:code {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                  :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.condition-code/value-set,
+                                                                       :strength :example},
+                                                  :zen/desc "Condition suffered by relation"},
+                                           :outcome {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                     :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.condition-outcome/value-set,
+                                                                          :strength :example},
+                                                     :zen/desc "deceased | permanent disability | etc"},
+                                           :contributedToDeath {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                                                                :zen/desc "Whether the condition contributed to the cause of death"},
+                                           :_contributedToDeath {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                           :onset {:fhir/polymorphic true,
+                                                   :type zen/map,
+                                                   :exclusive-keys #{#{:string
+                                                                       :Range
+                                                                       :Period
+                                                                       :Age}},
+                                                   :keys {:Age {:confirms #{hl7-fhir-r5-core.Age/schema}},
+                                                          :Range {:confirms #{hl7-fhir-r5-core.Range/schema}},
+                                                          :Period {:confirms #{hl7-fhir-r5-core.Period/schema}},
+                                                          :string {:confirms #{hl7-fhir-r5-core.string/schema}},
+                                                          :_string {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                                   :zen/desc "When condition first manifested"},
+                                           :note {:type zen/vector,
+                                                  :every {:confirms #{hl7-fhir-r5-core.Annotation/schema},
+                                                          :zen/desc "Extra information about condition"}}},
+                                    :require #{:code},
+                                    :zen/desc "Condition that the related person had"}},
+                :_name {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "External Id(s) for this record"}},
+                :born {:fhir/polymorphic true,
+                       :type zen/map,
+                       :exclusive-keys #{#{:date :string :Period}},
+                       :keys {:Period {:confirms #{hl7-fhir-r5-core.Period/schema}},
+                              :date {:confirms #{hl7-fhir-r5-core.date/schema}},
+                              :_date {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                              :string {:confirms #{hl7-fhir-r5-core.string/schema}},
+                              :_string {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                       :zen/desc "(approximate) date of birth"},
+                :_instantiatesCanonical {:type zen/vector,
+                                         :every {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                :dataAbsentReason {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                   :fhir/flags #{:SU},
+                                   :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.history-absent-reason/value-set,
+                                                        :strength :example},
+                                   :zen/desc "subject-unknown | withheld | unable-to-obtain | deferred"},
+                :_instantiatesUri {:type zen/vector,
+                                   :every {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                :estimatedAge {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                               :fhir/flags #{:SU},
+                               :zen/desc "Age is estimated?"}},
+         :zen.fhir/type "FamilyMemberHistory"}}

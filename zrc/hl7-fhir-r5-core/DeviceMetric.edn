@@ -1,0 +1,83 @@
+{ns hl7-fhir-r5-core.DeviceMetric,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.value-set.metric-calibration-type
+          hl7-fhir-r5-core.instant
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.value-set.metric-calibration-state
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.value-set.metric-operational-status
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.Device
+          hl7-fhir-r5-core.value-set.color-codes
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.value-set.devicemetric-type
+          hl7-fhir-r5-core.Quantity
+          hl7-fhir-r5-core.value-set.metric-category
+          hl7-fhir-r5-core.value-set.ucum-units},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/DeviceMetric",
+         :require #{:category :type :device},
+         :type zen/map,
+         :zen/desc "Describes a measurement, calculation or setting capability of a device.  The DeviceMetric resource is derived from the ISO/IEEE 11073-10201 Domain Information Model standard, but is more widely applicable. ",
+         :keys {:category {:confirms #{hl7-fhir-r5-core.code/schema},
+                           :fhir/flags #{:SU},
+                           :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.metric-category/value-set,
+                                                :strength :required},
+                           :zen/desc "measurement | setting | calculation | unspecified"},
+                :_color {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :color {:confirms #{hl7-fhir-r5-core.code/schema},
+                        :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.color-codes/value-set,
+                                             :strength :required},
+                        :zen/desc "Color name (from CSS4) or #RRGGBB code"},
+                :unit {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                       :fhir/flags #{:SU},
+                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.ucum-units/value-set,
+                                            :strength :preferred},
+                       :zen/desc "Unit of Measure for the Metric"},
+                :type {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                       :fhir/flags #{:SU},
+                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.devicemetric-type/value-set,
+                                            :strength :preferred},
+                       :zen/desc "Identity of metric, for example Heart Rate or PEEP Setting"},
+                :_operationalStatus {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Instance identifier"}},
+                :device {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                     zen.fhir/Reference},
+                         :fhir/flags #{:SU},
+                         :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Device/schema}},
+                         :zen/desc "Describes the link to the Device"},
+                :measurementFrequency {:confirms #{hl7-fhir-r5-core.Quantity/schema},
+                                       :zen/desc "Indicates how often the metric is taken or recorded"},
+                :calibration {:type zen/vector,
+                              :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                      :type zen/map,
+                                      :keys {:type {:confirms #{hl7-fhir-r5-core.code/schema},
+                                                    :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.metric-calibration-type/value-set,
+                                                                         :strength :required},
+                                                    :zen/desc "unspecified | offset | gain | two-point"},
+                                             :_type {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                             :state {:confirms #{hl7-fhir-r5-core.code/schema},
+                                                     :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.metric-calibration-state/value-set,
+                                                                          :strength :required},
+                                                     :zen/desc "not-calibrated | calibration-required | calibrated | unspecified"},
+                                             :_state {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                             :time {:confirms #{hl7-fhir-r5-core.instant/schema},
+                                                    :zen/desc "Describes the time last calibration has been performed"},
+                                             :_time {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                      :zen/desc "Describes the calibrations that have been performed or that are required to be performed"}},
+                :operationalStatus {:confirms #{hl7-fhir-r5-core.code/schema},
+                                    :fhir/flags #{:SU},
+                                    :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.metric-operational-status/value-set,
+                                                         :strength :required},
+                                    :zen/desc "on | off | standby | entered-in-error"},
+                :_category {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+         :zen.fhir/type "DeviceMetric"}}

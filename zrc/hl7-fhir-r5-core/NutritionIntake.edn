@@ -1,0 +1,218 @@
+{ns hl7-fhir-r5-core.NutritionIntake,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.value-set.edible-substance-type
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.CodeableReference
+          hl7-fhir-r5-core.boolean
+          zen.fhir
+          hl7-fhir-r5-core.value-set.nutrient-code
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.Group
+          hl7-fhir-r5-core.Observation
+          hl7-fhir-r5-core.Annotation
+          hl7-fhir-r5-core.SimpleQuantity
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.value-set.performer-role
+          hl7-fhir-r5-core.Encounter
+          hl7-fhir-r5-core.Location
+          hl7-fhir-r5-core.Practitioner
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.Device
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.CarePlan
+          hl7-fhir-r5-core.value-set.event-status
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.value-set.condition-code
+          hl7-fhir-r5-core.CareTeam
+          hl7-fhir-r5-core.Procedure
+          hl7-fhir-r5-core.Timing
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.RelatedPerson
+          hl7-fhir-r5-core.PractitionerRole
+          hl7-fhir-r5-core.value-set.clinicalimpression-status-reason
+          hl7-fhir-r5-core.Period
+          hl7-fhir-r5-core.canonical
+          hl7-fhir-r5-core.NutritionIntake
+          hl7-fhir-r5-core.value-set.not-consumed-reason
+          hl7-fhir-r5-core.NutritionOrder
+          hl7-fhir-r5-core.Quantity
+          hl7-fhir-r5-core.ServiceRequest
+          hl7-fhir-r5-core.uri
+          hl7-fhir-r5-core.value-set.diet-type
+          hl7-fhir-r5-core.value-set.food-type
+          hl7-fhir-r5-core.Patient},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/NutritionIntake",
+         :require #{:status :consumedItem :subject},
+         :type zen/map,
+         :zen/desc "A record of food or fluid that is being consumed by a patient.  A NutritionIntake may indicate that the patient may be consuming the food or fluid now or has consumed the food or fluid in the past.  The source of this information can be the patient, significant other (such as a family member or spouse), or a clinician.  A common scenario where this information is captured is during the history taking process during a patient visit or stay or through an app that tracks food or fluids consumed.   The consumption information may come from sources such as the patient's memory, from a nutrition label,  or from a clinician documenting observed intake.",
+         :keys {:ingredientLabel {:type zen/vector,
+                                  :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                          :type zen/map,
+                                          :keys {:nutrient {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                                            :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.nutrient-code/value-set,
+                                                                                 :strength :example},
+                                                            :zen/desc "Total nutrient consumed"},
+                                                 :amount {:confirms #{hl7-fhir-r5-core.Quantity/schema
+                                                                      hl7-fhir-r5-core.SimpleQuantity/schema},
+                                                          :zen/desc "Total amount of nutrient consumed"}},
+                                          :require #{:amount
+                                                     :nutrient},
+                                          :zen/desc "Total nutrient for the whole meal, product, serving"}},
+                :instantiatesCanonical {:type zen/vector,
+                                        :every {:confirms #{hl7-fhir-r5-core.canonical/schema},
+                                                :zen/desc "Instantiates FHIR protocol or definition"}},
+                :instantiatesUri {:type zen/vector,
+                                  :every {:confirms #{hl7-fhir-r5-core.uri/schema},
+                                          :zen/desc "Instantiates external protocol or definition"}},
+                :derivedFrom {:type zen/vector,
+                              :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                  zen.fhir/Reference},
+                                      :zen.fhir/reference {:refers #{}},
+                                      :zen/desc "Additional supporting information"}},
+                :encounter {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                        zen.fhir/Reference},
+                            :fhir/flags #{:SU},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Encounter/schema}},
+                            :zen/desc "Encounter associated with NutritionIntake"},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :reported {:fhir/polymorphic true,
+                           :type zen/map,
+                           :exclusive-keys #{#{:boolean :Reference}},
+                           :keys {:boolean {:confirms #{hl7-fhir-r5-core.boolean/schema}},
+                                  :_boolean {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                  :Reference {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                          zen.fhir/Reference},
+                                              :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                                             hl7-fhir-r5-core.PractitionerRole/schema
+                                                                             hl7-fhir-r5-core.Organization/schema
+                                                                             hl7-fhir-r5-core.Practitioner/schema
+                                                                             hl7-fhir-r5-core.RelatedPerson/schema}}}},
+                           :zen/desc "Person or organization that provided the information about the consumption of this food or fluid"},
+                :statusReason {:type zen/vector,
+                               :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.clinicalimpression-status-reason/value-set,
+                                                            :strength :example},
+                                       :zen/desc "Reason for current status"}},
+                :recorded {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                           :fhir/flags #{:SU},
+                           :zen/desc "When the intake was recorded"},
+                :note {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.Annotation/schema},
+                               :zen/desc "Further information about the consumption"}},
+                :reason {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                 :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.condition-code/value-set,
+                                                      :strength :example},
+                                 :zen/desc "Reason for why the food or fluid is /was consumed"}},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.event-status/value-set,
+                                              :strength :required},
+                         :zen/desc "preparation | in-progress | not-done | on-hold | stopped | completed | entered-in-error | unknown"},
+                :consumedItem {:type zen/vector,
+                               :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                       :type zen/map,
+                                       :keys {:type {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                     :fhir/flags #{:SU},
+                                                     :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.edible-substance-type/value-set,
+                                                                          :strength :example},
+                                                     :zen/desc "The type of food or fluid product"},
+                                              :nutritionProduct {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                                                 :fhir/flags #{:SU},
+                                                                 :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.food-type/value-set,
+                                                                                      :strength :example},
+                                                                 :zen/desc "Code that identifies the food or fluid product that was consumed"},
+                                              :schedule {:confirms #{hl7-fhir-r5-core.Timing/schema},
+                                                         :zen/desc "Scheduled frequency of consumption"},
+                                              :amount {:confirms #{hl7-fhir-r5-core.Quantity/schema
+                                                                   hl7-fhir-r5-core.SimpleQuantity/schema},
+                                                       :fhir/flags #{:SU},
+                                                       :zen/desc "Quantity of the specified food"},
+                                              :rate {:confirms #{hl7-fhir-r5-core.Quantity/schema
+                                                                 hl7-fhir-r5-core.SimpleQuantity/schema},
+                                                     :fhir/flags #{:SU},
+                                                     :zen/desc "Rate at which enteral feeding was administered"},
+                                              :notConsumed {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                                                            :zen/desc "Flag to indicate if the food or fluid item was refused or otherwise not consumed"},
+                                              :_notConsumed {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                              :notConsumedReason {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                  :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.not-consumed-reason/value-set,
+                                                                                       :strength :example},
+                                                                  :zen/desc "Reason food or fluid was not consumed"}},
+                                       :require #{:type
+                                                  :nutritionProduct},
+                                       :zen/desc "What food or fluid product or item was consumed"},
+                               :minItems 1},
+                :code {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                       :fhir/flags #{:SU},
+                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.diet-type/value-set,
+                                            :strength :example},
+                       :zen/desc "Code representing an overall type of nutrition intake"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "External identifier"}},
+                :basedOn {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                              zen.fhir/Reference},
+                                  :fhir/flags #{:SU},
+                                  :zen.fhir/reference {:refers #{hl7-fhir-r5-core.NutritionOrder/schema
+                                                                 hl7-fhir-r5-core.ServiceRequest/schema
+                                                                 hl7-fhir-r5-core.CarePlan/schema}},
+                                  :zen/desc "Fulfils plan, proposal or order"}},
+                :partOf {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                             zen.fhir/Reference},
+                                 :fhir/flags #{:SU},
+                                 :zen.fhir/reference {:refers #{hl7-fhir-r5-core.NutritionIntake/schema
+                                                                hl7-fhir-r5-core.Observation/schema
+                                                                hl7-fhir-r5-core.Procedure/schema}},
+                                 :zen/desc "Part of referenced event"}},
+                :_recorded {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :location {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                       zen.fhir/Reference},
+                           :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Location/schema}},
+                           :zen/desc "Where the intake occurred"},
+                :_instantiatesCanonical {:type zen/vector,
+                                         :every {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                :subject {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                      zen.fhir/Reference},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                         hl7-fhir-r5-core.Group/schema}},
+                          :zen/desc "Who is/was consuming the food or fluid"},
+                :occurrence {:fhir/polymorphic true,
+                             :type zen/map,
+                             :exclusive-keys #{#{:dateTime :Period}},
+                             :keys {:dateTime {:confirms #{hl7-fhir-r5-core.dateTime/schema}},
+                                    :_dateTime {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                    :Period {:confirms #{hl7-fhir-r5-core.Period/schema}}},
+                             :fhir/flags #{:SU},
+                             :zen/desc "The date/time or interval when the food or fluid is/was consumed"},
+                :performer {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                    :type zen/map,
+                                    :keys {:function {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                      :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.performer-role/value-set,
+                                                                           :strength :example},
+                                                      :zen/desc "Type of performer"},
+                                           :actor {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                               zen.fhir/Reference},
+                                                   :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                                                  hl7-fhir-r5-core.CareTeam/schema
+                                                                                  hl7-fhir-r5-core.PractitionerRole/schema
+                                                                                  hl7-fhir-r5-core.Organization/schema
+                                                                                  hl7-fhir-r5-core.Device/schema
+                                                                                  hl7-fhir-r5-core.Practitioner/schema
+                                                                                  hl7-fhir-r5-core.RelatedPerson/schema}},
+                                                   :zen/desc "Who performed the intake"}},
+                                    :require #{:actor},
+                                    :zen/desc "Who was performed in the intake"}},
+                :_instantiatesUri {:type zen/vector,
+                                   :every {:confirms #{hl7-fhir-r5-core.Element/schema}}}},
+         :zen.fhir/type "NutritionIntake"}}

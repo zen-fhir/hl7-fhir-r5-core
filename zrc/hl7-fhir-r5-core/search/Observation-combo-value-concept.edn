@@ -1,0 +1,16 @@
+{ns hl7-fhir-r5-core.search.Observation-combo-value-concept,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Observation-combo-value-concept",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Observation-combo-value-concept",
+         :fhir/type "token",
+         :name "combo-value-concept",
+         :expr {:Observation {:knife [["value"
+                                       "ofType(CodeableConcept"]
+                                      ["component"
+                                       "value"
+                                       "ofType(CodeableConcept"]],
+                              :jsonpath ["$.\"value\".\"ofType(CodeableConcept\"[*]"
+                                         "$.\"component\".\"value\".\"ofType(CodeableConcept\"[*]"],
+                              :data-types #{},
+                              :template :token}}}}

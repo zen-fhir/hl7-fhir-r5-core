@@ -1,0 +1,305 @@
+{ns hl7-fhir-r5-core.NutritionOrder,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.markdown
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.value-set.enteral-route
+          hl7-fhir-r5-core.CodeableReference
+          hl7-fhir-r5-core.boolean
+          hl7-fhir-r5-core.value-set.request-status
+          hl7-fhir-r5-core.Ratio
+          zen.fhir
+          hl7-fhir-r5-core.value-set.nutrient-code
+          hl7-fhir-r5-core.value-set.supplement-type
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.Group
+          hl7-fhir-r5-core.value-set.modified-foodtype
+          hl7-fhir-r5-core.Annotation
+          hl7-fhir-r5-core.SimpleQuantity
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.value-set.entformula-additive
+          hl7-fhir-r5-core.value-set.encounter-diet
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.Encounter
+          hl7-fhir-r5-core.value-set.request-intent
+          hl7-fhir-r5-core.value-set.texture-code
+          hl7-fhir-r5-core.Practitioner
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.CarePlan
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.value-set.consistency-type
+          hl7-fhir-r5-core.Timing
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.PractitionerRole
+          hl7-fhir-r5-core.canonical
+          hl7-fhir-r5-core.AllergyIntolerance
+          hl7-fhir-r5-core.value-set.medication-as-needed-reason
+          hl7-fhir-r5-core.value-set.entformula-type
+          hl7-fhir-r5-core.value-set.request-priority
+          hl7-fhir-r5-core.NutritionOrder
+          hl7-fhir-r5-core.Quantity
+          hl7-fhir-r5-core.ServiceRequest
+          hl7-fhir-r5-core.uri
+          hl7-fhir-r5-core.value-set.diet-type
+          hl7-fhir-r5-core.value-set.food-type
+          hl7-fhir-r5-core.Patient},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/NutritionOrder",
+         :require #{:dateTime :status :intent :subject},
+         :type zen/map,
+         :zen/desc "A request to supply a diet, formula feeding (enteral) or oral nutritional supplement to a patient/resident.",
+         :keys {:oralDiet {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                           :type zen/map,
+                           :keys {:type {:type zen/vector,
+                                         :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                 :fhir/flags #{:SU},
+                                                 :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.diet-type/value-set,
+                                                                      :strength :example},
+                                                 :zen/desc "Type of oral diet or diet restrictions that describe what can be consumed orally"}},
+                                  :schedule {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                             :type zen/map,
+                                             :keys {:timing {:type zen/vector,
+                                                             :every {:confirms #{hl7-fhir-r5-core.Timing/schema},
+                                                                     :zen/desc "Scheduled frequency of diet"}},
+                                                    :asNeeded {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                                                               :zen/desc "Take 'as needed'"},
+                                                    :_asNeeded {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                    :asNeededFor {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                  :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.medication-as-needed-reason/value-set,
+                                                                                       :strength :example},
+                                                                  :zen/desc "Take 'as needed' for x"}},
+                                             :zen/desc "Scheduling information for oral diets"},
+                                  :nutrient {:type zen/vector,
+                                             :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                                     :type zen/map,
+                                                     :keys {:modifier {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.nutrient-code/value-set,
+                                                                                            :strength :example},
+                                                                       :zen/desc "Type of nutrient that is being modified"},
+                                                            :amount {:confirms #{hl7-fhir-r5-core.Quantity/schema
+                                                                                 hl7-fhir-r5-core.SimpleQuantity/schema},
+                                                                     :zen/desc "Quantity of the specified nutrient"}},
+                                                     :zen/desc "Required  nutrient modifications"}},
+                                  :texture {:type zen/vector,
+                                            :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                                    :type zen/map,
+                                                    :keys {:modifier {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                      :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.texture-code/value-set,
+                                                                                           :strength :example},
+                                                                      :zen/desc "Code to indicate how to alter the texture of the foods, e.g. pureed"},
+                                                           :foodType {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                      :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.modified-foodtype/value-set,
+                                                                                           :strength :example},
+                                                                      :zen/desc "Concepts that are used to identify an entity that is ingested for nutritional purposes"}},
+                                                    :zen/desc "Required  texture modifications"}},
+                                  :fluidConsistencyType {:type zen/vector,
+                                                         :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                 :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.consistency-type/value-set,
+                                                                                      :strength :example},
+                                                                 :zen/desc "The required consistency of fluids and liquids provided to the patient"}},
+                                  :instruction {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                :fhir/flags #{:SU},
+                                                :zen/desc "Instructions or additional information about the oral diet"},
+                                  :_instruction {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                           :zen/desc "Oral diet components"},
+                :instantiatesCanonical {:type zen/vector,
+                                        :every {:confirms #{hl7-fhir-r5-core.canonical/schema},
+                                                :fhir/flags #{:SU},
+                                                :zen/desc "Instantiates FHIR protocol or definition"}},
+                :instantiatesUri {:type zen/vector,
+                                  :every {:confirms #{hl7-fhir-r5-core.uri/schema},
+                                          :fhir/flags #{:SU},
+                                          :zen/desc "Instantiates external protocol or definition"}},
+                :instantiates {:type zen/vector,
+                               :every {:confirms #{hl7-fhir-r5-core.uri/schema},
+                                       :zen/desc "Instantiates protocol or definition"}},
+                :encounter {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                        zen.fhir/Reference},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Encounter/schema}},
+                            :zen/desc "The encounter associated with this nutrition order"},
+                :_dateTime {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_priority {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_instantiates {:type zen/vector,
+                                :every {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :note {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.Annotation/schema},
+                               :zen/desc "Comments"}},
+                :outsideFoodAllowed {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                                     :zen/desc "Capture when a food item is brought in by the patient and/or family"},
+                :dateTime {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                           :fhir/flags #{:SU},
+                           :zen/desc "Date and time the nutrition order was requested"},
+                :enteralFormula {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                 :type zen/map,
+                                 :keys {:routeOfAdministration {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.enteral-route/value-set,
+                                                                                     :strength :extensible},
+                                                                :zen/desc "How the formula should enter the patient's gastrointestinal tract"},
+                                        :_administrationInstruction {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                        :_baseFormulaProductName {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                        :maxVolumeToDeliver {:confirms #{hl7-fhir-r5-core.Quantity/schema
+                                                                         hl7-fhir-r5-core.SimpleQuantity/schema},
+                                                             :zen/desc "Upper limit on formula volume per unit of time"},
+                                        :baseFormulaType {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                                          :fhir/flags #{:SU},
+                                                          :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.entformula-type/value-set,
+                                                                               :strength :example},
+                                                          :zen/desc "Type of enteral or infant formula"},
+                                        :deliveryDevice {:type zen/vector,
+                                                         :every {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                                                 :zen/desc "Intended type of device for the administration"}},
+                                        :caloricDensity {:confirms #{hl7-fhir-r5-core.Quantity/schema
+                                                                     hl7-fhir-r5-core.SimpleQuantity/schema},
+                                                         :zen/desc "Amount of energy per specified volume that is required"},
+                                        :additive {:type zen/vector,
+                                                   :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                                           :type zen/map,
+                                                           :keys {:type {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                                                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.entformula-additive/value-set,
+                                                                                              :strength :example},
+                                                                         :zen/desc "Type of modular component to add to the feeding"},
+                                                                  :productName {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                                                :zen/desc "Product or brand name of the modular additive"},
+                                                                  :_productName {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                                  :quantity {:confirms #{hl7-fhir-r5-core.Quantity/schema
+                                                                                         hl7-fhir-r5-core.SimpleQuantity/schema},
+                                                                             :zen/desc "Amount of additive to be given or mixed in"}},
+                                                           :zen/desc "Components to add to the feeding"}},
+                                        :administrationInstruction {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                                                                    :fhir/flags #{:SU},
+                                                                    :zen/desc "Formula feeding instructions expressed as text"},
+                                        :administration {:type zen/vector,
+                                                         :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                                                 :type zen/map,
+                                                                 :keys {:schedule {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                                                                   :type zen/map,
+                                                                                   :keys {:timing {:type zen/vector,
+                                                                                                   :every {:confirms #{hl7-fhir-r5-core.Timing/schema},
+                                                                                                           :zen/desc "Scheduled frequency of enteral formula"}},
+                                                                                          :asNeeded {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                                                                                                     :zen/desc "Take 'as needed'"},
+                                                                                          :_asNeeded {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                                                          :asNeededFor {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                                                        :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.medication-as-needed-reason/value-set,
+                                                                                                                             :strength :example},
+                                                                                                        :zen/desc "Take 'as needed' for x"}},
+                                                                                   :zen/desc "Scheduling information for enteral formula products"},
+                                                                        :quantity {:confirms #{hl7-fhir-r5-core.Quantity/schema
+                                                                                               hl7-fhir-r5-core.SimpleQuantity/schema},
+                                                                                   :zen/desc "The volume of formula to provide"},
+                                                                        :rate {:fhir/polymorphic true,
+                                                                               :type zen/map,
+                                                                               :exclusive-keys #{#{:Ratio
+                                                                                                   :Quantity}},
+                                                                               :keys {:Quantity {:confirms #{hl7-fhir-r5-core.Quantity/schema}},
+                                                                                      :Ratio {:confirms #{hl7-fhir-r5-core.Ratio/schema}}},
+                                                                               :zen/desc "Speed with which the formula is provided per period of time"}},
+                                                                 :zen/desc "Formula feeding instruction as structured data"}},
+                                        :baseFormulaProductName {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                                 :zen/desc "Product or brand name of the enteral or infant formula"}},
+                                 :zen/desc "Enteral formula components"},
+                :_intent {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :supportingInformation {:type zen/vector,
+                                        :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                            zen.fhir/Reference},
+                                                :zen.fhir/reference {:refers #{}},
+                                                :zen/desc "Information to support fulfilling of the nutrition order"}},
+                :_outsideFoodAllowed {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :foodPreferenceModifier {:type zen/vector,
+                                         :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                 :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.encounter-diet/value-set,
+                                                                      :strength :example},
+                                                 :zen/desc "Order-specific modifier about the type of food that should be given"}},
+                :priority {:confirms #{hl7-fhir-r5-core.code/schema},
+                           :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.request-priority/value-set,
+                                                :strength :required},
+                           :zen/desc "routine | urgent | asap | stat"},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.request-status/value-set,
+                                              :strength :required},
+                         :zen/desc "draft | active | on-hold | revoked | completed | entered-in-error | unknown"},
+                :groupIdentifier {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                  :fhir/flags #{:SU},
+                                  :zen/desc "Composite Request ID"},
+                :excludeFoodModifier {:type zen/vector,
+                                      :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                              :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.food-type/value-set,
+                                                                   :strength :example},
+                                              :zen/desc "Order-specific modifier about the type of food that should not be given"}},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :zen/desc "Identifiers assigned to this order"}},
+                :intent {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.request-intent/value-set,
+                                              :strength :required},
+                         :zen/desc "proposal | plan | directive | order | original-order | reflex-order | filler-order | instance-order | option"},
+                :orderer {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                      zen.fhir/Reference},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.PractitionerRole/schema
+                                                         hl7-fhir-r5-core.Practitioner/schema}},
+                          :zen/desc "Who ordered the diet, formula or nutritional supplement"},
+                :supplement {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                     :type zen/map,
+                                     :keys {:type {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                                   :fhir/flags #{:SU},
+                                                   :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.supplement-type/value-set,
+                                                                        :strength :example},
+                                                   :zen/desc "Type of supplement product requested"},
+                                            :productName {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                          :zen/desc "Product or brand name of the nutritional supplement"},
+                                            :_productName {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                            :schedule {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                                       :type zen/map,
+                                                       :keys {:timing {:type zen/vector,
+                                                                       :every {:confirms #{hl7-fhir-r5-core.Timing/schema},
+                                                                               :zen/desc "Scheduled frequency of diet"}},
+                                                              :asNeeded {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                                                                         :zen/desc "Take 'as needed'"},
+                                                              :_asNeeded {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                              :asNeededFor {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                            :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.medication-as-needed-reason/value-set,
+                                                                                                 :strength :example},
+                                                                            :zen/desc "Take 'as needed' for x"}},
+                                                       :zen/desc "Scheduling information for supplements"},
+                                            :quantity {:confirms #{hl7-fhir-r5-core.Quantity/schema
+                                                                   hl7-fhir-r5-core.SimpleQuantity/schema},
+                                                       :zen/desc "Amount of the nutritional supplement"},
+                                            :instruction {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                          :fhir/flags #{:SU},
+                                                          :zen/desc "Instructions or additional information about the oral supplement"},
+                                            :_instruction {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                     :zen/desc "Supplement components"}},
+                :basedOn {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                              zen.fhir/Reference},
+                                  :zen.fhir/reference {:refers #{hl7-fhir-r5-core.NutritionOrder/schema
+                                                                 hl7-fhir-r5-core.ServiceRequest/schema
+                                                                 hl7-fhir-r5-core.CarePlan/schema}},
+                                  :zen/desc "What this order fulfills"}},
+                :_instantiatesCanonical {:type zen/vector,
+                                         :every {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                :subject {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                      zen.fhir/Reference},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                         hl7-fhir-r5-core.Group/schema}},
+                          :zen/desc "Who requires the diet, formula or nutritional supplement"},
+                :performer {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                    :zen/desc "Who is desired to perform the administration of what is being ordered"}},
+                :allergyIntolerance {:type zen/vector,
+                                     :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                         zen.fhir/Reference},
+                                             :zen.fhir/reference {:refers #{hl7-fhir-r5-core.AllergyIntolerance/schema}},
+                                             :zen/desc "List of the patient's food and nutrition-related allergies and intolerances"}},
+                :_instantiatesUri {:type zen/vector,
+                                   :every {:confirms #{hl7-fhir-r5-core.Element/schema}}}},
+         :zen.fhir/type "NutritionOrder"}}

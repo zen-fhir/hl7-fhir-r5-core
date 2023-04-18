@@ -1,0 +1,13 @@
+{ns hl7-fhir-r5-core.search.ClinicalUseDefinition-effect-reference,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "ClinicalUseDefinition-effect-reference",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/ClinicalUseDefinition-effect-reference",
+         :fhir/type "reference",
+         :name "effect-reference",
+         :expr {:ClinicalUseDefinition {:knife [["undesirableEffect"
+                                                 "symptomConditionEffect"
+                                                 "reference"]],
+                                        :jsonpath ["$.\"undesirableEffect\".\"symptomConditionEffect\".\"reference\"[*]"],
+                                        :data-types #{},
+                                        :template :reference}}}}

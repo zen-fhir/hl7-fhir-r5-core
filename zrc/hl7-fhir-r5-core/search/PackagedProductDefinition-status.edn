@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.PackagedProductDefinition-status,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "PackagedProductDefinition-status",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/PackagedProductDefinition-status",
+         :fhir/type "token",
+         :name "status",
+         :expr {:PackagedProductDefinition {:knife [["status"]],
+                                            :jsonpath ["$.\"status\"[*]"],
+                                            :data-types #{{:type "CodeableConcept",
+                                                           :polymorphic? false}},
+                                            :template :token}}}}

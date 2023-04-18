@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Location-contains,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Location-contains",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Location-contains",
+         :fhir/type "special",
+         :name "contains",
+         :expr {:Location {:knife [["extension('http://hl7.org/fhir/StructureDefinition/location-boundary-geojson'"
+                                    "value"]],
+                           :jsonpath ["$.\"extension('http://hl7.org/fhir/StructureDefinition/location-boundary-geojson'\".\"value\"[*]"],
+                           :data-types #{},
+                           :template :special}}}}

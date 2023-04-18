@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.RegulatedAuthorization-status,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "RegulatedAuthorization-status",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/RegulatedAuthorization-status",
+         :fhir/type "token",
+         :name "status",
+         :expr {:RegulatedAuthorization {:knife [["status"]],
+                                         :jsonpath ["$.\"status\"[*]"],
+                                         :data-types #{{:type "CodeableConcept",
+                                                        :polymorphic? false}},
+                                         :template :token}}}}

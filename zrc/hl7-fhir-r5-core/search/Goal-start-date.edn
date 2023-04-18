@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Goal-start-date,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Goal-start-date",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Goal-start-date",
+         :fhir/type "date",
+         :name "start-date",
+         :expr {:Goal {:knife [["start" "ofType(date"]],
+                       :jsonpath ["$.\"start\".\"ofType(date\"[*]"],
+                       :data-types #{},
+                       :template :date,
+                       :sql {:where [:or]}}}}}

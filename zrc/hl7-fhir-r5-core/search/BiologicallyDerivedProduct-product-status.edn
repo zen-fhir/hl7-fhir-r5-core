@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.BiologicallyDerivedProduct-product-status,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "BiologicallyDerivedProduct-product-status",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/BiologicallyDerivedProduct-product-status",
+         :fhir/type "token",
+         :name "product-status",
+         :expr {:BiologicallyDerivedProduct {:knife [["productStatus"]],
+                                             :jsonpath ["$.\"productStatus\"[*]"],
+                                             :data-types #{{:type "Coding",
+                                                            :polymorphic? false}},
+                                             :template :token}}}}

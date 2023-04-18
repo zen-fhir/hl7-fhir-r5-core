@@ -1,0 +1,748 @@
+{ns hl7-fhir-r5-core.search.MetadataResource-effective,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "MetadataResource-effective",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/MetadataResource-effective",
+         :fhir/type "date",
+         :name "effective",
+         :expr {:CodeSystem {:knife [["effectivePeriod"]],
+                             :jsonpath ["$.\"effectivePeriod\"[*]"],
+                             :data-types #{{:type "Period",
+                                            :polymorphic? false}},
+                             :template :date,
+                             :sql {:where [:or
+                                           [:or
+                                            [:and
+                                             [:>=
+                                              [:pg/call
+                                               :max_text_date_bound
+                                               [:pg/sql "{{param}}"]]
+                                              [:pg/call
+                                               :jsonpath_extract_max_timestamptz
+                                               [:pg/sql
+                                                "{{table}}.resource"]
+                                               "$.\"effectivePeriod\"[*].start"]]
+                                             [:<=
+                                              [:pg/call
+                                               :min_text_date_bound
+                                               [:pg/sql "{{param}}"]]
+                                              [:pg/call
+                                               :jsonpath_extract_min_timestamptz
+                                               [:pg/sql
+                                                "{{table}}.resource"]
+                                               "$.\"effectivePeriod\"[*].end"]]]
+                                            [:and
+                                             [:>=
+                                              [:pg/call
+                                               :max_text_date_bound
+                                               [:pg/sql "{{param}}"]]
+                                              [:pg/call
+                                               :jsonpath_extract_max_timestamptz
+                                               [:pg/sql
+                                                "{{table}}.resource"]
+                                               "$.\"effectivePeriod\"[*].start"]]
+                                             [:is
+                                              [:pg/call
+                                               :jsonpath_extract_max_timestamptz
+                                               [:pg/sql
+                                                "{{table}}.resource"]
+                                               "$.\"effectivePeriod\"[*].end"]
+                                              nil]]
+                                            [:and
+                                             [:<=
+                                              [:pg/call
+                                               :min_text_date_bound
+                                               [:pg/sql "{{param}}"]]
+                                              [:pg/call
+                                               :jsonpath_extract_min_timestamptz
+                                               [:pg/sql
+                                                "{{table}}.resource"]
+                                               "$.\"effectivePeriod\"[*].end"]]
+                                             [:is
+                                              [:pg/call
+                                               :jsonpath_extract_min_timestamptz
+                                               [:pg/sql
+                                                "{{table}}.resource"]
+                                               "$.\"effectivePeriod\"[*].start"]
+                                              nil]]]]}},
+                :PlanDefinition {:knife [["effectivePeriod"]],
+                                 :jsonpath ["$.\"effectivePeriod\"[*]"],
+                                 :data-types #{{:type "Period",
+                                                :polymorphic? false}},
+                                 :template :date,
+                                 :sql {:where [:or
+                                               [:or
+                                                [:and
+                                                 [:>=
+                                                  [:pg/call
+                                                   :max_text_date_bound
+                                                   [:pg/sql
+                                                    "{{param}}"]]
+                                                  [:pg/call
+                                                   :jsonpath_extract_max_timestamptz
+                                                   [:pg/sql
+                                                    "{{table}}.resource"]
+                                                   "$.\"effectivePeriod\"[*].start"]]
+                                                 [:<=
+                                                  [:pg/call
+                                                   :min_text_date_bound
+                                                   [:pg/sql
+                                                    "{{param}}"]]
+                                                  [:pg/call
+                                                   :jsonpath_extract_min_timestamptz
+                                                   [:pg/sql
+                                                    "{{table}}.resource"]
+                                                   "$.\"effectivePeriod\"[*].end"]]]
+                                                [:and
+                                                 [:>=
+                                                  [:pg/call
+                                                   :max_text_date_bound
+                                                   [:pg/sql
+                                                    "{{param}}"]]
+                                                  [:pg/call
+                                                   :jsonpath_extract_max_timestamptz
+                                                   [:pg/sql
+                                                    "{{table}}.resource"]
+                                                   "$.\"effectivePeriod\"[*].start"]]
+                                                 [:is
+                                                  [:pg/call
+                                                   :jsonpath_extract_max_timestamptz
+                                                   [:pg/sql
+                                                    "{{table}}.resource"]
+                                                   "$.\"effectivePeriod\"[*].end"]
+                                                  nil]]
+                                                [:and
+                                                 [:<=
+                                                  [:pg/call
+                                                   :min_text_date_bound
+                                                   [:pg/sql
+                                                    "{{param}}"]]
+                                                  [:pg/call
+                                                   :jsonpath_extract_min_timestamptz
+                                                   [:pg/sql
+                                                    "{{table}}.resource"]
+                                                   "$.\"effectivePeriod\"[*].end"]]
+                                                 [:is
+                                                  [:pg/call
+                                                   :jsonpath_extract_min_timestamptz
+                                                   [:pg/sql
+                                                    "{{table}}.resource"]
+                                                   "$.\"effectivePeriod\"[*].start"]
+                                                  nil]]]]}},
+                :Library {:knife [["effectivePeriod"]],
+                          :jsonpath ["$.\"effectivePeriod\"[*]"],
+                          :data-types #{{:type "Period",
+                                         :polymorphic? false}},
+                          :template :date,
+                          :sql {:where [:or
+                                        [:or
+                                         [:and
+                                          [:>=
+                                           [:pg/call
+                                            :max_text_date_bound
+                                            [:pg/sql "{{param}}"]]
+                                           [:pg/call
+                                            :jsonpath_extract_max_timestamptz
+                                            [:pg/sql
+                                             "{{table}}.resource"]
+                                            "$.\"effectivePeriod\"[*].start"]]
+                                          [:<=
+                                           [:pg/call
+                                            :min_text_date_bound
+                                            [:pg/sql "{{param}}"]]
+                                           [:pg/call
+                                            :jsonpath_extract_min_timestamptz
+                                            [:pg/sql
+                                             "{{table}}.resource"]
+                                            "$.\"effectivePeriod\"[*].end"]]]
+                                         [:and
+                                          [:>=
+                                           [:pg/call
+                                            :max_text_date_bound
+                                            [:pg/sql "{{param}}"]]
+                                           [:pg/call
+                                            :jsonpath_extract_max_timestamptz
+                                            [:pg/sql
+                                             "{{table}}.resource"]
+                                            "$.\"effectivePeriod\"[*].start"]]
+                                          [:is
+                                           [:pg/call
+                                            :jsonpath_extract_max_timestamptz
+                                            [:pg/sql
+                                             "{{table}}.resource"]
+                                            "$.\"effectivePeriod\"[*].end"]
+                                           nil]]
+                                         [:and
+                                          [:<=
+                                           [:pg/call
+                                            :min_text_date_bound
+                                            [:pg/sql "{{param}}"]]
+                                           [:pg/call
+                                            :jsonpath_extract_min_timestamptz
+                                            [:pg/sql
+                                             "{{table}}.resource"]
+                                            "$.\"effectivePeriod\"[*].end"]]
+                                          [:is
+                                           [:pg/call
+                                            :jsonpath_extract_min_timestamptz
+                                            [:pg/sql
+                                             "{{table}}.resource"]
+                                            "$.\"effectivePeriod\"[*].start"]
+                                           nil]]]]}},
+                :ActivityDefinition {:knife [["effectivePeriod"]],
+                                     :jsonpath ["$.\"effectivePeriod\"[*]"],
+                                     :data-types #{{:type "Period",
+                                                    :polymorphic? false}},
+                                     :template :date,
+                                     :sql {:where [:or
+                                                   [:or
+                                                    [:and
+                                                     [:>=
+                                                      [:pg/call
+                                                       :max_text_date_bound
+                                                       [:pg/sql
+                                                        "{{param}}"]]
+                                                      [:pg/call
+                                                       :jsonpath_extract_max_timestamptz
+                                                       [:pg/sql
+                                                        "{{table}}.resource"]
+                                                       "$.\"effectivePeriod\"[*].start"]]
+                                                     [:<=
+                                                      [:pg/call
+                                                       :min_text_date_bound
+                                                       [:pg/sql
+                                                        "{{param}}"]]
+                                                      [:pg/call
+                                                       :jsonpath_extract_min_timestamptz
+                                                       [:pg/sql
+                                                        "{{table}}.resource"]
+                                                       "$.\"effectivePeriod\"[*].end"]]]
+                                                    [:and
+                                                     [:>=
+                                                      [:pg/call
+                                                       :max_text_date_bound
+                                                       [:pg/sql
+                                                        "{{param}}"]]
+                                                      [:pg/call
+                                                       :jsonpath_extract_max_timestamptz
+                                                       [:pg/sql
+                                                        "{{table}}.resource"]
+                                                       "$.\"effectivePeriod\"[*].start"]]
+                                                     [:is
+                                                      [:pg/call
+                                                       :jsonpath_extract_max_timestamptz
+                                                       [:pg/sql
+                                                        "{{table}}.resource"]
+                                                       "$.\"effectivePeriod\"[*].end"]
+                                                      nil]]
+                                                    [:and
+                                                     [:<=
+                                                      [:pg/call
+                                                       :min_text_date_bound
+                                                       [:pg/sql
+                                                        "{{param}}"]]
+                                                      [:pg/call
+                                                       :jsonpath_extract_min_timestamptz
+                                                       [:pg/sql
+                                                        "{{table}}.resource"]
+                                                       "$.\"effectivePeriod\"[*].end"]]
+                                                     [:is
+                                                      [:pg/call
+                                                       :jsonpath_extract_min_timestamptz
+                                                       [:pg/sql
+                                                        "{{table}}.resource"]
+                                                       "$.\"effectivePeriod\"[*].start"]
+                                                      nil]]]]}},
+                :Citation {:knife [["effectivePeriod"]],
+                           :jsonpath ["$.\"effectivePeriod\"[*]"],
+                           :data-types #{{:type "Period",
+                                          :polymorphic? false}},
+                           :template :date,
+                           :sql {:where [:or
+                                         [:or
+                                          [:and
+                                           [:>=
+                                            [:pg/call
+                                             :max_text_date_bound
+                                             [:pg/sql "{{param}}"]]
+                                            [:pg/call
+                                             :jsonpath_extract_max_timestamptz
+                                             [:pg/sql
+                                              "{{table}}.resource"]
+                                             "$.\"effectivePeriod\"[*].start"]]
+                                           [:<=
+                                            [:pg/call
+                                             :min_text_date_bound
+                                             [:pg/sql "{{param}}"]]
+                                            [:pg/call
+                                             :jsonpath_extract_min_timestamptz
+                                             [:pg/sql
+                                              "{{table}}.resource"]
+                                             "$.\"effectivePeriod\"[*].end"]]]
+                                          [:and
+                                           [:>=
+                                            [:pg/call
+                                             :max_text_date_bound
+                                             [:pg/sql "{{param}}"]]
+                                            [:pg/call
+                                             :jsonpath_extract_max_timestamptz
+                                             [:pg/sql
+                                              "{{table}}.resource"]
+                                             "$.\"effectivePeriod\"[*].start"]]
+                                           [:is
+                                            [:pg/call
+                                             :jsonpath_extract_max_timestamptz
+                                             [:pg/sql
+                                              "{{table}}.resource"]
+                                             "$.\"effectivePeriod\"[*].end"]
+                                            nil]]
+                                          [:and
+                                           [:<=
+                                            [:pg/call
+                                             :min_text_date_bound
+                                             [:pg/sql "{{param}}"]]
+                                            [:pg/call
+                                             :jsonpath_extract_min_timestamptz
+                                             [:pg/sql
+                                              "{{table}}.resource"]
+                                             "$.\"effectivePeriod\"[*].end"]]
+                                           [:is
+                                            [:pg/call
+                                             :jsonpath_extract_min_timestamptz
+                                             [:pg/sql
+                                              "{{table}}.resource"]
+                                             "$.\"effectivePeriod\"[*].start"]
+                                            nil]]]]}},
+                :ChargeItemDefinition {:knife [["applicability"
+                                                "effectivePeriod"]],
+                                       :jsonpath ["$.\"applicability\".\"effectivePeriod\"[*]"],
+                                       :data-types #{{:type "Period",
+                                                      :polymorphic? false}},
+                                       :template :date,
+                                       :sql {:where [:or
+                                                     [:or
+                                                      [:and
+                                                       [:>=
+                                                        [:pg/call
+                                                         :max_text_date_bound
+                                                         [:pg/sql
+                                                          "{{param}}"]]
+                                                        [:pg/call
+                                                         :jsonpath_extract_max_timestamptz
+                                                         [:pg/sql
+                                                          "{{table}}.resource"]
+                                                         "$.\"applicability\".\"effectivePeriod\"[*].start"]]
+                                                       [:<=
+                                                        [:pg/call
+                                                         :min_text_date_bound
+                                                         [:pg/sql
+                                                          "{{param}}"]]
+                                                        [:pg/call
+                                                         :jsonpath_extract_min_timestamptz
+                                                         [:pg/sql
+                                                          "{{table}}.resource"]
+                                                         "$.\"applicability\".\"effectivePeriod\"[*].end"]]]
+                                                      [:and
+                                                       [:>=
+                                                        [:pg/call
+                                                         :max_text_date_bound
+                                                         [:pg/sql
+                                                          "{{param}}"]]
+                                                        [:pg/call
+                                                         :jsonpath_extract_max_timestamptz
+                                                         [:pg/sql
+                                                          "{{table}}.resource"]
+                                                         "$.\"applicability\".\"effectivePeriod\"[*].start"]]
+                                                       [:is
+                                                        [:pg/call
+                                                         :jsonpath_extract_max_timestamptz
+                                                         [:pg/sql
+                                                          "{{table}}.resource"]
+                                                         "$.\"applicability\".\"effectivePeriod\"[*].end"]
+                                                        nil]]
+                                                      [:and
+                                                       [:<=
+                                                        [:pg/call
+                                                         :min_text_date_bound
+                                                         [:pg/sql
+                                                          "{{param}}"]]
+                                                        [:pg/call
+                                                         :jsonpath_extract_min_timestamptz
+                                                         [:pg/sql
+                                                          "{{table}}.resource"]
+                                                         "$.\"applicability\".\"effectivePeriod\"[*].end"]]
+                                                       [:is
+                                                        [:pg/call
+                                                         :jsonpath_extract_min_timestamptz
+                                                         [:pg/sql
+                                                          "{{table}}.resource"]
+                                                         "$.\"applicability\".\"effectivePeriod\"[*].start"]
+                                                        nil]]]]}},
+                :NamingSystem {:knife [["effectivePeriod"]],
+                               :jsonpath ["$.\"effectivePeriod\"[*]"],
+                               :data-types #{{:type "Period",
+                                              :polymorphic? false}},
+                               :template :date,
+                               :sql {:where [:or
+                                             [:or
+                                              [:and
+                                               [:>=
+                                                [:pg/call
+                                                 :max_text_date_bound
+                                                 [:pg/sql "{{param}}"]]
+                                                [:pg/call
+                                                 :jsonpath_extract_max_timestamptz
+                                                 [:pg/sql
+                                                  "{{table}}.resource"]
+                                                 "$.\"effectivePeriod\"[*].start"]]
+                                               [:<=
+                                                [:pg/call
+                                                 :min_text_date_bound
+                                                 [:pg/sql "{{param}}"]]
+                                                [:pg/call
+                                                 :jsonpath_extract_min_timestamptz
+                                                 [:pg/sql
+                                                  "{{table}}.resource"]
+                                                 "$.\"effectivePeriod\"[*].end"]]]
+                                              [:and
+                                               [:>=
+                                                [:pg/call
+                                                 :max_text_date_bound
+                                                 [:pg/sql "{{param}}"]]
+                                                [:pg/call
+                                                 :jsonpath_extract_max_timestamptz
+                                                 [:pg/sql
+                                                  "{{table}}.resource"]
+                                                 "$.\"effectivePeriod\"[*].start"]]
+                                               [:is
+                                                [:pg/call
+                                                 :jsonpath_extract_max_timestamptz
+                                                 [:pg/sql
+                                                  "{{table}}.resource"]
+                                                 "$.\"effectivePeriod\"[*].end"]
+                                                nil]]
+                                              [:and
+                                               [:<=
+                                                [:pg/call
+                                                 :min_text_date_bound
+                                                 [:pg/sql "{{param}}"]]
+                                                [:pg/call
+                                                 :jsonpath_extract_min_timestamptz
+                                                 [:pg/sql
+                                                  "{{table}}.resource"]
+                                                 "$.\"effectivePeriod\"[*].end"]]
+                                               [:is
+                                                [:pg/call
+                                                 :jsonpath_extract_min_timestamptz
+                                                 [:pg/sql
+                                                  "{{table}}.resource"]
+                                                 "$.\"effectivePeriod\"[*].start"]
+                                                nil]]]]}},
+                :Questionnaire {:knife [["effectivePeriod"]],
+                                :jsonpath ["$.\"effectivePeriod\"[*]"],
+                                :data-types #{{:type "Period",
+                                               :polymorphic? false}},
+                                :template :date,
+                                :sql {:where [:or
+                                              [:or
+                                               [:and
+                                                [:>=
+                                                 [:pg/call
+                                                  :max_text_date_bound
+                                                  [:pg/sql
+                                                   "{{param}}"]]
+                                                 [:pg/call
+                                                  :jsonpath_extract_max_timestamptz
+                                                  [:pg/sql
+                                                   "{{table}}.resource"]
+                                                  "$.\"effectivePeriod\"[*].start"]]
+                                                [:<=
+                                                 [:pg/call
+                                                  :min_text_date_bound
+                                                  [:pg/sql
+                                                   "{{param}}"]]
+                                                 [:pg/call
+                                                  :jsonpath_extract_min_timestamptz
+                                                  [:pg/sql
+                                                   "{{table}}.resource"]
+                                                  "$.\"effectivePeriod\"[*].end"]]]
+                                               [:and
+                                                [:>=
+                                                 [:pg/call
+                                                  :max_text_date_bound
+                                                  [:pg/sql
+                                                   "{{param}}"]]
+                                                 [:pg/call
+                                                  :jsonpath_extract_max_timestamptz
+                                                  [:pg/sql
+                                                   "{{table}}.resource"]
+                                                  "$.\"effectivePeriod\"[*].start"]]
+                                                [:is
+                                                 [:pg/call
+                                                  :jsonpath_extract_max_timestamptz
+                                                  [:pg/sql
+                                                   "{{table}}.resource"]
+                                                  "$.\"effectivePeriod\"[*].end"]
+                                                 nil]]
+                                               [:and
+                                                [:<=
+                                                 [:pg/call
+                                                  :min_text_date_bound
+                                                  [:pg/sql
+                                                   "{{param}}"]]
+                                                 [:pg/call
+                                                  :jsonpath_extract_min_timestamptz
+                                                  [:pg/sql
+                                                   "{{table}}.resource"]
+                                                  "$.\"effectivePeriod\"[*].end"]]
+                                                [:is
+                                                 [:pg/call
+                                                  :jsonpath_extract_min_timestamptz
+                                                  [:pg/sql
+                                                   "{{table}}.resource"]
+                                                  "$.\"effectivePeriod\"[*].start"]
+                                                 nil]]]]}},
+                :EventDefinition {:knife [["effectivePeriod"]],
+                                  :jsonpath ["$.\"effectivePeriod\"[*]"],
+                                  :data-types #{{:type "Period",
+                                                 :polymorphic? false}},
+                                  :template :date,
+                                  :sql {:where [:or
+                                                [:or
+                                                 [:and
+                                                  [:>=
+                                                   [:pg/call
+                                                    :max_text_date_bound
+                                                    [:pg/sql
+                                                     "{{param}}"]]
+                                                   [:pg/call
+                                                    :jsonpath_extract_max_timestamptz
+                                                    [:pg/sql
+                                                     "{{table}}.resource"]
+                                                    "$.\"effectivePeriod\"[*].start"]]
+                                                  [:<=
+                                                   [:pg/call
+                                                    :min_text_date_bound
+                                                    [:pg/sql
+                                                     "{{param}}"]]
+                                                   [:pg/call
+                                                    :jsonpath_extract_min_timestamptz
+                                                    [:pg/sql
+                                                     "{{table}}.resource"]
+                                                    "$.\"effectivePeriod\"[*].end"]]]
+                                                 [:and
+                                                  [:>=
+                                                   [:pg/call
+                                                    :max_text_date_bound
+                                                    [:pg/sql
+                                                     "{{param}}"]]
+                                                   [:pg/call
+                                                    :jsonpath_extract_max_timestamptz
+                                                    [:pg/sql
+                                                     "{{table}}.resource"]
+                                                    "$.\"effectivePeriod\"[*].start"]]
+                                                  [:is
+                                                   [:pg/call
+                                                    :jsonpath_extract_max_timestamptz
+                                                    [:pg/sql
+                                                     "{{table}}.resource"]
+                                                    "$.\"effectivePeriod\"[*].end"]
+                                                   nil]]
+                                                 [:and
+                                                  [:<=
+                                                   [:pg/call
+                                                    :min_text_date_bound
+                                                    [:pg/sql
+                                                     "{{param}}"]]
+                                                   [:pg/call
+                                                    :jsonpath_extract_min_timestamptz
+                                                    [:pg/sql
+                                                     "{{table}}.resource"]
+                                                    "$.\"effectivePeriod\"[*].end"]]
+                                                  [:is
+                                                   [:pg/call
+                                                    :jsonpath_extract_min_timestamptz
+                                                    [:pg/sql
+                                                     "{{table}}.resource"]
+                                                    "$.\"effectivePeriod\"[*].start"]
+                                                   nil]]]]}},
+                :ValueSet {:knife [["effectivePeriod"]],
+                           :jsonpath ["$.\"effectivePeriod\"[*]"],
+                           :data-types #{{:type "Period",
+                                          :polymorphic? false}},
+                           :template :date,
+                           :sql {:where [:or
+                                         [:or
+                                          [:and
+                                           [:>=
+                                            [:pg/call
+                                             :max_text_date_bound
+                                             [:pg/sql "{{param}}"]]
+                                            [:pg/call
+                                             :jsonpath_extract_max_timestamptz
+                                             [:pg/sql
+                                              "{{table}}.resource"]
+                                             "$.\"effectivePeriod\"[*].start"]]
+                                           [:<=
+                                            [:pg/call
+                                             :min_text_date_bound
+                                             [:pg/sql "{{param}}"]]
+                                            [:pg/call
+                                             :jsonpath_extract_min_timestamptz
+                                             [:pg/sql
+                                              "{{table}}.resource"]
+                                             "$.\"effectivePeriod\"[*].end"]]]
+                                          [:and
+                                           [:>=
+                                            [:pg/call
+                                             :max_text_date_bound
+                                             [:pg/sql "{{param}}"]]
+                                            [:pg/call
+                                             :jsonpath_extract_max_timestamptz
+                                             [:pg/sql
+                                              "{{table}}.resource"]
+                                             "$.\"effectivePeriod\"[*].start"]]
+                                           [:is
+                                            [:pg/call
+                                             :jsonpath_extract_max_timestamptz
+                                             [:pg/sql
+                                              "{{table}}.resource"]
+                                             "$.\"effectivePeriod\"[*].end"]
+                                            nil]]
+                                          [:and
+                                           [:<=
+                                            [:pg/call
+                                             :min_text_date_bound
+                                             [:pg/sql "{{param}}"]]
+                                            [:pg/call
+                                             :jsonpath_extract_min_timestamptz
+                                             [:pg/sql
+                                              "{{table}}.resource"]
+                                             "$.\"effectivePeriod\"[*].end"]]
+                                           [:is
+                                            [:pg/call
+                                             :jsonpath_extract_min_timestamptz
+                                             [:pg/sql
+                                              "{{table}}.resource"]
+                                             "$.\"effectivePeriod\"[*].start"]
+                                            nil]]]]}},
+                :Measure {:knife [["effectivePeriod"]],
+                          :jsonpath ["$.\"effectivePeriod\"[*]"],
+                          :data-types #{{:type "Period",
+                                         :polymorphic? false}},
+                          :template :date,
+                          :sql {:where [:or
+                                        [:or
+                                         [:and
+                                          [:>=
+                                           [:pg/call
+                                            :max_text_date_bound
+                                            [:pg/sql "{{param}}"]]
+                                           [:pg/call
+                                            :jsonpath_extract_max_timestamptz
+                                            [:pg/sql
+                                             "{{table}}.resource"]
+                                            "$.\"effectivePeriod\"[*].start"]]
+                                          [:<=
+                                           [:pg/call
+                                            :min_text_date_bound
+                                            [:pg/sql "{{param}}"]]
+                                           [:pg/call
+                                            :jsonpath_extract_min_timestamptz
+                                            [:pg/sql
+                                             "{{table}}.resource"]
+                                            "$.\"effectivePeriod\"[*].end"]]]
+                                         [:and
+                                          [:>=
+                                           [:pg/call
+                                            :max_text_date_bound
+                                            [:pg/sql "{{param}}"]]
+                                           [:pg/call
+                                            :jsonpath_extract_max_timestamptz
+                                            [:pg/sql
+                                             "{{table}}.resource"]
+                                            "$.\"effectivePeriod\"[*].start"]]
+                                          [:is
+                                           [:pg/call
+                                            :jsonpath_extract_max_timestamptz
+                                            [:pg/sql
+                                             "{{table}}.resource"]
+                                            "$.\"effectivePeriod\"[*].end"]
+                                           nil]]
+                                         [:and
+                                          [:<=
+                                           [:pg/call
+                                            :min_text_date_bound
+                                            [:pg/sql "{{param}}"]]
+                                           [:pg/call
+                                            :jsonpath_extract_min_timestamptz
+                                            [:pg/sql
+                                             "{{table}}.resource"]
+                                            "$.\"effectivePeriod\"[*].end"]]
+                                          [:is
+                                           [:pg/call
+                                            :jsonpath_extract_min_timestamptz
+                                            [:pg/sql
+                                             "{{table}}.resource"]
+                                            "$.\"effectivePeriod\"[*].start"]
+                                           nil]]]]}},
+                :ConceptMap {:knife [["effectivePeriod"]],
+                             :jsonpath ["$.\"effectivePeriod\"[*]"],
+                             :data-types #{{:type "Period",
+                                            :polymorphic? false}},
+                             :template :date,
+                             :sql {:where [:or
+                                           [:or
+                                            [:and
+                                             [:>=
+                                              [:pg/call
+                                               :max_text_date_bound
+                                               [:pg/sql "{{param}}"]]
+                                              [:pg/call
+                                               :jsonpath_extract_max_timestamptz
+                                               [:pg/sql
+                                                "{{table}}.resource"]
+                                               "$.\"effectivePeriod\"[*].start"]]
+                                             [:<=
+                                              [:pg/call
+                                               :min_text_date_bound
+                                               [:pg/sql "{{param}}"]]
+                                              [:pg/call
+                                               :jsonpath_extract_min_timestamptz
+                                               [:pg/sql
+                                                "{{table}}.resource"]
+                                               "$.\"effectivePeriod\"[*].end"]]]
+                                            [:and
+                                             [:>=
+                                              [:pg/call
+                                               :max_text_date_bound
+                                               [:pg/sql "{{param}}"]]
+                                              [:pg/call
+                                               :jsonpath_extract_max_timestamptz
+                                               [:pg/sql
+                                                "{{table}}.resource"]
+                                               "$.\"effectivePeriod\"[*].start"]]
+                                             [:is
+                                              [:pg/call
+                                               :jsonpath_extract_max_timestamptz
+                                               [:pg/sql
+                                                "{{table}}.resource"]
+                                               "$.\"effectivePeriod\"[*].end"]
+                                              nil]]
+                                            [:and
+                                             [:<=
+                                              [:pg/call
+                                               :min_text_date_bound
+                                               [:pg/sql "{{param}}"]]
+                                              [:pg/call
+                                               :jsonpath_extract_min_timestamptz
+                                               [:pg/sql
+                                                "{{table}}.resource"]
+                                               "$.\"effectivePeriod\"[*].end"]]
+                                             [:is
+                                              [:pg/call
+                                               :jsonpath_extract_min_timestamptz
+                                               [:pg/sql
+                                                "{{table}}.resource"]
+                                               "$.\"effectivePeriod\"[*].start"]
+                                              nil]]]]}}}}}

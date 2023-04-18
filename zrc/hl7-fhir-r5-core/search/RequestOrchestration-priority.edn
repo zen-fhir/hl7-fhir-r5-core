@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.RequestOrchestration-priority,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "RequestOrchestration-priority",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/RequestOrchestration-priority",
+         :fhir/type "token",
+         :name "priority",
+         :expr {:RequestOrchestration {:knife [["priority"]],
+                                       :jsonpath ["$.\"priority\"[*]"],
+                                       :data-types #{{:type "code",
+                                                      :polymorphic? false}},
+                                       :template :token}}}}

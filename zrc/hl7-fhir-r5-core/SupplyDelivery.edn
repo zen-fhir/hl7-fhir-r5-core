@@ -1,0 +1,119 @@
+{ns hl7-fhir-r5-core.SupplyDelivery,
+ import #{hl7-fhir-r5-core.BiologicallyDerivedProduct
+          hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.Medication
+          hl7-fhir-r5-core.Substance
+          hl7-fhir-r5-core.BackboneElement
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.SimpleQuantity
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.Location
+          hl7-fhir-r5-core.Contract
+          hl7-fhir-r5-core.Practitioner
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.Device
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.NutritionProduct
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.SupplyDelivery
+          hl7-fhir-r5-core.Timing
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.PractitionerRole
+          hl7-fhir-r5-core.Period
+          hl7-fhir-r5-core.SupplyRequest
+          hl7-fhir-r5-core.InventoryItem
+          hl7-fhir-r5-core.Quantity
+          hl7-fhir-r5-core.value-set.supplydelivery-supplyitemtype
+          hl7-fhir-r5-core.Patient
+          hl7-fhir-r5-core.value-set.supplydelivery-status},
+ schema {:zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen/desc "Record of delivery of what is supplied.",
+         :zen.fhir/type "SupplyDelivery",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/SupplyDelivery",
+         :zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :type zen/map,
+         :keys {:patient {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                      zen.fhir/Reference},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema}},
+                          :zen/desc "Patient for whom the item is supplied"},
+                :supplier {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                       zen.fhir/Reference},
+                           :zen.fhir/reference {:refers #{hl7-fhir-r5-core.PractitionerRole/schema
+                                                          hl7-fhir-r5-core.Organization/schema
+                                                          hl7-fhir-r5-core.Practitioner/schema}},
+                           :zen/desc "The item supplier"},
+                :suppliedItem {:type zen/vector,
+                               :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                       :type zen/map,
+                                       :keys {:quantity {:confirms #{hl7-fhir-r5-core.Quantity/schema
+                                                                     hl7-fhir-r5-core.SimpleQuantity/schema},
+                                                         :zen/desc "Amount supplied"},
+                                              :item {:fhir/polymorphic true,
+                                                     :type zen/map,
+                                                     :exclusive-keys #{#{:CodeableConcept
+                                                                         :Reference}},
+                                                     :keys {:CodeableConcept {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema}},
+                                                            :Reference {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                                    zen.fhir/Reference},
+                                                                        :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Medication/schema
+                                                                                                       hl7-fhir-r5-core.InventoryItem/schema
+                                                                                                       hl7-fhir-r5-core.NutritionProduct/schema
+                                                                                                       hl7-fhir-r5-core.Substance/schema
+                                                                                                       hl7-fhir-r5-core.Device/schema
+                                                                                                       hl7-fhir-r5-core.BiologicallyDerivedProduct/schema}}}},
+                                                     :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.supplydelivery-supplyitemtype/value-set,
+                                                                          :strength :example},
+                                                     :zen/desc "Medication, Substance, Device or Biologically Derived Product supplied"}},
+                                       :zen/desc "The item that is delivered or supplied"}},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :type {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.supplydelivery-supplyitemtype/value-set,
+                                            :strength :required},
+                       :zen/desc "Category of supply event"},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.supplydelivery-status/value-set,
+                                              :strength :required},
+                         :zen/desc "in-progress | completed | abandoned | entered-in-error"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :zen/desc "External identifier"}},
+                :basedOn {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                              zen.fhir/Reference},
+                                  :fhir/flags #{:SU},
+                                  :zen.fhir/reference {:refers #{hl7-fhir-r5-core.SupplyRequest/schema}},
+                                  :zen/desc "Fulfills plan, proposal or order"}},
+                :partOf {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                             zen.fhir/Reference},
+                                 :fhir/flags #{:SU},
+                                 :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Contract/schema
+                                                                hl7-fhir-r5-core.SupplyDelivery/schema}},
+                                 :zen/desc "Part of referenced event"}},
+                :receiver {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                               zen.fhir/Reference},
+                                   :zen.fhir/reference {:refers #{hl7-fhir-r5-core.PractitionerRole/schema
+                                                                  hl7-fhir-r5-core.Organization/schema
+                                                                  hl7-fhir-r5-core.Practitioner/schema}},
+                                   :zen/desc "Who received the delivery"}},
+                :destination {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                          zen.fhir/Reference},
+                              :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Location/schema}},
+                              :zen/desc "Where the delivery was sent"},
+                :occurrence {:fhir/polymorphic true,
+                             :type zen/map,
+                             :exclusive-keys #{#{:dateTime
+                                                 :Period
+                                                 :Timing}},
+                             :keys {:dateTime {:confirms #{hl7-fhir-r5-core.dateTime/schema}},
+                                    :_dateTime {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                    :Period {:confirms #{hl7-fhir-r5-core.Period/schema}},
+                                    :Timing {:confirms #{hl7-fhir-r5-core.Timing/schema}}},
+                             :fhir/flags #{:SU},
+                             :zen/desc "When event occurred"}}}}

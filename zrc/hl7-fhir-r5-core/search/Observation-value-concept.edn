@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Observation-value-concept,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Observation-value-concept",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Observation-value-concept",
+         :fhir/type "token",
+         :name "value-concept",
+         :expr {:Observation {:knife [["value"
+                                       "ofType(CodeableConcept"]],
+                              :jsonpath ["$.\"value\".\"ofType(CodeableConcept\"[*]"],
+                              :data-types #{},
+                              :template :token}}}}

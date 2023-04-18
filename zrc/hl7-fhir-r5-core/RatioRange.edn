@@ -1,0 +1,24 @@
+{ns hl7-fhir-r5-core.RatioRange,
+ import #{zen.fhir
+          hl7-fhir-r5-core.SimpleQuantity
+          hl7-fhir-r5-core.Quantity
+          hl7-fhir-r5-core.DataType},
+ schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen/desc "RatioRange Type: A range of ratios expressed as a low and high numerator and a denominator.",
+         :zen.fhir/type "RatioRange",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/RatioRange",
+         :zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DataType/schema},
+         :type zen/map,
+         :keys {:lowNumerator {:confirms #{hl7-fhir-r5-core.Quantity/schema
+                                           hl7-fhir-r5-core.SimpleQuantity/schema},
+                               :fhir/flags #{:SU},
+                               :zen/desc "Low Numerator limit"},
+                :highNumerator {:confirms #{hl7-fhir-r5-core.Quantity/schema
+                                            hl7-fhir-r5-core.SimpleQuantity/schema},
+                                :fhir/flags #{:SU},
+                                :zen/desc "High Numerator limit"},
+                :denominator {:confirms #{hl7-fhir-r5-core.Quantity/schema
+                                          hl7-fhir-r5-core.SimpleQuantity/schema},
+                              :fhir/flags #{:SU},
+                              :zen/desc "Denominator value"}}}}

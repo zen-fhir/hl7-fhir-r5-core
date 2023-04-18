@@ -1,0 +1,272 @@
+{ns hl7-fhir-r5-core.Encounter,
+ import #{hl7-fhir-r5-core.value-set.encounter-special-courtesy
+          hl7-fhir-r5-core.EpisodeOfCare
+          hl7-fhir-r5-core.DomainResource
+          hl7-terminology-r5.value-set.v3-ActPriority
+          hl7-fhir-r5-core.Appointment
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.CodeableReference
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.value-set.encounter-admit-source
+          hl7-fhir-r5-core.Group
+          hl7-fhir-r5-core.value-set.encounter-diagnosis-use
+          hl7-fhir-r5-core.MedicationRequest
+          hl7-fhir-r5-core.value-set.encounter-diet
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.Encounter
+          hl7-fhir-r5-core.DeviceRequest
+          hl7-fhir-r5-core.Location
+          hl7-fhir-r5-core.Practitioner
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.Device
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.CarePlan
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.value-set.condition-code
+          hl7-fhir-r5-core.CareTeam
+          hl7-fhir-r5-core.value-set.encounter-reason-use
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.value-set.encounter-location-status
+          hl7-fhir-r5-core.RelatedPerson
+          hl7-fhir-r5-core.value-set.encounter-reason
+          hl7-fhir-r5-core.PractitionerRole
+          hl7-fhir-r5-core.Period
+          hl7-fhir-r5-core.value-set.encounter-participant-type
+          hl7-fhir-r5-core.Duration
+          hl7-fhir-r5-core.value-set.encounter-special-arrangements
+          hl7-fhir-r5-core.value-set.service-type
+          hl7-fhir-r5-core.value-set.encounter-discharge-disposition
+          hl7-fhir-r5-core.VirtualServiceDetail
+          hl7-fhir-r5-core.value-set.encounter-subject-status
+          hl7-fhir-r5-core.ServiceRequest
+          hl7-fhir-r5-core.value-set.encounter-type
+          hl7-fhir-r5-core.Account
+          hl7-fhir-r5-core.HealthcareService
+          hl7-terminology-r5.value-set.v2-0092
+          hl7-fhir-r5-core.value-set.location-form
+          hl7-fhir-r5-core.Patient
+          hl7-terminology-r5.value-set.encounter-class
+          hl7-fhir-r5-core.value-set.encounter-status},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Encounter",
+         :require #{:status},
+         :type zen/map,
+         :zen/desc "An interaction between healthcare provider(s), and/or patient(s) for the purpose of providing healthcare service(s) or assessing the health status of patient(s).",
+         :keys {:appointment {:type zen/vector,
+                              :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                  zen.fhir/Reference},
+                                      :fhir/flags #{:SU},
+                                      :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Appointment/schema}},
+                                      :zen/desc "The appointment that scheduled this encounter"}},
+                :admission {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                            :type zen/map,
+                            :keys {:preAdmissionIdentifier {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                                            :zen/desc "Pre-admission identifier"},
+                                   :origin {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                        zen.fhir/Reference},
+                                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Organization/schema
+                                                                           hl7-fhir-r5-core.Location/schema}},
+                                            :zen/desc "The location/organization from which the patient came before admission"},
+                                   :admitSource {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                 :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.encounter-admit-source/value-set,
+                                                                      :strength :preferred},
+                                                 :zen/desc "From where patient was admitted (physician referral, transfer)"},
+                                   :reAdmission {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                 :zen.fhir/value-set {:symbol hl7-terminology-r5.value-set.v2-0092/value-set,
+                                                                      :strength :example},
+                                                 :zen/desc "Indicates that the patient is being re-admitted"},
+                                   :destination {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                             zen.fhir/Reference},
+                                                 :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Organization/schema
+                                                                                hl7-fhir-r5-core.Location/schema}},
+                                                 :zen/desc "Location/organization to which the patient is discharged"},
+                                   :dischargeDisposition {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                          :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.encounter-discharge-disposition/value-set,
+                                                                               :strength :example},
+                                                          :zen/desc "Category or kind of location after discharge"}},
+                            :zen/desc "Details about the admission to a healthcare service"},
+                :diagnosis {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                    :type zen/map,
+                                    :keys {:condition {:type zen/vector,
+                                                       :every {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                                               :fhir/flags #{:SU},
+                                                               :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.condition-code/value-set,
+                                                                                    :strength :example},
+                                                               :zen/desc "The diagnosis relevant to the encounter"}},
+                                           :use {:type zen/vector,
+                                                 :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.encounter-diagnosis-use/value-set,
+                                                                              :strength :preferred},
+                                                         :zen/desc "Role that this diagnosis has within the encounter (e.g. admission, billing, discharge …)"}}},
+                                    :fhir/flags #{:SU},
+                                    :zen/desc "The list of diagnosis relevant to this encounter"}},
+                :_plannedEndDate {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :subjectStatus {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.encounter-subject-status/value-set,
+                                                     :strength :example},
+                                :zen/desc "The current status of the subject in relation to the Encounter"},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :serviceProvider {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                              zen.fhir/Reference},
+                                  :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Organization/schema}},
+                                  :zen/desc "The organization (facility) responsible for this encounter"},
+                :_plannedStartDate {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :specialArrangement {:type zen/vector,
+                                     :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                             :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.encounter-special-arrangements/value-set,
+                                                                  :strength :preferred},
+                                             :zen/desc "Wheelchair, translator, stretcher, etc"}},
+                :dietPreference {:type zen/vector,
+                                 :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.encounter-diet/value-set,
+                                                              :strength :example},
+                                         :zen/desc "Diet preferences reported by the patient"}},
+                :episodeOfCare {:type zen/vector,
+                                :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                    zen.fhir/Reference},
+                                        :fhir/flags #{:SU},
+                                        :zen.fhir/reference {:refers #{hl7-fhir-r5-core.EpisodeOfCare/schema}},
+                                        :zen/desc "Episode(s) of care that this encounter should be recorded against"}},
+                :type {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                               :fhir/flags #{:SU},
+                               :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.encounter-type/value-set,
+                                                    :strength :example},
+                               :zen/desc "Specific type of encounter (e.g. e-mail consultation, surgical day-care, ...)"}},
+                :specialCourtesy {:type zen/vector,
+                                  :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                          :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.encounter-special-courtesy/value-set,
+                                                               :strength :preferred},
+                                          :zen/desc "Special courtesies (VIP, board member)"}},
+                :participant {:type zen/vector,
+                              :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                      :type zen/map,
+                                      :keys {:type {:type zen/vector,
+                                                    :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                            :fhir/flags #{:SU},
+                                                            :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.encounter-participant-type/value-set,
+                                                                                 :strength :extensible},
+                                                            :zen/desc "Role of participant in encounter"}},
+                                             :period {:confirms #{hl7-fhir-r5-core.Period/schema},
+                                                      :zen/desc "Period of time during the encounter that the participant participated"},
+                                             :actor {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                 zen.fhir/Reference},
+                                                     :fhir/flags #{:SU},
+                                                     :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                                                    hl7-fhir-r5-core.HealthcareService/schema
+                                                                                    hl7-fhir-r5-core.PractitionerRole/schema
+                                                                                    hl7-fhir-r5-core.Device/schema
+                                                                                    hl7-fhir-r5-core.Practitioner/schema
+                                                                                    hl7-fhir-r5-core.Group/schema
+                                                                                    hl7-fhir-r5-core.RelatedPerson/schema}},
+                                                     :zen/desc "The individual, device, or service participating in the encounter"}},
+                                      :fhir/flags #{:SU},
+                                      :zen/desc "List of participants involved in the encounter"}},
+                :serviceType {:type zen/vector,
+                              :every {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                      :fhir/flags #{:SU},
+                                      :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.service-type/value-set,
+                                                           :strength :example},
+                                      :zen/desc "Specific type of service"}},
+                :account {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                              zen.fhir/Reference},
+                                  :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Account/schema}},
+                                  :zen/desc "The set of accounts that may be used for billing for this Encounter"}},
+                :virtualService {:type zen/vector,
+                                 :every {:confirms #{hl7-fhir-r5-core.VirtualServiceDetail/schema},
+                                         :zen/desc "Connection details of a virtual service (e.g. conference call)"}},
+                :reason {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                 :type zen/map,
+                                 :keys {:use {:type zen/vector,
+                                              :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                      :fhir/flags #{:SU},
+                                                      :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.encounter-reason-use/value-set,
+                                                                           :strength :example},
+                                                      :zen/desc "What the reason value should be used for/as"}},
+                                        :value {:type zen/vector,
+                                                :every {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                                        :fhir/flags #{:SU},
+                                                        :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.encounter-reason/value-set,
+                                                                             :strength :preferred},
+                                                        :zen/desc "Reason the encounter takes place (core or reference)"}}},
+                                 :fhir/flags #{:SU},
+                                 :zen/desc "The list of medical reasons that are expected to be addressed during the episode of care"}},
+                :priority {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                           :zen.fhir/value-set {:symbol hl7-terminology-r5.value-set.v3-ActPriority/value-set,
+                                                :strength :example},
+                           :zen/desc "Indicates the urgency of the encounter"},
+                :actualPeriod {:confirms #{hl7-fhir-r5-core.Period/schema},
+                               :zen/desc "The actual start and end time of the encounter"},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.encounter-status/value-set,
+                                              :strength :required},
+                         :zen/desc "planned | in-progress | on-hold | discharged | completed | cancelled | discontinued | entered-in-error | unknown"},
+                :class {:type zen/vector,
+                        :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                :fhir/flags #{:SU},
+                                :zen.fhir/value-set {:symbol hl7-terminology-r5.value-set.encounter-class/value-set,
+                                                     :strength :preferred},
+                                :zen/desc "Classification of patient encounter context - e.g. Inpatient, outpatient"}},
+                :length {:confirms #{hl7-fhir-r5-core.Duration/schema},
+                         :zen/desc "Actual quantity of time the encounter lasted (less time absent)"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Identifier(s) by which this encounter is known"}},
+                :plannedStartDate {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                                   :zen/desc "The planned start date/time (or admission date) of the encounter"},
+                :basedOn {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                              zen.fhir/Reference},
+                                  :zen.fhir/reference {:refers #{hl7-fhir-r5-core.ServiceRequest/schema
+                                                                 hl7-fhir-r5-core.CarePlan/schema
+                                                                 hl7-fhir-r5-core.DeviceRequest/schema
+                                                                 hl7-fhir-r5-core.MedicationRequest/schema}},
+                                  :zen/desc "The request that initiated this encounter"}},
+                :partOf {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                     zen.fhir/Reference},
+                         :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Encounter/schema}},
+                         :zen/desc "Another Encounter this encounter is part of"},
+                :location {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                   :type zen/map,
+                                   :keys {:location {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                 zen.fhir/Reference},
+                                                     :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Location/schema}},
+                                                     :zen/desc "Location the encounter takes place"},
+                                          :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                                                   :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.encounter-location-status/value-set,
+                                                                        :strength :required},
+                                                   :zen/desc "planned | active | reserved | completed"},
+                                          :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                          :form {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                 :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.location-form/value-set,
+                                                                      :strength :example},
+                                                 :zen/desc "The physical type of the location (usually the level in the location hierarchy - bed, room, ward, virtual etc.)"},
+                                          :period {:confirms #{hl7-fhir-r5-core.Period/schema},
+                                                   :zen/desc "Time period during which the patient was present at the location"}},
+                                   :require #{:location},
+                                   :zen/desc "List of locations where the patient has been"}},
+                :subject {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                      zen.fhir/Reference},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                         hl7-fhir-r5-core.Group/schema}},
+                          :zen/desc "The patient or group related to this encounter"},
+                :plannedEndDate {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                                 :zen/desc "The planned end date/time (or discharge date) of the encounter"},
+                :careTeam {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                               zen.fhir/Reference},
+                                   :zen.fhir/reference {:refers #{hl7-fhir-r5-core.CareTeam/schema}},
+                                   :zen/desc "The group(s) that are allocated to participate in this encounter"}}},
+         :zen.fhir/type "Encounter"}}

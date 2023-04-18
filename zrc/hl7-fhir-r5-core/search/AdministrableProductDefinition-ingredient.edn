@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.AdministrableProductDefinition-ingredient,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "AdministrableProductDefinition-ingredient",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/AdministrableProductDefinition-ingredient",
+         :fhir/type "token",
+         :name "ingredient",
+         :expr {:AdministrableProductDefinition {:knife [["ingredient"]],
+                                                 :jsonpath ["$.\"ingredient\"[*]"],
+                                                 :data-types #{{:type "CodeableConcept",
+                                                                :polymorphic? false}},
+                                                 :template :token}}}}

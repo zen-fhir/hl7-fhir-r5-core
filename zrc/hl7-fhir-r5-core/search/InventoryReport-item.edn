@@ -1,0 +1,14 @@
+{ns hl7-fhir-r5-core.search.InventoryReport-item,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "InventoryReport-item",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/InventoryReport-item",
+         :fhir/type "token",
+         :name "item",
+         :expr {:InventoryReport {:knife [["inventoryListing"
+                                           "item"
+                                           "item"
+                                           "concept"]],
+                                  :jsonpath ["$.\"inventoryListing\".\"item\".\"item\".\"concept\"[*]"],
+                                  :data-types #{},
+                                  :template :token}}}}

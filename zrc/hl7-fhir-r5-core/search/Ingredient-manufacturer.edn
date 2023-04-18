@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Ingredient-manufacturer,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Ingredient-manufacturer",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Ingredient-manufacturer",
+         :fhir/type "reference",
+         :name "manufacturer",
+         :expr {:Ingredient {:knife [["manufacturer" "manufacturer"]],
+                             :jsonpath ["$.\"manufacturer\".\"manufacturer\"[*]"],
+                             :data-types #{{:type "Reference",
+                                            :polymorphic? false}},
+                             :template :reference}}}}

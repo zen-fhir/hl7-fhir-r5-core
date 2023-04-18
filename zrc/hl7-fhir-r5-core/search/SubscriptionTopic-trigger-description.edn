@@ -1,0 +1,26 @@
+{ns hl7-fhir-r5-core.search.SubscriptionTopic-trigger-description,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "SubscriptionTopic-trigger-description",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/SubscriptionTopic-trigger-description",
+         :fhir/type "string",
+         :name "trigger-description",
+         :expr {:SubscriptionTopic {:knife [["resourceTrigger"
+                                             "description"]],
+                                    :jsonpath ["$.\"resourceTrigger\".\"description\"[*]"],
+                                    :data-types #{{:type "markdown",
+                                                   :polymorphic? false}},
+                                    :template :string,
+                                    :sql {:where [:or
+                                                  [:ilike
+                                                   [:pg/cast
+                                                    [:pg/jsonb-path-query-array
+                                                     [:pg/sql
+                                                      "{{table}}.resource"]
+                                                     [:pg/cast
+                                                      "($.\"resourceTrigger\".\"description\"[*]).** ? (@.type() == \"string\")"
+                                                      :jsonpath]]
+                                                    :text]
+                                                   [:pg/sql
+                                                    "{{param}}"]]],
+                                          :parameter-format "%\"?%"}}}}}

@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Coverage-class-value,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Coverage-class-value",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Coverage-class-value",
+         :fhir/type "token",
+         :name "class-value",
+         :expr {:Coverage {:knife [["class" "value"]],
+                           :jsonpath ["$.\"class\".\"value\"[*]"],
+                           :data-types #{{:type "Identifier",
+                                          :polymorphic? false}},
+                           :template :token}}}}

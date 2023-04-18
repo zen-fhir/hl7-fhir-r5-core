@@ -1,0 +1,15 @@
+{ns hl7-fhir-r5-core.search.SubscriptionTopic-derived-or-self,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "SubscriptionTopic-derived-or-self",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/SubscriptionTopic-derived-or-self",
+         :fhir/type "uri",
+         :name "derived-or-self",
+         :expr {:SubscriptionTopic {:knife [["url"] ["derivedFrom"]],
+                                    :jsonpath ["$.\"url\"[*]"
+                                               "$.\"derivedFrom\"[*]"],
+                                    :data-types #{{:type "uri",
+                                                   :polymorphic? false}
+                                                  {:type "canonical",
+                                                   :polymorphic? false}},
+                                    :template :uri}}}}

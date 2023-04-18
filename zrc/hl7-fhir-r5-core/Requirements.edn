@@ -1,0 +1,186 @@
+{ns hl7-fhir-r5-core.Requirements,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.markdown
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.boolean
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.Group
+          hl7-fhir-r5-core.UsageContext
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.value-set.version-algorithm
+          hl7-fhir-r5-core.value-set.jurisdiction
+          hl7-fhir-r5-core.url
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.Practitioner
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.Device
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.CareTeam
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.RelatedPerson
+          hl7-fhir-r5-core.PractitionerRole
+          hl7-fhir-r5-core.value-set.publication-status
+          hl7-fhir-r5-core.canonical
+          hl7-fhir-r5-core.Coding
+          hl7-fhir-r5-core.id
+          hl7-fhir-r5-core.uri
+          hl7-fhir-r5-core.HealthcareService
+          hl7-fhir-r5-core.value-set.conformance-expectation
+          hl7-fhir-r5-core.ContactDetail
+          hl7-fhir-r5-core.Patient},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Requirements",
+         :require #{:status},
+         :type zen/map,
+         :zen/desc "The Requirements resource is used to describe an actor - a human or an application that plays a role in data exchange, and that may have obligations associated with the role the actor plays.",
+         :keys {:description {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                              :zen/desc "Natural language description of the requirements"},
+                :statement {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                    :type zen/map,
+                                    :keys {:_conformance {:type zen/vector,
+                                                          :every {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                           :requirement {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                                                         :zen/desc "The actual requirement"},
+                                           :_conditionality {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                           :_reference {:type zen/vector,
+                                                        :every {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                           :_satisfiedBy {:type zen/vector,
+                                                          :every {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                           :key {:confirms #{hl7-fhir-r5-core.id/schema},
+                                                 :zen/desc "Key that identifies this statement"},
+                                           :parent {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                    :zen/desc "A larger requirement that this requirement helps to refine and enable"},
+                                           :conformance {:type zen/vector,
+                                                         :every {:confirms #{hl7-fhir-r5-core.code/schema},
+                                                                 :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.conformance-expectation/value-set,
+                                                                                      :strength :required},
+                                                                 :zen/desc "SHALL | SHOULD | MAY | SHOULD-NOT"}},
+                                           :derivedFrom {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                         :zen/desc "Another statement this clarifies/restricts ([url#]key)"},
+                                           :_derivedFrom {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                           :_parent {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                           :conditionality {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                                                            :zen/desc "Set to true if requirements statement is conditional"},
+                                           :source {:type zen/vector,
+                                                    :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                        zen.fhir/Reference},
+                                                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                                                           hl7-fhir-r5-core.CareTeam/schema
+                                                                                           hl7-fhir-r5-core.HealthcareService/schema
+                                                                                           hl7-fhir-r5-core.PractitionerRole/schema
+                                                                                           hl7-fhir-r5-core.Organization/schema
+                                                                                           hl7-fhir-r5-core.Device/schema
+                                                                                           hl7-fhir-r5-core.Practitioner/schema
+                                                                                           hl7-fhir-r5-core.Group/schema
+                                                                                           hl7-fhir-r5-core.RelatedPerson/schema}},
+                                                            :zen/desc "Who asked for this statement"}},
+                                           :_label {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                           :reference {:type zen/vector,
+                                                       :every {:confirms #{hl7-fhir-r5-core.url/schema},
+                                                               :zen/desc "External artifact (rule/document etc. that) created this requirement"}},
+                                           :label {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                   :zen/desc "Short Human label for this statement"},
+                                           :_requirement {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                           :satisfiedBy {:type zen/vector,
+                                                         :every {:confirms #{hl7-fhir-r5-core.url/schema},
+                                                                 :zen/desc "Design artifact that satisfies this requirement"}},
+                                           :_key {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                    :require #{:requirement :key},
+                                    :zen/desc "Actual statement as markdown"}},
+                :date {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "Date last changed"},
+                :_reference {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                :publisher {:confirms #{hl7-fhir-r5-core.string/schema},
+                            :fhir/flags #{:SU},
+                            :zen/desc "Name of the publisher/steward (organization or individual)"},
+                :jurisdiction {:type zen/vector,
+                               :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                       :fhir/flags #{:SU},
+                                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.jurisdiction/value-set,
+                                                            :strength :extensible},
+                                       :zen/desc "Intended jurisdiction for Requirements (if applicable)"}},
+                :_publisher {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_copyrightLabel {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :derivedFrom {:type zen/vector,
+                              :every {:confirms #{hl7-fhir-r5-core.canonical/schema},
+                                      :fhir/flags #{:SU},
+                                      :zen/desc "Other set of Requirements this builds on"}},
+                :purpose {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                          :zen/desc "Why this Requirements is defined"},
+                :_date {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_derivedFrom {:type zen/vector,
+                               :every {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                :name {:confirms #{hl7-fhir-r5-core.string/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "Name for this Requirements (computer friendly)"},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :copyrightLabel {:confirms #{hl7-fhir-r5-core.string/schema},
+                                 :zen/desc "Copyright holder and year(s)"},
+                :_experimental {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :useContext {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.UsageContext/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "The context that the content is intended to support"}},
+                :copyright {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                            :zen/desc "Use and/or publishing restrictions"},
+                :versionAlgorithm {:fhir/polymorphic true,
+                                   :type zen/map,
+                                   :exclusive-keys #{#{:string
+                                                       :Coding}},
+                                   :keys {:string {:confirms #{hl7-fhir-r5-core.string/schema}},
+                                          :_string {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                          :Coding {:confirms #{hl7-fhir-r5-core.Coding/schema}}},
+                                   :fhir/flags #{:SU},
+                                   :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.version-algorithm/value-set,
+                                                        :strength :extensible},
+                                   :zen/desc "How to compare versions"},
+                :experimental {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                               :fhir/flags #{:SU},
+                               :zen/desc "For testing purposes, not real usage"},
+                :title {:confirms #{hl7-fhir-r5-core.string/schema},
+                        :fhir/flags #{:SU},
+                        :zen/desc "Name for this Requirements (human friendly)"},
+                :_description {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_purpose {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :reference {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r5-core.url/schema},
+                                    :zen/desc "External artifact (rule/document etc. that) created this set of requirements"}},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.publication-status/value-set,
+                                              :strength :required},
+                         :zen/desc "draft | active | retired | unknown"},
+                :_name {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :url {:confirms #{hl7-fhir-r5-core.uri/schema},
+                      :fhir/flags #{:SU},
+                      :zen/desc "Canonical identifier for this Requirements, represented as a URI (globally unique)"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Additional identifier for the Requirements (business identifier)"}},
+                :_copyright {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_title {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :version {:confirms #{hl7-fhir-r5-core.string/schema},
+                          :fhir/flags #{:SU},
+                          :zen/desc "Business version of the Requirements"},
+                :_version {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :contact {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.ContactDetail/schema},
+                                  :fhir/flags #{:SU},
+                                  :zen/desc "Contact details for the publisher"}},
+                :_actor {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                :_url {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :actor {:type zen/vector,
+                        :every {:confirms #{hl7-fhir-r5-core.canonical/schema},
+                                :zen/desc "Actor for these requirements"}}},
+         :zen.fhir/type "Requirements"}}

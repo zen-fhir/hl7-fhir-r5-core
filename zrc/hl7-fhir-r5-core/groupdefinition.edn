@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.groupdefinition,
+ import #{zen.fhir hl7-fhir-r5-core.Group},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{zen.fhir/Resource hl7-fhir-r5-core.Group/schema},
+         :zen/tags #{zen.fhir/profile-schema zen/schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/groupdefinition",
+         :require #{:membership :characteristic},
+         :type zen/map,
+         :zen/desc "Enforces a descriptive group that can be used in definitional resources",
+         :keys {:membership {:const {:value "definitional"}},
+                :characteristic {:type zen/vector, :minItems 1}},
+         :zen.fhir/type "Group"}}

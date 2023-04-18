@@ -1,0 +1,205 @@
+{ns hl7-fhir-r5-core.CarePlan,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.Appointment
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.CodeableReference
+          hl7-fhir-r5-core.value-set.request-status
+          zen.fhir
+          hl7-fhir-r5-core.value-set.care-plan-intent
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.Group
+          hl7-fhir-r5-core.VisionPrescription
+          hl7-fhir-r5-core.RequestOrchestration
+          hl7-fhir-r5-core.Annotation
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.ImmunizationRecommendation
+          hl7-fhir-r5-core.MedicationRequest
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.value-set.clinical-findings
+          hl7-fhir-r5-core.Encounter
+          hl7-fhir-r5-core.DeviceRequest
+          hl7-fhir-r5-core.Practitioner
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.Device
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.CarePlan
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.CareTeam
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.RelatedPerson
+          hl7-fhir-r5-core.PractitionerRole
+          hl7-fhir-r5-core.Period
+          hl7-fhir-r5-core.Goal
+          hl7-fhir-r5-core.value-set.care-plan-category
+          hl7-fhir-r5-core.SupplyRequest
+          hl7-fhir-r5-core.canonical
+          hl7-fhir-r5-core.value-set.care-plan-activity-performed
+          hl7-fhir-r5-core.NutritionOrder
+          hl7-fhir-r5-core.ServiceRequest
+          hl7-fhir-r5-core.uri
+          hl7-fhir-r5-core.Task
+          hl7-fhir-r5-core.Patient
+          hl7-fhir-r5-core.CommunicationRequest},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/CarePlan",
+         :require #{:status :intent :subject},
+         :type zen/map,
+         :zen/desc "Describes the intention of how one or more practitioners intend to deliver care for a particular patient, group or community for a period of time, possibly limited to care for a specific condition or set of conditions.",
+         :keys {:_created {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :description {:confirms #{hl7-fhir-r5-core.string/schema},
+                              :fhir/flags #{:SU},
+                              :zen/desc "Summary of nature of plan"},
+                :category {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                   :fhir/flags #{:SU},
+                                   :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.care-plan-category/value-set,
+                                                        :strength :example},
+                                   :zen/desc "Type of plan"}},
+                :addresses {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                    :fhir/flags #{:SU},
+                                    :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.clinical-findings/value-set,
+                                                         :strength :example},
+                                    :zen/desc "Health issues this plan addresses"}},
+                :instantiatesCanonical {:type zen/vector,
+                                        :every {:confirms #{hl7-fhir-r5-core.canonical/schema},
+                                                :fhir/flags #{:SU},
+                                                :zen/desc "Instantiates FHIR protocol or definition"}},
+                :instantiatesUri {:type zen/vector,
+                                  :every {:confirms #{hl7-fhir-r5-core.uri/schema},
+                                          :fhir/flags #{:SU},
+                                          :zen/desc "Instantiates external protocol or definition"}},
+                :supportingInfo {:type zen/vector,
+                                 :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                     zen.fhir/Reference},
+                                         :zen.fhir/reference {:refers #{}},
+                                         :zen/desc "Information considered as part of plan"}},
+                :encounter {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                        zen.fhir/Reference},
+                            :fhir/flags #{:SU},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Encounter/schema}},
+                            :zen/desc "The Encounter during which this CarePlan was created"},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :goal {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                           zen.fhir/Reference},
+                               :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Goal/schema}},
+                               :zen/desc "Desired outcome of plan"}},
+                :created {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                          :fhir/flags #{:SU},
+                          :zen/desc "Date record was first recorded"},
+                :title {:confirms #{hl7-fhir-r5-core.string/schema},
+                        :fhir/flags #{:SU},
+                        :zen/desc "Human-friendly name for the care plan"},
+                :_description {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :note {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.Annotation/schema},
+                               :zen/desc "Comments about the plan"}},
+                :_intent {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :activity {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                   :type zen/map,
+                                   :keys {:performedActivity {:type zen/vector,
+                                                              :every {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                                                      :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.care-plan-activity-performed/value-set,
+                                                                                           :strength :example},
+                                                                      :zen/desc "Results of the activity (concept, or Appointment, Encounter, Procedure, etc.)"}},
+                                          :progress {:type zen/vector,
+                                                     :every {:confirms #{hl7-fhir-r5-core.Annotation/schema},
+                                                             :zen/desc "Comments about the activity status/progress"}},
+                                          :plannedActivityReference {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                                 zen.fhir/Reference},
+                                                                     :zen.fhir/reference {:refers #{hl7-fhir-r5-core.RequestOrchestration/schema
+                                                                                                    hl7-fhir-r5-core.NutritionOrder/schema
+                                                                                                    hl7-fhir-r5-core.CommunicationRequest/schema
+                                                                                                    hl7-fhir-r5-core.ImmunizationRecommendation/schema
+                                                                                                    hl7-fhir-r5-core.ServiceRequest/schema
+                                                                                                    hl7-fhir-r5-core.DeviceRequest/schema
+                                                                                                    hl7-fhir-r5-core.VisionPrescription/schema
+                                                                                                    hl7-fhir-r5-core.Task/schema
+                                                                                                    hl7-fhir-r5-core.Appointment/schema
+                                                                                                    hl7-fhir-r5-core.SupplyRequest/schema
+                                                                                                    hl7-fhir-r5-core.MedicationRequest/schema}},
+                                                                     :zen/desc "Activity that is intended to be part of the care plan"}},
+                                   :zen/desc "Action to occur or has occurred as part of plan"}},
+                :custodian {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                        zen.fhir/Reference},
+                            :fhir/flags #{:SU},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                           hl7-fhir-r5-core.CareTeam/schema
+                                                           hl7-fhir-r5-core.PractitionerRole/schema
+                                                           hl7-fhir-r5-core.Organization/schema
+                                                           hl7-fhir-r5-core.Device/schema
+                                                           hl7-fhir-r5-core.Practitioner/schema
+                                                           hl7-fhir-r5-core.RelatedPerson/schema}},
+                            :zen/desc "Who is the designated responsible party"},
+                :contributor {:type zen/vector,
+                              :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                  zen.fhir/Reference},
+                                      :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                                     hl7-fhir-r5-core.CareTeam/schema
+                                                                     hl7-fhir-r5-core.PractitionerRole/schema
+                                                                     hl7-fhir-r5-core.Organization/schema
+                                                                     hl7-fhir-r5-core.Device/schema
+                                                                     hl7-fhir-r5-core.Practitioner/schema
+                                                                     hl7-fhir-r5-core.RelatedPerson/schema}},
+                                      :zen/desc "Who provided the content of the care plan"}},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.request-status/value-set,
+                                              :strength :required},
+                         :zen/desc "draft | active | on-hold | revoked | completed | entered-in-error | unknown"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "External Ids for this plan"}},
+                :intent {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.care-plan-intent/value-set,
+                                              :strength :required},
+                         :zen/desc "proposal | plan | order | option | directive"},
+                :_title {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :replaces {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                               zen.fhir/Reference},
+                                   :fhir/flags #{:SU},
+                                   :zen.fhir/reference {:refers #{hl7-fhir-r5-core.CarePlan/schema}},
+                                   :zen/desc "CarePlan replaced by this CarePlan"}},
+                :period {:confirms #{hl7-fhir-r5-core.Period/schema},
+                         :fhir/flags #{:SU},
+                         :zen/desc "Time period plan covers"},
+                :basedOn {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                              zen.fhir/Reference},
+                                  :fhir/flags #{:SU},
+                                  :zen.fhir/reference {:refers #{hl7-fhir-r5-core.RequestOrchestration/schema
+                                                                 hl7-fhir-r5-core.NutritionOrder/schema
+                                                                 hl7-fhir-r5-core.ServiceRequest/schema
+                                                                 hl7-fhir-r5-core.CarePlan/schema}},
+                                  :zen/desc "Fulfills plan, proposal or order"}},
+                :partOf {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                             zen.fhir/Reference},
+                                 :fhir/flags #{:SU},
+                                 :zen.fhir/reference {:refers #{hl7-fhir-r5-core.CarePlan/schema}},
+                                 :zen/desc "Part of referenced CarePlan"}},
+                :_instantiatesCanonical {:type zen/vector,
+                                         :every {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                :subject {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                      zen.fhir/Reference},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                         hl7-fhir-r5-core.Group/schema}},
+                          :zen/desc "Who the care plan is for"},
+                :careTeam {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                               zen.fhir/Reference},
+                                   :zen.fhir/reference {:refers #{hl7-fhir-r5-core.CareTeam/schema}},
+                                   :zen/desc "Who's involved in plan?"}},
+                :_instantiatesUri {:type zen/vector,
+                                   :every {:confirms #{hl7-fhir-r5-core.Element/schema}}}},
+         :zen.fhir/type "CarePlan"}}

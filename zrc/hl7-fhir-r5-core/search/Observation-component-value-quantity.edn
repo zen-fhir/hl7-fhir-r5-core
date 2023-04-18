@@ -1,0 +1,56 @@
+{ns hl7-fhir-r5-core.search.Observation-component-value-quantity,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Observation-component-value-quantity",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Observation-component-value-quantity",
+         :fhir/type "quantity",
+         :name "component-value-quantity",
+         :expr {:Observation {:knife [["component"
+                                       "value"
+                                       "ofType(Quantity"]
+                                      ["component"
+                                       "value"
+                                       "ofType(SampledData"]],
+                              :jsonpath ["$.\"component\".\"value\".\"ofType(Quantity\"[*]"
+                                         "$.\"component\".\"value\".\"ofType(SampledData\"[*]"],
+                              :data-types #{},
+                              :template :quantity,
+                              :sql {:where [:or
+                                            [:and
+                                             [:>=
+                                              [:pg/call
+                                               :jsonpath_extract_max_numeric
+                                               [:pg/sql
+                                                "{{table}}.resource"]
+                                               "$.\"component\".\"value\".\"ofType(Quantity\"[*].\"value\""]
+                                              [:pg/cast
+                                               [:pg/sql "{{param}}"]
+                                               :numeric]]
+                                             [:<=
+                                              [:pg/call
+                                               :jsonpath_extract_min_numeric
+                                               [:pg/sql
+                                                "{{table}}.resource"]
+                                               "$.\"component\".\"value\".\"ofType(Quantity\"[*].\"value\""]
+                                              [:pg/cast
+                                               [:pg/sql "{{param}}"]
+                                               :numeric]]]
+                                            [:and
+                                             [:>=
+                                              [:pg/call
+                                               :jsonpath_extract_max_numeric
+                                               [:pg/sql
+                                                "{{table}}.resource"]
+                                               "$.\"component\".\"value\".\"ofType(SampledData\"[*].\"value\""]
+                                              [:pg/cast
+                                               [:pg/sql "{{param}}"]
+                                               :numeric]]
+                                             [:<=
+                                              [:pg/call
+                                               :jsonpath_extract_min_numeric
+                                               [:pg/sql
+                                                "{{table}}.resource"]
+                                               "$.\"component\".\"value\".\"ofType(SampledData\"[*].\"value\""]
+                                              [:pg/cast
+                                               [:pg/sql "{{param}}"]
+                                               :numeric]]]]}}}}}

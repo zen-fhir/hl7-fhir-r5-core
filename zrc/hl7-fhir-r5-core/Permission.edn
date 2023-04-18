@@ -1,0 +1,167 @@
+{ns hl7-fhir-r5-core.Permission,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.BackboneElement
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.Group
+          hl7-fhir-r5-core.value-set.permission-status
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.value-set.security-label-event-examples
+          hl7-fhir-r5-core.value-set.permission-rule-combining
+          hl7-fhir-r5-core.Practitioner
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.value-set.consent-provision-type
+          hl7-fhir-r5-core.Device
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.CareTeam
+          hl7-fhir-r5-core.value-set.consent-policy
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.RelatedPerson
+          hl7-fhir-r5-core.PractitionerRole
+          hl7-fhir-r5-core.Period
+          hl7-fhir-r5-core.Coding
+          hl7-fhir-r5-core.value-set.consent-action
+          hl7-terminology-r5.value-set.v3-PurposeOfUse
+          hl7-fhir-r5-core.Expression
+          hl7-fhir-r5-core.HealthcareService
+          hl7-fhir-r5-core.Patient
+          hl7-fhir-r5-core.value-set.consent-data-meaning},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Permission",
+         :require #{:combining :status},
+         :type zen/map,
+         :zen/desc "Permission resource holds access rules for a given data and context.",
+         :keys {:date {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                               :fhir/flags #{:SU},
+                               :zen/desc "The date that permission was asserted"}},
+                :_date {:type zen/vector,
+                        :every {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                :rule {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                               :type zen/map,
+                               :keys {:type {:confirms #{hl7-fhir-r5-core.code/schema},
+                                             :fhir/flags #{:SU :?!},
+                                             :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.consent-provision-type/value-set,
+                                                                  :strength :required},
+                                             :zen/desc "deny | permit"},
+                                      :_type {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                      :data {:type zen/vector,
+                                             :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                                     :type zen/map,
+                                                     :keys {:resource {:type zen/vector,
+                                                                       :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                                                               :type zen/map,
+                                                                               :keys {:meaning {:confirms #{hl7-fhir-r5-core.code/schema},
+                                                                                                :fhir/flags #{:SU},
+                                                                                                :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.consent-data-meaning/value-set,
+                                                                                                                     :strength :required},
+                                                                                                :zen/desc "instance | related | dependents | authoredby"},
+                                                                                      :_meaning {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                                                      :reference {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                                                              zen.fhir/Reference},
+                                                                                                  :fhir/flags #{:SU},
+                                                                                                  :zen.fhir/reference {:refers #{}},
+                                                                                                  :zen/desc "The actual data reference"}},
+                                                                               :require #{:reference
+                                                                                          :meaning},
+                                                                               :fhir/flags #{:SU},
+                                                                               :zen/desc "Explicit FHIR Resource references"}},
+                                                            :security {:type zen/vector,
+                                                                       :every {:confirms #{hl7-fhir-r5-core.Coding/schema},
+                                                                               :fhir/flags #{:SU},
+                                                                               :zen/desc "Security tag code on .meta.security"}},
+                                                            :period {:type zen/vector,
+                                                                     :every {:confirms #{hl7-fhir-r5-core.Period/schema},
+                                                                             :fhir/flags #{:SU},
+                                                                             :zen/desc "Timeframe encompasing data create/update"}},
+                                                            :expression {:confirms #{hl7-fhir-r5-core.Expression/schema},
+                                                                         :fhir/flags #{:SU},
+                                                                         :zen/desc "Expression identifying the data"}},
+                                                     :fhir/flags #{:SU},
+                                                     :zen/desc "The selection criteria to identify data that is within scope of this provision"}},
+                                      :activity {:type zen/vector,
+                                                 :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                                         :type zen/map,
+                                                         :keys {:actor {:type zen/vector,
+                                                                        :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                                            zen.fhir/Reference},
+                                                                                :fhir/flags #{:SU},
+                                                                                :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                                                                               hl7-fhir-r5-core.CareTeam/schema
+                                                                                                               hl7-fhir-r5-core.PractitionerRole/schema
+                                                                                                               hl7-fhir-r5-core.Organization/schema
+                                                                                                               hl7-fhir-r5-core.Device/schema
+                                                                                                               hl7-fhir-r5-core.Practitioner/schema
+                                                                                                               hl7-fhir-r5-core.Group/schema
+                                                                                                               hl7-fhir-r5-core.RelatedPerson/schema}},
+                                                                                :zen/desc "Authorized actor(s)"}},
+                                                                :action {:type zen/vector,
+                                                                         :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                                 :fhir/flags #{:SU},
+                                                                                 :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.consent-action/value-set,
+                                                                                                      :strength :example},
+                                                                                 :zen/desc "Actions controlled by this rule"}},
+                                                                :purpose {:type zen/vector,
+                                                                          :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                                  :fhir/flags #{:SU},
+                                                                                  :zen.fhir/value-set {:symbol hl7-terminology-r5.value-set.v3-PurposeOfUse/value-set,
+                                                                                                       :strength :preferred},
+                                                                                  :zen/desc "The purpose for which the permission is given"}}},
+                                                         :fhir/flags #{:SU},
+                                                         :zen/desc "A description or definition of which activities are allowed to be done on the data"}},
+                                      :limit {:type zen/vector,
+                                              :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                      :fhir/flags #{:SU},
+                                                      :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.security-label-event-examples/value-set,
+                                                                           :strength :example},
+                                                      :zen/desc "What limits apply to the use of the data"}}},
+                               :fhir/flags #{:SU},
+                               :zen/desc "Constraints to the Permission"}},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :asserter {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                       zen.fhir/Reference},
+                           :fhir/flags #{:SU},
+                           :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                          hl7-fhir-r5-core.CareTeam/schema
+                                                          hl7-fhir-r5-core.HealthcareService/schema
+                                                          hl7-fhir-r5-core.PractitionerRole/schema
+                                                          hl7-fhir-r5-core.Organization/schema
+                                                          hl7-fhir-r5-core.Practitioner/schema
+                                                          hl7-fhir-r5-core.RelatedPerson/schema}},
+                           :zen/desc "The person or entity that asserts the permission"},
+                :combining {:confirms #{hl7-fhir-r5-core.code/schema},
+                            :fhir/flags #{:SU :?!},
+                            :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.permission-rule-combining/value-set,
+                                                 :strength :required},
+                            :zen/desc "deny-overrides | permit-overrides | ordered-deny-overrides | ordered-permit-overrides | deny-unless-permit | permit-unless-deny"},
+                :justification {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                :type zen/map,
+                                :keys {:basis {:type zen/vector,
+                                               :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                       :fhir/flags #{:SU},
+                                                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.consent-policy/value-set,
+                                                                            :strength :example},
+                                                       :zen/desc "The regulatory grounds upon which this Permission builds"}},
+                                       :evidence {:type zen/vector,
+                                                  :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                      zen.fhir/Reference},
+                                                          :fhir/flags #{:SU},
+                                                          :zen.fhir/reference {:refers #{}},
+                                                          :zen/desc "Justifing rational"}}},
+                                :fhir/flags #{:SU},
+                                :zen/desc "The asserted justification for using the data"},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.permission-status/value-set,
+                                              :strength :required},
+                         :zen/desc "active | entered-in-error | draft | rejected"},
+                :_combining {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :validity {:confirms #{hl7-fhir-r5-core.Period/schema},
+                           :fhir/flags #{:SU},
+                           :zen/desc "The period in which the permission is active"}},
+         :zen.fhir/type "Permission"}}

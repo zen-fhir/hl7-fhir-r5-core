@@ -1,0 +1,13 @@
+{ns hl7-fhir-r5-core.search.ClinicalUseDefinition-contraindication-reference,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "ClinicalUseDefinition-contraindication-reference",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/ClinicalUseDefinition-contraindication-reference",
+         :fhir/type "reference",
+         :name "contraindication-reference",
+         :expr {:ClinicalUseDefinition {:knife [["contraindication"
+                                                 "diseaseSymptomProcedure"
+                                                 "reference"]],
+                                        :jsonpath ["$.\"contraindication\".\"diseaseSymptomProcedure\".\"reference\"[*]"],
+                                        :data-types #{},
+                                        :template :reference}}}}

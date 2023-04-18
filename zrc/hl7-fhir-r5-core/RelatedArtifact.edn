@@ -1,0 +1,69 @@
+{ns hl7-fhir-r5-core.RelatedArtifact,
+ import #{hl7-fhir-r5-core.markdown
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.Attachment
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.date
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.value-set.related-artifact-type
+          hl7-fhir-r5-core.value-set.publication-status
+          hl7-fhir-r5-core.canonical
+          hl7-fhir-r5-core.DataType
+          hl7-fhir-r5-core.value-set.citation-artifact-classifier},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DataType/schema},
+         :zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/RelatedArtifact",
+         :require #{:type},
+         :type zen/map,
+         :zen/desc "RelatedArtifact Type: Related artifacts such as additional documentation, justification, or bibliographic references.",
+         :keys {:classifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.citation-artifact-classifier/value-set,
+                                                          :strength :example},
+                                     :zen/desc "Additional classifiers"}},
+                :_type {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :type {:confirms #{hl7-fhir-r5-core.code/schema},
+                       :fhir/flags #{:SU},
+                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.related-artifact-type/value-set,
+                                            :strength :required},
+                       :zen/desc "documentation | justification | citation | predecessor | successor | derived-from | depends-on | composed-of | part-of | amends | amended-with | appends | appended-with | cites | cited-by | comments-on | comment-in | contains | contained-in | corrects | correction-in | replaces | replaced-with | retracts | retracted-by | signs | similar-to | supports | supported-with | transforms | transformed-into | transformed-with | documents | specification-of | created-with | cite-as"},
+                :resourceReference {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                zen.fhir/Reference},
+                                    :fhir/flags #{:SU},
+                                    :zen.fhir/reference {:refers #{}},
+                                    :zen/desc "What artifact, if not a conformance resource"},
+                :_publicationStatus {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :document {:confirms #{hl7-fhir-r5-core.Attachment/schema},
+                           :fhir/flags #{:SU},
+                           :zen/desc "What document is being referenced"},
+                :citation {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                           :fhir/flags #{:SU},
+                           :zen/desc "Bibliographic citation for the artifact"},
+                :_label {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_resource {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :label {:confirms #{hl7-fhir-r5-core.string/schema},
+                        :fhir/flags #{:SU},
+                        :zen/desc "Short label"},
+                :resource {:confirms #{hl7-fhir-r5-core.canonical/schema},
+                           :fhir/flags #{:SU},
+                           :zen/desc "What artifact is being referenced"},
+                :_publicationDate {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :publicationStatus {:confirms #{hl7-fhir-r5-core.code/schema},
+                                    :fhir/flags #{:SU},
+                                    :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.publication-status/value-set,
+                                                         :strength :required},
+                                    :zen/desc "draft | active | retired | unknown"},
+                :display {:confirms #{hl7-fhir-r5-core.string/schema},
+                          :fhir/flags #{:SU},
+                          :zen/desc "Brief description of the related artifact"},
+                :_citation {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :publicationDate {:confirms #{hl7-fhir-r5-core.date/schema},
+                                  :fhir/flags #{:SU},
+                                  :zen/desc "Date of publication of the artifact being referred to"},
+                :_display {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+         :zen.fhir/type "RelatedArtifact"}}

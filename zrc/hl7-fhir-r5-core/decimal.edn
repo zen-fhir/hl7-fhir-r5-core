@@ -1,0 +1,8 @@
+{ns hl7-fhir-r5-core.decimal,
+ import #{zen.fhir},
+ schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen/desc "decimal Type: A rational number with implicit precision",
+         :zen.fhir/type "decimal",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/decimal",
+         :zen.fhir/version "0.6.21-2",
+         :type zen/number}}

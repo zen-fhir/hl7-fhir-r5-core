@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.PackagedProductDefinition-package-for,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "PackagedProductDefinition-package-for",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/PackagedProductDefinition-package-for",
+         :fhir/type "reference",
+         :name "package-for",
+         :expr {:PackagedProductDefinition {:knife [["packageFor"]],
+                                            :jsonpath ["$.\"packageFor\"[*]"],
+                                            :data-types #{{:type "Reference",
+                                                           :polymorphic? false}},
+                                            :template :reference}}}}

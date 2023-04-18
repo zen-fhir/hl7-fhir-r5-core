@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.DocumentReference-doc-status,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "DocumentReference-doc-status",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/DocumentReference-doc-status",
+         :fhir/type "token",
+         :name "doc-status",
+         :expr {:DocumentReference {:knife [["docStatus"]],
+                                    :jsonpath ["$.\"docStatus\"[*]"],
+                                    :data-types #{{:type "code",
+                                                   :polymorphic? false}},
+                                    :template :token}}}}

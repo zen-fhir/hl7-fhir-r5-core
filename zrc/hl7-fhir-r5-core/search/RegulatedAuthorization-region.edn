@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.RegulatedAuthorization-region,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "RegulatedAuthorization-region",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/RegulatedAuthorization-region",
+         :fhir/type "token",
+         :name "region",
+         :expr {:RegulatedAuthorization {:knife [["region"]],
+                                         :jsonpath ["$.\"region\"[*]"],
+                                         :data-types #{{:type "CodeableConcept",
+                                                        :polymorphic? false}},
+                                         :template :token}}}}

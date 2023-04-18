@@ -1,0 +1,67 @@
+{ns hl7-fhir-r5-core.search.MetadataResource-predecessor,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "MetadataResource-predecessor",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/MetadataResource-predecessor",
+         :fhir/type "reference",
+         :name "predecessor",
+         :expr {:EvidenceVariable {:knife [["relatedArtifact"
+                                            {:type "predecessor"}
+                                            "resource"]],
+                                   :jsonpath ["$.\"relatedArtifact\"?(@.\"type\"==\"predecessor\").\"resource\"[*]"],
+                                   :data-types #{},
+                                   :template :reference},
+                :CodeSystem {:knife [["relatedArtifact"
+                                      {:type "predecessor"}
+                                      "resource"]],
+                             :jsonpath ["$.\"relatedArtifact\"?(@.\"type\"==\"predecessor\").\"resource\"[*]"],
+                             :data-types #{},
+                             :template :reference},
+                :PlanDefinition {:knife [["relatedArtifact"
+                                          {:type "predecessor"}
+                                          "resource"]],
+                                 :jsonpath ["$.\"relatedArtifact\"?(@.\"type\"==\"predecessor\").\"resource\"[*]"],
+                                 :data-types #{},
+                                 :template :reference},
+                :Library {:knife [["relatedArtifact"
+                                   {:type "predecessor"}
+                                   "resource"]],
+                          :jsonpath ["$.\"relatedArtifact\"?(@.\"type\"==\"predecessor\").\"resource\"[*]"],
+                          :data-types #{},
+                          :template :reference},
+                :ActivityDefinition {:knife [["relatedArtifact"
+                                              {:type "predecessor"}
+                                              "resource"]],
+                                     :jsonpath ["$.\"relatedArtifact\"?(@.\"type\"==\"predecessor\").\"resource\"[*]"],
+                                     :data-types #{},
+                                     :template :reference},
+                :NamingSystem {:knife [["relatedArtifact"
+                                        {:type "predecessor"}
+                                        "resource"]],
+                               :jsonpath ["$.\"relatedArtifact\"?(@.\"type\"==\"predecessor\").\"resource\"[*]"],
+                               :data-types #{},
+                               :template :reference},
+                :EventDefinition {:knife [["relatedArtifact"
+                                           {:type "predecessor"}
+                                           "resource"]],
+                                  :jsonpath ["$.\"relatedArtifact\"?(@.\"type\"==\"predecessor\").\"resource\"[*]"],
+                                  :data-types #{},
+                                  :template :reference},
+                :ValueSet {:knife [["relatedArtifact"
+                                    {:type "predecessor"}
+                                    "resource"]],
+                           :jsonpath ["$.\"relatedArtifact\"?(@.\"type\"==\"predecessor\").\"resource\"[*]"],
+                           :data-types #{},
+                           :template :reference},
+                :Measure {:knife [["relatedArtifact"
+                                   {:type "predecessor"}
+                                   "resource"]],
+                          :jsonpath ["$.\"relatedArtifact\"?(@.\"type\"==\"predecessor\").\"resource\"[*]"],
+                          :data-types #{},
+                          :template :reference},
+                :ConceptMap {:knife [["relatedArtifact"
+                                      {:type "predecessor"}
+                                      "resource"]],
+                             :jsonpath ["$.\"relatedArtifact\"?(@.\"type\"==\"predecessor\").\"resource\"[*]"],
+                             :data-types #{},
+                             :template :reference}}}}

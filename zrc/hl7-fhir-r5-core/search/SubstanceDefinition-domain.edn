@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.SubstanceDefinition-domain,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "SubstanceDefinition-domain",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/SubstanceDefinition-domain",
+         :fhir/type "token",
+         :name "domain",
+         :expr {:SubstanceDefinition {:knife [["domain"]],
+                                      :jsonpath ["$.\"domain\"[*]"],
+                                      :data-types #{{:type "CodeableConcept",
+                                                     :polymorphic? false}},
+                                      :template :token}}}}

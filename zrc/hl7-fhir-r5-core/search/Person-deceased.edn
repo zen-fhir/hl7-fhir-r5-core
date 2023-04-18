@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Person-deceased,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Person-deceased",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Person-deceased",
+         :fhir/type "token",
+         :name "deceased",
+         :expr {:Person {:knife [["deceased and Person"
+                                  "deceased != false"]],
+                         :jsonpath ["$.\"deceased and Person\".\"deceased != false\"[*]"],
+                         :data-types #{},
+                         :template :token}}}}

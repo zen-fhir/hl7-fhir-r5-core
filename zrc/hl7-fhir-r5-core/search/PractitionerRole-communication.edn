@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.PractitionerRole-communication,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "PractitionerRole-communication",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/PractitionerRole-communication",
+         :fhir/type "token",
+         :name "communication",
+         :expr {:PractitionerRole {:knife [["communication"]],
+                                   :jsonpath ["$.\"communication\"[*]"],
+                                   :data-types #{{:type "CodeableConcept",
+                                                  :polymorphic? false}},
+                                   :template :token}}}}

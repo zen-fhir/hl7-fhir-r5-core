@@ -1,0 +1,288 @@
+{ns hl7-fhir-r5-core.AuditEvent,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.instant
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.boolean
+          hl7-fhir-r5-core.Ratio
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.value-set.participation-role-type
+          hl7-fhir-r5-core.ImmunizationRecommendation
+          hl7-fhir-r5-core.MedicationRequest
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.value-set.audit-event-type
+          hl7-fhir-r5-core.value-set.object-role
+          hl7-fhir-r5-core.AuditEvent
+          hl7-fhir-r5-core.Encounter
+          hl7-fhir-r5-core.DeviceRequest
+          hl7-fhir-r5-core.base64Binary
+          hl7-fhir-r5-core.Location
+          hl7-fhir-r5-core.Practitioner
+          hl7-fhir-r5-core.value-set.security-label-examples
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.Device
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.CarePlan
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.CareTeam
+          hl7-fhir-r5-core.integer
+          hl7-fhir-r5-core.time
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.value-set.audit-event-outcome-detail
+          hl7-fhir-r5-core.RelatedPerson
+          hl7-fhir-r5-core.PractitionerRole
+          hl7-fhir-r5-core.Period
+          hl7-fhir-r5-core.Coding
+          hl7-fhir-r5-core.Range
+          hl7-fhir-r5-core.NutritionOrder
+          hl7-terminology-r5.value-set.v3-PurposeOfUse
+          hl7-fhir-r5-core.Quantity
+          hl7-fhir-r5-core.ServiceRequest
+          hl7-fhir-r5-core.value-set.audit-event-sub-type
+          hl7-fhir-r5-core.value-set.security-role-type
+          hl7-fhir-r5-core.uri
+          hl7-fhir-r5-core.value-set.audit-event-outcome
+          hl7-fhir-r5-core.value-set.audit-event-severity
+          hl7-fhir-r5-core.value-set.audit-event-action
+          hl7-fhir-r5-core.Task
+          hl7-fhir-r5-core.Endpoint
+          hl7-fhir-r5-core.Patient
+          hl7-fhir-r5-core.value-set.security-source-type},
+ agent-schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
+               :zen.fhir/version "0.6.21-2",
+               :confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+               :type zen/map,
+               :keys {:role {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                     :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.security-role-type/value-set,
+                                                          :strength :example},
+                                     :zen/desc "Agent role in the event"}},
+                      :requestor {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                                  :fhir/flags #{:SU},
+                                  :zen/desc "Whether user is initiator"},
+                      :who {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                        zen.fhir/Reference},
+                            :fhir/flags #{:SU},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                           hl7-fhir-r5-core.CareTeam/schema
+                                                           hl7-fhir-r5-core.PractitionerRole/schema
+                                                           hl7-fhir-r5-core.Organization/schema
+                                                           hl7-fhir-r5-core.Device/schema
+                                                           hl7-fhir-r5-core.Practitioner/schema
+                                                           hl7-fhir-r5-core.RelatedPerson/schema}},
+                            :zen/desc "Identifier of who"},
+                      :authorization {:type zen/vector,
+                                      :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                              :zen.fhir/value-set {:symbol hl7-terminology-r5.value-set.v3-PurposeOfUse/value-set,
+                                                                   :strength :example},
+                                              :zen/desc "Allowable authorization for this agent"}},
+                      :type {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                             :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.participation-role-type/value-set,
+                                                  :strength :preferred},
+                             :zen/desc "How agent participated"},
+                      :policy {:type zen/vector,
+                               :every {:confirms #{hl7-fhir-r5-core.uri/schema},
+                                       :zen/desc "Policy that authorized the agent participation in the event"}},
+                      :_policy {:type zen/vector,
+                                :every {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                      :network {:fhir/polymorphic true,
+                                :type zen/map,
+                                :exclusive-keys #{#{:string
+                                                    :uri
+                                                    :Reference}},
+                                :keys {:Reference {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                               zen.fhir/Reference},
+                                                   :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Endpoint/schema}}},
+                                       :uri {:confirms #{hl7-fhir-r5-core.uri/schema}},
+                                       :_uri {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                       :string {:confirms #{hl7-fhir-r5-core.string/schema}},
+                                       :_string {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                :zen/desc "This agent network location for the activity"},
+                      :location {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                             zen.fhir/Reference},
+                                 :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Location/schema}},
+                                 :zen/desc "The agent location when the event occurred"},
+                      :_requestor {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+               :require #{:who},
+               :fhir/flags #{:SU},
+               :zen/desc "Actor involved in the event"},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/AuditEvent",
+         :require #{:source :recorded :agent :code},
+         :type zen/map,
+         :zen/desc "A record of an event relevant for purposes such as operations, privacy, security, maintenance, and performance analysis.",
+         :keys {:patient {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                      zen.fhir/Reference},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema}},
+                          :zen/desc "The patient is the subject of the data used/created/updated/deleted during the activity"},
+                :category {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                   :fhir/flags #{:SU},
+                                   :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.audit-event-type/value-set,
+                                                        :strength :example},
+                                   :zen/desc "Type/identifier of event"}},
+                :occurred {:fhir/polymorphic true,
+                           :type zen/map,
+                           :exclusive-keys #{#{:dateTime :Period}},
+                           :keys {:Period {:confirms #{hl7-fhir-r5-core.Period/schema}},
+                                  :dateTime {:confirms #{hl7-fhir-r5-core.dateTime/schema}},
+                                  :_dateTime {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                           :zen/desc "When the activity occurred"},
+                :encounter {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                        zen.fhir/Reference},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Encounter/schema}},
+                            :zen/desc "Encounter within which this event occurred or which the event is tightly associated"},
+                :authorization {:type zen/vector,
+                                :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                        :fhir/flags #{:SU},
+                                        :zen.fhir/value-set {:symbol hl7-terminology-r5.value-set.v3-PurposeOfUse/value-set,
+                                                             :strength :example},
+                                        :zen/desc "Authorization related to the event"}},
+                :_action {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :outcome {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                          :type zen/map,
+                          :keys {:code {:confirms #{hl7-fhir-r5-core.Coding/schema},
+                                        :fhir/flags #{:SU},
+                                        :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.audit-event-outcome/value-set,
+                                                             :strength :preferred},
+                                        :zen/desc "Whether the event succeeded or failed"},
+                                 :detail {:type zen/vector,
+                                          :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                  :fhir/flags #{:SU},
+                                                  :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.audit-event-outcome-detail/value-set,
+                                                                       :strength :example},
+                                                  :zen/desc "Additional outcome detail"}}},
+                          :require #{:code},
+                          :fhir/flags #{:SU},
+                          :zen/desc "Whether the event succeeded or failed"},
+                :source {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                         :type zen/map,
+                         :keys {:site {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                   zen.fhir/Reference},
+                                       :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Location/schema}},
+                                       :zen/desc "Logical source location within the enterprise"},
+                                :observer {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                       zen.fhir/Reference},
+                                           :fhir/flags #{:SU},
+                                           :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                                          hl7-fhir-r5-core.CareTeam/schema
+                                                                          hl7-fhir-r5-core.PractitionerRole/schema
+                                                                          hl7-fhir-r5-core.Organization/schema
+                                                                          hl7-fhir-r5-core.Device/schema
+                                                                          hl7-fhir-r5-core.Practitioner/schema
+                                                                          hl7-fhir-r5-core.RelatedPerson/schema}},
+                                           :zen/desc "The identity of source detecting the event"},
+                                :type {:type zen/vector,
+                                       :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                               :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.security-source-type/value-set,
+                                                                    :strength :preferred},
+                                               :zen/desc "The type of source where event originated"}}},
+                         :require #{:observer},
+                         :fhir/flags #{:SU},
+                         :zen/desc "Audit Event Reporter"},
+                :recorded {:confirms #{hl7-fhir-r5-core.instant/schema},
+                           :fhir/flags #{:SU},
+                           :zen/desc "Time when the event was recorded"},
+                :agent {:type zen/vector,
+                        :every {:confirms #{hl7-fhir-r5-core.AuditEvent/agent-schema}},
+                        :minItems 1},
+                :severity {:confirms #{hl7-fhir-r5-core.code/schema},
+                           :fhir/flags #{:SU},
+                           :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.audit-event-severity/value-set,
+                                                :strength :required},
+                           :zen/desc "emergency | alert | critical | error | warning | notice | informational | debug"},
+                :code {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                       :fhir/flags #{:SU},
+                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.audit-event-sub-type/value-set,
+                                            :strength :example},
+                       :zen/desc "Specific type of event"},
+                :action {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.audit-event-action/value-set,
+                                              :strength :required},
+                         :zen/desc "Type of action performed during the event"},
+                :_severity {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :basedOn {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                              zen.fhir/Reference},
+                                  :zen.fhir/reference {:refers #{hl7-fhir-r5-core.NutritionOrder/schema
+                                                                 hl7-fhir-r5-core.ImmunizationRecommendation/schema
+                                                                 hl7-fhir-r5-core.ServiceRequest/schema
+                                                                 hl7-fhir-r5-core.CarePlan/schema
+                                                                 hl7-fhir-r5-core.DeviceRequest/schema
+                                                                 hl7-fhir-r5-core.Task/schema
+                                                                 hl7-fhir-r5-core.MedicationRequest/schema}},
+                                  :zen/desc "Workflow authorization within which this event occurred"}},
+                :_recorded {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :entity {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                 :type zen/map,
+                                 :keys {:what {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                           zen.fhir/Reference},
+                                               :fhir/flags #{:SU},
+                                               :zen.fhir/reference {:refers #{}},
+                                               :zen/desc "Specific instance of resource"},
+                                        :role {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                               :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.object-role/value-set,
+                                                                    :strength :example},
+                                               :zen/desc "What role the entity played"},
+                                        :securityLabel {:type zen/vector,
+                                                        :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.security-label-examples/value-set,
+                                                                                     :strength :example},
+                                                                :zen/desc "Security labels on the entity"}},
+                                        :query {:confirms #{hl7-fhir-r5-core.base64Binary/schema},
+                                                :fhir/flags #{:SU},
+                                                :zen/desc "Query parameters"},
+                                        :_query {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                        :detail {:type zen/vector,
+                                                 :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                                         :type zen/map,
+                                                         :keys {:type {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.audit-event-type/value-set,
+                                                                                            :strength :example},
+                                                                       :zen/desc "Name of the property"},
+                                                                :value {:fhir/polymorphic true,
+                                                                        :type zen/map,
+                                                                        :exclusive-keys #{#{:time
+                                                                                            :base64Binary
+                                                                                            :string
+                                                                                            :dateTime
+                                                                                            :Range
+                                                                                            :integer
+                                                                                            :Ratio
+                                                                                            :Period
+                                                                                            :CodeableConcept
+                                                                                            :Quantity
+                                                                                            :boolean}},
+                                                                        :keys {:_dateTime {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                                               :time {:confirms #{hl7-fhir-r5-core.time/schema}},
+                                                                               :base64Binary {:confirms #{hl7-fhir-r5-core.base64Binary/schema}},
+                                                                               :string {:confirms #{hl7-fhir-r5-core.string/schema}},
+                                                                               :dateTime {:confirms #{hl7-fhir-r5-core.dateTime/schema}},
+                                                                               :_time {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                                               :Range {:confirms #{hl7-fhir-r5-core.Range/schema}},
+                                                                               :integer {:confirms #{hl7-fhir-r5-core.integer/schema}},
+                                                                               :Ratio {:confirms #{hl7-fhir-r5-core.Ratio/schema}},
+                                                                               :_boolean {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                                               :Period {:confirms #{hl7-fhir-r5-core.Period/schema}},
+                                                                               :_base64Binary {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                                               :_integer {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                                               :CodeableConcept {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema}},
+                                                                               :Quantity {:confirms #{hl7-fhir-r5-core.Quantity/schema}},
+                                                                               :boolean {:confirms #{hl7-fhir-r5-core.boolean/schema}},
+                                                                               :_string {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                                                        :zen/desc "Property value"}},
+                                                         :require #{:value
+                                                                    :type},
+                                                         :zen/desc "Additional Information about the entity"}},
+                                        :agent {:type zen/vector,
+                                                :every {:confirms #{hl7-fhir-r5-core.AuditEvent/agent-schema},
+                                                        :zen/desc "Entity is attributed to this agent"}}},
+                                 :fhir/flags #{:SU},
+                                 :zen/desc "Data or objects used"}}},
+         :zen.fhir/type "AuditEvent"}}

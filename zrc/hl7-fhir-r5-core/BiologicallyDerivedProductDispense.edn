@@ -1,0 +1,121 @@
+{ns hl7-fhir-r5-core.BiologicallyDerivedProductDispense,
+ import #{hl7-fhir-r5-core.BiologicallyDerivedProduct
+          hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.BackboneElement
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.Annotation
+          hl7-fhir-r5-core.SimpleQuantity
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.value-set.biologicallyderivedproductdispense-origin-relationship
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.value-set.biologicallyderivedproductdispense-performer-function
+          hl7-fhir-r5-core.Location
+          hl7-fhir-r5-core.Practitioner
+          hl7-fhir-r5-core.value-set.biologicallyderivedproductdispense-match-status
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.value-set.biologicallyderivedproductdispense-status
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.Quantity
+          hl7-fhir-r5-core.ServiceRequest
+          hl7-fhir-r5-core.Patient
+          hl7-fhir-r5-core.BiologicallyDerivedProductDispense},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/BiologicallyDerivedProductDispense",
+         :require #{:patient :product :status},
+         :type zen/map,
+         :zen/desc "A record of dispensation of a biologically derived product.",
+         :keys {:patient {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                      zen.fhir/Reference},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema}},
+                          :zen/desc "The intended recipient of the dispensed product"},
+                :whenHandedOver {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                                 :fhir/flags #{:SU},
+                                 :zen/desc "When the product was dispatched"},
+                :usageInstruction {:confirms #{hl7-fhir-r5-core.string/schema},
+                                   :fhir/flags #{:SU},
+                                   :zen/desc "Specific instructions for use"},
+                :_preparedDate {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :preparedDate {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                               :fhir/flags #{:SU},
+                               :zen/desc "When product was selected/matched"},
+                :note {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.Annotation/schema},
+                               :fhir/flags #{:SU},
+                               :zen/desc "Additional notes"}},
+                :_usageInstruction {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :product {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                      zen.fhir/Reference},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.BiologicallyDerivedProduct/schema}},
+                          :zen/desc "The BiologicallyDerivedProduct that is dispensed"},
+                :originRelationshipType {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                         :fhir/flags #{:SU},
+                                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.biologicallyderivedproductdispense-origin-relationship/value-set,
+                                                              :strength :example},
+                                         :zen/desc "Relationship between the donor and intended recipient"},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.biologicallyderivedproductdispense-status/value-set,
+                                              :strength :required},
+                         :zen/desc "preparation | in-progress | allocated | issued | unfulfilled | returned | entered-in-error | unknown"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Business identifier for this dispense"}},
+                :basedOn {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                              zen.fhir/Reference},
+                                  :fhir/flags #{:SU},
+                                  :zen.fhir/reference {:refers #{hl7-fhir-r5-core.ServiceRequest/schema}},
+                                  :zen/desc "The order or request that this dispense is fulfilling"}},
+                :quantity {:confirms #{hl7-fhir-r5-core.Quantity/schema
+                                       hl7-fhir-r5-core.SimpleQuantity/schema},
+                           :fhir/flags #{:SU},
+                           :zen/desc "Amount dispensed"},
+                :partOf {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                             zen.fhir/Reference},
+                                 :fhir/flags #{:SU},
+                                 :zen.fhir/reference {:refers #{hl7-fhir-r5-core.BiologicallyDerivedProductDispense/schema}},
+                                 :zen/desc "Short description"}},
+                :_whenHandedOver {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :location {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                       zen.fhir/Reference},
+                           :fhir/flags #{:SU},
+                           :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Location/schema}},
+                           :zen/desc "Where the dispense occurred"},
+                :destination {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                          zen.fhir/Reference},
+                              :fhir/flags #{:SU},
+                              :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Location/schema}},
+                              :zen/desc "Where the product was dispatched to"},
+                :performer {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                    :type zen/map,
+                                    :keys {:function {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                      :fhir/flags #{:SU},
+                                                      :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.biologicallyderivedproductdispense-performer-function/value-set,
+                                                                           :strength :example},
+                                                      :zen/desc "Identifies the function of the performer during the dispense"},
+                                           :actor {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                               zen.fhir/Reference},
+                                                   :fhir/flags #{:SU},
+                                                   :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Practitioner/schema}},
+                                                   :zen/desc "Who performed the action"}},
+                                    :require #{:actor},
+                                    :fhir/flags #{:SU},
+                                    :zen/desc "Indicates who or what performed an action"}},
+                :matchStatus {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                              :fhir/flags #{:SU},
+                              :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.biologicallyderivedproductdispense-match-status/value-set,
+                                                   :strength :example},
+                              :zen/desc "Indicates the type of matching associated with the dispense"}},
+         :zen.fhir/type "BiologicallyDerivedProductDispense"}}

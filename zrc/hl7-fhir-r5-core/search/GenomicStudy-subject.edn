@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.GenomicStudy-subject,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "GenomicStudy-subject",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/GenomicStudy-subject",
+         :fhir/type "reference",
+         :name "subject",
+         :expr {:GenomicStudy {:knife [["subject"]],
+                               :jsonpath ["$.\"subject\"[*]"],
+                               :data-types #{{:type "Reference",
+                                              :polymorphic? false}},
+                               :template :reference}}}}

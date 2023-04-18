@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.SpecimenDefinition-type-tested,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "SpecimenDefinition-type-tested",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/SpecimenDefinition-type-tested",
+         :fhir/type "token",
+         :name "type-tested",
+         :expr {:SpecimenDefinition {:knife [["typeTested" "type"]],
+                                     :jsonpath ["$.\"typeTested\".\"type\"[*]"],
+                                     :data-types #{{:type "CodeableConcept",
+                                                    :polymorphic? false}},
+                                     :template :token}}}}

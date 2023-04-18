@@ -1,0 +1,180 @@
+{ns hl7-fhir-r5-core.Extension,
+ import #{hl7-fhir-r5-core.markdown
+          hl7-fhir-r5-core.instant
+          hl7-fhir-r5-core.decimal
+          hl7-fhir-r5-core.SampledData
+          hl7-fhir-r5-core.Age
+          hl7-fhir-r5-core.DataRequirement
+          hl7-fhir-r5-core.CodeableReference
+          hl7-fhir-r5-core.boolean
+          hl7-fhir-r5-core.Ratio
+          zen.fhir
+          hl7-fhir-r5-core.positiveInt
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.integer64
+          hl7-fhir-r5-core.Annotation
+          hl7-fhir-r5-core.UsageContext
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.url
+          hl7-fhir-r5-core.Distance
+          hl7-fhir-r5-core.Attachment
+          hl7-fhir-r5-core.base64Binary
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.oid
+          hl7-fhir-r5-core.Money
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.date
+          hl7-fhir-r5-core.ExtendedContactDetail
+          hl7-fhir-r5-core.uuid
+          hl7-fhir-r5-core.integer
+          hl7-fhir-r5-core.time
+          hl7-fhir-r5-core.Address
+          hl7-fhir-r5-core.Timing
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.ContactPoint
+          hl7-fhir-r5-core.Period
+          hl7-fhir-r5-core.canonical
+          hl7-fhir-r5-core.RelatedArtifact
+          hl7-fhir-r5-core.Duration
+          hl7-fhir-r5-core.RatioRange
+          hl7-fhir-r5-core.Coding
+          hl7-fhir-r5-core.ParameterDefinition
+          hl7-fhir-r5-core.Meta
+          hl7-fhir-r5-core.Count
+          hl7-fhir-r5-core.Range
+          hl7-fhir-r5-core.Dosage
+          hl7-fhir-r5-core.Quantity
+          hl7-fhir-r5-core.Availability
+          hl7-fhir-r5-core.Signature
+          hl7-fhir-r5-core.Expression
+          hl7-fhir-r5-core.DataType
+          hl7-fhir-r5-core.id
+          hl7-fhir-r5-core.TriggerDefinition
+          hl7-fhir-r5-core.HumanName
+          hl7-fhir-r5-core.uri
+          hl7-fhir-r5-core.unsignedInt
+          hl7-fhir-r5-core.ContactDetail},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DataType/schema},
+         :zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Extension",
+         :require #{:url},
+         :type zen/map,
+         :zen/desc "Extension Type: Optional Extension Element - found in all resources.",
+         :keys {:url {:confirms #{hl7-fhir-r5-core.uri/schema},
+                      :zen/desc "identifies the meaning of the extension"},
+                :value {:fhir/polymorphic true,
+                        :type zen/map,
+                        :exclusive-keys #{#{:unsignedInt
+                                            :Signature
+                                            :markdown
+                                            :date
+                                            :Dosage
+                                            :ContactDetail
+                                            :RelatedArtifact
+                                            :instant
+                                            :UsageContext
+                                            :time
+                                            :DataRequirement
+                                            :base64Binary
+                                            :Meta
+                                            :Distance
+                                            :SampledData
+                                            :TriggerDefinition
+                                            :Identifier
+                                            :string
+                                            :Address
+                                            :Expression
+                                            :RatioRange
+                                            :dateTime
+                                            :Range
+                                            :integer
+                                            :Ratio
+                                            :oid
+                                            :ContactPoint
+                                            :Money
+                                            :decimal
+                                            :id
+                                            :Attachment
+                                            :Period
+                                            :canonical
+                                            :url
+                                            :code
+                                            :HumanName
+                                            :positiveInt
+                                            :ParameterDefinition
+                                            :Coding
+                                            :Timing
+                                            :ExtendedContactDetail
+                                            :Duration
+                                            :uri
+                                            :CodeableConcept
+                                            :uuid
+                                            :Count
+                                            :Quantity
+                                            :boolean
+                                            :Availability
+                                            :CodeableReference
+                                            :integer64
+                                            :Annotation
+                                            :Age
+                                            :Reference}},
+                        :keys {:unsignedInt {:confirms #{hl7-fhir-r5-core.unsignedInt/schema}},
+                               :Signature {:confirms #{hl7-fhir-r5-core.Signature/schema}},
+                               :markdown {:confirms #{hl7-fhir-r5-core.markdown/schema}},
+                               :date {:confirms #{hl7-fhir-r5-core.date/schema}},
+                               :Dosage {:confirms #{hl7-fhir-r5-core.Dosage/schema}},
+                               :ContactDetail {:confirms #{hl7-fhir-r5-core.ContactDetail/schema}},
+                               :RelatedArtifact {:confirms #{hl7-fhir-r5-core.RelatedArtifact/schema}},
+                               :instant {:confirms #{hl7-fhir-r5-core.instant/schema}},
+                               :UsageContext {:confirms #{hl7-fhir-r5-core.UsageContext/schema}},
+                               :time {:confirms #{hl7-fhir-r5-core.time/schema}},
+                               :DataRequirement {:confirms #{hl7-fhir-r5-core.DataRequirement/schema}},
+                               :base64Binary {:confirms #{hl7-fhir-r5-core.base64Binary/schema}},
+                               :Meta {:confirms #{hl7-fhir-r5-core.Meta/schema}},
+                               :Distance {:confirms #{hl7-fhir-r5-core.Distance/schema}},
+                               :SampledData {:confirms #{hl7-fhir-r5-core.SampledData/schema}},
+                               :TriggerDefinition {:confirms #{hl7-fhir-r5-core.TriggerDefinition/schema}},
+                               :Identifier {:confirms #{hl7-fhir-r5-core.Identifier/schema}},
+                               :string {:confirms #{hl7-fhir-r5-core.string/schema}},
+                               :Address {:confirms #{hl7-fhir-r5-core.Address/schema}},
+                               :Expression {:confirms #{hl7-fhir-r5-core.Expression/schema}},
+                               :RatioRange {:confirms #{hl7-fhir-r5-core.RatioRange/schema}},
+                               :dateTime {:confirms #{hl7-fhir-r5-core.dateTime/schema}},
+                               :Range {:confirms #{hl7-fhir-r5-core.Range/schema}},
+                               :integer {:confirms #{hl7-fhir-r5-core.integer/schema}},
+                               :Ratio {:confirms #{hl7-fhir-r5-core.Ratio/schema}},
+                               :oid {:confirms #{hl7-fhir-r5-core.oid/schema}},
+                               :ContactPoint {:confirms #{hl7-fhir-r5-core.ContactPoint/schema}},
+                               :Money {:confirms #{hl7-fhir-r5-core.Money/schema}},
+                               :decimal {:confirms #{hl7-fhir-r5-core.decimal/schema}},
+                               :id {:confirms #{hl7-fhir-r5-core.id/schema}},
+                               :Attachment {:confirms #{hl7-fhir-r5-core.Attachment/schema}},
+                               :Period {:confirms #{hl7-fhir-r5-core.Period/schema}},
+                               :canonical {:confirms #{hl7-fhir-r5-core.canonical/schema}},
+                               :url {:confirms #{hl7-fhir-r5-core.url/schema}},
+                               :code {:confirms #{hl7-fhir-r5-core.code/schema}},
+                               :HumanName {:confirms #{hl7-fhir-r5-core.HumanName/schema}},
+                               :positiveInt {:confirms #{hl7-fhir-r5-core.positiveInt/schema}},
+                               :ParameterDefinition {:confirms #{hl7-fhir-r5-core.ParameterDefinition/schema}},
+                               :Coding {:confirms #{hl7-fhir-r5-core.Coding/schema}},
+                               :Timing {:confirms #{hl7-fhir-r5-core.Timing/schema}},
+                               :ExtendedContactDetail {:confirms #{hl7-fhir-r5-core.ExtendedContactDetail/schema}},
+                               :Duration {:confirms #{hl7-fhir-r5-core.Duration/schema}},
+                               :uri {:confirms #{hl7-fhir-r5-core.uri/schema}},
+                               :CodeableConcept {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema}},
+                               :uuid {:confirms #{hl7-fhir-r5-core.uuid/schema}},
+                               :Count {:confirms #{hl7-fhir-r5-core.Count/schema}},
+                               :Quantity {:confirms #{hl7-fhir-r5-core.Quantity/schema}},
+                               :boolean {:confirms #{hl7-fhir-r5-core.boolean/schema}},
+                               :Availability {:confirms #{hl7-fhir-r5-core.Availability/schema}},
+                               :CodeableReference {:confirms #{hl7-fhir-r5-core.CodeableReference/schema}},
+                               :integer64 {:confirms #{hl7-fhir-r5-core.integer64/schema}},
+                               :Annotation {:confirms #{hl7-fhir-r5-core.Annotation/schema}},
+                               :Age {:confirms #{hl7-fhir-r5-core.Age/schema}},
+                               :Reference {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                       zen.fhir/Reference},
+                                           :zen.fhir/reference {:refers #{}}}},
+                        :zen/desc "Value of extension"}},
+         :zen.fhir/type "Extension"}}

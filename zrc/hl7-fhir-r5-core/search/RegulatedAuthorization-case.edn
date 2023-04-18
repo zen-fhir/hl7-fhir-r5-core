@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.RegulatedAuthorization-case,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "RegulatedAuthorization-case",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/RegulatedAuthorization-case",
+         :fhir/type "token",
+         :name "case",
+         :expr {:RegulatedAuthorization {:knife [["case" "identifier"]],
+                                         :jsonpath ["$.\"case\".\"identifier\"[*]"],
+                                         :data-types #{{:type "Identifier",
+                                                        :polymorphic? false}},
+                                         :template :token}}}}

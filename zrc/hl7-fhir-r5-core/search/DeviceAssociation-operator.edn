@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.DeviceAssociation-operator,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "DeviceAssociation-operator",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/DeviceAssociation-operator",
+         :fhir/type "reference",
+         :name "operator",
+         :expr {:DeviceAssociation {:knife [["operation" "operator"]],
+                                    :jsonpath ["$.\"operation\".\"operator\"[*]"],
+                                    :data-types #{{:type "Reference",
+                                                   :polymorphic? false}},
+                                    :template :reference}}}}

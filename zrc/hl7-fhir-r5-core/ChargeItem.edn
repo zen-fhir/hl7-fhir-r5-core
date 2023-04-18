@@ -1,0 +1,185 @@
+{ns hl7-fhir-r5-core.ChargeItem,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.MonetaryComponent
+          hl7-fhir-r5-core.value-set.device-type
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.CodeableReference
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.Group
+          hl7-fhir-r5-core.value-set.body-site
+          hl7-fhir-r5-core.Annotation
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.ChargeItem
+          hl7-fhir-r5-core.value-set.chargeitem-billingcodes
+          hl7-fhir-r5-core.value-set.performer-role
+          hl7-fhir-r5-core.Encounter
+          hl7-fhir-r5-core.value-set.chargeitem-status
+          hl7-fhir-r5-core.Practitioner
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.Device
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.CareTeam
+          hl7-fhir-r5-core.Timing
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.RelatedPerson
+          hl7-fhir-r5-core.PractitionerRole
+          hl7-fhir-r5-core.Period
+          hl7-fhir-r5-core.canonical
+          hl7-fhir-r5-core.value-set.icd-10
+          hl7-fhir-r5-core.Quantity
+          hl7-fhir-r5-core.Account
+          hl7-fhir-r5-core.uri
+          hl7-fhir-r5-core.HealthcareService
+          hl7-fhir-r5-core.Patient},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/ChargeItem",
+         :require #{:status :code :subject},
+         :type zen/map,
+         :zen/desc "The resource ChargeItem describes the provision of healthcare provider products for a certain patient, therefore referring not only to the product, but containing in addition details of the provision, like date, time, amounts and participating organizations and persons. Main Usage of the ChargeItem is to enable the billing process and internal cost allocation.",
+         :keys {:service {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                  :zen/desc "Which rendered service is being charged?"}},
+                :definitionUri {:type zen/vector,
+                                :every {:confirms #{hl7-fhir-r5-core.uri/schema},
+                                        :zen/desc "Defining information about the code of this charge item"}},
+                :enterer {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                      zen.fhir/Reference},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                         hl7-fhir-r5-core.PractitionerRole/schema
+                                                         hl7-fhir-r5-core.Organization/schema
+                                                         hl7-fhir-r5-core.Device/schema
+                                                         hl7-fhir-r5-core.Practitioner/schema
+                                                         hl7-fhir-r5-core.RelatedPerson/schema}},
+                          :zen/desc "Individual who was entering"},
+                :encounter {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                        zen.fhir/Reference},
+                            :fhir/flags #{:SU},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Encounter/schema}},
+                            :zen/desc "Encounter associated with this ChargeItem"},
+                :requestingOrganization {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                     zen.fhir/Reference},
+                                         :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Organization/schema}},
+                                         :zen/desc "Organization requesting the charged service"},
+                :unitPriceComponent {:confirms #{hl7-fhir-r5-core.MonetaryComponent/schema},
+                                     :zen/desc "Unit price overriding the associated rules"},
+                :definitionCanonical {:type zen/vector,
+                                      :every {:confirms #{hl7-fhir-r5-core.canonical/schema},
+                                              :zen/desc "Resource defining the code of this ChargeItem"}},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :totalPriceComponent {:confirms #{hl7-fhir-r5-core.MonetaryComponent/schema},
+                                      :zen/desc "Total price overriding the associated rules"},
+                :bodysite {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                   :fhir/flags #{:SU},
+                                   :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.body-site/value-set,
+                                                        :strength :example},
+                                   :zen/desc "Anatomical location, if relevant"}},
+                :_definitionUri {:type zen/vector,
+                                 :every {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                :costCenter {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                         zen.fhir/Reference},
+                             :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Organization/schema}},
+                             :zen/desc "Organization that has ownership of the (potential, future) revenue"},
+                :note {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.Annotation/schema},
+                               :zen/desc "Comments made about the ChargeItem"}},
+                :account {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                              zen.fhir/Reference},
+                                  :fhir/flags #{:SU},
+                                  :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Account/schema}},
+                                  :zen/desc "Account to place this charge"}},
+                :_definitionCanonical {:type zen/vector,
+                                       :every {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                :reason {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                 :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.icd-10/value-set,
+                                                      :strength :example},
+                                 :zen/desc "Why was the charged  service rendered?"}},
+                :product {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                  :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.device-type/value-set,
+                                                       :strength :example},
+                                  :zen/desc "Product charged"}},
+                :supportingInformation {:type zen/vector,
+                                        :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                            zen.fhir/Reference},
+                                                :zen.fhir/reference {:refers #{}},
+                                                :zen/desc "Further information supporting this charge"}},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.chargeitem-status/value-set,
+                                              :strength :required},
+                         :zen/desc "planned | billable | not-billable | aborted | billed | entered-in-error | unknown"},
+                :code {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                       :fhir/flags #{:SU},
+                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.chargeitem-billingcodes/value-set,
+                                            :strength :example},
+                       :zen/desc "A code that identifies the charge, like a billing code"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Business Identifier for item"}},
+                :_enteredDate {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :quantity {:confirms #{hl7-fhir-r5-core.Quantity/schema},
+                           :fhir/flags #{:SU},
+                           :zen/desc "Quantity of which the charge item has been serviced"},
+                :partOf {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                             zen.fhir/Reference},
+                                 :zen.fhir/reference {:refers #{hl7-fhir-r5-core.ChargeItem/schema}},
+                                 :zen/desc "Part of referenced ChargeItem"}},
+                :enteredDate {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                              :fhir/flags #{:SU},
+                              :zen/desc "Date the charge item was entered"},
+                :overrideReason {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                 :zen/desc "Reason for overriding the list price/factor"},
+                :performingOrganization {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                     zen.fhir/Reference},
+                                         :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Organization/schema}},
+                                         :zen/desc "Organization providing the charged service"},
+                :subject {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                      zen.fhir/Reference},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                         hl7-fhir-r5-core.Group/schema}},
+                          :zen/desc "Individual service was done for/to"},
+                :occurrence {:fhir/polymorphic true,
+                             :type zen/map,
+                             :exclusive-keys #{#{:dateTime
+                                                 :Period
+                                                 :Timing}},
+                             :keys {:dateTime {:confirms #{hl7-fhir-r5-core.dateTime/schema}},
+                                    :_dateTime {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                    :Period {:confirms #{hl7-fhir-r5-core.Period/schema}},
+                                    :Timing {:confirms #{hl7-fhir-r5-core.Timing/schema}}},
+                             :fhir/flags #{:SU},
+                             :zen/desc "When the charged service was applied"},
+                :performer {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                    :type zen/map,
+                                    :keys {:function {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                      :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.performer-role/value-set,
+                                                                           :strength :example},
+                                                      :zen/desc "What type of performance was done"},
+                                           :actor {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                               zen.fhir/Reference},
+                                                   :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                                                  hl7-fhir-r5-core.CareTeam/schema
+                                                                                  hl7-fhir-r5-core.HealthcareService/schema
+                                                                                  hl7-fhir-r5-core.PractitionerRole/schema
+                                                                                  hl7-fhir-r5-core.Organization/schema
+                                                                                  hl7-fhir-r5-core.Device/schema
+                                                                                  hl7-fhir-r5-core.Practitioner/schema
+                                                                                  hl7-fhir-r5-core.RelatedPerson/schema}},
+                                                   :zen/desc "Individual who was performing"}},
+                                    :require #{:actor},
+                                    :zen/desc "Who performed charged service"}}},
+         :zen.fhir/type "ChargeItem"}}

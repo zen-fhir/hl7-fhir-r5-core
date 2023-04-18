@@ -1,0 +1,314 @@
+{ns hl7-fhir-r5-core.Appointment,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-terminology-r5.value-set.v3-ActPriority
+          hl7-fhir-r5-core.value-set.timezones
+          hl7-fhir-r5-core.Appointment
+          hl7-fhir-r5-core.value-set.participationstatus
+          hl7-fhir-r5-core.instant
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.CodeableReference
+          hl7-fhir-r5-core.boolean
+          zen.fhir
+          hl7-fhir-r5-core.positiveInt
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.Group
+          hl7-fhir-r5-core.value-set.days-of-week
+          hl7-fhir-r5-core.Annotation
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.MedicationRequest
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.value-set.appointment-cancellation-reason
+          hl7-fhir-r5-core.value-set.week-of-month
+          hl7-fhir-r5-core.DeviceRequest
+          hl7-fhir-r5-core.value-set.service-category
+          hl7-fhir-r5-core.Location
+          hl7-fhir-r5-core.value-set.c80-practice-codes
+          hl7-fhir-r5-core.Practitioner
+          hl7-fhir-r5-core.value-set.appointment-recurrrence-type
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.Device
+          hl7-fhir-r5-core.CarePlan
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.date
+          hl7-fhir-r5-core.Slot
+          hl7-fhir-r5-core.CareTeam
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.RelatedPerson
+          hl7-fhir-r5-core.value-set.encounter-reason
+          hl7-fhir-r5-core.PractitionerRole
+          hl7-fhir-r5-core.Period
+          hl7-fhir-r5-core.value-set.encounter-participant-type
+          hl7-fhir-r5-core.value-set.service-type
+          hl7-fhir-r5-core.Coding
+          hl7-fhir-r5-core.VirtualServiceDetail
+          hl7-fhir-r5-core.value-set.appointmentstatus
+          hl7-fhir-r5-core.ServiceRequest
+          hl7-fhir-r5-core.Account
+          hl7-fhir-r5-core.HealthcareService
+          hl7-terminology-r5.value-set.v2-0276
+          hl7-fhir-r5-core.Patient},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Appointment",
+         :require #{:participant :status},
+         :type zen/map,
+         :zen/desc "A booking of a healthcare event among patient(s), practitioner(s), related person(s) and/or device(s) for a specific date/time. This may result in one or more Encounter(s).",
+         :keys {:_created {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :description {:confirms #{hl7-fhir-r5-core.string/schema},
+                              :zen/desc "Shown on a subject line in a meeting request, or appointment list"},
+                :serviceCategory {:type zen/vector,
+                                  :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                          :fhir/flags #{:SU},
+                                          :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.service-category/value-set,
+                                                               :strength :example},
+                                          :zen/desc "A broad categorization of the service that is to be performed during this appointment"}},
+                :slot {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                           zen.fhir/Reference},
+                               :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Slot/schema}},
+                               :zen/desc "The slots that this appointment is filling"}},
+                :previousAppointment {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                  zen.fhir/Reference},
+                                      :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Appointment/schema}},
+                                      :zen/desc "The previous appointment in a series"},
+                :originatingAppointment {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                     zen.fhir/Reference},
+                                         :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Appointment/schema}},
+                                         :zen/desc "The originating appointment in a recurring set of appointments"},
+                :recurrenceId {:confirms #{hl7-fhir-r5-core.positiveInt/schema},
+                               :zen/desc "The sequence number in the recurrence"},
+                :cancellationDate {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                                   :zen/desc "When the appointment was cancelled"},
+                :specialty {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                    :fhir/flags #{:SU},
+                                    :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.c80-practice-codes/value-set,
+                                                         :strength :preferred},
+                                    :zen/desc "The specialty of a practitioner that would be required to perform the service requested in this appointment"}},
+                :_cancellationDate {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :occurrenceChanged {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                                    :zen/desc "Indicates that this appointment varies from a recurrence pattern"},
+                :requestedPeriod {:type zen/vector,
+                                  :every {:confirms #{hl7-fhir-r5-core.Period/schema},
+                                          :zen/desc "Potential date/time interval(s) requested to allocate the appointment within"}},
+                :patientInstruction {:type zen/vector,
+                                     :every {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                             :zen/desc "Detailed information and instructions for the patient"}},
+                :_end {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :recurrenceTemplate {:type zen/vector,
+                                     :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                             :type zen/map,
+                                             :keys {:timezone {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                               :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.timezones/value-set,
+                                                                                    :strength :required},
+                                                               :zen/desc "The timezone of the occurrences"},
+                                                    :_excludingRecurrenceId {:type zen/vector,
+                                                                             :every {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                                    :_excludingDate {:type zen/vector,
+                                                                     :every {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                                    :lastOccurrenceDate {:confirms #{hl7-fhir-r5-core.date/schema},
+                                                                         :zen/desc "The date when the recurrence should end"},
+                                                    :yearlyTemplate {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                                                     :type zen/map,
+                                                                     :keys {:yearInterval {:confirms #{hl7-fhir-r5-core.positiveInt/schema},
+                                                                                           :zen/desc "Recurs every nth year"},
+                                                                            :_yearInterval {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                                                     :require #{:yearInterval},
+                                                                     :zen/desc "Information about yearly recurring appointments"},
+                                                    :monthlyTemplate {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                                                      :type zen/map,
+                                                                      :keys {:dayOfMonth {:confirms #{hl7-fhir-r5-core.positiveInt/schema},
+                                                                                          :zen/desc "Recurs on a specific day of the month"},
+                                                                             :_dayOfMonth {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                                             :nthWeekOfMonth {:confirms #{hl7-fhir-r5-core.Coding/schema},
+                                                                                              :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.week-of-month/value-set,
+                                                                                                                   :strength :required},
+                                                                                              :zen/desc "Indicates which week of the month the appointment should occur"},
+                                                                             :dayOfWeek {:confirms #{hl7-fhir-r5-core.Coding/schema},
+                                                                                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.days-of-week/value-set,
+                                                                                                              :strength :required},
+                                                                                         :zen/desc "Indicates which day of the week the appointment should occur"},
+                                                                             :monthInterval {:confirms #{hl7-fhir-r5-core.positiveInt/schema},
+                                                                                             :zen/desc "Recurs every nth month"},
+                                                                             :_monthInterval {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                                                      :require #{:monthInterval},
+                                                                      :zen/desc "Information about monthly recurring appointments"},
+                                                    :weeklyTemplate {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                                                     :type zen/map,
+                                                                     :keys {:_wednesday {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                                            :_friday {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                                            :_saturday {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                                            :_sunday {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                                            :_tuesday {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                                            :saturday {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                                                                                       :zen/desc "Recurs on Saturday"},
+                                                                            :_weekInterval {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                                            :weekInterval {:confirms #{hl7-fhir-r5-core.positiveInt/schema},
+                                                                                           :zen/desc "Recurs every nth week"},
+                                                                            :tuesday {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                                                                                      :zen/desc "Recurs on Tuesday"},
+                                                                            :_monday {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                                            :wednesday {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                                                                                        :zen/desc "Recurs on Wednesday"},
+                                                                            :sunday {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                                                                                     :zen/desc "Recurs on Sunday"},
+                                                                            :friday {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                                                                                     :zen/desc "Recurs on Friday"},
+                                                                            :monday {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                                                                                     :zen/desc "Recurs on Mondays"},
+                                                                            :_thursday {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                                            :thursday {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                                                                                       :zen/desc "Recurs on Thursday"}},
+                                                                     :zen/desc "Information about weekly recurring appointments"},
+                                                    :occurrenceDate {:type zen/vector,
+                                                                     :every {:confirms #{hl7-fhir-r5-core.date/schema},
+                                                                             :zen/desc "Specific dates for a recurring set of appointments (no template)"}},
+                                                    :excludingDate {:type zen/vector,
+                                                                    :every {:confirms #{hl7-fhir-r5-core.date/schema},
+                                                                            :zen/desc "Any dates that should be excluded from the series"}},
+                                                    :occurrenceCount {:confirms #{hl7-fhir-r5-core.positiveInt/schema},
+                                                                      :zen/desc "The number of planned occurrences"},
+                                                    :_occurrenceDate {:type zen/vector,
+                                                                      :every {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                                    :_lastOccurrenceDate {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                    :_occurrenceCount {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                    :recurrenceType {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                     :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.appointment-recurrrence-type/value-set,
+                                                                                          :strength :preferred},
+                                                                     :zen/desc "The frequency of the recurrence"},
+                                                    :excludingRecurrenceId {:type zen/vector,
+                                                                            :every {:confirms #{hl7-fhir-r5-core.positiveInt/schema},
+                                                                                    :zen/desc "Any recurrence IDs that should be excluded from the recurrence"}}},
+                                             :require #{:recurrenceType},
+                                             :zen/desc "Details of the recurrence pattern/template used to generate occurrences"}},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :start {:confirms #{hl7-fhir-r5-core.instant/schema},
+                        :fhir/flags #{:SU},
+                        :zen/desc "When appointment is to take place"},
+                :created {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                          :zen/desc "The date that this appointment was initially created"},
+                :participant {:type zen/vector,
+                              :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                      :type zen/map,
+                                      :keys {:type {:type zen/vector,
+                                                    :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                            :fhir/flags #{:SU},
+                                                            :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.encounter-participant-type/value-set,
+                                                                                 :strength :extensible},
+                                                            :zen/desc "Role of participant in the appointment"}},
+                                             :period {:confirms #{hl7-fhir-r5-core.Period/schema},
+                                                      :zen/desc "Participation period of the actor"},
+                                             :actor {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                 zen.fhir/Reference},
+                                                     :fhir/flags #{:SU},
+                                                     :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                                                    hl7-fhir-r5-core.CareTeam/schema
+                                                                                    hl7-fhir-r5-core.HealthcareService/schema
+                                                                                    hl7-fhir-r5-core.PractitionerRole/schema
+                                                                                    hl7-fhir-r5-core.Location/schema
+                                                                                    hl7-fhir-r5-core.Device/schema
+                                                                                    hl7-fhir-r5-core.Practitioner/schema
+                                                                                    hl7-fhir-r5-core.Group/schema
+                                                                                    hl7-fhir-r5-core.RelatedPerson/schema}},
+                                                     :zen/desc "The individual, device, location, or service participating in the appointment"},
+                                             :required {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                                                        :fhir/flags #{:SU},
+                                                        :zen/desc "The participant is required to attend (optional when false)"},
+                                             :_required {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                             :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                                                      :fhir/flags #{:SU},
+                                                      :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.participationstatus/value-set,
+                                                                           :strength :required},
+                                                      :zen/desc "accepted | declined | tentative | needs-action"},
+                                             :_status {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                      :require #{:status},
+                                      :zen/desc "Participants involved in appointment"},
+                              :minItems 1},
+                :serviceType {:type zen/vector,
+                              :every {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                      :fhir/flags #{:SU},
+                                      :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.service-type/value-set,
+                                                           :strength :example},
+                                      :zen/desc "The specific service that is to be performed during this appointment"}},
+                :_description {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :note {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.Annotation/schema},
+                               :zen/desc "Additional comments"}},
+                :account {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                              zen.fhir/Reference},
+                                  :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Account/schema}},
+                                  :zen/desc "The set of accounts that may be used for billing for this Appointment"}},
+                :virtualService {:type zen/vector,
+                                 :every {:confirms #{hl7-fhir-r5-core.VirtualServiceDetail/schema},
+                                         :zen/desc "Connection details of a virtual service (e.g. conference call)"}},
+                :reason {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                 :fhir/flags #{:SU},
+                                 :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.encounter-reason/value-set,
+                                                      :strength :preferred},
+                                 :zen/desc "Reason this appointment is scheduled"}},
+                :supportingInformation {:type zen/vector,
+                                        :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                            zen.fhir/Reference},
+                                                :zen.fhir/reference {:refers #{}},
+                                                :zen/desc "Additional information to support the appointment"}},
+                :priority {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                           :zen.fhir/value-set {:symbol hl7-terminology-r5.value-set.v3-ActPriority/value-set,
+                                                :strength :example},
+                           :zen/desc "Used to make informed decisions if needing to re-prioritize"},
+                :appointmentType {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                  :fhir/flags #{:SU},
+                                  :zen.fhir/value-set {:symbol hl7-terminology-r5.value-set.v2-0276/value-set,
+                                                       :strength :preferred},
+                                  :zen/desc "The style of appointment or patient that has been booked in the slot (not service type)"},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.appointmentstatus/value-set,
+                                              :strength :required},
+                         :zen/desc "proposed | pending | booked | arrived | fulfilled | cancelled | noshow | entered-in-error | checked-in | waitlist"},
+                :class {:type zen/vector,
+                        :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                :fhir/flags #{:SU},
+                                :zen/desc "Classification when becoming an encounter"}},
+                :minutesDuration {:confirms #{hl7-fhir-r5-core.positiveInt/schema},
+                                  :zen/desc "Can be less than start/end (e.g. estimate)"},
+                :cancellationReason {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.appointment-cancellation-reason/value-set,
+                                                          :strength :example},
+                                     :zen/desc "The coded reason for the appointment being cancelled"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "External Ids for this item"}},
+                :_minutesDuration {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :replaces {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                               zen.fhir/Reference},
+                                   :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Appointment/schema}},
+                                   :zen/desc "Appointment replaced by this Appointment"}},
+                :basedOn {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                              zen.fhir/Reference},
+                                  :zen.fhir/reference {:refers #{hl7-fhir-r5-core.ServiceRequest/schema
+                                                                 hl7-fhir-r5-core.CarePlan/schema
+                                                                 hl7-fhir-r5-core.DeviceRequest/schema
+                                                                 hl7-fhir-r5-core.MedicationRequest/schema}},
+                                  :zen/desc "The request this appointment is allocated to assess"}},
+                :end {:confirms #{hl7-fhir-r5-core.instant/schema},
+                      :fhir/flags #{:SU},
+                      :zen/desc "When appointment is to conclude"},
+                :_start {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :subject {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                      zen.fhir/Reference},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                         hl7-fhir-r5-core.Group/schema}},
+                          :zen/desc "The patient or group associated with the appointment"},
+                :_occurrenceChanged {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_recurrenceId {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+         :zen.fhir/type "Appointment"}}

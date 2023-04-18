@@ -1,0 +1,16 @@
+{ns hl7-fhir-r5-core.search.MedicationStatement-effective,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "MedicationStatement-effective",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/MedicationStatement-effective",
+         :fhir/type "date",
+         :name "effective",
+         :expr {:MedicationStatement {:knife [["effective"
+                                               "ofType(dateTime"]
+                                              ["effective"
+                                               "ofType(Period"]],
+                                      :jsonpath ["$.\"effective\".\"ofType(dateTime\"[*]"
+                                                 "$.\"effective\".\"ofType(Period\"[*]"],
+                                      :data-types #{},
+                                      :template :date,
+                                      :sql {:where [:or]}}}}}

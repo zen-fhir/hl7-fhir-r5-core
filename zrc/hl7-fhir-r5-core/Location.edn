@@ -1,0 +1,122 @@
+{ns hl7-fhir-r5-core.Location,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.markdown
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.decimal
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.value-set.location-status
+          hl7-fhir-r5-core.Location
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.ExtendedContactDetail
+          hl7-fhir-r5-core.Address
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.value-set.location-characteristic
+          hl7-terminology-r5.value-set.v2-0116
+          hl7-fhir-r5-core.Coding
+          hl7-fhir-r5-core.value-set.location-mode
+          hl7-fhir-r5-core.VirtualServiceDetail
+          hl7-fhir-r5-core.Availability
+          hl7-fhir-r5-core.Endpoint
+          hl7-fhir-r5-core.value-set.location-form
+          hl7-terminology-r5.value-set.v3-ServiceDeliveryLocationRoleType},
+ schema {:zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen/desc "Details and position information for a place where services are provided and resources and participants may be stored, found, contained, or accommodated.",
+         :zen.fhir/type "Location",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Location",
+         :zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :type zen/map,
+         :keys {:description {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                              :fhir/flags #{:SU},
+                              :zen/desc "Additional details about the location that could be displayed as further information to identify the location beyond its name"},
+                :address {:confirms #{hl7-fhir-r5-core.Address/schema},
+                          :zen/desc "Physical location"},
+                :managingOrganization {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                   zen.fhir/Reference},
+                                       :fhir/flags #{:SU},
+                                       :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Organization/schema}},
+                                       :zen/desc "Organization responsible for provisioning and upkeep"},
+                :name {:confirms #{hl7-fhir-r5-core.string/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "Name of the location as used by humans"},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :mode {:confirms #{hl7-fhir-r5-core.code/schema},
+                       :fhir/flags #{:SU},
+                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.location-mode/value-set,
+                                            :strength :required},
+                       :zen/desc "instance | kind"},
+                :type {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                               :fhir/flags #{:SU},
+                               :zen.fhir/value-set {:symbol hl7-terminology-r5.value-set.v3-ServiceDeliveryLocationRoleType/value-set,
+                                                    :strength :extensible},
+                               :zen/desc "Type of function performed"}},
+                :_description {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :characteristic {:type zen/vector,
+                                 :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.location-characteristic/value-set,
+                                                              :strength :example},
+                                         :zen/desc "Collection of characteristics (attributes)"}},
+                :virtualService {:type zen/vector,
+                                 :every {:confirms #{hl7-fhir-r5-core.VirtualServiceDetail/schema},
+                                         :zen/desc "Connection details of a virtual service (e.g. conference call)"}},
+                :alias {:type zen/vector,
+                        :every {:confirms #{hl7-fhir-r5-core.string/schema},
+                                :zen/desc "A list of alternate names that the location is known as, or was known as, in the past"}},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.location-status/value-set,
+                                              :strength :required},
+                         :zen/desc "active | suspended | inactive"},
+                :_name {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Unique code or number identifying the location to its users"}},
+                :hoursOfOperation {:type zen/vector,
+                                   :every {:confirms #{hl7-fhir-r5-core.Availability/schema},
+                                           :zen/desc "What days/times during a week is this location usually open (including exceptions)"}},
+                :position {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                           :type zen/map,
+                           :keys {:longitude {:confirms #{hl7-fhir-r5-core.decimal/schema},
+                                              :zen/desc "Longitude with WGS84 datum"},
+                                  :_longitude {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                  :latitude {:confirms #{hl7-fhir-r5-core.decimal/schema},
+                                             :zen/desc "Latitude with WGS84 datum"},
+                                  :_latitude {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                  :altitude {:confirms #{hl7-fhir-r5-core.decimal/schema},
+                                             :zen/desc "Altitude with WGS84 datum"},
+                                  :_altitude {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                           :require #{:longitude :latitude},
+                           :zen/desc "The absolute geographic location"},
+                :form {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                       :fhir/flags #{:SU},
+                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.location-form/value-set,
+                                            :strength :example},
+                       :zen/desc "Physical form of the location"},
+                :operationalStatus {:confirms #{hl7-fhir-r5-core.Coding/schema},
+                                    :fhir/flags #{:SU},
+                                    :zen.fhir/value-set {:symbol hl7-terminology-r5.value-set.v2-0116/value-set,
+                                                         :strength :preferred},
+                                    :zen/desc "The operational status of the location (typically only for a bed/room)"},
+                :partOf {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                     zen.fhir/Reference},
+                         :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Location/schema}},
+                         :zen/desc "Another Location this one is physically a part of"},
+                :_alias {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                :_mode {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :endpoint {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                               zen.fhir/Reference},
+                                   :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Endpoint/schema}},
+                                   :zen/desc "Technical endpoints providing access to services operated for the location"}},
+                :contact {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.ExtendedContactDetail/schema},
+                                  :zen/desc "Official contact details for the location"}}}}}

@@ -1,0 +1,14 @@
+{ns hl7-fhir-r5-core.search.DocumentReference-creation,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "DocumentReference-creation",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/DocumentReference-creation",
+         :fhir/type "date",
+         :name "creation",
+         :expr {:DocumentReference {:knife [["content"
+                                             "attachment"
+                                             "creation"]],
+                                    :jsonpath ["$.\"content\".\"attachment\".\"creation\"[*]"],
+                                    :data-types #{},
+                                    :template :date,
+                                    :sql {:where [:or]}}}}}

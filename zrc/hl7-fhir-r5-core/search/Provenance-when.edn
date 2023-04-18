@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Provenance-when,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Provenance-when",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Provenance-when",
+         :fhir/type "date",
+         :name "when",
+         :expr {:Provenance {:knife [["occurred" "ofType(dateTime"]],
+                             :jsonpath ["$.\"occurred\".\"ofType(dateTime\"[*]"],
+                             :data-types #{},
+                             :template :date,
+                             :sql {:where [:or]}}}}}

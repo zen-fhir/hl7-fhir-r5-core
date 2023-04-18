@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.ConceptMap-target-scope-uri,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "ConceptMap-target-scope-uri",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/ConceptMap-target-scope-uri",
+         :fhir/type "uri",
+         :name "target-scope-uri",
+         :expr {:ConceptMap {:knife [["targetScope" "uri"]],
+                             :jsonpath ["$.\"targetScope\".\"uri\"[*]"],
+                             :data-types #{{:type "uri",
+                                            :polymorphic? false}},
+                             :template :uri}}}}

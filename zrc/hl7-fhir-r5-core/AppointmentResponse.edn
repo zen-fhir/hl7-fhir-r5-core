@@ -1,0 +1,88 @@
+{ns hl7-fhir-r5-core.AppointmentResponse,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.Appointment
+          hl7-fhir-r5-core.markdown
+          hl7-fhir-r5-core.instant
+          hl7-fhir-r5-core.boolean
+          zen.fhir
+          hl7-fhir-r5-core.positiveInt
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.Group
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.value-set.appointmentresponse-status
+          hl7-fhir-r5-core.Location
+          hl7-fhir-r5-core.Practitioner
+          hl7-fhir-r5-core.Device
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.date
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.RelatedPerson
+          hl7-fhir-r5-core.PractitionerRole
+          hl7-fhir-r5-core.value-set.encounter-participant-type
+          hl7-fhir-r5-core.HealthcareService
+          hl7-fhir-r5-core.Patient},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/AppointmentResponse",
+         :require #{:appointment :participantStatus},
+         :type zen/map,
+         :zen/desc "A reply to an appointment request for a patient and/or practitioner(s), such as a confirmation or rejection.",
+         :keys {:appointment {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                          zen.fhir/Reference},
+                              :fhir/flags #{:SU},
+                              :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Appointment/schema}},
+                              :zen/desc "Appointment this response relates to"},
+                :recurrenceId {:confirms #{hl7-fhir-r5-core.positiveInt/schema},
+                               :zen/desc "The recurrence ID of the specific recurring request"},
+                :proposedNewTime {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                                  :fhir/flags #{:SU},
+                                  :zen/desc "Indicator for a counter proposal"},
+                :_end {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :start {:confirms #{hl7-fhir-r5-core.instant/schema},
+                        :zen/desc "Time from appointment, or requested new start time"},
+                :_proposedNewTime {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :participantStatus {:confirms #{hl7-fhir-r5-core.code/schema},
+                                    :fhir/flags #{:SU :?!},
+                                    :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.appointmentresponse-status/value-set,
+                                                         :strength :required},
+                                    :zen/desc "accepted | declined | tentative | needs-action | entered-in-error"},
+                :recurring {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                            :zen/desc "This response is for all occurrences in a recurring request"},
+                :occurrenceDate {:confirms #{hl7-fhir-r5-core.date/schema},
+                                 :zen/desc "Original date within a recurring request"},
+                :participantType {:type zen/vector,
+                                  :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                          :fhir/flags #{:SU},
+                                          :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.encounter-participant-type/value-set,
+                                                               :strength :extensible},
+                                          :zen/desc "Role of participant in the appointment"}},
+                :_occurrenceDate {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :comment {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                          :zen/desc "Additional comments"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "External Ids for this item"}},
+                :_participantStatus {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :end {:confirms #{hl7-fhir-r5-core.instant/schema},
+                      :zen/desc "Time from appointment, or requested new end time"},
+                :_start {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_comment {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :actor {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                    zen.fhir/Reference},
+                        :fhir/flags #{:SU},
+                        :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                       hl7-fhir-r5-core.HealthcareService/schema
+                                                       hl7-fhir-r5-core.PractitionerRole/schema
+                                                       hl7-fhir-r5-core.Location/schema
+                                                       hl7-fhir-r5-core.Device/schema
+                                                       hl7-fhir-r5-core.Practitioner/schema
+                                                       hl7-fhir-r5-core.Group/schema
+                                                       hl7-fhir-r5-core.RelatedPerson/schema}},
+                        :zen/desc "Person(s), Location, HealthcareService, or Device"},
+                :_recurrenceId {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_recurring {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+         :zen.fhir/type "AppointmentResponse"}}

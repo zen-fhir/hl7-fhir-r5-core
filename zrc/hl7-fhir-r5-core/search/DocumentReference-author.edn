@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.DocumentReference-author,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "DocumentReference-author",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/DocumentReference-author",
+         :fhir/type "reference",
+         :name "author",
+         :expr {:DocumentReference {:knife [["author"]],
+                                    :jsonpath ["$.\"author\"[*]"],
+                                    :data-types #{{:type "Reference",
+                                                   :polymorphic? false}},
+                                    :template :reference}}}}

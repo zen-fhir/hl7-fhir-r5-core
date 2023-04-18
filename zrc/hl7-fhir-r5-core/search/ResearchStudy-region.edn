@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.ResearchStudy-region,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "ResearchStudy-region",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/ResearchStudy-region",
+         :fhir/type "token",
+         :name "region",
+         :expr {:ResearchStudy {:knife [["region"]],
+                                :jsonpath ["$.\"region\"[*]"],
+                                :data-types #{{:type "CodeableConcept",
+                                               :polymorphic? false}},
+                                :template :token}}}}

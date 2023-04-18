@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Device-parent,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Device-parent",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Device-parent",
+         :fhir/type "reference",
+         :name "parent",
+         :expr {:Device {:knife [["parent"]],
+                         :jsonpath ["$.\"parent\"[*]"],
+                         :data-types #{{:type "Reference",
+                                        :polymorphic? false}},
+                         :template :reference}}}}

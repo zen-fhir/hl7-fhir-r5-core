@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.CarePlan-custodian,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "CarePlan-custodian",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/CarePlan-custodian",
+         :fhir/type "reference",
+         :name "custodian",
+         :expr {:CarePlan {:knife [["custodian"]],
+                           :jsonpath ["$.\"custodian\"[*]"],
+                           :data-types #{{:type "Reference",
+                                          :polymorphic? false}},
+                           :template :reference}}}}

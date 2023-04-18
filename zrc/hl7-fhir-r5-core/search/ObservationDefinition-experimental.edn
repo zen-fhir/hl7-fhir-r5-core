@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.ObservationDefinition-experimental,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "ObservationDefinition-experimental",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/ObservationDefinition-experimental",
+         :fhir/type "token",
+         :name "experimental",
+         :expr {:ObservationDefinition {:knife [["experimental"]],
+                                        :jsonpath ["$.\"experimental\"[*]"],
+                                        :data-types #{{:type "boolean",
+                                                       :polymorphic? false}},
+                                        :template :token}}}}

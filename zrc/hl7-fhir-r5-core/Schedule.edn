@@ -1,0 +1,82 @@
+{ns hl7-fhir-r5-core.Schedule,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.markdown
+          hl7-fhir-r5-core.CodeableReference
+          hl7-fhir-r5-core.boolean
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.value-set.service-category
+          hl7-fhir-r5-core.Location
+          hl7-fhir-r5-core.value-set.c80-practice-codes
+          hl7-fhir-r5-core.Practitioner
+          hl7-fhir-r5-core.Device
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.CareTeam
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.RelatedPerson
+          hl7-fhir-r5-core.PractitionerRole
+          hl7-fhir-r5-core.Period
+          hl7-fhir-r5-core.value-set.service-type
+          hl7-fhir-r5-core.HealthcareService
+          hl7-fhir-r5-core.Patient},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Schedule",
+         :require #{:actor},
+         :type zen/map,
+         :zen/desc "A container for slots of time that may be available for booking appointments.",
+         :keys {:_active {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :serviceCategory {:type zen/vector,
+                                  :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                          :fhir/flags #{:SU},
+                                          :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.service-category/value-set,
+                                                               :strength :example},
+                                          :zen/desc "High-level category"}},
+                :specialty {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                    :fhir/flags #{:SU},
+                                    :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.c80-practice-codes/value-set,
+                                                         :strength :preferred},
+                                    :zen/desc "Type of specialty needed"}},
+                :name {:confirms #{hl7-fhir-r5-core.string/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "Human-readable label"},
+                :serviceType {:type zen/vector,
+                              :every {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                      :fhir/flags #{:SU},
+                                      :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.service-type/value-set,
+                                                           :strength :example},
+                                      :zen/desc "Specific service"}},
+                :planningHorizon {:confirms #{hl7-fhir-r5-core.Period/schema},
+                                  :fhir/flags #{:SU},
+                                  :zen/desc "Period of time covered by schedule"},
+                :active {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen/desc "Whether this schedule is in active use"},
+                :comment {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                          :zen/desc "Comments on availability"},
+                :_name {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "External Ids for this item"}},
+                :_comment {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :actor {:type zen/vector,
+                        :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                            zen.fhir/Reference},
+                                :fhir/flags #{:SU},
+                                :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                               hl7-fhir-r5-core.CareTeam/schema
+                                                               hl7-fhir-r5-core.HealthcareService/schema
+                                                               hl7-fhir-r5-core.PractitionerRole/schema
+                                                               hl7-fhir-r5-core.Location/schema
+                                                               hl7-fhir-r5-core.Device/schema
+                                                               hl7-fhir-r5-core.Practitioner/schema
+                                                               hl7-fhir-r5-core.RelatedPerson/schema}},
+                                :zen/desc "Resource(s) that availability information is being provided for"},
+                        :minItems 1}},
+         :zen.fhir/type "Schedule"}}

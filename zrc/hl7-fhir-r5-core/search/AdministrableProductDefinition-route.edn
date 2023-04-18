@@ -1,0 +1,13 @@
+{ns hl7-fhir-r5-core.search.AdministrableProductDefinition-route,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "AdministrableProductDefinition-route",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/AdministrableProductDefinition-route",
+         :fhir/type "token",
+         :name "route",
+         :expr {:AdministrableProductDefinition {:knife [["routeOfAdministration"
+                                                          "code"]],
+                                                 :jsonpath ["$.\"routeOfAdministration\".\"code\"[*]"],
+                                                 :data-types #{{:type "CodeableConcept",
+                                                                :polymorphic? false}},
+                                                 :template :token}}}}

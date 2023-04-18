@@ -1,0 +1,11 @@
+{ns hl7-fhir-r5-core.search.ImagingSelection-body-structure,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "ImagingSelection-body-structure",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/ImagingSelection-body-structure",
+         :fhir/type "reference",
+         :name "body-structure",
+         :expr {:ImagingSelection {:knife [["bodySite" "reference"]],
+                                   :jsonpath ["$.\"bodySite\".\"reference\"[*]"],
+                                   :data-types #{},
+                                   :template :reference}}}}

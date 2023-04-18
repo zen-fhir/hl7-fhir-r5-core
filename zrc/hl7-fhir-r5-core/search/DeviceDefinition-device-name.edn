@@ -1,0 +1,56 @@
+{ns hl7-fhir-r5-core.search.DeviceDefinition-device-name,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "DeviceDefinition-device-name",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/DeviceDefinition-device-name",
+         :fhir/type "string",
+         :name "device-name",
+         :expr {:DeviceDefinition {:knife [["deviceName" "name"]
+                                           ["classification"
+                                            "type"
+                                            "coding"
+                                            "display"]
+                                           ["classification"
+                                            "type"
+                                            "text"]],
+                                   :jsonpath ["$.\"deviceName\".\"name\"[*]"
+                                              "$.\"classification\".\"type\".\"coding\".\"display\"[*]"
+                                              "$.\"classification\".\"type\".\"text\"[*]"],
+                                   :data-types #{{:type "string",
+                                                  :polymorphic? false}},
+                                   :template :string,
+                                   :sql {:where [:or
+                                                 [:ilike
+                                                  [:pg/cast
+                                                   [:pg/jsonb-path-query-array
+                                                    [:pg/sql
+                                                     "{{table}}.resource"]
+                                                    [:pg/cast
+                                                     "($.\"deviceName\".\"name\"[*]).** ? (@.type() == \"string\")"
+                                                     :jsonpath]]
+                                                   :text]
+                                                  [:pg/sql
+                                                   "{{param}}"]]
+                                                 [:ilike
+                                                  [:pg/cast
+                                                   [:pg/jsonb-path-query-array
+                                                    [:pg/sql
+                                                     "{{table}}.resource"]
+                                                    [:pg/cast
+                                                     "($.\"classification\".\"type\".\"coding\".\"display\"[*]).** ? (@.type() == \"string\")"
+                                                     :jsonpath]]
+                                                   :text]
+                                                  [:pg/sql
+                                                   "{{param}}"]]
+                                                 [:ilike
+                                                  [:pg/cast
+                                                   [:pg/jsonb-path-query-array
+                                                    [:pg/sql
+                                                     "{{table}}.resource"]
+                                                    [:pg/cast
+                                                     "($.\"classification\".\"type\".\"text\"[*]).** ? (@.type() == \"string\")"
+                                                     :jsonpath]]
+                                                   :text]
+                                                  [:pg/sql
+                                                   "{{param}}"]]],
+                                         :parameter-format "%\"?%"}}}}}

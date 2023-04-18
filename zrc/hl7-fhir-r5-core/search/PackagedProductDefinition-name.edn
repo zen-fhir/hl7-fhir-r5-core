@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.PackagedProductDefinition-name,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "PackagedProductDefinition-name",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/PackagedProductDefinition-name",
+         :fhir/type "token",
+         :name "name",
+         :expr {:PackagedProductDefinition {:knife [["name"]],
+                                            :jsonpath ["$.\"name\"[*]"],
+                                            :data-types #{{:type "string",
+                                                           :polymorphic? false}},
+                                            :template :token}}}}

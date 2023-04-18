@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Provenance-activity,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Provenance-activity",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Provenance-activity",
+         :fhir/type "token",
+         :name "activity",
+         :expr {:Provenance {:knife [["activity"]],
+                             :jsonpath ["$.\"activity\"[*]"],
+                             :data-types #{{:type "CodeableConcept",
+                                            :polymorphic? false}},
+                             :template :token}}}}

@@ -1,0 +1,544 @@
+{ns hl7-fhir-r5-core.Task,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.markdown
+          hl7-fhir-r5-core.instant
+          hl7-fhir-r5-core.Provenance
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.decimal
+          hl7-fhir-r5-core.SampledData
+          hl7-fhir-r5-core.Age
+          hl7-fhir-r5-core.DataRequirement
+          hl7-fhir-r5-core.CodeableReference
+          hl7-fhir-r5-core.boolean
+          hl7-fhir-r5-core.Ratio
+          zen.fhir
+          hl7-fhir-r5-core.positiveInt
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.Group
+          hl7-fhir-r5-core.integer64
+          hl7-fhir-r5-core.value-set.task-code
+          hl7-fhir-r5-core.Annotation
+          hl7-fhir-r5-core.UsageContext
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.url
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.Distance
+          hl7-fhir-r5-core.value-set.performer-role
+          hl7-fhir-r5-core.Attachment
+          hl7-fhir-r5-core.Encounter
+          hl7-fhir-r5-core.base64Binary
+          hl7-fhir-r5-core.Location
+          hl7-fhir-r5-core.Practitioner
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.oid
+          hl7-fhir-r5-core.Money
+          hl7-fhir-r5-core.Device
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.date
+          hl7-fhir-r5-core.ClaimResponse
+          hl7-fhir-r5-core.CareTeam
+          hl7-fhir-r5-core.Coverage
+          hl7-fhir-r5-core.value-set.task-status
+          hl7-fhir-r5-core.ExtendedContactDetail
+          hl7-fhir-r5-core.uuid
+          hl7-fhir-r5-core.integer
+          hl7-fhir-r5-core.time
+          hl7-fhir-r5-core.Address
+          hl7-fhir-r5-core.Timing
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.ContactPoint
+          hl7-fhir-r5-core.RelatedPerson
+          hl7-fhir-r5-core.value-set.task-status-reason
+          hl7-fhir-r5-core.PractitionerRole
+          hl7-fhir-r5-core.Period
+          hl7-fhir-r5-core.canonical
+          hl7-fhir-r5-core.RelatedArtifact
+          hl7-fhir-r5-core.Duration
+          hl7-fhir-r5-core.RatioRange
+          hl7-fhir-r5-core.Coding
+          hl7-fhir-r5-core.ParameterDefinition
+          hl7-fhir-r5-core.Meta
+          hl7-fhir-r5-core.Count
+          hl7-fhir-r5-core.Range
+          hl7-fhir-r5-core.value-set.request-priority
+          hl7-fhir-r5-core.Dosage
+          hl7-fhir-r5-core.Quantity
+          hl7-fhir-r5-core.Availability
+          hl7-fhir-r5-core.Signature
+          hl7-fhir-r5-core.Expression
+          hl7-fhir-r5-core.id
+          hl7-fhir-r5-core.TriggerDefinition
+          hl7-fhir-r5-core.HumanName
+          hl7-fhir-r5-core.uri
+          hl7-fhir-r5-core.unsignedInt
+          hl7-fhir-r5-core.value-set.task-intent
+          hl7-fhir-r5-core.ContactDetail
+          hl7-fhir-r5-core.Task
+          hl7-fhir-r5-core.Patient},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Task",
+         :require #{:status :intent},
+         :type zen/map,
+         :zen/desc "A task to be performed.",
+         :keys {:restriction {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                              :type zen/map,
+                              :keys {:repetitions {:confirms #{hl7-fhir-r5-core.positiveInt/schema},
+                                                   :zen/desc "How many times to repeat"},
+                                     :_repetitions {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                     :period {:confirms #{hl7-fhir-r5-core.Period/schema},
+                                              :zen/desc "When fulfillment is sought"},
+                                     :recipient {:type zen/vector,
+                                                 :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                     zen.fhir/Reference},
+                                                         :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                                                        hl7-fhir-r5-core.PractitionerRole/schema
+                                                                                        hl7-fhir-r5-core.Organization/schema
+                                                                                        hl7-fhir-r5-core.Practitioner/schema
+                                                                                        hl7-fhir-r5-core.Group/schema
+                                                                                        hl7-fhir-r5-core.RelatedPerson/schema}},
+                                                         :zen/desc "For whom is fulfillment sought?"}}},
+                              :zen/desc "Constraints on fulfillment tasks"},
+                :description {:confirms #{hl7-fhir-r5-core.string/schema},
+                              :fhir/flags #{:SU},
+                              :zen/desc "Human-readable explanation of task"},
+                :requestedPerformer {:type zen/vector,
+                                     :every {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                             :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.performer-role/value-set,
+                                                                  :strength :preferred},
+                                             :zen/desc "Who should perform Task"}},
+                :executionPeriod {:confirms #{hl7-fhir-r5-core.Period/schema},
+                                  :fhir/flags #{:SU},
+                                  :zen/desc "Start and end time of execution"},
+                :insurance {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                zen.fhir/Reference},
+                                    :zen.fhir/reference {:refers #{hl7-fhir-r5-core.ClaimResponse/schema
+                                                                   hl7-fhir-r5-core.Coverage/schema}},
+                                    :zen/desc "Associated insurance coverage"}},
+                :instantiatesCanonical {:confirms #{hl7-fhir-r5-core.canonical/schema},
+                                        :fhir/flags #{:SU},
+                                        :zen/desc "Formal definition of task"},
+                :instantiatesUri {:confirms #{hl7-fhir-r5-core.uri/schema},
+                                  :fhir/flags #{:SU},
+                                  :zen/desc "Formal definition of task"},
+                :relevantHistory {:type zen/vector,
+                                  :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                      zen.fhir/Reference},
+                                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Provenance/schema}},
+                                          :zen/desc "Key events in history of the Task"}},
+                :_authoredOn {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :requestedPeriod {:confirms #{hl7-fhir-r5-core.Period/schema},
+                                  :fhir/flags #{:SU},
+                                  :zen/desc "When the task should be performed"},
+                :encounter {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                        zen.fhir/Reference},
+                            :fhir/flags #{:SU},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Encounter/schema}},
+                            :zen/desc "Healthcare event during which this task originated"},
+                :_doNotPerform {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_priority {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :statusReason {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                               :fhir/flags #{:SU},
+                               :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.task-status-reason/value-set,
+                                                    :strength :example},
+                               :zen/desc "Reason for current status"},
+                :authoredOn {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                             :zen/desc "Task Creation Date"},
+                :output {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                 :type zen/map,
+                                 :keys {:type {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                               :zen/desc "Label for output"},
+                                        :value {:fhir/polymorphic true,
+                                                :type zen/map,
+                                                :exclusive-keys #{#{:unsignedInt
+                                                                    :Signature
+                                                                    :markdown
+                                                                    :date
+                                                                    :Dosage
+                                                                    :ContactDetail
+                                                                    :RelatedArtifact
+                                                                    :instant
+                                                                    :UsageContext
+                                                                    :time
+                                                                    :DataRequirement
+                                                                    :base64Binary
+                                                                    :Meta
+                                                                    :Distance
+                                                                    :SampledData
+                                                                    :TriggerDefinition
+                                                                    :Identifier
+                                                                    :string
+                                                                    :Address
+                                                                    :Expression
+                                                                    :RatioRange
+                                                                    :dateTime
+                                                                    :Range
+                                                                    :integer
+                                                                    :Ratio
+                                                                    :oid
+                                                                    :ContactPoint
+                                                                    :Money
+                                                                    :decimal
+                                                                    :id
+                                                                    :Attachment
+                                                                    :Period
+                                                                    :canonical
+                                                                    :url
+                                                                    :code
+                                                                    :HumanName
+                                                                    :positiveInt
+                                                                    :ParameterDefinition
+                                                                    :Coding
+                                                                    :Timing
+                                                                    :ExtendedContactDetail
+                                                                    :Duration
+                                                                    :uri
+                                                                    :CodeableConcept
+                                                                    :uuid
+                                                                    :Count
+                                                                    :Quantity
+                                                                    :boolean
+                                                                    :Availability
+                                                                    :CodeableReference
+                                                                    :integer64
+                                                                    :Annotation
+                                                                    :Age
+                                                                    :Reference}},
+                                                :keys {:_decimal {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                       :unsignedInt {:confirms #{hl7-fhir-r5-core.unsignedInt/schema}},
+                                                       :Signature {:confirms #{hl7-fhir-r5-core.Signature/schema}},
+                                                       :markdown {:confirms #{hl7-fhir-r5-core.markdown/schema}},
+                                                       :_id {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                       :_code {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                       :date {:confirms #{hl7-fhir-r5-core.date/schema}},
+                                                       :_canonical {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                       :Dosage {:confirms #{hl7-fhir-r5-core.Dosage/schema}},
+                                                       :ContactDetail {:confirms #{hl7-fhir-r5-core.ContactDetail/schema}},
+                                                       :RelatedArtifact {:confirms #{hl7-fhir-r5-core.RelatedArtifact/schema}},
+                                                       :instant {:confirms #{hl7-fhir-r5-core.instant/schema}},
+                                                       :_positiveInt {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                       :_uri {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                       :_date {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                       :_dateTime {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                       :UsageContext {:confirms #{hl7-fhir-r5-core.UsageContext/schema}},
+                                                       :time {:confirms #{hl7-fhir-r5-core.time/schema}},
+                                                       :DataRequirement {:confirms #{hl7-fhir-r5-core.DataRequirement/schema}},
+                                                       :base64Binary {:confirms #{hl7-fhir-r5-core.base64Binary/schema}},
+                                                       :Meta {:confirms #{hl7-fhir-r5-core.Meta/schema}},
+                                                       :Distance {:confirms #{hl7-fhir-r5-core.Distance/schema}},
+                                                       :_integer64 {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                       :SampledData {:confirms #{hl7-fhir-r5-core.SampledData/schema}},
+                                                       :TriggerDefinition {:confirms #{hl7-fhir-r5-core.TriggerDefinition/schema}},
+                                                       :Identifier {:confirms #{hl7-fhir-r5-core.Identifier/schema}},
+                                                       :string {:confirms #{hl7-fhir-r5-core.string/schema}},
+                                                       :Address {:confirms #{hl7-fhir-r5-core.Address/schema}},
+                                                       :Expression {:confirms #{hl7-fhir-r5-core.Expression/schema}},
+                                                       :RatioRange {:confirms #{hl7-fhir-r5-core.RatioRange/schema}},
+                                                       :dateTime {:confirms #{hl7-fhir-r5-core.dateTime/schema}},
+                                                       :_time {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                       :Range {:confirms #{hl7-fhir-r5-core.Range/schema}},
+                                                       :integer {:confirms #{hl7-fhir-r5-core.integer/schema}},
+                                                       :Ratio {:confirms #{hl7-fhir-r5-core.Ratio/schema}},
+                                                       :oid {:confirms #{hl7-fhir-r5-core.oid/schema}},
+                                                       :ContactPoint {:confirms #{hl7-fhir-r5-core.ContactPoint/schema}},
+                                                       :Money {:confirms #{hl7-fhir-r5-core.Money/schema}},
+                                                       :_boolean {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                       :decimal {:confirms #{hl7-fhir-r5-core.decimal/schema}},
+                                                       :id {:confirms #{hl7-fhir-r5-core.id/schema}},
+                                                       :Attachment {:confirms #{hl7-fhir-r5-core.Attachment/schema}},
+                                                       :Period {:confirms #{hl7-fhir-r5-core.Period/schema}},
+                                                       :_base64Binary {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                       :canonical {:confirms #{hl7-fhir-r5-core.canonical/schema}},
+                                                       :url {:confirms #{hl7-fhir-r5-core.url/schema}},
+                                                       :code {:confirms #{hl7-fhir-r5-core.code/schema}},
+                                                       :HumanName {:confirms #{hl7-fhir-r5-core.HumanName/schema}},
+                                                       :positiveInt {:confirms #{hl7-fhir-r5-core.positiveInt/schema}},
+                                                       :ParameterDefinition {:confirms #{hl7-fhir-r5-core.ParameterDefinition/schema}},
+                                                       :Coding {:confirms #{hl7-fhir-r5-core.Coding/schema}},
+                                                       :_markdown {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                       :Timing {:confirms #{hl7-fhir-r5-core.Timing/schema}},
+                                                       :ExtendedContactDetail {:confirms #{hl7-fhir-r5-core.ExtendedContactDetail/schema}},
+                                                       :_uuid {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                       :_integer {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                       :Duration {:confirms #{hl7-fhir-r5-core.Duration/schema}},
+                                                       :uri {:confirms #{hl7-fhir-r5-core.uri/schema}},
+                                                       :CodeableConcept {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema}},
+                                                       :uuid {:confirms #{hl7-fhir-r5-core.uuid/schema}},
+                                                       :Count {:confirms #{hl7-fhir-r5-core.Count/schema}},
+                                                       :Quantity {:confirms #{hl7-fhir-r5-core.Quantity/schema}},
+                                                       :_instant {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                       :_oid {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                       :boolean {:confirms #{hl7-fhir-r5-core.boolean/schema}},
+                                                       :_unsignedInt {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                       :Availability {:confirms #{hl7-fhir-r5-core.Availability/schema}},
+                                                       :_url {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                       :CodeableReference {:confirms #{hl7-fhir-r5-core.CodeableReference/schema}},
+                                                       :_string {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                       :integer64 {:confirms #{hl7-fhir-r5-core.integer64/schema}},
+                                                       :Annotation {:confirms #{hl7-fhir-r5-core.Annotation/schema}},
+                                                       :Age {:confirms #{hl7-fhir-r5-core.Age/schema}},
+                                                       :Reference {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                               zen.fhir/Reference},
+                                                                   :zen.fhir/reference {:refers #{}}}},
+                                                :zen/desc "Result of output"}},
+                                 :require #{:value :type},
+                                 :zen/desc "Information produced as part of task"}},
+                :businessStatus {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                 :fhir/flags #{:SU},
+                                 :zen/desc "E.g. \"Specimen collected\", \"IV prepped\""},
+                :_description {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :note {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.Annotation/schema},
+                               :zen/desc "Comments made about the task"}},
+                :_intent {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :reason {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                 :zen/desc "Why task is needed"}},
+                :for {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                  zen.fhir/Reference},
+                      :fhir/flags #{:SU},
+                      :zen.fhir/reference {:refers #{}},
+                      :zen/desc "Beneficiary of the Task"},
+                :requester {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                        zen.fhir/Reference},
+                            :fhir/flags #{:SU},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                           hl7-fhir-r5-core.PractitionerRole/schema
+                                                           hl7-fhir-r5-core.Organization/schema
+                                                           hl7-fhir-r5-core.Device/schema
+                                                           hl7-fhir-r5-core.Practitioner/schema
+                                                           hl7-fhir-r5-core.RelatedPerson/schema}},
+                            :zen/desc "Who is asking for task to be done"},
+                :lastModified {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                               :fhir/flags #{:SU},
+                               :zen/desc "Task Last Modified Date"},
+                :priority {:confirms #{hl7-fhir-r5-core.code/schema},
+                           :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.request-priority/value-set,
+                                                :strength :required},
+                           :zen/desc "routine | urgent | asap | stat"},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.task-status/value-set,
+                                              :strength :required},
+                         :zen/desc "draft | requested | received | accepted | +"},
+                :groupIdentifier {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                  :fhir/flags #{:SU},
+                                  :zen/desc "Requisition or grouper id"},
+                :code {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                       :fhir/flags #{:SU},
+                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.task-code/value-set,
+                                            :strength :example},
+                       :zen/desc "Task Type"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :zen/desc "Task Instance Identifier"}},
+                :doNotPerform {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                               :fhir/flags #{:SU :?!},
+                               :zen/desc "True if Task is prohibiting action"},
+                :intent {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.task-intent/value-set,
+                                              :strength :required},
+                         :zen/desc "unknown | proposal | plan | order | original-order | reflex-order | filler-order | instance-order | option"},
+                :focus {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                    zen.fhir/Reference},
+                        :fhir/flags #{:SU},
+                        :zen.fhir/reference {:refers #{}},
+                        :zen/desc "What task is acting on"},
+                :input {:type zen/vector,
+                        :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                :type zen/map,
+                                :keys {:type {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                              :zen/desc "Label for the input"},
+                                       :value {:fhir/polymorphic true,
+                                               :type zen/map,
+                                               :exclusive-keys #{#{:unsignedInt
+                                                                   :Signature
+                                                                   :markdown
+                                                                   :date
+                                                                   :Dosage
+                                                                   :ContactDetail
+                                                                   :RelatedArtifact
+                                                                   :instant
+                                                                   :UsageContext
+                                                                   :time
+                                                                   :DataRequirement
+                                                                   :base64Binary
+                                                                   :Meta
+                                                                   :Distance
+                                                                   :SampledData
+                                                                   :TriggerDefinition
+                                                                   :Identifier
+                                                                   :string
+                                                                   :Address
+                                                                   :Expression
+                                                                   :RatioRange
+                                                                   :dateTime
+                                                                   :Range
+                                                                   :integer
+                                                                   :Ratio
+                                                                   :oid
+                                                                   :ContactPoint
+                                                                   :Money
+                                                                   :decimal
+                                                                   :id
+                                                                   :Attachment
+                                                                   :Period
+                                                                   :canonical
+                                                                   :url
+                                                                   :code
+                                                                   :HumanName
+                                                                   :positiveInt
+                                                                   :ParameterDefinition
+                                                                   :Coding
+                                                                   :Timing
+                                                                   :ExtendedContactDetail
+                                                                   :Duration
+                                                                   :uri
+                                                                   :CodeableConcept
+                                                                   :uuid
+                                                                   :Count
+                                                                   :Quantity
+                                                                   :boolean
+                                                                   :Availability
+                                                                   :CodeableReference
+                                                                   :integer64
+                                                                   :Annotation
+                                                                   :Age
+                                                                   :Reference}},
+                                               :keys {:_decimal {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                      :unsignedInt {:confirms #{hl7-fhir-r5-core.unsignedInt/schema}},
+                                                      :Signature {:confirms #{hl7-fhir-r5-core.Signature/schema}},
+                                                      :markdown {:confirms #{hl7-fhir-r5-core.markdown/schema}},
+                                                      :_id {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                      :_code {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                      :date {:confirms #{hl7-fhir-r5-core.date/schema}},
+                                                      :_canonical {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                      :Dosage {:confirms #{hl7-fhir-r5-core.Dosage/schema}},
+                                                      :ContactDetail {:confirms #{hl7-fhir-r5-core.ContactDetail/schema}},
+                                                      :RelatedArtifact {:confirms #{hl7-fhir-r5-core.RelatedArtifact/schema}},
+                                                      :instant {:confirms #{hl7-fhir-r5-core.instant/schema}},
+                                                      :_positiveInt {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                      :_uri {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                      :_date {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                      :_dateTime {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                      :UsageContext {:confirms #{hl7-fhir-r5-core.UsageContext/schema}},
+                                                      :time {:confirms #{hl7-fhir-r5-core.time/schema}},
+                                                      :DataRequirement {:confirms #{hl7-fhir-r5-core.DataRequirement/schema}},
+                                                      :base64Binary {:confirms #{hl7-fhir-r5-core.base64Binary/schema}},
+                                                      :Meta {:confirms #{hl7-fhir-r5-core.Meta/schema}},
+                                                      :Distance {:confirms #{hl7-fhir-r5-core.Distance/schema}},
+                                                      :_integer64 {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                      :SampledData {:confirms #{hl7-fhir-r5-core.SampledData/schema}},
+                                                      :TriggerDefinition {:confirms #{hl7-fhir-r5-core.TriggerDefinition/schema}},
+                                                      :Identifier {:confirms #{hl7-fhir-r5-core.Identifier/schema}},
+                                                      :string {:confirms #{hl7-fhir-r5-core.string/schema}},
+                                                      :Address {:confirms #{hl7-fhir-r5-core.Address/schema}},
+                                                      :Expression {:confirms #{hl7-fhir-r5-core.Expression/schema}},
+                                                      :RatioRange {:confirms #{hl7-fhir-r5-core.RatioRange/schema}},
+                                                      :dateTime {:confirms #{hl7-fhir-r5-core.dateTime/schema}},
+                                                      :_time {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                      :Range {:confirms #{hl7-fhir-r5-core.Range/schema}},
+                                                      :integer {:confirms #{hl7-fhir-r5-core.integer/schema}},
+                                                      :Ratio {:confirms #{hl7-fhir-r5-core.Ratio/schema}},
+                                                      :oid {:confirms #{hl7-fhir-r5-core.oid/schema}},
+                                                      :ContactPoint {:confirms #{hl7-fhir-r5-core.ContactPoint/schema}},
+                                                      :Money {:confirms #{hl7-fhir-r5-core.Money/schema}},
+                                                      :_boolean {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                      :decimal {:confirms #{hl7-fhir-r5-core.decimal/schema}},
+                                                      :id {:confirms #{hl7-fhir-r5-core.id/schema}},
+                                                      :Attachment {:confirms #{hl7-fhir-r5-core.Attachment/schema}},
+                                                      :Period {:confirms #{hl7-fhir-r5-core.Period/schema}},
+                                                      :_base64Binary {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                      :canonical {:confirms #{hl7-fhir-r5-core.canonical/schema}},
+                                                      :url {:confirms #{hl7-fhir-r5-core.url/schema}},
+                                                      :code {:confirms #{hl7-fhir-r5-core.code/schema}},
+                                                      :HumanName {:confirms #{hl7-fhir-r5-core.HumanName/schema}},
+                                                      :positiveInt {:confirms #{hl7-fhir-r5-core.positiveInt/schema}},
+                                                      :ParameterDefinition {:confirms #{hl7-fhir-r5-core.ParameterDefinition/schema}},
+                                                      :Coding {:confirms #{hl7-fhir-r5-core.Coding/schema}},
+                                                      :_markdown {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                      :Timing {:confirms #{hl7-fhir-r5-core.Timing/schema}},
+                                                      :ExtendedContactDetail {:confirms #{hl7-fhir-r5-core.ExtendedContactDetail/schema}},
+                                                      :_uuid {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                      :_integer {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                      :Duration {:confirms #{hl7-fhir-r5-core.Duration/schema}},
+                                                      :uri {:confirms #{hl7-fhir-r5-core.uri/schema}},
+                                                      :CodeableConcept {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema}},
+                                                      :uuid {:confirms #{hl7-fhir-r5-core.uuid/schema}},
+                                                      :Count {:confirms #{hl7-fhir-r5-core.Count/schema}},
+                                                      :Quantity {:confirms #{hl7-fhir-r5-core.Quantity/schema}},
+                                                      :_instant {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                      :_oid {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                      :boolean {:confirms #{hl7-fhir-r5-core.boolean/schema}},
+                                                      :_unsignedInt {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                      :Availability {:confirms #{hl7-fhir-r5-core.Availability/schema}},
+                                                      :_url {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                      :CodeableReference {:confirms #{hl7-fhir-r5-core.CodeableReference/schema}},
+                                                      :_string {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                      :integer64 {:confirms #{hl7-fhir-r5-core.integer64/schema}},
+                                                      :Annotation {:confirms #{hl7-fhir-r5-core.Annotation/schema}},
+                                                      :Age {:confirms #{hl7-fhir-r5-core.Age/schema}},
+                                                      :Reference {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                              zen.fhir/Reference},
+                                                                  :zen.fhir/reference {:refers #{}}}},
+                                               :zen/desc "Content to use in performing the task"}},
+                                :require #{:value :type},
+                                :zen/desc "Information used to perform task"}},
+                :basedOn {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                              zen.fhir/Reference},
+                                  :fhir/flags #{:SU},
+                                  :zen.fhir/reference {:refers #{}},
+                                  :zen/desc "Request fulfilled by this task"}},
+                :partOf {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                             zen.fhir/Reference},
+                                 :fhir/flags #{:SU},
+                                 :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Task/schema}},
+                                 :zen/desc "Composite task"}},
+                :_lastModified {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :location {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                       zen.fhir/Reference},
+                           :fhir/flags #{:SU},
+                           :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Location/schema}},
+                           :zen/desc "Where task occurs"},
+                :_instantiatesCanonical {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :owner {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                    zen.fhir/Reference},
+                        :fhir/flags #{:SU},
+                        :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                       hl7-fhir-r5-core.CareTeam/schema
+                                                       hl7-fhir-r5-core.PractitionerRole/schema
+                                                       hl7-fhir-r5-core.Organization/schema
+                                                       hl7-fhir-r5-core.Practitioner/schema
+                                                       hl7-fhir-r5-core.RelatedPerson/schema}},
+                        :zen/desc "Responsible individual"},
+                :performer {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                    :type zen/map,
+                                    :keys {:function {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                      :fhir/flags #{:SU},
+                                                      :zen/desc "Type of performance"},
+                                           :actor {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                               zen.fhir/Reference},
+                                                   :fhir/flags #{:SU},
+                                                   :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                                                  hl7-fhir-r5-core.CareTeam/schema
+                                                                                  hl7-fhir-r5-core.PractitionerRole/schema
+                                                                                  hl7-fhir-r5-core.Organization/schema
+                                                                                  hl7-fhir-r5-core.Practitioner/schema
+                                                                                  hl7-fhir-r5-core.RelatedPerson/schema}},
+                                                   :zen/desc "Who performed the task"}},
+                                    :require #{:actor},
+                                    :fhir/flags #{:SU},
+                                    :zen/desc "Who or what performed the task"}},
+                :_instantiatesUri {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+         :zen.fhir/type "Task"}}

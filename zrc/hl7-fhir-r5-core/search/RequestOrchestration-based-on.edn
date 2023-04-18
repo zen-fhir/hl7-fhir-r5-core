@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.RequestOrchestration-based-on,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "RequestOrchestration-based-on",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/RequestOrchestration-based-on",
+         :fhir/type "reference",
+         :name "based-on",
+         :expr {:RequestOrchestration {:knife [["basedOn"]],
+                                       :jsonpath ["$.\"basedOn\"[*]"],
+                                       :data-types #{{:type "Reference",
+                                                      :polymorphic? false}},
+                                       :template :reference}}}}

@@ -1,0 +1,221 @@
+{ns hl7-fhir-r5-core.Account,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.markdown
+          hl7-fhir-r5-core.instant
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.value-set.account-relationship
+          hl7-fhir-r5-core.CodeableReference
+          hl7-fhir-r5-core.boolean
+          zen.fhir
+          hl7-fhir-r5-core.positiveInt
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.value-set.encounter-diagnosis-use
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.value-set.procedure-code
+          hl7-fhir-r5-core.value-set.account-status
+          hl7-fhir-r5-core.Location
+          hl7-fhir-r5-core.value-set.account-aggregate
+          hl7-fhir-r5-core.Practitioner
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.Money
+          hl7-fhir-r5-core.Device
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.value-set.condition-code
+          hl7-fhir-r5-core.value-set.currencies
+          hl7-fhir-r5-core.Coverage
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.RelatedPerson
+          hl7-fhir-r5-core.PractitionerRole
+          hl7-fhir-r5-core.Period
+          hl7-fhir-r5-core.value-set.account-balance-term
+          hl7-fhir-r5-core.Account
+          hl7-fhir-r5-core.HealthcareService
+          hl7-fhir-r5-core.value-set.account-type
+          hl7-fhir-r5-core.value-set.account-billing-status
+          hl7-fhir-r5-core.Patient},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Account",
+         :require #{:status},
+         :type zen/map,
+         :zen/desc "A financial tool for tracking value accrued for a particular purpose.  In the healthcare field, used to track charges for a patient, cost centers, etc.",
+         :keys {:description {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                              :fhir/flags #{:SU},
+                              :zen/desc "Explanation of purpose/use"},
+                :diagnosis {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                    :type zen/map,
+                                    :keys {:packageCode {:type zen/vector,
+                                                         :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                 :zen/desc "Package Code specific for billing"}},
+                                           :_sequence {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                           :_dateOfDiagnosis {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                           :dateOfDiagnosis {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                                                             :zen/desc "Date of the diagnosis (when coded diagnosis)"},
+                                           :type {:type zen/vector,
+                                                  :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                          :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.encounter-diagnosis-use/value-set,
+                                                                               :strength :preferred},
+                                                          :zen/desc "Type that this diagnosis has relevant to the account (e.g. admission, billing, discharge …)"}},
+                                           :_onAdmission {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                           :condition {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                                       :fhir/flags #{:SU},
+                                                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.condition-code/value-set,
+                                                                            :strength :example},
+                                                       :zen/desc "The diagnosis relevant to the account"},
+                                           :sequence {:confirms #{hl7-fhir-r5-core.positiveInt/schema},
+                                                      :zen/desc "Ranking of the diagnosis (for each type)"},
+                                           :onAdmission {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                                                         :zen/desc "Diagnosis present on Admission"}},
+                                    :require #{:condition},
+                                    :fhir/flags #{:SU},
+                                    :zen/desc "The list of diagnoses relevant to this account"}},
+                :_calculatedAt {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :calculatedAt {:confirms #{hl7-fhir-r5-core.instant/schema},
+                               :zen/desc "Time the balance amount was calculated"},
+                :name {:confirms #{hl7-fhir-r5-core.string/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "Human-readable label"},
+                :servicePeriod {:confirms #{hl7-fhir-r5-core.Period/schema},
+                                :fhir/flags #{:SU},
+                                :zen/desc "Transaction window"},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :coverage {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                   :type zen/map,
+                                   :keys {:coverage {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                 zen.fhir/Reference},
+                                                     :fhir/flags #{:SU},
+                                                     :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Coverage/schema}},
+                                                     :zen/desc "The party(s), such as insurances, that may contribute to the payment of this account"},
+                                          :priority {:confirms #{hl7-fhir-r5-core.positiveInt/schema},
+                                                     :fhir/flags #{:SU},
+                                                     :zen/desc "The priority of the coverage in the context of this account"},
+                                          :_priority {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                   :require #{:coverage},
+                                   :fhir/flags #{:SU},
+                                   :zen/desc "The party(s) that are responsible for covering the payment of this account, and what order should they be applied to the account"}},
+                :type {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                       :fhir/flags #{:SU},
+                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.account-type/value-set,
+                                            :strength :example},
+                       :zen/desc "E.g. patient, expense, depreciation"},
+                :procedure {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                    :type zen/map,
+                                    :keys {:sequence {:confirms #{hl7-fhir-r5-core.positiveInt/schema},
+                                                      :zen/desc "Ranking of the procedure (for each type)"},
+                                           :_sequence {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                           :code {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                                  :fhir/flags #{:SU},
+                                                  :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.procedure-code/value-set,
+                                                                       :strength :example},
+                                                  :zen/desc "The procedure relevant to the account"},
+                                           :dateOfService {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                                                           :zen/desc "Date of the procedure (when coded procedure)"},
+                                           :_dateOfService {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                           :type {:type zen/vector,
+                                                  :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                          :zen/desc "How this procedure value should be used in charging the account"}},
+                                           :packageCode {:type zen/vector,
+                                                         :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                 :zen/desc "Package Code specific for billing"}},
+                                           :device {:type zen/vector,
+                                                    :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                        zen.fhir/Reference},
+                                                            :fhir/flags #{:SU},
+                                                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Device/schema}},
+                                                            :zen/desc "Any devices that were associated with the procedure"}}},
+                                    :require #{:code},
+                                    :fhir/flags #{:SU},
+                                    :zen/desc "The list of procedures relevant to this account"}},
+                :relatedAccount {:type zen/vector,
+                                 :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                         :type zen/map,
+                                         :keys {:relationship {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                               :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.account-relationship/value-set,
+                                                                                    :strength :example},
+                                                               :zen/desc "Relationship of the associated Account"},
+                                                :account {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                      zen.fhir/Reference},
+                                                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Account/schema}},
+                                                          :zen/desc "Reference to an associated Account"}},
+                                         :require #{:account},
+                                         :zen/desc "Other associated accounts related to this account"}},
+                :_description {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :currency {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                           :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.currencies/value-set,
+                                                :strength :required},
+                           :zen/desc "The base or default currency"},
+                :balance {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                  :type zen/map,
+                                  :keys {:aggregate {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                     :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.account-aggregate/value-set,
+                                                                          :strength :extensible},
+                                                     :zen/desc "Who is expected to pay this part of the balance"},
+                                         :term {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.account-balance-term/value-set,
+                                                                     :strength :extensible},
+                                                :zen/desc "current | 30 | 60 | 90 | 120"},
+                                         :estimate {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                                                    :zen/desc "Estimated balance"},
+                                         :_estimate {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                         :amount {:confirms #{hl7-fhir-r5-core.Money/schema},
+                                                  :zen/desc "Calculated amount"}},
+                                  :require #{:amount},
+                                  :zen/desc "Calculated account balance(s)"}},
+                :guarantor {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                    :type zen/map,
+                                    :keys {:party {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                               zen.fhir/Reference},
+                                                   :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                                                  hl7-fhir-r5-core.Organization/schema
+                                                                                  hl7-fhir-r5-core.RelatedPerson/schema}},
+                                                   :zen/desc "Responsible entity"},
+                                           :onHold {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                                                    :zen/desc "Credit or other hold applied"},
+                                           :_onHold {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                           :period {:confirms #{hl7-fhir-r5-core.Period/schema},
+                                                    :zen/desc "Guarantee account during"}},
+                                    :require #{:party},
+                                    :zen/desc "The parties ultimately responsible for balancing the Account"}},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.account-status/value-set,
+                                              :strength :required},
+                         :zen/desc "active | inactive | entered-in-error | on-hold | unknown"},
+                :_name {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :billingStatus {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                :fhir/flags #{:SU},
+                                :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.account-billing-status/value-set,
+                                                     :strength :example},
+                                :zen/desc "Tracks the lifecycle of the account through the billing process"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Account number"}},
+                :subject {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                              zen.fhir/Reference},
+                                  :fhir/flags #{:SU},
+                                  :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                                 hl7-fhir-r5-core.HealthcareService/schema
+                                                                 hl7-fhir-r5-core.PractitionerRole/schema
+                                                                 hl7-fhir-r5-core.Organization/schema
+                                                                 hl7-fhir-r5-core.Location/schema
+                                                                 hl7-fhir-r5-core.Device/schema
+                                                                 hl7-fhir-r5-core.Practitioner/schema}},
+                                  :zen/desc "The entity that caused the expenses"}},
+                :owner {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                    zen.fhir/Reference},
+                        :fhir/flags #{:SU},
+                        :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Organization/schema}},
+                        :zen/desc "Entity managing the Account"}},
+         :zen.fhir/type "Account"}}

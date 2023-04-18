@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Transport-identifier,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Transport-identifier",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Transport-identifier",
+         :fhir/type "token",
+         :name "identifier",
+         :expr {:Transport {:knife [["identifier"]],
+                            :jsonpath ["$.\"identifier\"[*]"],
+                            :data-types #{{:type "Identifier",
+                                           :polymorphic? false}},
+                            :template :token}}}}

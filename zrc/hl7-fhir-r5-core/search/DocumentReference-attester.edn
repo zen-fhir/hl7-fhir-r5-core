@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.DocumentReference-attester,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "DocumentReference-attester",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/DocumentReference-attester",
+         :fhir/type "reference",
+         :name "attester",
+         :expr {:DocumentReference {:knife [["attester" "party"]],
+                                    :jsonpath ["$.\"attester\".\"party\"[*]"],
+                                    :data-types #{{:type "Reference",
+                                                   :polymorphic? false}},
+                                    :template :reference}}}}

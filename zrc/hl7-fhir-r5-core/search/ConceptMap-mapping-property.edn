@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.ConceptMap-mapping-property,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "ConceptMap-mapping-property",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/ConceptMap-mapping-property",
+         :fhir/type "uri",
+         :name "mapping-property",
+         :expr {:ConceptMap {:knife [["property" "uri"]],
+                             :jsonpath ["$.\"property\".\"uri\"[*]"],
+                             :data-types #{{:type "uri",
+                                            :polymorphic? false}},
+                             :template :uri}}}}

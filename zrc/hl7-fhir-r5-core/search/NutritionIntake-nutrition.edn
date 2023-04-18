@@ -1,0 +1,13 @@
+{ns hl7-fhir-r5-core.search.NutritionIntake-nutrition,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "NutritionIntake-nutrition",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/NutritionIntake-nutrition",
+         :fhir/type "token",
+         :name "nutrition",
+         :expr {:NutritionIntake {:knife [["consumedItem"
+                                           "nutritionProduct"
+                                           "concept"]],
+                                  :jsonpath ["$.\"consumedItem\".\"nutritionProduct\".\"concept\"[*]"],
+                                  :data-types #{},
+                                  :template :token}}}}

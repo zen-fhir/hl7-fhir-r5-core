@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.SubstanceDefinition-code,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "SubstanceDefinition-code",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/SubstanceDefinition-code",
+         :fhir/type "token",
+         :name "code",
+         :expr {:SubstanceDefinition {:knife [["code" "code"]],
+                                      :jsonpath ["$.\"code\".\"code\"[*]"],
+                                      :data-types #{{:type "CodeableConcept",
+                                                     :polymorphic? false}},
+                                      :template :token}}}}

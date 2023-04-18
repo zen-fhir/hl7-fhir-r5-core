@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.ResearchStudy-phase,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "ResearchStudy-phase",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/ResearchStudy-phase",
+         :fhir/type "token",
+         :name "phase",
+         :expr {:ResearchStudy {:knife [["phase"]],
+                                :jsonpath ["$.\"phase\"[*]"],
+                                :data-types #{{:type "CodeableConcept",
+                                               :polymorphic? false}},
+                                :template :token}}}}

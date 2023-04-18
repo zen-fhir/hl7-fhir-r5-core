@@ -1,0 +1,182 @@
+{ns hl7-fhir-r5-core.Communication,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.CodeableReference
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.Group
+          hl7-fhir-r5-core.Annotation
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.value-set.clinical-findings
+          hl7-fhir-r5-core.Attachment
+          hl7-fhir-r5-core.Encounter
+          hl7-fhir-r5-core.value-set.communication-not-done-reason
+          hl7-fhir-r5-core.Location
+          hl7-fhir-r5-core.Practitioner
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.Device
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.value-set.event-status
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.CareTeam
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.RelatedPerson
+          hl7-fhir-r5-core.PractitionerRole
+          hl7-fhir-r5-core.canonical
+          hl7-fhir-r5-core.Communication
+          hl7-terminology-r5.value-set.v3-ParticipationMode
+          hl7-fhir-r5-core.value-set.request-priority
+          hl7-fhir-r5-core.uri
+          hl7-fhir-r5-core.HealthcareService
+          hl7-fhir-r5-core.Endpoint
+          hl7-fhir-r5-core.value-set.communication-category
+          hl7-fhir-r5-core.Patient
+          hl7-fhir-r5-core.value-set.communication-topic},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Communication",
+         :require #{:status},
+         :type zen/map,
+         :zen/desc "A clinical or business level record of information being transmitted or shared; e.g. an alert that was sent to a responsible provider, a public health agency communication to a provider/reporter in response to a case report for a reportable condition.",
+         :keys {:category {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                   :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.communication-category/value-set,
+                                                        :strength :example},
+                                   :zen/desc "Message category"}},
+                :received {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                           :zen/desc "When received"},
+                :instantiatesCanonical {:type zen/vector,
+                                        :every {:confirms #{hl7-fhir-r5-core.canonical/schema},
+                                                :fhir/flags #{:SU},
+                                                :zen/desc "Instantiates FHIR protocol or definition"}},
+                :payload {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                  :type zen/map,
+                                  :keys {:content {:fhir/polymorphic true,
+                                                   :type zen/map,
+                                                   :exclusive-keys #{#{:Attachment
+                                                                       :CodeableConcept
+                                                                       :Reference}},
+                                                   :keys {:Attachment {:confirms #{hl7-fhir-r5-core.Attachment/schema}},
+                                                          :Reference {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                                  zen.fhir/Reference},
+                                                                      :zen.fhir/reference {:refers #{}}},
+                                                          :CodeableConcept {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema}}},
+                                                   :zen/desc "Message part content"}},
+                                  :require #{:content},
+                                  :zen/desc "Message payload"}},
+                :instantiatesUri {:type zen/vector,
+                                  :every {:confirms #{hl7-fhir-r5-core.uri/schema},
+                                          :fhir/flags #{:SU},
+                                          :zen/desc "Instantiates external protocol or definition"}},
+                :_received {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :encounter {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                        zen.fhir/Reference},
+                            :fhir/flags #{:SU},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Encounter/schema}},
+                            :zen/desc "The Encounter during which this Communication was created"},
+                :medium {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                 :zen.fhir/value-set {:symbol hl7-terminology-r5.value-set.v3-ParticipationMode/value-set,
+                                                      :strength :example},
+                                 :zen/desc "A channel of communication"}},
+                :_priority {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :recipient {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                zen.fhir/Reference},
+                                    :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                                   hl7-fhir-r5-core.CareTeam/schema
+                                                                   hl7-fhir-r5-core.HealthcareService/schema
+                                                                   hl7-fhir-r5-core.PractitionerRole/schema
+                                                                   hl7-fhir-r5-core.Organization/schema
+                                                                   hl7-fhir-r5-core.Location/schema
+                                                                   hl7-fhir-r5-core.Endpoint/schema
+                                                                   hl7-fhir-r5-core.Device/schema
+                                                                   hl7-fhir-r5-core.Practitioner/schema
+                                                                   hl7-fhir-r5-core.Group/schema
+                                                                   hl7-fhir-r5-core.RelatedPerson/schema}},
+                                    :zen/desc "Who the information is shared with"}},
+                :statusReason {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                               :fhir/flags #{:SU},
+                               :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.communication-not-done-reason/value-set,
+                                                    :strength :example},
+                               :zen/desc "Reason for current status"},
+                :topic {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                        :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.communication-topic/value-set,
+                                             :strength :example},
+                        :zen/desc "Description of the purpose/content"},
+                :sent {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                       :zen/desc "When sent"},
+                :note {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.Annotation/schema},
+                               :zen/desc "Comments made about the communication"}},
+                :reason {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                 :fhir/flags #{:SU},
+                                 :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.clinical-findings/value-set,
+                                                      :strength :example},
+                                 :zen/desc "Indication for message"}},
+                :priority {:confirms #{hl7-fhir-r5-core.code/schema},
+                           :fhir/flags #{:SU},
+                           :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.request-priority/value-set,
+                                                :strength :required},
+                           :zen/desc "routine | urgent | asap | stat"},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.event-status/value-set,
+                                              :strength :required},
+                         :zen/desc "preparation | in-progress | not-done | on-hold | stopped | completed | entered-in-error | unknown"},
+                :sender {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                     zen.fhir/Reference},
+                         :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                        hl7-fhir-r5-core.CareTeam/schema
+                                                        hl7-fhir-r5-core.HealthcareService/schema
+                                                        hl7-fhir-r5-core.PractitionerRole/schema
+                                                        hl7-fhir-r5-core.Organization/schema
+                                                        hl7-fhir-r5-core.Endpoint/schema
+                                                        hl7-fhir-r5-core.Device/schema
+                                                        hl7-fhir-r5-core.Practitioner/schema
+                                                        hl7-fhir-r5-core.RelatedPerson/schema}},
+                         :zen/desc "Who shares the information"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Unique identifier"}},
+                :inResponseTo {:type zen/vector,
+                               :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                   zen.fhir/Reference},
+                                       :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Communication/schema}},
+                                       :zen/desc "Reply to"}},
+                :basedOn {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                              zen.fhir/Reference},
+                                  :fhir/flags #{:SU},
+                                  :zen.fhir/reference {:refers #{}},
+                                  :zen/desc "Request fulfilled by this communication"}},
+                :partOf {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                             zen.fhir/Reference},
+                                 :fhir/flags #{:SU},
+                                 :zen.fhir/reference {:refers #{}},
+                                 :zen/desc "Part of referenced event (e.g. Communication, Procedure)"}},
+                :_instantiatesCanonical {:type zen/vector,
+                                         :every {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                :subject {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                      zen.fhir/Reference},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                         hl7-fhir-r5-core.Group/schema}},
+                          :zen/desc "Focus of message"},
+                :about {:type zen/vector,
+                        :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                            zen.fhir/Reference},
+                                :zen.fhir/reference {:refers #{}},
+                                :zen/desc "Resources that pertain to this communication"}},
+                :_instantiatesUri {:type zen/vector,
+                                   :every {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                :_sent {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+         :zen.fhir/type "Communication"}}

@@ -1,0 +1,267 @@
+{ns hl7-fhir-r5-core.MedicationRequest,
+ import #{hl7-fhir-r5-core.value-set.medicationrequest-intent
+          hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.markdown
+          hl7-fhir-r5-core.Provenance
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.CodeableReference
+          hl7-fhir-r5-core.boolean
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.Group
+          hl7-fhir-r5-core.Annotation
+          hl7-fhir-r5-core.SimpleQuantity
+          hl7-fhir-r5-core.ImmunizationRecommendation
+          hl7-terminology-r5.value-set.v3-SubstanceAdminSubstitutionReason
+          hl7-fhir-r5-core.MedicationRequest
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.value-set.medication-codes
+          hl7-fhir-r5-core.Encounter
+          hl7-fhir-r5-core.DeviceDefinition
+          hl7-fhir-r5-core.value-set.medication-intended-performer-role
+          hl7-fhir-r5-core.Practitioner
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.Device
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.CarePlan
+          hl7-fhir-r5-core.value-set.medicationrequest-course-of-therapy
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.value-set.condition-code
+          hl7-fhir-r5-core.ClaimResponse
+          hl7-terminology-r5.value-set.v3-ActSubstanceAdminSubstitutionCode
+          hl7-fhir-r5-core.CareTeam
+          hl7-fhir-r5-core.Coverage
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.RelatedPerson
+          hl7-fhir-r5-core.PractitionerRole
+          hl7-fhir-r5-core.Period
+          hl7-fhir-r5-core.Duration
+          hl7-fhir-r5-core.value-set.request-priority
+          hl7-fhir-r5-core.Dosage
+          hl7-fhir-r5-core.Quantity
+          hl7-fhir-r5-core.value-set.medicationrequest-status
+          hl7-fhir-r5-core.ServiceRequest
+          hl7-fhir-r5-core.HealthcareService
+          hl7-fhir-r5-core.unsignedInt
+          hl7-fhir-r5-core.value-set.medicationrequest-admin-location
+          hl7-fhir-r5-core.value-set.medication-dose-aid
+          hl7-fhir-r5-core.value-set.medicationrequest-status-reason
+          hl7-fhir-r5-core.Patient},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/MedicationRequest",
+         :require #{:status :intent :subject :medication},
+         :type zen/map,
+         :zen/desc "An order or request for both supply of the medication and the instructions for administration of the medication to a patient. The resource is called \"MedicationRequest\" rather than \"MedicationPrescription\" or \"MedicationOrder\" to generalize the use across inpatient and outpatient settings, including care plans, etc., and to harmonize with workflow patterns.",
+         :keys {:performerType {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                :fhir/flags #{:SU},
+                                :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.medication-intended-performer-role/value-set,
+                                                     :strength :extensible},
+                                :zen/desc "Desired kind of performer of the medication administration"},
+                :category {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                   :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.medicationrequest-admin-location/value-set,
+                                                        :strength :example},
+                                   :zen/desc "Grouping or category of medication request"}},
+                :insurance {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                zen.fhir/Reference},
+                                    :zen.fhir/reference {:refers #{hl7-fhir-r5-core.ClaimResponse/schema
+                                                                   hl7-fhir-r5-core.Coverage/schema}},
+                                    :zen/desc "Associated insurance coverage"}},
+                :_statusChanged {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :eventHistory {:type zen/vector,
+                               :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                   zen.fhir/Reference},
+                                       :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Provenance/schema}},
+                                       :zen/desc "A list of events of interest in the lifecycle"}},
+                :substitution {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                               :type zen/map,
+                               :keys {:allowed {:fhir/polymorphic true,
+                                                :type zen/map,
+                                                :exclusive-keys #{#{:CodeableConcept
+                                                                    :boolean}},
+                                                :keys {:boolean {:confirms #{hl7-fhir-r5-core.boolean/schema}},
+                                                       :_boolean {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                       :CodeableConcept {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema}}},
+                                                :zen.fhir/value-set {:symbol hl7-terminology-r5.value-set.v3-ActSubstanceAdminSubstitutionCode/value-set,
+                                                                     :strength :preferred},
+                                                :zen/desc "Whether substitution is allowed or not"},
+                                      :reason {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                               :zen.fhir/value-set {:symbol hl7-terminology-r5.value-set.v3-SubstanceAdminSubstitutionReason/value-set,
+                                                                    :strength :example},
+                                               :zen/desc "Why should (not) substitution be made"}},
+                               :require #{:allowed},
+                               :zen/desc "Any restrictions on medication substitution"},
+                :_renderedDosageInstruction {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_authoredOn {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :encounter {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                        zen.fhir/Reference},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Encounter/schema}},
+                            :zen/desc "Encounter created as part of encounter/admission/stay"},
+                :_doNotPerform {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :dispenseRequest {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                  :type zen/map,
+                                  :keys {:dispenser {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                 zen.fhir/Reference},
+                                                     :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Organization/schema}},
+                                                     :zen/desc "Intended performer of dispense"},
+                                         :doseAdministrationAid {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                 :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.medication-dose-aid/value-set,
+                                                                                      :strength :example},
+                                                                 :zen/desc "Type of adherence packaging to use for the dispense"},
+                                         :initialFill {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                                       :type zen/map,
+                                                       :keys {:quantity {:confirms #{hl7-fhir-r5-core.Quantity/schema
+                                                                                     hl7-fhir-r5-core.SimpleQuantity/schema},
+                                                                         :zen/desc "First fill quantity"},
+                                                              :duration {:confirms #{hl7-fhir-r5-core.Duration/schema},
+                                                                         :zen/desc "First fill duration"}},
+                                                       :zen/desc "First fill details"},
+                                         :dispenserInstruction {:type zen/vector,
+                                                                :every {:confirms #{hl7-fhir-r5-core.Annotation/schema},
+                                                                        :zen/desc "Additional information for the dispenser"}},
+                                         :dispenseInterval {:confirms #{hl7-fhir-r5-core.Duration/schema},
+                                                            :zen/desc "Minimum period of time between dispenses"},
+                                         :_numberOfRepeatsAllowed {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                         :validityPeriod {:confirms #{hl7-fhir-r5-core.Period/schema},
+                                                          :zen/desc "Time period supply is authorized for"},
+                                         :numberOfRepeatsAllowed {:confirms #{hl7-fhir-r5-core.unsignedInt/schema},
+                                                                  :zen/desc "Number of refills authorized"},
+                                         :quantity {:confirms #{hl7-fhir-r5-core.Quantity/schema
+                                                                hl7-fhir-r5-core.SimpleQuantity/schema},
+                                                    :zen/desc "Amount of medication to supply per dispense"},
+                                         :expectedSupplyDuration {:confirms #{hl7-fhir-r5-core.Duration/schema},
+                                                                  :zen/desc "Number of days supply per dispense"}},
+                                  :zen/desc "Medication supply authorization"},
+                :_priority {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :reported {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                           :fhir/flags #{:SU},
+                           :zen/desc "Reported rather than primary record"},
+                :statusReason {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                               :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.medicationrequest-status-reason/value-set,
+                                                    :strength :example},
+                               :zen/desc "Reason for current status"},
+                :authoredOn {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                             :fhir/flags #{:SU},
+                             :zen/desc "When request was initially authored"},
+                :effectiveDosePeriod {:confirms #{hl7-fhir-r5-core.Period/schema},
+                                      :zen/desc "Period over which the medication is to be taken"},
+                :note {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.Annotation/schema},
+                               :zen/desc "Information about the prescription"}},
+                :_intent {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :reason {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                 :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.condition-code/value-set,
+                                                      :strength :example},
+                                 :zen/desc "Reason or indication for ordering or not ordering the medication"}},
+                :statusChanged {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                                :zen/desc "When the status was changed"},
+                :requester {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                        zen.fhir/Reference},
+                            :fhir/flags #{:SU},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                           hl7-fhir-r5-core.PractitionerRole/schema
+                                                           hl7-fhir-r5-core.Organization/schema
+                                                           hl7-fhir-r5-core.Device/schema
+                                                           hl7-fhir-r5-core.Practitioner/schema
+                                                           hl7-fhir-r5-core.RelatedPerson/schema}},
+                            :zen/desc "Who/What requested the Request"},
+                :supportingInformation {:type zen/vector,
+                                        :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                            zen.fhir/Reference},
+                                                :zen.fhir/reference {:refers #{}},
+                                                :zen/desc "Information to support fulfilling of the medication"}},
+                :priority {:confirms #{hl7-fhir-r5-core.code/schema},
+                           :fhir/flags #{:SU},
+                           :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.request-priority/value-set,
+                                                :strength :required},
+                           :zen/desc "routine | urgent | asap | stat"},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.medicationrequest-status/value-set,
+                                              :strength :required},
+                         :zen/desc "active | on-hold | ended | stopped | completed | cancelled | entered-in-error | draft | unknown"},
+                :dosageInstruction {:type zen/vector,
+                                    :every {:confirms #{hl7-fhir-r5-core.Dosage/schema},
+                                            :zen/desc "Specific instructions for how the medication should be taken"}},
+                :groupIdentifier {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                  :fhir/flags #{:SU},
+                                  :zen/desc "Composite request this is part of"},
+                :recorder {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                       zen.fhir/Reference},
+                           :zen.fhir/reference {:refers #{hl7-fhir-r5-core.PractitionerRole/schema
+                                                          hl7-fhir-r5-core.Practitioner/schema}},
+                           :zen/desc "Person who entered the request"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :zen/desc "External ids for this request"}},
+                :doNotPerform {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                               :fhir/flags #{:SU :?!},
+                               :zen/desc "True if patient is to stop taking or not to start taking the medication"},
+                :intent {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.medicationrequest-intent/value-set,
+                                              :strength :required},
+                         :zen/desc "proposal | plan | order | original-order | reflex-order | filler-order | instance-order | option"},
+                :device {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                 :zen/desc "Intended type of device for the administration"}},
+                :renderedDosageInstruction {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                                            :zen/desc "Full representation of the dosage instructions"},
+                :basedOn {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                              zen.fhir/Reference},
+                                  :fhir/flags #{:SU},
+                                  :zen.fhir/reference {:refers #{hl7-fhir-r5-core.ImmunizationRecommendation/schema
+                                                                 hl7-fhir-r5-core.ServiceRequest/schema
+                                                                 hl7-fhir-r5-core.CarePlan/schema
+                                                                 hl7-fhir-r5-core.MedicationRequest/schema}},
+                                  :zen/desc "A plan or request that is fulfilled in whole or in part by this medication request"}},
+                :priorPrescription {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                zen.fhir/Reference},
+                                    :zen.fhir/reference {:refers #{hl7-fhir-r5-core.MedicationRequest/schema}},
+                                    :zen/desc "Reference to an order/prescription that is being replaced by this MedicationRequest"},
+                :informationSource {:type zen/vector,
+                                    :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                        zen.fhir/Reference},
+                                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                                           hl7-fhir-r5-core.PractitionerRole/schema
+                                                                           hl7-fhir-r5-core.Organization/schema
+                                                                           hl7-fhir-r5-core.Practitioner/schema
+                                                                           hl7-fhir-r5-core.RelatedPerson/schema}},
+                                            :zen/desc "The person or organization who provided the information about this request, if the source is someone other than the requestor"}},
+                :_reported {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :courseOfTherapyType {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                      :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.medicationrequest-course-of-therapy/value-set,
+                                                           :strength :extensible},
+                                      :zen/desc "Overall pattern of medication administration"},
+                :subject {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                      zen.fhir/Reference},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                         hl7-fhir-r5-core.Group/schema}},
+                          :zen/desc "Individual or group for whom the medication has been requested"},
+                :performer {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                zen.fhir/Reference},
+                                    :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                                   hl7-fhir-r5-core.CareTeam/schema
+                                                                   hl7-fhir-r5-core.HealthcareService/schema
+                                                                   hl7-fhir-r5-core.PractitionerRole/schema
+                                                                   hl7-fhir-r5-core.Organization/schema
+                                                                   hl7-fhir-r5-core.Practitioner/schema
+                                                                   hl7-fhir-r5-core.RelatedPerson/schema
+                                                                   hl7-fhir-r5-core.DeviceDefinition/schema}},
+                                    :zen/desc "Intended performer of administration"}},
+                :medication {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                             :fhir/flags #{:SU},
+                             :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.medication-codes/value-set,
+                                                  :strength :example},
+                             :zen/desc "Medication to be taken"}},
+         :zen.fhir/type "MedicationRequest"}}

@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.DeviceDefinition-type,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "DeviceDefinition-type",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/DeviceDefinition-type",
+         :fhir/type "token",
+         :name "type",
+         :expr {:DeviceDefinition {:knife [["conformsTo" "category"]],
+                                   :jsonpath ["$.\"conformsTo\".\"category\"[*]"],
+                                   :data-types #{{:type "CodeableConcept",
+                                                  :polymorphic? false}},
+                                   :template :token}}}}

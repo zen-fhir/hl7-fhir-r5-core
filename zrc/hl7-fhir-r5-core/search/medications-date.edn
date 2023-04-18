@@ -1,0 +1,16 @@
+{ns hl7-fhir-r5-core.search.medications-date,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "medications-date",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/medications-date",
+         :fhir/type "date",
+         :name "date",
+         :expr {:MedicationAdministration {:knife [["occurence"
+                                                    "ofType(dateTime"]
+                                                   ["occurence"
+                                                    "ofType(Period"]],
+                                           :jsonpath ["$.\"occurence\".\"ofType(dateTime\"[*]"
+                                                      "$.\"occurence\".\"ofType(Period\"[*]"],
+                                           :data-types #{},
+                                           :template :date,
+                                           :sql {:where [:or]}}}}}

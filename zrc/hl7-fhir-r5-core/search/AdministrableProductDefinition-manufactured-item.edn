@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.AdministrableProductDefinition-manufactured-item,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "AdministrableProductDefinition-manufactured-item",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/AdministrableProductDefinition-manufactured-item",
+         :fhir/type "reference",
+         :name "manufactured-item",
+         :expr {:AdministrableProductDefinition {:knife [["producedFrom"]],
+                                                 :jsonpath ["$.\"producedFrom\"[*]"],
+                                                 :data-types #{{:type "Reference",
+                                                                :polymorphic? false}},
+                                                 :template :reference}}}}

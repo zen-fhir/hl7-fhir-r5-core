@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.RegulatedAuthorization-case-type,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "RegulatedAuthorization-case-type",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/RegulatedAuthorization-case-type",
+         :fhir/type "token",
+         :name "case-type",
+         :expr {:RegulatedAuthorization {:knife [["case" "type"]],
+                                         :jsonpath ["$.\"case\".\"type\"[*]"],
+                                         :data-types #{{:type "CodeableConcept",
+                                                        :polymorphic? false}},
+                                         :template :token}}}}

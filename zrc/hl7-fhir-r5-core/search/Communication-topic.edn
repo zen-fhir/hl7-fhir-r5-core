@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Communication-topic,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Communication-topic",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Communication-topic",
+         :fhir/type "token",
+         :name "topic",
+         :expr {:Communication {:knife [["topic"]],
+                                :jsonpath ["$.\"topic\"[*]"],
+                                :data-types #{{:type "CodeableConcept",
+                                               :polymorphic? false}},
+                                :template :token}}}}

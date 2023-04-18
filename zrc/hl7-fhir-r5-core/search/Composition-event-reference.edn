@@ -1,0 +1,11 @@
+{ns hl7-fhir-r5-core.search.Composition-event-reference,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Composition-event-reference",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Composition-event-reference",
+         :fhir/type "reference",
+         :name "event-reference",
+         :expr {:Composition {:knife [["event" "detail" "reference"]],
+                              :jsonpath ["$.\"event\".\"detail\".\"reference\"[*]"],
+                              :data-types #{},
+                              :template :reference}}}}

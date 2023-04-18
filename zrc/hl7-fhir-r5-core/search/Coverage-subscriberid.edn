@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Coverage-subscriberid,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Coverage-subscriberid",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Coverage-subscriberid",
+         :fhir/type "token",
+         :name "subscriberid",
+         :expr {:Coverage {:knife [["subscriberId"]],
+                           :jsonpath ["$.\"subscriberId\"[*]"],
+                           :data-types #{{:type "Identifier",
+                                          :polymorphic? false}},
+                           :template :token}}}}

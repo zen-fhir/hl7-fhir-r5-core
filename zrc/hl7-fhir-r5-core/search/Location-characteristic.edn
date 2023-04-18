@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Location-characteristic,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Location-characteristic",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Location-characteristic",
+         :fhir/type "token",
+         :name "characteristic",
+         :expr {:Location {:knife [["characteristic"]],
+                           :jsonpath ["$.\"characteristic\"[*]"],
+                           :data-types #{{:type "CodeableConcept",
+                                          :polymorphic? false}},
+                           :template :token}}}}

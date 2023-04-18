@@ -1,0 +1,13 @@
+{ns hl7-fhir-r5-core.search.VerificationResult-attestation-onbehalfof,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "VerificationResult-attestation-onbehalfof",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/VerificationResult-attestation-onbehalfof",
+         :fhir/type "reference",
+         :name "attestation-onbehalfof",
+         :expr {:VerificationResult {:knife [["attestation"
+                                              "onBehalfOf"]],
+                                     :jsonpath ["$.\"attestation\".\"onBehalfOf\"[*]"],
+                                     :data-types #{{:type "Reference",
+                                                    :polymorphic? false}},
+                                     :template :reference}}}}

@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.VerificationResult-primarysource-who,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "VerificationResult-primarysource-who",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/VerificationResult-primarysource-who",
+         :fhir/type "reference",
+         :name "primarysource-who",
+         :expr {:VerificationResult {:knife [["primarySource" "who"]],
+                                     :jsonpath ["$.\"primarySource\".\"who\"[*]"],
+                                     :data-types #{{:type "Reference",
+                                                    :polymorphic? false}},
+                                     :template :reference}}}}

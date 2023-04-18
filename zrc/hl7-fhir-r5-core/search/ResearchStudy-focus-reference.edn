@@ -1,0 +1,11 @@
+{ns hl7-fhir-r5-core.search.ResearchStudy-focus-reference,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "ResearchStudy-focus-reference",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/ResearchStudy-focus-reference",
+         :fhir/type "reference",
+         :name "focus-reference",
+         :expr {:ResearchStudy {:knife [["focus" "reference"]],
+                                :jsonpath ["$.\"focus\".\"reference\"[*]"],
+                                :data-types #{},
+                                :template :reference}}}}

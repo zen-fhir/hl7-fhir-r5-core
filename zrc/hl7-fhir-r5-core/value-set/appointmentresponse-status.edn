@@ -1,0 +1,18 @@
+{ns hl7-fhir-r5-core.value-set.appointmentresponse-status,
+ import #{zen.fhir},
+ value-set {:zen/tags #{zen.fhir/value-set},
+            :zen/desc "The Participation status for a participant in response to a request for an appointment.",
+            :zen.fhir/version "0.6.21-2",
+            :fhir/code-systems #{{:fhir/url "http://hl7.org/fhir/participationstatus",
+                                  :zen.fhir/content :bundled}
+                                 {:fhir/url "http://hl7.org/fhir/appointmentstatus",
+                                  :zen.fhir/content :bundled}},
+            :uri "http://hl7.org/fhir/ValueSet/appointmentresponse-status",
+            :version "5.0.0",
+            :ftr {:module "hl7-fhir-r5-core",
+                  :source-url "https://storage.googleapis.com",
+                  :source-type :cloud-storage,
+                  :ftr-path "ftr",
+                  :tag "init",
+                  :validation-index {:type :nippy,
+                                     :file "index.nippy"}}}}

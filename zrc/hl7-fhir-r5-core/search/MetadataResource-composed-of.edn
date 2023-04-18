@@ -1,0 +1,43 @@
+{ns hl7-fhir-r5-core.search.MetadataResource-composed-of,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "MetadataResource-composed-of",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/MetadataResource-composed-of",
+         :fhir/type "reference",
+         :name "composed-of",
+         :expr {:ActivityDefinition {:knife [["relatedArtifact"
+                                              {:type "composed-of"}
+                                              "resource"]],
+                                     :jsonpath ["$.\"relatedArtifact\"?(@.\"type\"==\"composed-of\").\"resource\"[*]"],
+                                     :data-types #{},
+                                     :template :reference},
+                :EventDefinition {:knife [["relatedArtifact"
+                                           {:type "composed-of"}
+                                           "resource"]],
+                                  :jsonpath ["$.\"relatedArtifact\"?(@.\"type\"==\"composed-of\").\"resource\"[*]"],
+                                  :data-types #{},
+                                  :template :reference},
+                :EvidenceVariable {:knife [["relatedArtifact"
+                                            {:type "composed-of"}
+                                            "resource"]],
+                                   :jsonpath ["$.\"relatedArtifact\"?(@.\"type\"==\"composed-of\").\"resource\"[*]"],
+                                   :data-types #{},
+                                   :template :reference},
+                :Library {:knife [["relatedArtifact"
+                                   {:type "composed-of"}
+                                   "resource"]],
+                          :jsonpath ["$.\"relatedArtifact\"?(@.\"type\"==\"composed-of\").\"resource\"[*]"],
+                          :data-types #{},
+                          :template :reference},
+                :Measure {:knife [["relatedArtifact"
+                                   {:type "composed-of"}
+                                   "resource"]],
+                          :jsonpath ["$.\"relatedArtifact\"?(@.\"type\"==\"composed-of\").\"resource\"[*]"],
+                          :data-types #{},
+                          :template :reference},
+                :PlanDefinition {:knife [["relatedArtifact"
+                                          {:type "composed-of"}
+                                          "resource"]],
+                                 :jsonpath ["$.\"relatedArtifact\"?(@.\"type\"==\"composed-of\").\"resource\"[*]"],
+                                 :data-types #{},
+                                 :template :reference}}}}

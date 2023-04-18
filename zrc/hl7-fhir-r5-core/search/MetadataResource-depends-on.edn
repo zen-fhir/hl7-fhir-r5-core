@@ -1,0 +1,52 @@
+{ns hl7-fhir-r5-core.search.MetadataResource-depends-on,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "MetadataResource-depends-on",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/MetadataResource-depends-on",
+         :fhir/type "reference",
+         :name "depends-on",
+         :expr {:ActivityDefinition {:knife [["relatedArtifact"
+                                              {:type "depends-on"}
+                                              "resource"]
+                                             ["library"]],
+                                     :jsonpath ["$.\"relatedArtifact\"?(@.\"type\"==\"depends-on\").\"resource\"[*]"
+                                                "$.\"library\"[*]"],
+                                     :data-types #{{:type "canonical",
+                                                    :polymorphic? false}},
+                                     :template :reference},
+                :EventDefinition {:knife [["relatedArtifact"
+                                           {:type "depends-on"}
+                                           "resource"]],
+                                  :jsonpath ["$.\"relatedArtifact\"?(@.\"type\"==\"depends-on\").\"resource\"[*]"],
+                                  :data-types #{},
+                                  :template :reference},
+                :EvidenceVariable {:knife [["relatedArtifact"
+                                            {:type "depends-on"}
+                                            "resource"]],
+                                   :jsonpath ["$.\"relatedArtifact\"?(@.\"type\"==\"depends-on\").\"resource\"[*]"],
+                                   :data-types #{},
+                                   :template :reference},
+                :Library {:knife [["relatedArtifact"
+                                   {:type "depends-on"}
+                                   "resource"]],
+                          :jsonpath ["$.\"relatedArtifact\"?(@.\"type\"==\"depends-on\").\"resource\"[*]"],
+                          :data-types #{},
+                          :template :reference},
+                :Measure {:knife [["relatedArtifact"
+                                   {:type "depends-on"}
+                                   "resource"]
+                                  ["library"]],
+                          :jsonpath ["$.\"relatedArtifact\"?(@.\"type\"==\"depends-on\").\"resource\"[*]"
+                                     "$.\"library\"[*]"],
+                          :data-types #{{:type "canonical",
+                                         :polymorphic? false}},
+                          :template :reference},
+                :PlanDefinition {:knife [["relatedArtifact"
+                                          {:type "depends-on"}
+                                          "resource"]
+                                         ["library"]],
+                                 :jsonpath ["$.\"relatedArtifact\"?(@.\"type\"==\"depends-on\").\"resource\"[*]"
+                                            "$.\"library\"[*]"],
+                                 :data-types #{{:type "canonical",
+                                                :polymorphic? false}},
+                                 :template :reference}}}}

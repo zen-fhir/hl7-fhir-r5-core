@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.MedicationRequest-group-identifier,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "MedicationRequest-group-identifier",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/MedicationRequest-group-identifier",
+         :fhir/type "token",
+         :name "group-identifier",
+         :expr {:MedicationRequest {:knife [["groupIdentifier"]],
+                                    :jsonpath ["$.\"groupIdentifier\"[*]"],
+                                    :data-types #{{:type "Identifier",
+                                                   :polymorphic? false}},
+                                    :template :token}}}}

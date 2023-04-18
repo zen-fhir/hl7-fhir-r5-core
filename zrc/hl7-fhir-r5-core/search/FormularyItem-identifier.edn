@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.FormularyItem-identifier,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "FormularyItem-identifier",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/FormularyItem-identifier",
+         :fhir/type "token",
+         :name "identifier",
+         :expr {:FormularyItem {:knife [["identifier"]],
+                                :jsonpath ["$.\"identifier\"[*]"],
+                                :data-types #{{:type "Identifier",
+                                               :polymorphic? false}},
+                                :template :token}}}}

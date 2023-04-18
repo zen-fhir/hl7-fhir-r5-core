@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.ResearchStudy-eligibility,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "ResearchStudy-eligibility",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/ResearchStudy-eligibility",
+         :fhir/type "reference",
+         :name "eligibility",
+         :expr {:ResearchStudy {:knife [["recruitment" "eligibility"]],
+                                :jsonpath ["$.\"recruitment\".\"eligibility\"[*]"],
+                                :data-types #{{:type "Reference",
+                                               :polymorphic? false}},
+                                :template :reference}}}}

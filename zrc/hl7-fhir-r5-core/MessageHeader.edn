@@ -1,0 +1,158 @@
+{ns hl7-fhir-r5-core.MessageHeader,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.OperationOutcome
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.url
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.Practitioner
+          hl7-fhir-r5-core.Device
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.ContactPoint
+          hl7-fhir-r5-core.PractitionerRole
+          hl7-fhir-r5-core.canonical
+          hl7-fhir-r5-core.Coding
+          hl7-fhir-r5-core.value-set.response-code
+          hl7-fhir-r5-core.value-set.message-reason-encounter
+          hl7-fhir-r5-core.Endpoint},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/MessageHeader",
+         :require #{:source :event},
+         :type zen/map,
+         :zen/desc "The header for a message exchange that is either requesting or responding to an action.  The reference(s) that are the subject of the action as well as other information related to the action are typically transmitted in a bundle in which the MessageHeader resource instance is the first resource in the bundle.",
+         :keys {:response {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                           :type zen/map,
+                           :keys {:identifier {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                               :fhir/flags #{:SU},
+                                               :zen/desc "Bundle.identifier of original message"},
+                                  :code {:confirms #{hl7-fhir-r5-core.code/schema},
+                                         :fhir/flags #{:SU},
+                                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.response-code/value-set,
+                                                              :strength :required},
+                                         :zen/desc "ok | transient-error | fatal-error"},
+                                  :_code {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                  :details {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                        zen.fhir/Reference},
+                                            :fhir/flags #{:SU},
+                                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.OperationOutcome/schema}},
+                                            :zen/desc "Specific list of hints/warnings/errors"}},
+                           :require #{:code :identifier},
+                           :fhir/flags #{:SU},
+                           :zen/desc "If this is a reply to prior message"},
+                :definition {:confirms #{hl7-fhir-r5-core.canonical/schema},
+                             :fhir/flags #{:SU},
+                             :zen/desc "Link to the definition for this message"},
+                :_definition {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :source {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                         :type zen/map,
+                         :keys {:endpoint {:fhir/polymorphic true,
+                                           :type zen/map,
+                                           :exclusive-keys #{#{:url
+                                                               :Reference}},
+                                           :keys {:url {:confirms #{hl7-fhir-r5-core.url/schema}},
+                                                  :_url {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                  :Reference {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                          zen.fhir/Reference},
+                                                              :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Endpoint/schema}}}},
+                                           :fhir/flags #{:SU},
+                                           :zen/desc "Actual source address or Endpoint resource"},
+                                :name {:confirms #{hl7-fhir-r5-core.string/schema},
+                                       :fhir/flags #{:SU},
+                                       :zen/desc "Name of system"},
+                                :_name {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                :software {:confirms #{hl7-fhir-r5-core.string/schema},
+                                           :fhir/flags #{:SU},
+                                           :zen/desc "Name of software running the system"},
+                                :_software {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                :version {:confirms #{hl7-fhir-r5-core.string/schema},
+                                          :fhir/flags #{:SU},
+                                          :zen/desc "Version of software running"},
+                                :_version {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                :contact {:confirms #{hl7-fhir-r5-core.ContactPoint/schema},
+                                          :fhir/flags #{:SU},
+                                          :zen/desc "Human contact for problems"}},
+                         :fhir/flags #{:SU},
+                         :zen/desc "Message source application"},
+                :author {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                     zen.fhir/Reference},
+                         :fhir/flags #{:SU},
+                         :zen.fhir/reference {:refers #{hl7-fhir-r5-core.PractitionerRole/schema
+                                                        hl7-fhir-r5-core.Organization/schema
+                                                        hl7-fhir-r5-core.Device/schema
+                                                        hl7-fhir-r5-core.Practitioner/schema}},
+                         :zen/desc "The source of the decision"},
+                :reason {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                         :fhir/flags #{:SU},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.message-reason-encounter/value-set,
+                                              :strength :example},
+                         :zen/desc "Cause of event"},
+                :responsible {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                          zen.fhir/Reference},
+                              :fhir/flags #{:SU},
+                              :zen.fhir/reference {:refers #{hl7-fhir-r5-core.PractitionerRole/schema
+                                                             hl7-fhir-r5-core.Organization/schema
+                                                             hl7-fhir-r5-core.Practitioner/schema}},
+                              :zen/desc "Final responsibility for event"},
+                :event {:fhir/polymorphic true,
+                        :type zen/map,
+                        :exclusive-keys #{#{:canonical :Coding}},
+                        :keys {:Coding {:confirms #{hl7-fhir-r5-core.Coding/schema}},
+                               :canonical {:confirms #{hl7-fhir-r5-core.canonical/schema}},
+                               :_canonical {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                        :fhir/flags #{:SU},
+                        :zen/desc "Event code or link to EventDefinition"},
+                :sender {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                     zen.fhir/Reference},
+                         :fhir/flags #{:SU},
+                         :zen.fhir/reference {:refers #{hl7-fhir-r5-core.PractitionerRole/schema
+                                                        hl7-fhir-r5-core.Organization/schema
+                                                        hl7-fhir-r5-core.Device/schema
+                                                        hl7-fhir-r5-core.Practitioner/schema}},
+                         :zen/desc "Real world sender of the message"},
+                :focus {:type zen/vector,
+                        :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                            zen.fhir/Reference},
+                                :fhir/flags #{:SU},
+                                :zen.fhir/reference {:refers #{}},
+                                :zen/desc "The actual content of the message"}},
+                :destination {:type zen/vector,
+                              :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                      :type zen/map,
+                                      :keys {:endpoint {:fhir/polymorphic true,
+                                                        :type zen/map,
+                                                        :exclusive-keys #{#{:url
+                                                                            :Reference}},
+                                                        :keys {:url {:confirms #{hl7-fhir-r5-core.url/schema}},
+                                                               :_url {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                               :Reference {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                                       zen.fhir/Reference},
+                                                                           :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Endpoint/schema}}}},
+                                                        :fhir/flags #{:SU},
+                                                        :zen/desc "Actual destination address or Endpoint resource"},
+                                             :name {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                    :fhir/flags #{:SU},
+                                                    :zen/desc "Name of system"},
+                                             :_name {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                             :target {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                  zen.fhir/Reference},
+                                                      :fhir/flags #{:SU},
+                                                      :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Device/schema}},
+                                                      :zen/desc "Particular delivery destination within the destination"},
+                                             :receiver {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                    zen.fhir/Reference},
+                                                        :fhir/flags #{:SU},
+                                                        :zen.fhir/reference {:refers #{hl7-fhir-r5-core.PractitionerRole/schema
+                                                                                       hl7-fhir-r5-core.Organization/schema
+                                                                                       hl7-fhir-r5-core.Practitioner/schema}},
+                                                        :zen/desc "Intended \"real-world\" recipient for the data"}},
+                                      :fhir/flags #{:SU},
+                                      :zen/desc "Message destination application(s)"}}},
+         :zen.fhir/type "MessageHeader"}}

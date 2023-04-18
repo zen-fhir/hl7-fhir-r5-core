@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Medication-serial-number,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Medication-serial-number",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Medication-serial-number",
+         :fhir/type "token",
+         :name "serial-number",
+         :expr {:Medication {:knife [["identifier"]],
+                             :jsonpath ["$.\"identifier\"[*]"],
+                             :data-types #{{:type "Identifier",
+                                            :polymorphic? false}},
+                             :template :token}}}}

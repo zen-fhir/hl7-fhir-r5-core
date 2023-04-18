@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.BiologicallyDerivedProduct-request,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "BiologicallyDerivedProduct-request",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/BiologicallyDerivedProduct-request",
+         :fhir/type "reference",
+         :name "request",
+         :expr {:BiologicallyDerivedProduct {:knife [["request"]],
+                                             :jsonpath ["$.\"request\"[*]"],
+                                             :data-types #{{:type "Reference",
+                                                            :polymorphic? false}},
+                                             :template :reference}}}}

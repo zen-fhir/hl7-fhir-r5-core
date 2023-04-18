@@ -1,0 +1,182 @@
+{ns hl7-fhir-r5-core.Ingredient,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.markdown
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.CodeableReference
+          hl7-fhir-r5-core.boolean
+          hl7-fhir-r5-core.value-set.ingredient-function
+          hl7-fhir-r5-core.Ratio
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.ManufacturedItemDefinition
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.value-set.country
+          hl7-fhir-r5-core.value-set.publication-status
+          hl7-fhir-r5-core.RatioRange
+          hl7-fhir-r5-core.AdministrableProductDefinition
+          hl7-fhir-r5-core.Quantity
+          hl7-fhir-r5-core.MedicinalProductDefinition
+          hl7-fhir-r5-core.value-set.ingredient-role
+          hl7-fhir-r5-core.value-set.ingredient-manufacturer-role
+          hl7-fhir-r5-core.value-set.substance-codes},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Ingredient",
+         :require #{:role :substance :status},
+         :type zen/map,
+         :zen/desc "An ingredient of a manufactured item or pharmaceutical product.",
+         :keys {:role {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                       :fhir/flags #{:SU},
+                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.ingredient-role/value-set,
+                                            :strength :example},
+                       :zen/desc "Purpose of the ingredient within the product, e.g. active, inactive"},
+                :group {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                        :fhir/flags #{:SU},
+                        :zen/desc "A classification of the ingredient according to where in the physical item it tends to be used, such the outer shell of a tablet, inner body or ink"},
+                :_allergenicIndicator {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :function {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                   :fhir/flags #{:SU},
+                                   :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.ingredient-function/value-set,
+                                                        :strength :example},
+                                   :zen/desc "Precise action within the drug product, e.g. antioxidant, alkalizing agent"}},
+                :substance {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                            :type zen/map,
+                            :keys {:code {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                          :fhir/flags #{:SU},
+                                          :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.substance-codes/value-set,
+                                                               :strength :example},
+                                          :zen/desc "A code or full resource that represents the ingredient substance"},
+                                   :strength {:type zen/vector,
+                                              :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                                      :type zen/map,
+                                                      :keys {:textConcentration {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                                                 :fhir/flags #{:SU},
+                                                                                 :zen/desc "Text of either the whole concentration strength or a part of it (rest being in Strength.concentration as a ratio)"},
+                                                             :textPresentation {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                                                :fhir/flags #{:SU},
+                                                                                :zen/desc "Text of either the whole presentation strength or a part of it (rest being in Strength.presentation as a ratio)"},
+                                                             :_textConcentration {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                             :concentration {:fhir/polymorphic true,
+                                                                             :type zen/map,
+                                                                             :exclusive-keys #{#{:RatioRange
+                                                                                                 :Ratio
+                                                                                                 :CodeableConcept
+                                                                                                 :Quantity}},
+                                                                             :keys {:Ratio {:confirms #{hl7-fhir-r5-core.Ratio/schema}},
+                                                                                    :RatioRange {:confirms #{hl7-fhir-r5-core.RatioRange/schema}},
+                                                                                    :CodeableConcept {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema}},
+                                                                                    :Quantity {:confirms #{hl7-fhir-r5-core.Quantity/schema}}},
+                                                                             :fhir/flags #{:SU},
+                                                                             :zen/desc "The strength per unitary volume (or mass)"},
+                                                             :basis {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                     :fhir/flags #{:SU},
+                                                                     :zen/desc "A code that indicates if the strength is, for example, based on the ingredient substance as stated or on the substance base (when the ingredient is a salt)"},
+                                                             :_measurementPoint {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                             :measurementPoint {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                                                :fhir/flags #{:SU},
+                                                                                :zen/desc "When strength is measured at a particular point or distance"},
+                                                             :_textPresentation {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                             :presentation {:fhir/polymorphic true,
+                                                                            :type zen/map,
+                                                                            :exclusive-keys #{#{:RatioRange
+                                                                                                :Ratio
+                                                                                                :CodeableConcept
+                                                                                                :Quantity}},
+                                                                            :keys {:Ratio {:confirms #{hl7-fhir-r5-core.Ratio/schema}},
+                                                                                   :RatioRange {:confirms #{hl7-fhir-r5-core.RatioRange/schema}},
+                                                                                   :CodeableConcept {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema}},
+                                                                                   :Quantity {:confirms #{hl7-fhir-r5-core.Quantity/schema}}},
+                                                                            :fhir/flags #{:SU},
+                                                                            :zen/desc "The quantity of substance in the unit of presentation"},
+                                                             :country {:type zen/vector,
+                                                                       :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                               :fhir/flags #{:SU},
+                                                                               :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.country/value-set,
+                                                                                                    :strength :example},
+                                                                               :zen/desc "Where the strength range applies"}},
+                                                             :referenceStrength {:type zen/vector,
+                                                                                 :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                                                                         :type zen/map,
+                                                                                         :keys {:substance {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                                                                                            :fhir/flags #{:SU},
+                                                                                                            :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.substance-codes/value-set,
+                                                                                                                                 :strength :example},
+                                                                                                            :zen/desc "Relevant reference substance"},
+                                                                                                :strength {:fhir/polymorphic true,
+                                                                                                           :type zen/map,
+                                                                                                           :exclusive-keys #{#{:RatioRange
+                                                                                                                               :Ratio
+                                                                                                                               :Quantity}},
+                                                                                                           :keys {:Ratio {:confirms #{hl7-fhir-r5-core.Ratio/schema}},
+                                                                                                                  :RatioRange {:confirms #{hl7-fhir-r5-core.RatioRange/schema}},
+                                                                                                                  :Quantity {:confirms #{hl7-fhir-r5-core.Quantity/schema}}},
+                                                                                                           :fhir/flags #{:SU},
+                                                                                                           :zen/desc "Strength expressed in terms of a reference substance"},
+                                                                                                :measurementPoint {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                                                                                   :fhir/flags #{:SU},
+                                                                                                                   :zen/desc "When strength is measured at a particular point or distance"},
+                                                                                                :_measurementPoint {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                                                                :country {:type zen/vector,
+                                                                                                          :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                                                                                  :fhir/flags #{:SU},
+                                                                                                                  :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.country/value-set,
+                                                                                                                                       :strength :example},
+                                                                                                                  :zen/desc "Where the strength range applies"}}},
+                                                                                         :require #{:substance
+                                                                                                    :strength},
+                                                                                         :fhir/flags #{:SU},
+                                                                                         :zen/desc "Strength expressed in terms of a reference substance"}}},
+                                                      :fhir/flags #{:SU},
+                                                      :zen/desc "The quantity of substance, per presentation, or per volume or mass, and type of quantity"}}},
+                            :require #{:code},
+                            :fhir/flags #{:SU},
+                            :zen/desc "The substance that comprises this ingredient"},
+                :for {:type zen/vector,
+                      :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                          zen.fhir/Reference},
+                              :fhir/flags #{:SU},
+                              :zen.fhir/reference {:refers #{hl7-fhir-r5-core.MedicinalProductDefinition/schema
+                                                             hl7-fhir-r5-core.AdministrableProductDefinition/schema
+                                                             hl7-fhir-r5-core.ManufacturedItemDefinition/schema}},
+                              :zen/desc "The product which this ingredient is a constituent part of"}},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.publication-status/value-set,
+                                              :strength :required},
+                         :zen/desc "draft | active | retired | unknown"},
+                :allergenicIndicator {:confirms #{hl7-fhir-r5-core.boolean/schema},
+                                      :fhir/flags #{:SU},
+                                      :zen/desc "If the ingredient is a known or suspected allergen"},
+                :comment {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                          :zen/desc "A place for providing any notes that are relevant to the component, e.g. removed during process, adjusted for loss on drying"},
+                :identifier {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                             :fhir/flags #{:SU},
+                             :zen/desc "An identifier or code by which the ingredient can be referenced"},
+                :manufacturer {:type zen/vector,
+                               :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                       :type zen/map,
+                                       :keys {:role {:confirms #{hl7-fhir-r5-core.code/schema},
+                                                     :fhir/flags #{:SU},
+                                                     :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.ingredient-manufacturer-role/value-set,
+                                                                          :strength :required},
+                                                     :zen/desc "allowed | possible | actual"},
+                                              :_role {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                              :manufacturer {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                                         zen.fhir/Reference},
+                                                             :fhir/flags #{:SU},
+                                                             :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Organization/schema}},
+                                                             :zen/desc "An organization that manufactures this ingredient"}},
+                                       :require #{:manufacturer},
+                                       :fhir/flags #{:SU},
+                                       :zen/desc "An organization that manufactures this ingredient"}},
+                :_comment {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+         :zen.fhir/type "Ingredient"}}

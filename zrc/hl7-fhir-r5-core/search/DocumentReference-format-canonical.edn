@@ -1,0 +1,14 @@
+{ns hl7-fhir-r5-core.search.DocumentReference-format-canonical,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "DocumentReference-format-canonical",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/DocumentReference-format-canonical",
+         :fhir/type "reference",
+         :name "format-canonical",
+         :expr {:DocumentReference {:knife [["content"
+                                             "profile"
+                                             "value"
+                                             "ofType(canonical"]],
+                                    :jsonpath ["$.\"content\".\"profile\".\"value\".\"ofType(canonical\"[*]"],
+                                    :data-types #{},
+                                    :template :reference}}}}

@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.CommunicationRequest-information-provider,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "CommunicationRequest-information-provider",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/CommunicationRequest-information-provider",
+         :fhir/type "reference",
+         :name "information-provider",
+         :expr {:CommunicationRequest {:knife [["informationProvider"]],
+                                       :jsonpath ["$.\"informationProvider\"[*]"],
+                                       :data-types #{{:type "Reference",
+                                                      :polymorphic? false}},
+                                       :template :reference}}}}

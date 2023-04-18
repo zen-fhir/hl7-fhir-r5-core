@@ -1,0 +1,13 @@
+{ns hl7-fhir-r5-core.search.Observation-component-value-canonical,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Observation-component-value-canonical",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Observation-component-value-canonical",
+         :fhir/type "uri",
+         :name "component-value-canonical",
+         :expr {:Observation {:knife [["component"
+                                       "value"
+                                       "ofType(canonical"]],
+                              :jsonpath ["$.\"component\".\"value\".\"ofType(canonical\"[*]"],
+                              :data-types #{},
+                              :template :uri}}}}

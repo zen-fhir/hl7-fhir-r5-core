@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Endpoint-connection-type,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Endpoint-connection-type",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Endpoint-connection-type",
+         :fhir/type "token",
+         :name "connection-type",
+         :expr {:Endpoint {:knife [["connectionType"]],
+                           :jsonpath ["$.\"connectionType\"[*]"],
+                           :data-types #{{:type "CodeableConcept",
+                                          :polymorphic? false}},
+                           :template :token}}}}

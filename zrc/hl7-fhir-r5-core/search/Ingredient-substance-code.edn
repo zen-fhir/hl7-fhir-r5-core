@@ -1,0 +1,11 @@
+{ns hl7-fhir-r5-core.search.Ingredient-substance-code,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Ingredient-substance-code",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Ingredient-substance-code",
+         :fhir/type "token",
+         :name "substance-code",
+         :expr {:Ingredient {:knife [["substance" "code" "concept"]],
+                             :jsonpath ["$.\"substance\".\"code\".\"concept\"[*]"],
+                             :data-types #{},
+                             :template :token}}}}

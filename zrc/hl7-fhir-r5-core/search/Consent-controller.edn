@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.Consent-controller,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Consent-controller",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Consent-controller",
+         :fhir/type "reference",
+         :name "controller",
+         :expr {:Consent {:knife [["controller"]],
+                          :jsonpath ["$.\"controller\"[*]"],
+                          :data-types #{{:type "Reference",
+                                         :polymorphic? false}},
+                          :template :reference}}}}

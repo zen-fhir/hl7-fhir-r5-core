@@ -1,0 +1,67 @@
+{ns hl7-fhir-r5-core.Signature,
+ import #{hl7-fhir-r5-core.instant
+          zen.fhir
+          hl7-fhir-r5-core.value-set.mimetypes
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.base64Binary
+          hl7-fhir-r5-core.Practitioner
+          hl7-fhir-r5-core.Device
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.value-set.signature-type
+          hl7-fhir-r5-core.RelatedPerson
+          hl7-fhir-r5-core.PractitionerRole
+          hl7-fhir-r5-core.Coding
+          hl7-fhir-r5-core.DataType
+          hl7-fhir-r5-core.Patient},
+ schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen/desc "Signature Type: A signature along with supporting context. The signature may be a digital signature that is cryptographic in nature, or some other signature acceptable to the domain. This other signature may be as simple as a graphical image representing a hand-written signature, or a signature ceremony Different signature approaches have different utilities.",
+         :zen.fhir/type "Signature",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Signature",
+         :zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DataType/schema},
+         :type zen/map,
+         :keys {:who {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                  zen.fhir/Reference},
+                      :fhir/flags #{:SU},
+                      :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                     hl7-fhir-r5-core.PractitionerRole/schema
+                                                     hl7-fhir-r5-core.Organization/schema
+                                                     hl7-fhir-r5-core.Device/schema
+                                                     hl7-fhir-r5-core.Practitioner/schema
+                                                     hl7-fhir-r5-core.RelatedPerson/schema}},
+                      :zen/desc "Who signed"},
+                :_data {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :when {:confirms #{hl7-fhir-r5-core.instant/schema},
+                       :fhir/flags #{:SU},
+                       :zen/desc "When the signature was created"},
+                :onBehalfOf {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                         zen.fhir/Reference},
+                             :fhir/flags #{:SU},
+                             :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                            hl7-fhir-r5-core.PractitionerRole/schema
+                                                            hl7-fhir-r5-core.Organization/schema
+                                                            hl7-fhir-r5-core.Device/schema
+                                                            hl7-fhir-r5-core.Practitioner/schema
+                                                            hl7-fhir-r5-core.RelatedPerson/schema}},
+                             :zen/desc "The party represented"},
+                :_sigFormat {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :_targetFormat {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :sigFormat {:confirms #{hl7-fhir-r5-core.code/schema},
+                            :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.mimetypes/value-set,
+                                                 :strength :required},
+                            :zen/desc "The technical format of the signature"},
+                :type {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.Coding/schema},
+                               :fhir/flags #{:SU},
+                               :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.signature-type/value-set,
+                                                    :strength :preferred},
+                               :zen/desc "Indication of the reason the entity signed the object(s)"}},
+                :targetFormat {:confirms #{hl7-fhir-r5-core.code/schema},
+                               :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.mimetypes/value-set,
+                                                    :strength :required},
+                               :zen/desc "The technical format of the signed resources"},
+                :_when {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :data {:confirms #{hl7-fhir-r5-core.base64Binary/schema},
+                       :zen/desc "The actual signature content (XML DigSig. JWS, picture, etc.)"}}}}

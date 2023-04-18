@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.DeviceAssociation-identifier,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "DeviceAssociation-identifier",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/DeviceAssociation-identifier",
+         :fhir/type "token",
+         :name "identifier",
+         :expr {:DeviceAssociation {:knife [["identifier"]],
+                                    :jsonpath ["$.\"identifier\"[*]"],
+                                    :data-types #{{:type "Identifier",
+                                                   :polymorphic? false}},
+                                    :template :token}}}}

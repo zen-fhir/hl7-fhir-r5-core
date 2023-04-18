@@ -1,0 +1,18 @@
+{ns hl7-fhir-r5-core.value-set.color-codes,
+ import #{zen.fhir},
+ value-set {:zen/tags #{zen.fhir/value-set},
+            :zen/desc "This value set includes color codes - either the color names as defined in [CSS4](https://www.w3.org/TR/css-color-4/), or any valid RGB code (```#RRGGBB``` in Hex).",
+            :zen.fhir/version "0.6.21-2",
+            :fhir/code-systems #{{:fhir/url "http://hl7.org/fhir/color-names",
+                                  :zen.fhir/content :bundled}
+                                 {:fhir/url "http://hl7.org/fhir/color-rgb",
+                                  :zen.fhir/content :not-present}},
+            :uri "http://hl7.org/fhir/ValueSet/color-codes",
+            :version "5.0.0",
+            :ftr {:module "hl7-fhir-r5-core",
+                  :source-url "https://storage.googleapis.com",
+                  :source-type :cloud-storage,
+                  :ftr-path "ftr",
+                  :tag "init",
+                  :validation-index {:type :nippy,
+                                     :file "index.nippy"}}}}

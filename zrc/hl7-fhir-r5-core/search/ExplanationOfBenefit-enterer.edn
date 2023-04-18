@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.ExplanationOfBenefit-enterer,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "ExplanationOfBenefit-enterer",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/ExplanationOfBenefit-enterer",
+         :fhir/type "reference",
+         :name "enterer",
+         :expr {:ExplanationOfBenefit {:knife [["enterer"]],
+                                       :jsonpath ["$.\"enterer\"[*]"],
+                                       :data-types #{{:type "Reference",
+                                                      :polymorphic? false}},
+                                       :template :reference}}}}

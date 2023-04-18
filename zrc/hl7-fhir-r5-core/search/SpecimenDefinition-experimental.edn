@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.SpecimenDefinition-experimental,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "SpecimenDefinition-experimental",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/SpecimenDefinition-experimental",
+         :fhir/type "token",
+         :name "experimental",
+         :expr {:SpecimenDefinition {:knife [["experimental"]],
+                                     :jsonpath ["$.\"experimental\"[*]"],
+                                     :data-types #{{:type "boolean",
+                                                    :polymorphic? false}},
+                                     :template :token}}}}

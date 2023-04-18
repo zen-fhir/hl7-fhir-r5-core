@@ -1,0 +1,12 @@
+{ns hl7-fhir-r5-core.search.BodyStructure-excludedstructure,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "BodyStructure-excludedstructure",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/BodyStructure-excludedstructure",
+         :fhir/type "token",
+         :name "excluded_structure",
+         :expr {:BodyStructure {:knife [["excludedStructure"
+                                         "structure"]],
+                                :jsonpath ["$.\"excludedStructure\".\"structure\"[*]"],
+                                :data-types #{},
+                                :template :token}}}}

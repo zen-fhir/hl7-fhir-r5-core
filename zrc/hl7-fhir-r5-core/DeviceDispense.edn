@@ -1,0 +1,141 @@
+{ns hl7-fhir-r5-core.DeviceDispense,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.markdown
+          hl7-fhir-r5-core.Provenance
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.CodeableReference
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.Annotation
+          hl7-fhir-r5-core.SimpleQuantity
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.Encounter
+          hl7-fhir-r5-core.DeviceRequest
+          hl7-fhir-r5-core.Location
+          hl7-fhir-r5-core.Practitioner
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.Device
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.CarePlan
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.value-set.devicedispense-status-reason
+          hl7-fhir-r5-core.CareTeam
+          hl7-fhir-r5-core.Procedure
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.RelatedPerson
+          hl7-fhir-r5-core.PractitionerRole
+          hl7-fhir-r5-core.value-set.devicedispense-status
+          hl7-fhir-r5-core.Quantity
+          hl7-fhir-r5-core.Patient},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/DeviceDispense",
+         :require #{:status :device :subject},
+         :type zen/map,
+         :zen/desc "Indicates that a device is to be or has been dispensed for a named person/patient.  This includes a description of the product (supply) provided and the instructions for using the device.",
+         :keys {:category {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                   :zen/desc "Type of device dispense"}},
+                :whenHandedOver {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                                 :zen/desc "When product was given out"},
+                :eventHistory {:type zen/vector,
+                               :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                   zen.fhir/Reference},
+                                       :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Provenance/schema}},
+                                       :zen/desc "A list of relevant lifecycle events"}},
+                :usageInstruction {:confirms #{hl7-fhir-r5-core.markdown/schema},
+                                   :zen/desc "Full representation of the usage instructions"},
+                :_preparedDate {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :encounter {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                        zen.fhir/Reference},
+                            :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Encounter/schema}},
+                            :zen/desc "Encounter associated with event"},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :preparedDate {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                               :fhir/flags #{:SU},
+                               :zen/desc "When product was packaged and reviewed"},
+                :type {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                       :zen/desc "Trial fill, partial fill, emergency fill, etc"},
+                :statusReason {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                               :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.devicedispense-status-reason/value-set,
+                                                    :strength :example},
+                               :zen/desc "Why a dispense was or was not performed"},
+                :note {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.Annotation/schema},
+                               :zen/desc "Information about the dispense"}},
+                :_usageInstruction {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :supportingInformation {:type zen/vector,
+                                        :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                            zen.fhir/Reference},
+                                                :zen.fhir/reference {:refers #{}},
+                                                :zen/desc "Information that supports the dispensing of the device"}},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.devicedispense-status/value-set,
+                                              :strength :required},
+                         :zen/desc "preparation | in-progress | cancelled | on-hold | completed | entered-in-error | stopped | declined | unknown"},
+                :identifier {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                     :fhir/flags #{:SU},
+                                     :zen/desc "Business identifier for this dispensation"}},
+                :device {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                         :fhir/flags #{:SU},
+                         :zen/desc "What device was supplied"},
+                :basedOn {:type zen/vector,
+                          :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                              zen.fhir/Reference},
+                                  :zen.fhir/reference {:refers #{hl7-fhir-r5-core.CarePlan/schema
+                                                                 hl7-fhir-r5-core.DeviceRequest/schema}},
+                                  :zen/desc "The order or request that this dispense is fulfilling"}},
+                :quantity {:confirms #{hl7-fhir-r5-core.Quantity/schema
+                                       hl7-fhir-r5-core.SimpleQuantity/schema},
+                           :zen/desc "Amount dispensed"},
+                :partOf {:type zen/vector,
+                         :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                             zen.fhir/Reference},
+                                 :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Procedure/schema}},
+                                 :zen/desc "The bigger event that this dispense is a part of"}},
+                :_whenHandedOver {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :location {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                       zen.fhir/Reference},
+                           :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Location/schema}},
+                           :zen/desc "Where the dispense occurred"},
+                :receiver {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                       zen.fhir/Reference},
+                           :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                          hl7-fhir-r5-core.PractitionerRole/schema
+                                                          hl7-fhir-r5-core.Location/schema
+                                                          hl7-fhir-r5-core.Practitioner/schema
+                                                          hl7-fhir-r5-core.RelatedPerson/schema}},
+                           :zen/desc "Who collected the device or where the medication was delivered"},
+                :subject {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                      zen.fhir/Reference},
+                          :fhir/flags #{:SU},
+                          :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                         hl7-fhir-r5-core.Practitioner/schema}},
+                          :zen/desc "Who the dispense is for"},
+                :destination {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                          zen.fhir/Reference},
+                              :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Location/schema}},
+                              :zen/desc "Where the device was sent or should be sent"},
+                :performer {:type zen/vector,
+                            :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                    :type zen/map,
+                                    :keys {:function {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                      :zen/desc "Who performed the dispense and what they did"},
+                                           :actor {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                               zen.fhir/Reference},
+                                                   :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Patient/schema
+                                                                                  hl7-fhir-r5-core.CareTeam/schema
+                                                                                  hl7-fhir-r5-core.PractitionerRole/schema
+                                                                                  hl7-fhir-r5-core.Organization/schema
+                                                                                  hl7-fhir-r5-core.Device/schema
+                                                                                  hl7-fhir-r5-core.Practitioner/schema
+                                                                                  hl7-fhir-r5-core.RelatedPerson/schema}},
+                                                   :zen/desc "Individual who was performing"}},
+                                    :require #{:actor},
+                                    :zen/desc "Who performed event"}}},
+         :zen.fhir/type "DeviceDispense"}}

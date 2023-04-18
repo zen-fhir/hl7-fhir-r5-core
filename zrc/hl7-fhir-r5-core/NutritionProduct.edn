@@ -1,0 +1,141 @@
+{ns hl7-fhir-r5-core.NutritionProduct,
+ import #{hl7-fhir-r5-core.DomainResource
+          hl7-fhir-r5-core.value-set.edible-substance-type
+          hl7-fhir-r5-core.value-set.allergen-class
+          hl7-fhir-r5-core.BackboneElement
+          hl7-fhir-r5-core.CodeableReference
+          hl7-fhir-r5-core.boolean
+          hl7-fhir-r5-core.Ratio
+          zen.fhir
+          hl7-fhir-r5-core.CodeableConcept
+          hl7-fhir-r5-core.Annotation
+          hl7-fhir-r5-core.SimpleQuantity
+          hl7-fhir-r5-core.string
+          hl7-fhir-r5-core.Element
+          hl7-fhir-r5-core.Attachment
+          hl7-fhir-r5-core.base64Binary
+          hl7-fhir-r5-core.value-set.nutrition-product-category
+          hl7-fhir-r5-core.dateTime
+          hl7-fhir-r5-core.Organization
+          hl7-fhir-r5-core.Reference
+          hl7-fhir-r5-core.code
+          hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.value-set.nutrition-product-nutrient
+          hl7-fhir-r5-core.Quantity
+          hl7-fhir-r5-core.value-set.measurement-property
+          hl7-fhir-r5-core.value-set.nutritionproduct-status},
+ schema {:zen.fhir/version "0.6.21-2",
+         :confirms #{hl7-fhir-r5-core.DomainResource/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen/schema zen.fhir/base-schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/NutritionProduct",
+         :require #{:status},
+         :type zen/map,
+         :zen/desc "A food or supplement that is consumed by patients.",
+         :keys {:category {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                   :fhir/flags #{:SU},
+                                   :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.nutrition-product-category/value-set,
+                                                        :strength :example},
+                                   :zen/desc "Broad product groups or categories used to classify the product, such as Legume and Legume Products, Beverages, or Beef Products"}},
+                :instance {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                   :type zen/map,
+                                   :keys {:expiry {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                                                   :zen/desc "The expiry date or date and time for the product"},
+                                          :useBy {:confirms #{hl7-fhir-r5-core.dateTime/schema},
+                                                  :zen/desc "The date until which the product is expected to be good for consumption"},
+                                          :name {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                 :zen/desc "The name for the specific product"},
+                                          :_expiry {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                          :biologicalSourceEvent {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                                                  :zen/desc "An identifier that supports traceability to the event during which material in this product from one or more biological entities was obtained or pooled"},
+                                          :lotNumber {:confirms #{hl7-fhir-r5-core.string/schema},
+                                                      :zen/desc "The identification of the batch or lot of the product"},
+                                          :_name {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                          :identifier {:type zen/vector,
+                                                       :every {:confirms #{hl7-fhir-r5-core.Identifier/schema},
+                                                               :zen/desc "The identifier for the physical instance, typically a serial number or manufacturer number"}},
+                                          :quantity {:confirms #{hl7-fhir-r5-core.Quantity/schema
+                                                                 hl7-fhir-r5-core.SimpleQuantity/schema},
+                                                     :zen/desc "The amount of items or instances"},
+                                          :_useBy {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                          :_lotNumber {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                   :zen/desc "One or several physical instances or occurrences of the nutrition product"}},
+                :nutrient {:type zen/vector,
+                           :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                   :type zen/map,
+                                   :keys {:item {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                                 :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.nutrition-product-nutrient/value-set,
+                                                                      :strength :example},
+                                                 :zen/desc "The (relevant) nutrients in the product"},
+                                          :amount {:type zen/vector,
+                                                   :every {:confirms #{hl7-fhir-r5-core.Ratio/schema},
+                                                           :zen/desc "The amount of nutrient expressed in one or more units: X per pack / per serving / per dose"}}},
+                                   :fhir/flags #{:SU},
+                                   :zen/desc "The product's nutritional information expressed by the nutrients"}},
+                :_status {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                :note {:type zen/vector,
+                       :every {:confirms #{hl7-fhir-r5-core.Annotation/schema},
+                               :zen/desc "Comments made about the product"}},
+                :characteristic {:type zen/vector,
+                                 :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                         :type zen/map,
+                                         :keys {:type {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                                                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.measurement-property/value-set,
+                                                                            :strength :example},
+                                                       :zen/desc "Code specifying the type of characteristic"},
+                                                :value {:fhir/polymorphic true,
+                                                        :type zen/map,
+                                                        :exclusive-keys #{#{:base64Binary
+                                                                            :string
+                                                                            :Attachment
+                                                                            :CodeableConcept
+                                                                            :Quantity
+                                                                            :boolean}},
+                                                        :keys {:base64Binary {:confirms #{hl7-fhir-r5-core.base64Binary/schema}},
+                                                               :string {:confirms #{hl7-fhir-r5-core.string/schema}},
+                                                               :_boolean {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                               :Attachment {:confirms #{hl7-fhir-r5-core.Attachment/schema}},
+                                                               :_base64Binary {:confirms #{hl7-fhir-r5-core.Element/schema}},
+                                                               :CodeableConcept {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema}},
+                                                               :Quantity {:confirms #{hl7-fhir-r5-core.Quantity/schema}},
+                                                               :boolean {:confirms #{hl7-fhir-r5-core.boolean/schema}},
+                                                               :_string {:confirms #{hl7-fhir-r5-core.Element/schema}}},
+                                                        :zen/desc "The value of the characteristic"}},
+                                         :require #{:value :type},
+                                         :zen/desc "Specifies descriptive properties of the nutrition product"}},
+                :ingredient {:type zen/vector,
+                             :every {:confirms #{hl7-fhir-r5-core.BackboneElement/schema},
+                                     :type zen/map,
+                                     :keys {:item {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                                   :fhir/flags #{:SU},
+                                                   :zen/desc "The ingredient contained in the product"},
+                                            :amount {:type zen/vector,
+                                                     :every {:confirms #{hl7-fhir-r5-core.Ratio/schema},
+                                                             :fhir/flags #{:SU},
+                                                             :zen/desc "The amount of ingredient that is in the product"}}},
+                                     :require #{:item},
+                                     :zen/desc "Ingredients contained in this product"}},
+                :status {:confirms #{hl7-fhir-r5-core.code/schema},
+                         :fhir/flags #{:SU :?!},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.nutritionproduct-status/value-set,
+                                              :strength :required},
+                         :zen/desc "active | inactive | entered-in-error"},
+                :knownAllergen {:type zen/vector,
+                                :every {:confirms #{hl7-fhir-r5-core.CodeableReference/schema},
+                                        :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.allergen-class/value-set,
+                                                             :strength :example},
+                                        :zen/desc "Known or suspected allergens that are a part of this product"}},
+                :code {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
+                       :fhir/flags #{:SU},
+                       :zen.fhir/value-set {:symbol hl7-fhir-r5-core.value-set.edible-substance-type/value-set,
+                                            :strength :example},
+                       :zen/desc "A code that can identify the detailed nutrients and ingredients in a specific food product"},
+                :manufacturer {:type zen/vector,
+                               :every {:confirms #{hl7-fhir-r5-core.Reference/schema
+                                                   zen.fhir/Reference},
+                                       :fhir/flags #{:SU},
+                                       :zen.fhir/reference {:refers #{hl7-fhir-r5-core.Organization/schema}},
+                                       :zen/desc "Manufacturer, representative or officially responsible for the product"}}},
+         :zen.fhir/type "NutritionProduct"}}
