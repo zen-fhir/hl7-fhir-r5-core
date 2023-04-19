@@ -13,7 +13,7 @@
          :zen/desc "VirtualServiceDetail Type: Virtual Service Contact Details.",
          :zen.fhir/type "VirtualServiceDetail",
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/VirtualServiceDetail",
-         :zen.fhir/version "0.6.21-2",
+         :zen.fhir/version "0.6.22",
          :confirms #{hl7-fhir-r5-core.DataType/schema},
          :type zen/map,
          :keys {:channelType {:confirms #{hl7-fhir-r5-core.Coding/schema},

@@ -19,7 +19,7 @@
          :zen/desc "Signature Type: A signature along with supporting context. The signature may be a digital signature that is cryptographic in nature, or some other signature acceptable to the domain. This other signature may be as simple as a graphical image representing a hand-written signature, or a signature ceremony Different signature approaches have different utilities.",
          :zen.fhir/type "Signature",
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Signature",
-         :zen.fhir/version "0.6.21-2",
+         :zen.fhir/version "0.6.22",
          :confirms #{hl7-fhir-r5-core.DataType/schema},
          :type zen/map,
          :keys {:who {:confirms #{hl7-fhir-r5-core.Reference/schema

@@ -2,7 +2,7 @@
  import #{zen.fhir},
  value-set {:zen/tags #{zen.fhir/value-set},
             :zen/desc "The method used to define, describe, or determine a characteristic value.",
-            :zen.fhir/version "0.6.21-2",
+            :zen.fhir/version "0.6.22",
             :fhir/code-systems #{{:fhir/url "http://hl7.org/fhir/definition-method",
                                   :zen.fhir/content :bundled}},
             :uri "http://hl7.org/fhir/ValueSet/definition-method",
