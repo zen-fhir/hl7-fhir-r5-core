@@ -4,5 +4,5 @@
          :zen/desc "Logical Model: A pattern followed by resources that represent a participant that can be contacted.",
          :zen.fhir/type "ParticipantContactable",
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/ParticipantContactable",
-         :zen.fhir/version "0.6.22-1",
+         :zen.fhir/version "0.6.22-2",
          :confirms #{hl7-fhir-r5-core.Base/schema}}}

@@ -13,7 +13,7 @@
          :zen/desc "ExtendedContactDetail Type: Specifies contact information for a specific purpose over a period of time, might be handled/monitored by a specific named person or organization.",
          :zen.fhir/type "ExtendedContactDetail",
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/ExtendedContactDetail",
-         :zen.fhir/version "0.6.22-1",
+         :zen.fhir/version "0.6.22-2",
          :confirms #{hl7-fhir-r5-core.DataType/schema},
          :type zen/map,
          :keys {:purpose {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},

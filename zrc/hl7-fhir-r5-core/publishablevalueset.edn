@@ -8,17 +8,17 @@
           hl7-fhir-uv-extensions-r5.valueset-compose-createdBy},
  compose-include-concept-designation-schema {:zen/tags #{zen/schema
                                                          zen.fhir/structure-schema},
-                                             :zen.fhir/version "0.6.22-1"},
+                                             :zen.fhir/version "0.6.22-2"},
  compose-include-schema {:zen/tags #{zen/schema
                                      zen.fhir/structure-schema},
-                         :zen.fhir/version "0.6.22-1",
+                         :zen.fhir/version "0.6.22-2",
                          :type zen/map,
                          :keys {:copyright {:fhir/flags #{:MS}},
                                 :concept {:every {:keys {:designation {:confirms #{hl7-fhir-r5-core.publishablevalueset/compose-include-concept-designation-schema}}}}}}},
  expansion-contains-schema {:zen/tags #{zen/schema
                                         zen.fhir/structure-schema},
-                            :zen.fhir/version "0.6.22-1"},
- schema {:zen.fhir/version "0.6.22-1",
+                            :zen.fhir/version "0.6.22-2"},
+ schema {:zen.fhir/version "0.6.22-2",
          :confirms #{hl7-fhir-r5-core.shareablevalueset/schema
                      zen.fhir/Resource},
          :zen/tags #{zen.fhir/profile-schema zen/schema},
