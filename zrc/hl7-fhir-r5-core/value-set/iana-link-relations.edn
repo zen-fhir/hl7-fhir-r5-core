@@ -2,7 +2,7 @@
  import #{zen.fhir},
  value-set {:zen/tags #{zen.fhir/value-set},
             :zen/desc "Link Relation Types defined at https://www.iana.org/assignments/link-relations/link-relations.xhtml#link-relations-1",
-            :zen.fhir/version "0.6.22",
+            :zen.fhir/version "0.6.22-1",
             :fhir/code-systems #{{:fhir/url "http://hl7.org/fhir/CodeSystem/iana-link-relations",
                                   :zen.fhir/content :bundled}},
             :uri "http://hl7.org/fhir/ValueSet/iana-link-relations",

@@ -4,4 +4,4 @@
          :zen/desc "Base Type: Base definition for all types defined in FHIR type system.",
          :zen.fhir/type "Base",
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Base",
-         :zen.fhir/version "0.6.22"}}
+         :zen.fhir/version "0.6.22-1"}}
