@@ -2,7 +2,7 @@
  import #{zen.fhir},
  value-set {:zen/tags #{zen.fhir/value-set},
             :zen/desc "Dose forms for a product as a whole, considering all individual parts, but before any mixing",
-            :zen.fhir/version "0.6.23",
+            :zen.fhir/version "0.6.23-1",
             :fhir/code-systems #{{:fhir/url "http://hl7.org/fhir/combined-dose-form",
                                   :zen.fhir/content :bundled}},
             :uri "http://hl7.org/fhir/ValueSet/combined-dose-form",

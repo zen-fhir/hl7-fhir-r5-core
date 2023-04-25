@@ -40,7 +40,7 @@
           hl7-fhir-r5-core.value-set.variable-handling},
  characteristic-schema {:zen/tags #{zen/schema
                                     zen.fhir/structure-schema},
-                        :zen.fhir/version "0.6.23",
+                        :zen.fhir/version "0.6.23-1",
                         :confirms #{hl7-fhir-r5-core.BackboneElement/schema},
                         :type zen/map,
                         :keys {:description {:confirms #{hl7-fhir-r5-core.markdown/schema},
@@ -185,7 +185,7 @@
                                                        :zen/desc "Timing in which the characteristic is determined"}}},
                         :fhir/flags #{:SU},
                         :zen/desc "A defining factor of the EvidenceVariable"},
- schema {:zen.fhir/version "0.6.23",
+ schema {:zen.fhir/version "0.6.23-1",
          :confirms #{hl7-fhir-r5-core.DomainResource/schema
                      zen.fhir/Resource},
          :zen/tags #{zen/schema zen.fhir/base-schema},

@@ -31,7 +31,7 @@
           hl7-fhir-r5-core.value-set.map-model-mode
           hl7-fhir-r5-core.value-set.map-transform},
  group-rule-schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
-                    :zen.fhir/version "0.6.23",
+                    :zen.fhir/version "0.6.23-1",
                     :confirms #{hl7-fhir-r5-core.BackboneElement/schema},
                     :type zen/map,
                     :keys {:name {:confirms #{hl7-fhir-r5-core.id/schema},
@@ -156,7 +156,7 @@
                     :zen/desc "Transform Rule from source to target"},
  group-rule-target-parameter-schema {:zen/tags #{zen/schema
                                                  zen.fhir/structure-schema},
-                                     :zen.fhir/version "0.6.23",
+                                     :zen.fhir/version "0.6.23-1",
                                      :confirms #{hl7-fhir-r5-core.BackboneElement/schema},
                                      :type zen/map,
                                      :keys {:value {:fhir/polymorphic true,
@@ -190,7 +190,7 @@
                                      :require #{:value},
                                      :fhir/flags #{:SU},
                                      :zen/desc "Parameters to the transform"},
- schema {:zen.fhir/version "0.6.23",
+ schema {:zen.fhir/version "0.6.23-1",
          :confirms #{hl7-fhir-r5-core.DomainResource/schema
                      zen.fhir/Resource},
          :zen/tags #{zen/schema zen.fhir/base-schema},

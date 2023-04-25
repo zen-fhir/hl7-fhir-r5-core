@@ -6,7 +6,7 @@
          :zen/desc "Document Section Library (For testing section templates)",
          :zen.fhir/type "Composition",
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/example-section-library",
-         :zen.fhir/version "0.6.23",
+         :zen.fhir/version "0.6.23-1",
          :confirms #{hl7-fhir-r5-core.Composition/schema
                      zen.fhir/Resource},
          :type zen/map,
@@ -49,7 +49,7 @@
                                                                                         :system "http://loinc.org"}}}}}}}},
                           :every {:confirms #{hl7-fhir-r5-core.example-section-library/section-schema}}}}},
  section-schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
-                 :zen.fhir/version "0.6.23",
+                 :zen.fhir/version "0.6.23-1",
                  :type zen/map,
                  :keys {:section {:type zen/vector,
                                   :every {:confirms #{hl7-fhir-r5-core.example-section-library/section-schema}}}}}}
