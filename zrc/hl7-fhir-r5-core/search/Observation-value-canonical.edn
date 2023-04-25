@@ -5,7 +5,7 @@
          :fhir/url "http://hl7.org/fhir/SearchParameter/Observation-value-canonical",
          :fhir/type "uri",
          :name "value-canonical",
-         :expr {:Observation {:knife [["value" "ofType(canonical"]],
-                              :jsonpath ["$.\"value\".\"ofType(canonical\"[*]"],
+         :expr {:Observation {:knife [["value" "canonical"]],
+                              :jsonpath ["$.\"value\".\"canonical\"[*]"],
                               :data-types #{},
                               :template :uri}}}}

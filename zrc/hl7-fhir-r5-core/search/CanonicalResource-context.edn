@@ -7,181 +7,181 @@
          :name "context",
          :expr {:MessageDefinition {:knife [["useContext"
                                              "value"
-                                             "ofType(CodeableConcept"]],
-                                    :jsonpath ["$.\"useContext\".\"value\".\"ofType(CodeableConcept\"[*]"],
+                                             "CodeableConcept"]],
+                                    :jsonpath ["$.\"useContext\".\"value\".\"CodeableConcept\"[*]"],
                                     :data-types #{},
                                     :template :token},
                 :Evidence {:knife [["useContext"
                                     "value"
-                                    "ofType(CodeableConcept"]],
-                           :jsonpath ["$.\"useContext\".\"value\".\"ofType(CodeableConcept\"[*]"],
+                                    "CodeableConcept"]],
+                           :jsonpath ["$.\"useContext\".\"value\".\"CodeableConcept\"[*]"],
                            :data-types #{},
                            :template :token},
                 :ConditionDefinition {:knife [["useContext"
                                                "value"
-                                               "ofType(CodeableConcept"]],
-                                      :jsonpath ["$.\"useContext\".\"value\".\"ofType(CodeableConcept\"[*]"],
+                                               "CodeableConcept"]],
+                                      :jsonpath ["$.\"useContext\".\"value\".\"CodeableConcept\"[*]"],
                                       :data-types #{},
                                       :template :token},
                 :CompartmentDefinition {:knife [["useContext"
                                                  "value"
-                                                 "ofType(CodeableConcept"]],
-                                        :jsonpath ["$.\"useContext\".\"value\".\"ofType(CodeableConcept\"[*]"],
+                                                 "CodeableConcept"]],
+                                        :jsonpath ["$.\"useContext\".\"value\".\"CodeableConcept\"[*]"],
                                         :data-types #{},
                                         :template :token},
                 :EvidenceVariable {:knife [["useContext"
                                             "value"
-                                            "ofType(CodeableConcept"]],
-                                   :jsonpath ["$.\"useContext\".\"value\".\"ofType(CodeableConcept\"[*]"],
+                                            "CodeableConcept"]],
+                                   :jsonpath ["$.\"useContext\".\"value\".\"CodeableConcept\"[*]"],
                                    :data-types #{},
                                    :template :token},
                 :ImplementationGuide {:knife [["useContext"
                                                "value"
-                                               "ofType(CodeableConcept"]],
-                                      :jsonpath ["$.\"useContext\".\"value\".\"ofType(CodeableConcept\"[*]"],
+                                               "CodeableConcept"]],
+                                      :jsonpath ["$.\"useContext\".\"value\".\"CodeableConcept\"[*]"],
                                       :data-types #{},
                                       :template :token},
                 :CodeSystem {:knife [["useContext"
                                       "value"
-                                      "ofType(CodeableConcept"]],
-                             :jsonpath ["$.\"useContext\".\"value\".\"ofType(CodeableConcept\"[*]"],
+                                      "CodeableConcept"]],
+                             :jsonpath ["$.\"useContext\".\"value\".\"CodeableConcept\"[*]"],
                              :data-types #{},
                              :template :token},
                 :PlanDefinition {:knife [["useContext"
                                           "value"
-                                          "ofType(CodeableConcept"]],
-                                 :jsonpath ["$.\"useContext\".\"value\".\"ofType(CodeableConcept\"[*]"],
+                                          "CodeableConcept"]],
+                                 :jsonpath ["$.\"useContext\".\"value\".\"CodeableConcept\"[*]"],
                                  :data-types #{},
                                  :template :token},
                 :StructureMap {:knife [["useContext"
                                         "value"
-                                        "ofType(CodeableConcept"]],
-                               :jsonpath ["$.\"useContext\".\"value\".\"ofType(CodeableConcept\"[*]"],
+                                        "CodeableConcept"]],
+                               :jsonpath ["$.\"useContext\".\"value\".\"CodeableConcept\"[*]"],
                                :data-types #{},
                                :template :token},
                 :Library {:knife [["useContext"
                                    "value"
-                                   "ofType(CodeableConcept"]],
-                          :jsonpath ["$.\"useContext\".\"value\".\"ofType(CodeableConcept\"[*]"],
+                                   "CodeableConcept"]],
+                          :jsonpath ["$.\"useContext\".\"value\".\"CodeableConcept\"[*]"],
                           :data-types #{},
                           :template :token},
                 :ActivityDefinition {:knife [["useContext"
                                               "value"
-                                              "ofType(CodeableConcept"]],
-                                     :jsonpath ["$.\"useContext\".\"value\".\"ofType(CodeableConcept\"[*]"],
+                                              "CodeableConcept"]],
+                                     :jsonpath ["$.\"useContext\".\"value\".\"CodeableConcept\"[*]"],
                                      :data-types #{},
                                      :template :token},
                 :Citation {:knife [["useContext"
                                     "value"
-                                    "ofType(CodeableConcept"]],
-                           :jsonpath ["$.\"useContext\".\"value\".\"ofType(CodeableConcept\"[*]"],
+                                    "CodeableConcept"]],
+                           :jsonpath ["$.\"useContext\".\"value\".\"CodeableConcept\"[*]"],
                            :data-types #{},
                            :template :token},
                 :EvidenceReport {:knife [["useContext"
                                           "value"
-                                          "ofType(CodeableConcept"]],
-                                 :jsonpath ["$.\"useContext\".\"value\".\"ofType(CodeableConcept\"[*]"],
+                                          "CodeableConcept"]],
+                                 :jsonpath ["$.\"useContext\".\"value\".\"CodeableConcept\"[*]"],
                                  :data-types #{},
                                  :template :token},
                 :ChargeItemDefinition {:knife [["useContext"
                                                 "value"
-                                                "ofType(CodeableConcept"]],
-                                       :jsonpath ["$.\"useContext\".\"value\".\"ofType(CodeableConcept\"[*]"],
+                                                "CodeableConcept"]],
+                                       :jsonpath ["$.\"useContext\".\"value\".\"CodeableConcept\"[*]"],
                                        :data-types #{},
                                        :template :token},
                 :NamingSystem {:knife [["useContext"
                                         "value"
-                                        "ofType(CodeableConcept"]],
-                               :jsonpath ["$.\"useContext\".\"value\".\"ofType(CodeableConcept\"[*]"],
+                                        "CodeableConcept"]],
+                               :jsonpath ["$.\"useContext\".\"value\".\"CodeableConcept\"[*]"],
                                :data-types #{},
                                :template :token},
                 :Questionnaire {:knife [["useContext"
                                          "value"
-                                         "ofType(CodeableConcept"]],
-                                :jsonpath ["$.\"useContext\".\"value\".\"ofType(CodeableConcept\"[*]"],
+                                         "CodeableConcept"]],
+                                :jsonpath ["$.\"useContext\".\"value\".\"CodeableConcept\"[*]"],
                                 :data-types #{},
                                 :template :token},
                 :EventDefinition {:knife [["useContext"
                                            "value"
-                                           "ofType(CodeableConcept"]],
-                                  :jsonpath ["$.\"useContext\".\"value\".\"ofType(CodeableConcept\"[*]"],
+                                           "CodeableConcept"]],
+                                  :jsonpath ["$.\"useContext\".\"value\".\"CodeableConcept\"[*]"],
                                   :data-types #{},
                                   :template :token},
                 :ValueSet {:knife [["useContext"
                                     "value"
-                                    "ofType(CodeableConcept"]],
-                           :jsonpath ["$.\"useContext\".\"value\".\"ofType(CodeableConcept\"[*]"],
+                                    "CodeableConcept"]],
+                           :jsonpath ["$.\"useContext\".\"value\".\"CodeableConcept\"[*]"],
                            :data-types #{},
                            :template :token},
                 :ExampleScenario {:knife [["useContext"
                                            "value"
-                                           "ofType(CodeableConcept"]],
-                                  :jsonpath ["$.\"useContext\".\"value\".\"ofType(CodeableConcept\"[*]"],
+                                           "CodeableConcept"]],
+                                  :jsonpath ["$.\"useContext\".\"value\".\"CodeableConcept\"[*]"],
                                   :data-types #{},
                                   :template :token},
                 :Measure {:knife [["useContext"
                                    "value"
-                                   "ofType(CodeableConcept"]],
-                          :jsonpath ["$.\"useContext\".\"value\".\"ofType(CodeableConcept\"[*]"],
+                                   "CodeableConcept"]],
+                          :jsonpath ["$.\"useContext\".\"value\".\"CodeableConcept\"[*]"],
                           :data-types #{},
                           :template :token},
                 :CapabilityStatement {:knife [["useContext"
                                                "value"
-                                               "ofType(CodeableConcept"]],
-                                      :jsonpath ["$.\"useContext\".\"value\".\"ofType(CodeableConcept\"[*]"],
+                                               "CodeableConcept"]],
+                                      :jsonpath ["$.\"useContext\".\"value\".\"CodeableConcept\"[*]"],
                                       :data-types #{},
                                       :template :token},
                 :TestScript {:knife [["useContext"
                                       "value"
-                                      "ofType(CodeableConcept"]],
-                             :jsonpath ["$.\"useContext\".\"value\".\"ofType(CodeableConcept\"[*]"],
+                                      "CodeableConcept"]],
+                             :jsonpath ["$.\"useContext\".\"value\".\"CodeableConcept\"[*]"],
                              :data-types #{},
                              :template :token},
                 :ConceptMap {:knife [["useContext"
                                       "value"
-                                      "ofType(CodeableConcept"]],
-                             :jsonpath ["$.\"useContext\".\"value\".\"ofType(CodeableConcept\"[*]"],
+                                      "CodeableConcept"]],
+                             :jsonpath ["$.\"useContext\".\"value\".\"CodeableConcept\"[*]"],
                              :data-types #{},
                              :template :token},
                 :StructureDefinition {:knife [["useContext"
                                                "value"
-                                               "ofType(CodeableConcept"]],
-                                      :jsonpath ["$.\"useContext\".\"value\".\"ofType(CodeableConcept\"[*]"],
+                                               "CodeableConcept"]],
+                                      :jsonpath ["$.\"useContext\".\"value\".\"CodeableConcept\"[*]"],
                                       :data-types #{},
                                       :template :token},
                 :Requirements {:knife [["useContext"
                                         "value"
-                                        "ofType(CodeableConcept"]],
-                               :jsonpath ["$.\"useContext\".\"value\".\"ofType(CodeableConcept\"[*]"],
+                                        "CodeableConcept"]],
+                               :jsonpath ["$.\"useContext\".\"value\".\"CodeableConcept\"[*]"],
                                :data-types #{},
                                :template :token},
                 :ActorDefinition {:knife [["useContext"
                                            "value"
-                                           "ofType(CodeableConcept"]],
-                                  :jsonpath ["$.\"useContext\".\"value\".\"ofType(CodeableConcept\"[*]"],
+                                           "CodeableConcept"]],
+                                  :jsonpath ["$.\"useContext\".\"value\".\"CodeableConcept\"[*]"],
                                   :data-types #{},
                                   :template :token},
                 :SearchParameter {:knife [["useContext"
                                            "value"
-                                           "ofType(CodeableConcept"]],
-                                  :jsonpath ["$.\"useContext\".\"value\".\"ofType(CodeableConcept\"[*]"],
+                                           "CodeableConcept"]],
+                                  :jsonpath ["$.\"useContext\".\"value\".\"CodeableConcept\"[*]"],
                                   :data-types #{},
                                   :template :token},
                 :OperationDefinition {:knife [["useContext"
                                                "value"
-                                               "ofType(CodeableConcept"]],
-                                      :jsonpath ["$.\"useContext\".\"value\".\"ofType(CodeableConcept\"[*]"],
+                                               "CodeableConcept"]],
+                                      :jsonpath ["$.\"useContext\".\"value\".\"CodeableConcept\"[*]"],
                                       :data-types #{},
                                       :template :token},
                 :GraphDefinition {:knife [["useContext"
                                            "value"
-                                           "ofType(CodeableConcept"]],
-                                  :jsonpath ["$.\"useContext\".\"value\".\"ofType(CodeableConcept\"[*]"],
+                                           "CodeableConcept"]],
+                                  :jsonpath ["$.\"useContext\".\"value\".\"CodeableConcept\"[*]"],
                                   :data-types #{},
                                   :template :token},
                 :TerminologyCapabilities {:knife [["useContext"
                                                    "value"
-                                                   "ofType(CodeableConcept"]],
-                                          :jsonpath ["$.\"useContext\".\"value\".\"ofType(CodeableConcept\"[*]"],
+                                                   "CodeableConcept"]],
+                                          :jsonpath ["$.\"useContext\".\"value\".\"CodeableConcept\"[*]"],
                                           :data-types #{},
                                           :template :token}}}}

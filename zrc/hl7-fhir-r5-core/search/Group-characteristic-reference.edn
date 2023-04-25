@@ -5,9 +5,8 @@
          :fhir/url "http://hl7.org/fhir/SearchParameter/Group-characteristic-reference",
          :fhir/type "reference",
          :name "characteristic-reference",
-         :expr {:Group {:knife [["characteristic"
-                                 "value"
-                                 "ofType(Reference"]],
-                        :jsonpath ["$.\"characteristic\".\"value\".\"ofType(Reference\"[*]"],
-                        :data-types #{},
+         :expr {:Group {:knife [["characteristic" "value" "Reference"]],
+                        :jsonpath ["$.\"characteristic\".\"value\".\"Reference\"[*]"],
+                        :data-types #{{:type "Reference",
+                                       :polymorphic? false}},
                         :template :reference}}}}

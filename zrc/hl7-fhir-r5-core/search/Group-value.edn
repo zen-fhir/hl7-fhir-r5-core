@@ -7,11 +7,12 @@
          :name "value",
          :expr {:Group {:knife [["characteristic"
                                  "value"
-                                 "ofType(CodeableConcept"]
-                                ["characteristic"
-                                 "value"
-                                 "ofType(boolean"]],
-                        :jsonpath ["$.\"characteristic\".\"value\".\"ofType(CodeableConcept\"[*]"
-                                   "$.\"characteristic\".\"value\".\"ofType(boolean\"[*]"],
-                        :data-types #{},
+                                 "CodeableConcept"]
+                                ["characteristic" "value" "boolean"]],
+                        :jsonpath ["$.\"characteristic\".\"value\".\"CodeableConcept\"[*]"
+                                   "$.\"characteristic\".\"value\".\"boolean\"[*]"],
+                        :data-types #{{:type "boolean",
+                                       :polymorphic? false}
+                                      {:type "CodeableConcept",
+                                       :polymorphic? false}},
                         :template :token}}}}

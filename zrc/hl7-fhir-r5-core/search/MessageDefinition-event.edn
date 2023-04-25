@@ -5,7 +5,8 @@
          :fhir/url "http://hl7.org/fhir/SearchParameter/MessageDefinition-event",
          :fhir/type "token",
          :name "event",
-         :expr {:MessageDefinition {:knife [["event" "ofType(Coding"]],
-                                    :jsonpath ["$.\"event\".\"ofType(Coding\"[*]"],
-                                    :data-types #{},
+         :expr {:MessageDefinition {:knife [["event" "Coding"]],
+                                    :jsonpath ["$.\"event\".\"Coding\"[*]"],
+                                    :data-types #{{:type "Coding",
+                                                   :polymorphic? false}},
                                     :template :token}}}}

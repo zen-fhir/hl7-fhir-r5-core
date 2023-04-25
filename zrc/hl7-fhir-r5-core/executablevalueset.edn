@@ -5,14 +5,14 @@
           hl7-fhir-uv-extensions-r5.valueset-warning},
  compose-include-concept-designation-schema {:zen/tags #{zen/schema
                                                          zen.fhir/structure-schema},
-                                             :zen.fhir/version "0.6.22-2"},
+                                             :zen.fhir/version "0.6.23"},
  compose-include-schema {:zen/tags #{zen/schema
                                      zen.fhir/structure-schema},
-                         :zen.fhir/version "0.6.22-2",
+                         :zen.fhir/version "0.6.23",
                          :every {:keys {:concept {:every {:keys {:designation {:confirms #{hl7-fhir-r5-core.executablevalueset/compose-include-concept-designation-schema}}}}}}}},
  expansion-contains-schema {:zen/tags #{zen/schema
                                         zen.fhir/structure-schema},
-                            :zen.fhir/version "0.6.22-2",
+                            :zen.fhir/version "0.6.23",
                             :type zen/map,
                             :keys {:inactive {:fhir/flags #{:MS}},
                                    :system {:fhir/flags #{:MS}},
@@ -32,7 +32,7 @@
                                    :version {:fhir/flags #{:MS}}},
                             :require #{:code},
                             :fhir/flags #{:MS}},
- schema {:zen.fhir/version "0.6.22-2",
+ schema {:zen.fhir/version "0.6.23",
          :confirms #{hl7-fhir-r5-core.shareablevalueset/schema
                      zen.fhir/Resource},
          :zen/tags #{zen.fhir/profile-schema zen/schema},

@@ -8,8 +8,9 @@
          :expr {:Substance {:knife [["code" "concept"]
                                     ["ingredient"
                                      "substance"
-                                     "ofType(CodeableConcept"]],
+                                     "CodeableConcept"]],
                             :jsonpath ["$.\"code\".\"concept\"[*]"
-                                       "$.\"ingredient\".\"substance\".\"ofType(CodeableConcept\"[*]"],
-                            :data-types #{},
+                                       "$.\"ingredient\".\"substance\".\"CodeableConcept\"[*]"],
+                            :data-types #{{:type "CodeableConcept",
+                                           :polymorphic? false}},
                             :template :token}}}}

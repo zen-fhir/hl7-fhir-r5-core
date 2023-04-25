@@ -7,7 +7,7 @@
          :name "component-value-canonical",
          :expr {:Observation {:knife [["component"
                                        "value"
-                                       "ofType(canonical"]],
-                              :jsonpath ["$.\"component\".\"value\".\"ofType(canonical\"[*]"],
+                                       "canonical"]],
+                              :jsonpath ["$.\"component\".\"value\".\"canonical\"[*]"],
                               :data-types #{},
                               :template :uri}}}}

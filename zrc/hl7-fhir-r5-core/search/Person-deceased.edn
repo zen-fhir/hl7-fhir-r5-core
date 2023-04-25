@@ -5,8 +5,10 @@
          :fhir/url "http://hl7.org/fhir/SearchParameter/Person-deceased",
          :fhir/type "token",
          :name "deceased",
-         :expr {:Person {:knife [["deceased and Person"
-                                  "deceased != false"]],
-                         :jsonpath ["$.\"deceased and Person\".\"deceased != false\"[*]"],
-                         :data-types #{},
+         :expr {:Person {:knife [["deceased"]],
+                         :jsonpath ["$.\"deceased\"[*]"],
+                         :data-types #{{:type "dateTime",
+                                        :polymorphic? true}
+                                       {:type "boolean",
+                                        :polymorphic? true}},
                          :template :token}}}}

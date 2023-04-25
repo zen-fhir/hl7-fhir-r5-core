@@ -5,7 +5,10 @@
          :fhir/url "http://hl7.org/fhir/SearchParameter/Bundle-message",
          :fhir/type "reference",
          :name "message",
-         :expr {:Bundle {:knife [],
-                         :jsonpath [],
+         :expr {:Bundle {:knife [["entry"
+                                  0
+                                  "resource"
+                                  "MessageHeader"]],
+                         :jsonpath ["$.\"entry\"[0].\"resource\".\"MessageHeader\"[*]"],
                          :data-types #{},
                          :template :reference}}}}

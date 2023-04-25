@@ -5,7 +5,8 @@
          :fhir/url "http://hl7.org/fhir/SearchParameter/Observation-value-reference",
          :fhir/type "reference",
          :name "value-reference",
-         :expr {:Observation {:knife [["value" "ofType(Reference"]],
-                              :jsonpath ["$.\"value\".\"ofType(Reference\"[*]"],
-                              :data-types #{},
+         :expr {:Observation {:knife [["value" "Reference"]],
+                              :jsonpath ["$.\"value\".\"Reference\"[*]"],
+                              :data-types #{{:type "Reference",
+                                             :polymorphic? false}},
                               :template :reference}}}}

@@ -5,11 +5,167 @@
          :fhir/url "http://hl7.org/fhir/SearchParameter/DetectedIssue-identified",
          :fhir/type "date",
          :name "identified",
-         :expr {:DetectedIssue {:knife [["identified"
-                                         "ofType(dateTime"]
-                                        ["identified" "ofType(Period"]],
-                                :jsonpath ["$.\"identified\".\"ofType(dateTime\"[*]"
-                                           "$.\"identified\".\"ofType(Period\"[*]"],
-                                :data-types #{},
+         :expr {:DetectedIssue {:knife [["identified" "dateTime"]
+                                        ["identified" "Period"]],
+                                :jsonpath ["$.\"identified\".\"dateTime\"[*]"
+                                           "$.\"identified\".\"Period\"[*]"],
+                                :data-types #{{:type "Period",
+                                               :polymorphic? false}
+                                              {:type "dateTime",
+                                               :polymorphic? false}},
                                 :template :date,
-                                :sql {:where [:or]}}}}}
+                                :sql {:where [:or
+                                              [:or
+                                               [:and
+                                                [:>=
+                                                 [:pg/call
+                                                  :max_text_date_bound
+                                                  [:pg/sql
+                                                   "{{param}}"]]
+                                                 [:pg/call
+                                                  :jsonpath_extract_max_timestamptz
+                                                  [:pg/sql
+                                                   "{{table}}.resource"]
+                                                  "$.\"identified\".\"dateTime\"[*].start"]]
+                                                [:<=
+                                                 [:pg/call
+                                                  :min_text_date_bound
+                                                  [:pg/sql
+                                                   "{{param}}"]]
+                                                 [:pg/call
+                                                  :jsonpath_extract_min_timestamptz
+                                                  [:pg/sql
+                                                   "{{table}}.resource"]
+                                                  "$.\"identified\".\"dateTime\"[*].end"]]]
+                                               [:and
+                                                [:>=
+                                                 [:pg/call
+                                                  :max_text_date_bound
+                                                  [:pg/sql
+                                                   "{{param}}"]]
+                                                 [:pg/call
+                                                  :jsonpath_extract_max_timestamptz
+                                                  [:pg/sql
+                                                   "{{table}}.resource"]
+                                                  "$.\"identified\".\"dateTime\"[*].start"]]
+                                                [:is
+                                                 [:pg/call
+                                                  :jsonpath_extract_max_timestamptz
+                                                  [:pg/sql
+                                                   "{{table}}.resource"]
+                                                  "$.\"identified\".\"dateTime\"[*].end"]
+                                                 nil]]
+                                               [:and
+                                                [:<=
+                                                 [:pg/call
+                                                  :min_text_date_bound
+                                                  [:pg/sql
+                                                   "{{param}}"]]
+                                                 [:pg/call
+                                                  :jsonpath_extract_min_timestamptz
+                                                  [:pg/sql
+                                                   "{{table}}.resource"]
+                                                  "$.\"identified\".\"dateTime\"[*].end"]]
+                                                [:is
+                                                 [:pg/call
+                                                  :jsonpath_extract_min_timestamptz
+                                                  [:pg/sql
+                                                   "{{table}}.resource"]
+                                                  "$.\"identified\".\"dateTime\"[*].start"]
+                                                 nil]]]
+                                              [:or
+                                               [:and
+                                                [:>=
+                                                 [:pg/call
+                                                  :max_text_date_bound
+                                                  [:pg/sql
+                                                   "{{param}}"]]
+                                                 [:pg/call
+                                                  :jsonpath_extract_max_timestamptz
+                                                  [:pg/sql
+                                                   "{{table}}.resource"]
+                                                  "$.\"identified\".\"Period\"[*].start"]]
+                                                [:<=
+                                                 [:pg/call
+                                                  :min_text_date_bound
+                                                  [:pg/sql
+                                                   "{{param}}"]]
+                                                 [:pg/call
+                                                  :jsonpath_extract_min_timestamptz
+                                                  [:pg/sql
+                                                   "{{table}}.resource"]
+                                                  "$.\"identified\".\"Period\"[*].end"]]]
+                                               [:and
+                                                [:>=
+                                                 [:pg/call
+                                                  :max_text_date_bound
+                                                  [:pg/sql
+                                                   "{{param}}"]]
+                                                 [:pg/call
+                                                  :jsonpath_extract_max_timestamptz
+                                                  [:pg/sql
+                                                   "{{table}}.resource"]
+                                                  "$.\"identified\".\"Period\"[*].start"]]
+                                                [:is
+                                                 [:pg/call
+                                                  :jsonpath_extract_max_timestamptz
+                                                  [:pg/sql
+                                                   "{{table}}.resource"]
+                                                  "$.\"identified\".\"Period\"[*].end"]
+                                                 nil]]
+                                               [:and
+                                                [:<=
+                                                 [:pg/call
+                                                  :min_text_date_bound
+                                                  [:pg/sql
+                                                   "{{param}}"]]
+                                                 [:pg/call
+                                                  :jsonpath_extract_min_timestamptz
+                                                  [:pg/sql
+                                                   "{{table}}.resource"]
+                                                  "$.\"identified\".\"Period\"[*].end"]]
+                                                [:is
+                                                 [:pg/call
+                                                  :jsonpath_extract_min_timestamptz
+                                                  [:pg/sql
+                                                   "{{table}}.resource"]
+                                                  "$.\"identified\".\"Period\"[*].start"]
+                                                 nil]]]
+                                              [:and
+                                               [:>=
+                                                [:pg/call
+                                                 :max_text_date_bound
+                                                 [:pg/sql "{{param}}"]]
+                                                [:pg/call
+                                                 :jsonpath_extract_max_timestamptz
+                                                 [:pg/sql
+                                                  "{{table}}.resource"]
+                                                 "$.\"identified\".\"dateTime\"[*]"]]
+                                               [:<=
+                                                [:pg/call
+                                                 :min_text_date_bound
+                                                 [:pg/sql "{{param}}"]]
+                                                [:pg/call
+                                                 :jsonpath_extract_min_timestamptz
+                                                 [:pg/sql
+                                                  "{{table}}.resource"]
+                                                 "$.\"identified\".\"dateTime\"[*]"]]]
+                                              [:and
+                                               [:>=
+                                                [:pg/call
+                                                 :max_text_date_bound
+                                                 [:pg/sql "{{param}}"]]
+                                                [:pg/call
+                                                 :jsonpath_extract_max_timestamptz
+                                                 [:pg/sql
+                                                  "{{table}}.resource"]
+                                                 "$.\"identified\".\"Period\"[*]"]]
+                                               [:<=
+                                                [:pg/call
+                                                 :min_text_date_bound
+                                                 [:pg/sql "{{param}}"]]
+                                                [:pg/call
+                                                 :jsonpath_extract_min_timestamptz
+                                                 [:pg/sql
+                                                  "{{table}}.resource"]
+                                                 "$.\"identified\".\"Period\"[*]"]]]]}}}}}

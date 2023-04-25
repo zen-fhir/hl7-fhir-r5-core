@@ -5,11 +5,14 @@
          :fhir/url "http://hl7.org/fhir/SearchParameter/Condition-abatement-age",
          :fhir/type "quantity",
          :name "abatement-age",
-         :expr {:Condition {:knife [["abatement" "ofType(Age"]
-                                    ["abatement" "ofType(Range"]],
-                            :jsonpath ["$.\"abatement\".\"ofType(Age\"[*]"
-                                       "$.\"abatement\".\"ofType(Range\"[*]"],
-                            :data-types #{},
+         :expr {:Condition {:knife [["abatement" "Age"]
+                                    ["abatement" "Range"]],
+                            :jsonpath ["$.\"abatement\".\"Age\"[*]"
+                                       "$.\"abatement\".\"Range\"[*]"],
+                            :data-types #{{:type "Age",
+                                           :polymorphic? false}
+                                          {:type "Range",
+                                           :polymorphic? false}},
                             :template :quantity,
                             :sql {:where [:or
                                           [:and
@@ -18,7 +21,7 @@
                                              :jsonpath_extract_max_numeric
                                              [:pg/sql
                                               "{{table}}.resource"]
-                                             "$.\"abatement\".\"ofType(Age\"[*].\"value\""]
+                                             "$.\"abatement\".\"Age\"[*].\"value\""]
                                             [:pg/cast
                                              [:pg/sql "{{param}}"]
                                              :numeric]]
@@ -27,7 +30,7 @@
                                              :jsonpath_extract_min_numeric
                                              [:pg/sql
                                               "{{table}}.resource"]
-                                             "$.\"abatement\".\"ofType(Age\"[*].\"value\""]
+                                             "$.\"abatement\".\"Age\"[*].\"value\""]
                                             [:pg/cast
                                              [:pg/sql "{{param}}"]
                                              :numeric]]]
@@ -37,7 +40,7 @@
                                              :jsonpath_extract_max_numeric
                                              [:pg/sql
                                               "{{table}}.resource"]
-                                             "$.\"abatement\".\"ofType(Range\"[*].\"value\""]
+                                             "$.\"abatement\".\"Range\"[*].\"value\""]
                                             [:pg/cast
                                              [:pg/sql "{{param}}"]
                                              :numeric]]
@@ -46,7 +49,7 @@
                                              :jsonpath_extract_min_numeric
                                              [:pg/sql
                                               "{{table}}.resource"]
-                                             "$.\"abatement\".\"ofType(Range\"[*].\"value\""]
+                                             "$.\"abatement\".\"Range\"[*].\"value\""]
                                             [:pg/cast
                                              [:pg/sql "{{param}}"]
                                              :numeric]]]]}}}}}

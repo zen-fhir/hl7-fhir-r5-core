@@ -2,7 +2,7 @@
  import #{zen.fhir},
  value-set {:zen/tags #{zen.fhir/value-set},
             :zen/desc "This is the code specifying the high-level kind of document (e.g. Prescription, Discharge Summary, Report, etc.). Made up of a set of non-healthcare specific codes and all LOINC codes where scale type = 'DOC'.",
-            :zen.fhir/version "0.6.22-2",
+            :zen.fhir/version "0.6.23",
             :fhir/code-systems #{{:fhir/url "http://loinc.org",
                                   :zen.fhir/content :not-present}
                                  {:fhir/url "http://terminology.hl7.org/CodeSystem/media-category",

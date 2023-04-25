@@ -8,12 +8,15 @@
          :expr {:RequestOrchestration {:knife [["action"
                                                 "participant"
                                                 "actor"
-                                                "ofType(Reference"]
+                                                "Reference"]
                                                ["action"
                                                 "participant"
                                                 "actor"
-                                                "ofType(canonical"]],
-                                       :jsonpath ["$.\"action\".\"participant\".\"actor\".\"ofType(Reference\"[*]"
-                                                  "$.\"action\".\"participant\".\"actor\".\"ofType(canonical\"[*]"],
-                                       :data-types #{},
+                                                "canonical"]],
+                                       :jsonpath ["$.\"action\".\"participant\".\"actor\".\"Reference\"[*]"
+                                                  "$.\"action\".\"participant\".\"actor\".\"canonical\"[*]"],
+                                       :data-types #{{:type "canonical",
+                                                      :polymorphic? false}
+                                                     {:type "Reference",
+                                                      :polymorphic? false}},
                                        :template :reference}}}}

@@ -5,8 +5,28 @@
          :fhir/url "http://hl7.org/fhir/SearchParameter/Patient-death-date",
          :fhir/type "date",
          :name "death-date",
-         :expr {:Patient {:knife [["deceased" "ofType(dateTime"]],
-                          :jsonpath ["$.\"deceased\".\"ofType(dateTime\"[*]"],
-                          :data-types #{},
+         :expr {:Patient {:knife [["deceased" "dateTime"]],
+                          :jsonpath ["$.\"deceased\".\"dateTime\"[*]"],
+                          :data-types #{{:type "dateTime",
+                                         :polymorphic? false}},
                           :template :date,
-                          :sql {:where [:or]}}}}}
+                          :sql {:where [:or
+                                        [:and
+                                         [:>=
+                                          [:pg/call
+                                           :max_text_date_bound
+                                           [:pg/sql "{{param}}"]]
+                                          [:pg/call
+                                           :jsonpath_extract_max_timestamptz
+                                           [:pg/sql
+                                            "{{table}}.resource"]
+                                           "$.\"deceased\".\"dateTime\"[*]"]]
+                                         [:<=
+                                          [:pg/call
+                                           :min_text_date_bound
+                                           [:pg/sql "{{param}}"]]
+                                          [:pg/call
+                                           :jsonpath_extract_min_timestamptz
+                                           [:pg/sql
+                                            "{{table}}.resource"]
+                                           "$.\"deceased\".\"dateTime\"[*]"]]]]}}}}}

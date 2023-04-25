@@ -5,12 +5,12 @@
          :fhir/url "http://hl7.org/fhir/SearchParameter/Observation-combo-value-concept",
          :fhir/type "token",
          :name "combo-value-concept",
-         :expr {:Observation {:knife [["value"
-                                       "ofType(CodeableConcept"]
+         :expr {:Observation {:knife [["value" "CodeableConcept"]
                                       ["component"
                                        "value"
-                                       "ofType(CodeableConcept"]],
-                              :jsonpath ["$.\"value\".\"ofType(CodeableConcept\"[*]"
-                                         "$.\"component\".\"value\".\"ofType(CodeableConcept\"[*]"],
-                              :data-types #{},
+                                       "CodeableConcept"]],
+                              :jsonpath ["$.\"value\".\"CodeableConcept\"[*]"
+                                         "$.\"component\".\"value\".\"CodeableConcept\"[*]"],
+                              :data-types #{{:type "CodeableConcept",
+                                             :polymorphic? false}},
                               :template :token}}}}

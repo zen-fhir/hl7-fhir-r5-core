@@ -5,12 +5,293 @@
          :fhir/url "http://hl7.org/fhir/SearchParameter/ChargeItem-occurrence",
          :fhir/type "date",
          :name "occurrence",
-         :expr {:ChargeItem {:knife [["occurrence" "ofType(dateTime"]
-                                     ["occurrence" "ofType(Period"]
-                                     ["occurrence" "ofType(Timing"]],
-                             :jsonpath ["$.\"occurrence\".\"ofType(dateTime\"[*]"
-                                        "$.\"occurrence\".\"ofType(Period\"[*]"
-                                        "$.\"occurrence\".\"ofType(Timing\"[*]"],
-                             :data-types #{},
+         :expr {:ChargeItem {:knife [["occurrence" "dateTime"]
+                                     ["occurrence" "Period"]
+                                     ["occurrence" "Timing"]],
+                             :jsonpath ["$.\"occurrence\".\"dateTime\"[*]"
+                                        "$.\"occurrence\".\"Period\"[*]"
+                                        "$.\"occurrence\".\"Timing\"[*]"],
+                             :data-types #{{:type "Period",
+                                            :polymorphic? false}
+                                           {:type "dateTime",
+                                            :polymorphic? false}
+                                           {:type "Timing",
+                                            :polymorphic? false}},
                              :template :date,
-                             :sql {:where [:or]}}}}}
+                             :sql {:where [:or
+                                           [:or
+                                            [:and
+                                             [:>=
+                                              [:pg/call
+                                               :max_text_date_bound
+                                               [:pg/sql "{{param}}"]]
+                                              [:pg/call
+                                               :jsonpath_extract_max_timestamptz
+                                               [:pg/sql
+                                                "{{table}}.resource"]
+                                               "$.\"occurrence\".\"dateTime\"[*].start"]]
+                                             [:<=
+                                              [:pg/call
+                                               :min_text_date_bound
+                                               [:pg/sql "{{param}}"]]
+                                              [:pg/call
+                                               :jsonpath_extract_min_timestamptz
+                                               [:pg/sql
+                                                "{{table}}.resource"]
+                                               "$.\"occurrence\".\"dateTime\"[*].end"]]]
+                                            [:and
+                                             [:>=
+                                              [:pg/call
+                                               :max_text_date_bound
+                                               [:pg/sql "{{param}}"]]
+                                              [:pg/call
+                                               :jsonpath_extract_max_timestamptz
+                                               [:pg/sql
+                                                "{{table}}.resource"]
+                                               "$.\"occurrence\".\"dateTime\"[*].start"]]
+                                             [:is
+                                              [:pg/call
+                                               :jsonpath_extract_max_timestamptz
+                                               [:pg/sql
+                                                "{{table}}.resource"]
+                                               "$.\"occurrence\".\"dateTime\"[*].end"]
+                                              nil]]
+                                            [:and
+                                             [:<=
+                                              [:pg/call
+                                               :min_text_date_bound
+                                               [:pg/sql "{{param}}"]]
+                                              [:pg/call
+                                               :jsonpath_extract_min_timestamptz
+                                               [:pg/sql
+                                                "{{table}}.resource"]
+                                               "$.\"occurrence\".\"dateTime\"[*].end"]]
+                                             [:is
+                                              [:pg/call
+                                               :jsonpath_extract_min_timestamptz
+                                               [:pg/sql
+                                                "{{table}}.resource"]
+                                               "$.\"occurrence\".\"dateTime\"[*].start"]
+                                              nil]]]
+                                           [:or
+                                            [:and
+                                             [:>=
+                                              [:pg/call
+                                               :max_text_date_bound
+                                               [:pg/sql "{{param}}"]]
+                                              [:pg/call
+                                               :jsonpath_extract_max_timestamptz
+                                               [:pg/sql
+                                                "{{table}}.resource"]
+                                               "$.\"occurrence\".\"Period\"[*].start"]]
+                                             [:<=
+                                              [:pg/call
+                                               :min_text_date_bound
+                                               [:pg/sql "{{param}}"]]
+                                              [:pg/call
+                                               :jsonpath_extract_min_timestamptz
+                                               [:pg/sql
+                                                "{{table}}.resource"]
+                                               "$.\"occurrence\".\"Period\"[*].end"]]]
+                                            [:and
+                                             [:>=
+                                              [:pg/call
+                                               :max_text_date_bound
+                                               [:pg/sql "{{param}}"]]
+                                              [:pg/call
+                                               :jsonpath_extract_max_timestamptz
+                                               [:pg/sql
+                                                "{{table}}.resource"]
+                                               "$.\"occurrence\".\"Period\"[*].start"]]
+                                             [:is
+                                              [:pg/call
+                                               :jsonpath_extract_max_timestamptz
+                                               [:pg/sql
+                                                "{{table}}.resource"]
+                                               "$.\"occurrence\".\"Period\"[*].end"]
+                                              nil]]
+                                            [:and
+                                             [:<=
+                                              [:pg/call
+                                               :min_text_date_bound
+                                               [:pg/sql "{{param}}"]]
+                                              [:pg/call
+                                               :jsonpath_extract_min_timestamptz
+                                               [:pg/sql
+                                                "{{table}}.resource"]
+                                               "$.\"occurrence\".\"Period\"[*].end"]]
+                                             [:is
+                                              [:pg/call
+                                               :jsonpath_extract_min_timestamptz
+                                               [:pg/sql
+                                                "{{table}}.resource"]
+                                               "$.\"occurrence\".\"Period\"[*].start"]
+                                              nil]]]
+                                           [:or
+                                            [:and
+                                             [:>=
+                                              [:pg/call
+                                               :max_text_date_bound
+                                               [:pg/sql "{{param}}"]]
+                                              [:pg/call
+                                               :jsonpath_extract_max_timestamptz
+                                               [:pg/sql
+                                                "{{table}}.resource"]
+                                               "$.\"occurrence\".\"Timing\"[*].start"]]
+                                             [:<=
+                                              [:pg/call
+                                               :min_text_date_bound
+                                               [:pg/sql "{{param}}"]]
+                                              [:pg/call
+                                               :jsonpath_extract_min_timestamptz
+                                               [:pg/sql
+                                                "{{table}}.resource"]
+                                               "$.\"occurrence\".\"Timing\"[*].end"]]]
+                                            [:and
+                                             [:>=
+                                              [:pg/call
+                                               :max_text_date_bound
+                                               [:pg/sql "{{param}}"]]
+                                              [:pg/call
+                                               :jsonpath_extract_max_timestamptz
+                                               [:pg/sql
+                                                "{{table}}.resource"]
+                                               "$.\"occurrence\".\"Timing\"[*].start"]]
+                                             [:is
+                                              [:pg/call
+                                               :jsonpath_extract_max_timestamptz
+                                               [:pg/sql
+                                                "{{table}}.resource"]
+                                               "$.\"occurrence\".\"Timing\"[*].end"]
+                                              nil]]
+                                            [:and
+                                             [:<=
+                                              [:pg/call
+                                               :min_text_date_bound
+                                               [:pg/sql "{{param}}"]]
+                                              [:pg/call
+                                               :jsonpath_extract_min_timestamptz
+                                               [:pg/sql
+                                                "{{table}}.resource"]
+                                               "$.\"occurrence\".\"Timing\"[*].end"]]
+                                             [:is
+                                              [:pg/call
+                                               :jsonpath_extract_min_timestamptz
+                                               [:pg/sql
+                                                "{{table}}.resource"]
+                                               "$.\"occurrence\".\"Timing\"[*].start"]
+                                              nil]]]
+                                           [:and
+                                            [:>=
+                                             [:pg/call
+                                              :max_text_date_bound
+                                              [:pg/sql "{{param}}"]]
+                                             [:pg/call
+                                              :jsonpath_extract_max_timestamptz
+                                              [:pg/sql
+                                               "{{table}}.resource"]
+                                              "$.\"occurrence\".\"dateTime\"[*]"]]
+                                            [:<=
+                                             [:pg/call
+                                              :min_text_date_bound
+                                              [:pg/sql "{{param}}"]]
+                                             [:pg/call
+                                              :jsonpath_extract_min_timestamptz
+                                              [:pg/sql
+                                               "{{table}}.resource"]
+                                              "$.\"occurrence\".\"dateTime\"[*]"]]]
+                                           [:and
+                                            [:>=
+                                             [:pg/call
+                                              :max_text_date_bound
+                                              [:pg/sql "{{param}}"]]
+                                             [:pg/call
+                                              :jsonpath_extract_max_timestamptz
+                                              [:pg/sql
+                                               "{{table}}.resource"]
+                                              "$.\"occurrence\".\"Period\"[*]"]]
+                                            [:<=
+                                             [:pg/call
+                                              :min_text_date_bound
+                                              [:pg/sql "{{param}}"]]
+                                             [:pg/call
+                                              :jsonpath_extract_min_timestamptz
+                                              [:pg/sql
+                                               "{{table}}.resource"]
+                                              "$.\"occurrence\".\"Period\"[*]"]]]
+                                           [:and
+                                            [:>=
+                                             [:pg/call
+                                              :max_text_date_bound
+                                              [:pg/sql "{{param}}"]]
+                                             [:pg/call
+                                              :jsonpath_extract_max_timestamptz
+                                              [:pg/sql
+                                               "{{table}}.resource"]
+                                              "$.\"occurrence\".\"Timing\"[*]"]]
+                                            [:<=
+                                             [:pg/call
+                                              :min_text_date_bound
+                                              [:pg/sql "{{param}}"]]
+                                             [:pg/call
+                                              :jsonpath_extract_min_timestamptz
+                                              [:pg/sql
+                                               "{{table}}.resource"]
+                                              "$.\"occurrence\".\"Timing\"[*]"]]]
+                                           [:and
+                                            [:>=
+                                             [:pg/call
+                                              :max_text_date_bound
+                                              [:pg/sql "{{param}}"]]
+                                             [:pg/call
+                                              :jsonpath_extract_max_timestamptz
+                                              [:pg/sql
+                                               "{{table}}.resource"]
+                                              "$.\"occurrence\".\"dateTime\"[*].event"]]
+                                            [:<=
+                                             [:pg/call
+                                              :min_text_date_bound
+                                              [:pg/sql "{{param}}"]]
+                                             [:pg/call
+                                              :jsonpath_extract_min_timestamptz
+                                              [:pg/sql
+                                               "{{table}}.resource"]
+                                              "$.\"occurrence\".\"dateTime\"[*].event"]]]
+                                           [:and
+                                            [:>=
+                                             [:pg/call
+                                              :max_text_date_bound
+                                              [:pg/sql "{{param}}"]]
+                                             [:pg/call
+                                              :jsonpath_extract_max_timestamptz
+                                              [:pg/sql
+                                               "{{table}}.resource"]
+                                              "$.\"occurrence\".\"Period\"[*].event"]]
+                                            [:<=
+                                             [:pg/call
+                                              :min_text_date_bound
+                                              [:pg/sql "{{param}}"]]
+                                             [:pg/call
+                                              :jsonpath_extract_min_timestamptz
+                                              [:pg/sql
+                                               "{{table}}.resource"]
+                                              "$.\"occurrence\".\"Period\"[*].event"]]]
+                                           [:and
+                                            [:>=
+                                             [:pg/call
+                                              :max_text_date_bound
+                                              [:pg/sql "{{param}}"]]
+                                             [:pg/call
+                                              :jsonpath_extract_max_timestamptz
+                                              [:pg/sql
+                                               "{{table}}.resource"]
+                                              "$.\"occurrence\".\"Timing\"[*].event"]]
+                                            [:<=
+                                             [:pg/call
+                                              :min_text_date_bound
+                                              [:pg/sql "{{param}}"]]
+                                             [:pg/call
+                                              :jsonpath_extract_min_timestamptz
+                                              [:pg/sql
+                                               "{{table}}.resource"]
+                                              "$.\"occurrence\".\"Timing\"[*].event"]]]]}}}}}

@@ -8,9 +8,10 @@
          :expr {:Ingredient {:knife [["substance"
                                       "strength"
                                       "concentration"
-                                      "ofType(Quantity"]],
-                             :jsonpath ["$.\"substance\".\"strength\".\"concentration\".\"ofType(Quantity\"[*]"],
-                             :data-types #{},
+                                      "Quantity"]],
+                             :jsonpath ["$.\"substance\".\"strength\".\"concentration\".\"Quantity\"[*]"],
+                             :data-types #{{:type "Quantity",
+                                            :polymorphic? false}},
                              :template :quantity,
                              :sql {:where [:or
                                            [:and
@@ -19,7 +20,7 @@
                                               :jsonpath_extract_max_numeric
                                               [:pg/sql
                                                "{{table}}.resource"]
-                                              "$.\"substance\".\"strength\".\"concentration\".\"ofType(Quantity\"[*].\"value\""]
+                                              "$.\"substance\".\"strength\".\"concentration\".\"Quantity\"[*].\"value\""]
                                              [:pg/cast
                                               [:pg/sql "{{param}}"]
                                               :numeric]]
@@ -28,7 +29,7 @@
                                               :jsonpath_extract_min_numeric
                                               [:pg/sql
                                                "{{table}}.resource"]
-                                              "$.\"substance\".\"strength\".\"concentration\".\"ofType(Quantity\"[*].\"value\""]
+                                              "$.\"substance\".\"strength\".\"concentration\".\"Quantity\"[*].\"value\""]
                                              [:pg/cast
                                               [:pg/sql "{{param}}"]
                                               :numeric]]]]}}}}}

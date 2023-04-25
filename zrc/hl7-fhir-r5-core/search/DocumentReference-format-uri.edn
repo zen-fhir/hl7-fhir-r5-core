@@ -8,7 +8,8 @@
          :expr {:DocumentReference {:knife [["content"
                                              "profile"
                                              "value"
-                                             "ofType(uri"]],
-                                    :jsonpath ["$.\"content\".\"profile\".\"value\".\"ofType(uri\"[*]"],
-                                    :data-types #{},
+                                             "uri"]],
+                                    :jsonpath ["$.\"content\".\"profile\".\"value\".\"uri\"[*]"],
+                                    :data-types #{{:type "uri",
+                                                   :polymorphic? false}},
                                     :template :uri}}}}

@@ -7,7 +7,8 @@
          :name "substance-reference",
          :expr {:Substance {:knife [["ingredient"
                                      "substance"
-                                     "ofType(Reference"]],
-                            :jsonpath ["$.\"ingredient\".\"substance\".\"ofType(Reference\"[*]"],
-                            :data-types #{},
+                                     "Reference"]],
+                            :jsonpath ["$.\"ingredient\".\"substance\".\"Reference\"[*]"],
+                            :data-types #{{:type "Reference",
+                                           :polymorphic? false}},
                             :template :reference}}}}

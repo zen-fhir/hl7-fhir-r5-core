@@ -7,7 +7,8 @@
          :name "component-value-concept",
          :expr {:Observation {:knife [["component"
                                        "value"
-                                       "ofType(CodeableConcept"]],
-                              :jsonpath ["$.\"component\".\"value\".\"ofType(CodeableConcept\"[*]"],
-                              :data-types #{},
+                                       "CodeableConcept"]],
+                              :jsonpath ["$.\"component\".\"value\".\"CodeableConcept\"[*]"],
+                              :data-types #{{:type "CodeableConcept",
+                                             :polymorphic? false}},
                               :template :token}}}}

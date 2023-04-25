@@ -2,7 +2,7 @@
  import #{zen.fhir},
  value-set {:zen/tags #{zen.fhir/value-set},
             :zen/desc "This value set includes the FHIR resource types, along with some other important content class codes",
-            :zen.fhir/version "0.6.22-2",
+            :zen.fhir/version "0.6.23",
             :fhir/code-systems #{{:fhir/url "urn:ietf:rfc:3986",
                                   :zen.fhir/content :bundled}
                                  {:fhir/url "urn:ietf:bcp:13",

@@ -5,9 +5,12 @@
          :fhir/url "http://hl7.org/fhir/SearchParameter/MessageHeader-event",
          :fhir/type "token",
          :name "event",
-         :expr {:MessageHeader {:knife [["event" "ofType(Coding"]
-                                        ["event" "ofType(canonical"]],
-                                :jsonpath ["$.\"event\".\"ofType(Coding\"[*]"
-                                           "$.\"event\".\"ofType(canonical\"[*]"],
-                                :data-types #{},
+         :expr {:MessageHeader {:knife [["event" "Coding"]
+                                        ["event" "canonical"]],
+                                :jsonpath ["$.\"event\".\"Coding\"[*]"
+                                           "$.\"event\".\"canonical\"[*]"],
+                                :data-types #{{:type "canonical",
+                                               :polymorphic? false}
+                                              {:type "Coding",
+                                               :polymorphic? false}},
                                 :template :token}}}}

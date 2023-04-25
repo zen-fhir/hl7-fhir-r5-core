@@ -8,7 +8,8 @@
          :expr {:QuestionnaireResponse {:knife [["item"
                                                  "answer"
                                                  "value"
-                                                 "ofType(Reference"]],
-                                        :jsonpath ["$.\"item\".\"answer\".\"value\".\"ofType(Reference\"[*]"],
-                                        :data-types #{},
+                                                 "Reference"]],
+                                        :jsonpath ["$.\"item\".\"answer\".\"value\".\"Reference\"[*]"],
+                                        :data-types #{{:type "Reference",
+                                                       :polymorphic? false}},
                                         :template :reference}}}}

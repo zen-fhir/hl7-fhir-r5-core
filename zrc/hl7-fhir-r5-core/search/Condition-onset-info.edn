@@ -5,9 +5,10 @@
          :fhir/url "http://hl7.org/fhir/SearchParameter/Condition-onset-info",
          :fhir/type "string",
          :name "onset-info",
-         :expr {:Condition {:knife [["onset" "ofType(string"]],
-                            :jsonpath ["$.\"onset\".\"ofType(string\"[*]"],
-                            :data-types #{},
+         :expr {:Condition {:knife [["onset" "string"]],
+                            :jsonpath ["$.\"onset\".\"string\"[*]"],
+                            :data-types #{{:type "string",
+                                           :polymorphic? false}},
                             :template :string,
                             :sql {:where [:or
                                           [:ilike
@@ -16,7 +17,7 @@
                                              [:pg/sql
                                               "{{table}}.resource"]
                                              [:pg/cast
-                                              "($.\"onset\".\"ofType(string\"[*]).** ? (@.type() == \"string\")"
+                                              "($.\"onset\".\"string\"[*]).** ? (@.type() == \"string\")"
                                               :jsonpath]]
                                             :text]
                                            [:pg/sql "{{param}}"]]],

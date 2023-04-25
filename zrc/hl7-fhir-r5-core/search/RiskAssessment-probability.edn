@@ -7,8 +7,30 @@
          :name "probability",
          :expr {:RiskAssessment {:knife [["prediction"
                                           "probability"
-                                          "ofType(decimal"]],
-                                 :jsonpath ["$.\"prediction\".\"probability\".\"ofType(decimal\"[*]"],
-                                 :data-types #{},
+                                          "decimal"]],
+                                 :jsonpath ["$.\"prediction\".\"probability\".\"decimal\"[*]"],
+                                 :data-types #{{:type "decimal",
+                                                :polymorphic? false}},
                                  :template :number,
-                                 :sql {:where [:or]}}}}}
+                                 :sql {:where [:or
+                                               [:and
+                                                [:>=
+                                                 [:pg/call
+                                                  :jsonpath_extract_max_numeric
+                                                  [:pg/sql
+                                                   "{{table}}.resource"]
+                                                  "$.\"prediction\".\"probability\".\"decimal\"[*]"]
+                                                 [:pg/cast
+                                                  [:pg/sql
+                                                   "{{param}}"]
+                                                  :numeric]]
+                                                [:<=
+                                                 [:pg/call
+                                                  :jsonpath_extract_min_numeric
+                                                  [:pg/sql
+                                                   "{{table}}.resource"]
+                                                  "$.\"prediction\".\"probability\".\"decimal\"[*]"]
+                                                 [:pg/cast
+                                                  [:pg/sql
+                                                   "{{param}}"]
+                                                  :numeric]]]]}}}}}

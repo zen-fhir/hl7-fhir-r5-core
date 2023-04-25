@@ -2,7 +2,7 @@
  import #{zen.fhir},
  value-set {:zen/tags #{zen.fhir/value-set},
             :zen/desc "The use context of a substance name for example if there is a different name when used as a drug active ingredient as opposed to a food colour additive.",
-            :zen.fhir/version "0.6.22-2",
+            :zen.fhir/version "0.6.23",
             :fhir/code-systems #{{:fhir/url "http://hl7.org/fhir/substance-name-domain",
                                   :zen.fhir/content :bundled}},
             :uri "http://hl7.org/fhir/ValueSet/substance-name-domain",

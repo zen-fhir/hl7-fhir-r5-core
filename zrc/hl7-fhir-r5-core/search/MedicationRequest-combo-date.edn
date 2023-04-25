@@ -12,9 +12,9 @@
                                              "timing"
                                              "repeat"
                                              "bounds"
-                                             "ofType(Period"]],
+                                             "Period"]],
                                     :jsonpath ["$.\"dosageInstruction\".\"timing\".\"event\"[*]"
-                                               "$.\"dosageInstruction\".\"timing\".\"repeat\".\"bounds\".\"ofType(Period\"[*]"],
+                                               "$.\"dosageInstruction\".\"timing\".\"repeat\".\"bounds\".\"Period\"[*]"],
                                     :data-types #{},
                                     :template :date,
                                     :sql {:where [:or]}}}}}

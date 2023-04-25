@@ -7,11 +7,12 @@
          :name "definition",
          :expr {:PlanDefinition {:knife [["action"
                                           "definition"
-                                          "ofType(canonical"]
-                                         ["action"
-                                          "definition"
-                                          "ofType(uri"]],
-                                 :jsonpath ["$.\"action\".\"definition\".\"ofType(canonical\"[*]"
-                                            "$.\"action\".\"definition\".\"ofType(uri\"[*]"],
-                                 :data-types #{},
+                                          "canonical"]
+                                         ["action" "definition" "uri"]],
+                                 :jsonpath ["$.\"action\".\"definition\".\"canonical\"[*]"
+                                            "$.\"action\".\"definition\".\"uri\"[*]"],
+                                 :data-types #{{:type "uri",
+                                                :polymorphic? false}
+                                               {:type "canonical",
+                                                :polymorphic? false}},
                                  :template :reference}}}}

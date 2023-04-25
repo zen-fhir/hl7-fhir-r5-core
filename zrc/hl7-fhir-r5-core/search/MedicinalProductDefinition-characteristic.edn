@@ -7,11 +7,14 @@
          :name "characteristic",
          :expr {:MedicinalProductDefinition {:knife [["characteristic"
                                                       "value"
-                                                      "ofType(Quantity"]
+                                                      "Quantity"]
                                                      ["characteristic"
                                                       "value"
-                                                      "ofType(CodeableConcept"]],
-                                             :jsonpath ["$.\"characteristic\".\"value\".\"ofType(Quantity\"[*]"
-                                                        "$.\"characteristic\".\"value\".\"ofType(CodeableConcept\"[*]"],
-                                             :data-types #{},
+                                                      "CodeableConcept"]],
+                                             :jsonpath ["$.\"characteristic\".\"value\".\"Quantity\"[*]"
+                                                        "$.\"characteristic\".\"value\".\"CodeableConcept\"[*]"],
+                                             :data-types #{{:type "Quantity",
+                                                            :polymorphic? false}
+                                                           {:type "CodeableConcept",
+                                                            :polymorphic? false}},
                                              :template :token}}}}

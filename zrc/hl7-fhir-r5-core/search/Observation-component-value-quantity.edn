@@ -5,15 +5,16 @@
          :fhir/url "http://hl7.org/fhir/SearchParameter/Observation-component-value-quantity",
          :fhir/type "quantity",
          :name "component-value-quantity",
-         :expr {:Observation {:knife [["component"
-                                       "value"
-                                       "ofType(Quantity"]
+         :expr {:Observation {:knife [["component" "value" "Quantity"]
                                       ["component"
                                        "value"
-                                       "ofType(SampledData"]],
-                              :jsonpath ["$.\"component\".\"value\".\"ofType(Quantity\"[*]"
-                                         "$.\"component\".\"value\".\"ofType(SampledData\"[*]"],
-                              :data-types #{},
+                                       "SampledData"]],
+                              :jsonpath ["$.\"component\".\"value\".\"Quantity\"[*]"
+                                         "$.\"component\".\"value\".\"SampledData\"[*]"],
+                              :data-types #{{:type "SampledData",
+                                             :polymorphic? false}
+                                            {:type "Quantity",
+                                             :polymorphic? false}},
                               :template :quantity,
                               :sql {:where [:or
                                             [:and
@@ -22,7 +23,7 @@
                                                :jsonpath_extract_max_numeric
                                                [:pg/sql
                                                 "{{table}}.resource"]
-                                               "$.\"component\".\"value\".\"ofType(Quantity\"[*].\"value\""]
+                                               "$.\"component\".\"value\".\"Quantity\"[*].\"value\""]
                                               [:pg/cast
                                                [:pg/sql "{{param}}"]
                                                :numeric]]
@@ -31,7 +32,7 @@
                                                :jsonpath_extract_min_numeric
                                                [:pg/sql
                                                 "{{table}}.resource"]
-                                               "$.\"component\".\"value\".\"ofType(Quantity\"[*].\"value\""]
+                                               "$.\"component\".\"value\".\"Quantity\"[*].\"value\""]
                                               [:pg/cast
                                                [:pg/sql "{{param}}"]
                                                :numeric]]]
@@ -41,7 +42,7 @@
                                                :jsonpath_extract_max_numeric
                                                [:pg/sql
                                                 "{{table}}.resource"]
-                                               "$.\"component\".\"value\".\"ofType(SampledData\"[*].\"value\""]
+                                               "$.\"component\".\"value\".\"SampledData\"[*].\"value\""]
                                               [:pg/cast
                                                [:pg/sql "{{param}}"]
                                                :numeric]]
@@ -50,7 +51,7 @@
                                                :jsonpath_extract_min_numeric
                                                [:pg/sql
                                                 "{{table}}.resource"]
-                                               "$.\"component\".\"value\".\"ofType(SampledData\"[*].\"value\""]
+                                               "$.\"component\".\"value\".\"SampledData\"[*].\"value\""]
                                               [:pg/cast
                                                [:pg/sql "{{param}}"]
                                                :numeric]]]]}}}}}

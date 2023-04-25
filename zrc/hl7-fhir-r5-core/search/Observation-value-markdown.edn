@@ -5,12 +5,12 @@
          :fhir/url "http://hl7.org/fhir/SearchParameter/Observation-value-markdown",
          :fhir/type "string",
          :name "value-markdown",
-         :expr {:Observation {:knife [["value" "ofType(markdown"]
+         :expr {:Observation {:knife [["value" "markdown"]
                                       ["value"
-                                       "ofType(CodeableConcept"
+                                       "CodeableConcept"
                                        "text"]],
-                              :jsonpath ["$.\"value\".\"ofType(markdown\"[*]"
-                                         "$.\"value\".\"ofType(CodeableConcept\".\"text\"[*]"],
+                              :jsonpath ["$.\"value\".\"markdown\"[*]"
+                                         "$.\"value\".\"CodeableConcept\".\"text\"[*]"],
                               :data-types #{},
                               :template :string,
                               :sql {:where [:or
@@ -20,7 +20,7 @@
                                                [:pg/sql
                                                 "{{table}}.resource"]
                                                [:pg/cast
-                                                "($.\"value\".\"ofType(markdown\"[*]).** ? (@.type() == \"string\")"
+                                                "($.\"value\".\"markdown\"[*]).** ? (@.type() == \"string\")"
                                                 :jsonpath]]
                                               :text]
                                              [:pg/sql "{{param}}"]]
@@ -30,7 +30,7 @@
                                                [:pg/sql
                                                 "{{table}}.resource"]
                                                [:pg/cast
-                                                "($.\"value\".\"ofType(CodeableConcept\".\"text\"[*]).** ? (@.type() == \"string\")"
+                                                "($.\"value\".\"CodeableConcept\".\"text\"[*]).** ? (@.type() == \"string\")"
                                                 :jsonpath]]
                                               :text]
                                              [:pg/sql "{{param}}"]]],
