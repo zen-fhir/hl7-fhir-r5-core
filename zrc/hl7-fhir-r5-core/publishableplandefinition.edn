@@ -1,10 +1,6 @@
 {ns hl7-fhir-r5-core.publishableplandefinition,
- import #{zen.fhir
-          hl7-fhir-r5-core.publishableplandefinition
-          hl7-fhir-r5-core.shareableplandefinition},
- action-schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
-                :zen.fhir/version "0.6.23-1"},
- schema {:zen.fhir/version "0.6.23-1",
+ import #{zen.fhir hl7-fhir-r5-core.shareableplandefinition},
+ schema {:zen.fhir/version "0.6.24",
          :confirms #{hl7-fhir-r5-core.shareableplandefinition/schema
                      zen.fhir/Resource},
          :zen/tags #{zen.fhir/profile-schema zen/schema},
@@ -32,7 +28,6 @@
                 :lastReviewDate {:fhir/flags #{:MS}},
                 :editor {:type zen/vector,
                          :every {:fhir/flags #{:MS}}},
-                :action {:confirms #{hl7-fhir-r5-core.publishableplandefinition/action-schema}},
                 :reviewer {:type zen/vector,
                            :every {:fhir/flags #{:MS}}},
                 :relatedArtifact {:type zen/vector,

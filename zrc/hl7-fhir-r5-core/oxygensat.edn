@@ -1,15 +1,10 @@
 {ns hl7-fhir-r5-core.oxygensat,
- import #{zen.fhir
-          hl7-fhir-r5-core.oxygensat
-          hl7-fhir-r5-core.vitalsigns},
- referenceRange-schema {:zen/tags #{zen/schema
-                                    zen.fhir/structure-schema},
-                        :zen.fhir/version "0.6.23-1"},
+ import #{zen.fhir hl7-fhir-r5-core.vitalsigns},
  schema {:zen/tags #{zen.fhir/profile-schema zen/schema},
          :zen/desc "FHIR Oxygen Saturation Profile",
          :zen.fhir/type "Observation",
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/oxygensat",
-         :zen.fhir/version "0.6.23-1",
+         :zen.fhir/version "0.6.24",
          :confirms #{hl7-fhir-r5-core.vitalsigns/schema
                      zen.fhir/Resource},
          :type zen/map,
@@ -39,5 +34,4 @@
                                           :require #{:system
                                                      :unit
                                                      :value
-                                                     :code}}}},
-                :referenceRange {:confirms #{hl7-fhir-r5-core.oxygensat/referenceRange-schema}}}}}
+                                                     :code}}}}}}}

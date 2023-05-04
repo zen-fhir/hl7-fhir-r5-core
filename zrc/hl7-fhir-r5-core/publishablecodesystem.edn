@@ -2,11 +2,8 @@
  import #{zen.fhir
           hl7-fhir-uv-extensions-r5.codesystem-sourceReference
           hl7-fhir-r5-core.shareablecodesystem
-          hl7-fhir-r5-core.publishablecodesystem
           hl7-fhir-uv-extensions-r5.codesystem-otherName},
- concept-schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
-                 :zen.fhir/version "0.6.23-1"},
- schema {:zen.fhir/version "0.6.23-1",
+ schema {:zen.fhir/version "0.6.24",
          :confirms #{hl7-fhir-r5-core.shareablecodesystem/schema
                      zen.fhir/Resource},
          :zen/tags #{zen.fhir/profile-schema zen/schema},
@@ -30,7 +27,6 @@
                                   :fhir/extensionUri "http://hl7.org/fhir/StructureDefinition/codesystem-sourceReference"},
                 :identifier {:type zen/vector,
                              :every {:fhir/flags #{:MS}}},
-                :concept {:confirms #{hl7-fhir-r5-core.publishablecodesystem/concept-schema}},
                 :contact {:type zen/vector,
                           :every {:fhir/flags #{:MS}}},
                 :effectivePeriod {:fhir/flags #{:MS}}},

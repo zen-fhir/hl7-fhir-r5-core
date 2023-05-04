@@ -1,25 +1,15 @@
 {ns hl7-fhir-r5-core.shareabletestscript,
- import #{hl7-fhir-r5-core.TestScript
-          zen.fhir
-          hl7-fhir-r5-core.shareabletestscript},
- schema {:zen.fhir/version "0.6.23-1",
+ import #{hl7-fhir-r5-core.TestScript zen.fhir},
+ schema {:zen/tags #{zen.fhir/profile-schema zen/schema},
+         :zen/desc "Enforces the minimum information set for the test script metadata required by HL7 and other organizations that share and publish test scripts",
+         :zen.fhir/type "TestScript",
+         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/shareabletestscript",
+         :zen.fhir/version "0.6.24",
          :confirms #{zen.fhir/Resource
                      hl7-fhir-r5-core.TestScript/schema},
-         :zen/tags #{zen.fhir/profile-schema zen/schema},
-         :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/shareabletestscript",
+         :type zen/map,
          :require #{:description
                     :publisher
                     :experimental
                     :url
-                    :version},
-         :type zen/map,
-         :zen/desc "Enforces the minimum information set for the test script metadata required by HL7 and other organizations that share and publish test scripts",
-         :zen.fhir/type "TestScript",
-         :every {:keys {:setup {:every {:keys {:action {:every {:keys {:assert {:confirms #{hl7-fhir-r5-core.shareabletestscript/setup-action-assert-schema}},
-                                                                       :operation {:confirms #{hl7-fhir-r5-core.shareabletestscript/setup-action-operation-schema}}}}}}}}}}},
- setup-action-assert-schema {:zen/tags #{zen/schema
-                                         zen.fhir/structure-schema},
-                             :zen.fhir/version "0.6.23-1"},
- setup-action-operation-schema {:zen/tags #{zen/schema
-                                            zen.fhir/structure-schema},
-                                :zen.fhir/version "0.6.23-1"}}
+                    :version}}}

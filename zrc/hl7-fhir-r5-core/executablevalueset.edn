@@ -3,16 +3,9 @@
           hl7-fhir-r5-core.executablevalueset
           hl7-fhir-r5-core.shareablevalueset
           hl7-fhir-uv-extensions-r5.valueset-warning},
- compose-include-concept-designation-schema {:zen/tags #{zen/schema
-                                                         zen.fhir/structure-schema},
-                                             :zen.fhir/version "0.6.23-1"},
- compose-include-schema {:zen/tags #{zen/schema
-                                     zen.fhir/structure-schema},
-                         :zen.fhir/version "0.6.23-1",
-                         :every {:keys {:concept {:every {:keys {:designation {:confirms #{hl7-fhir-r5-core.executablevalueset/compose-include-concept-designation-schema}}}}}}}},
  expansion-contains-schema {:zen/tags #{zen/schema
                                         zen.fhir/structure-schema},
-                            :zen.fhir/version "0.6.23-1",
+                            :zen.fhir/version "0.6.24",
                             :type zen/map,
                             :keys {:inactive {:fhir/flags #{:MS}},
                                    :system {:fhir/flags #{:MS}},
@@ -32,7 +25,7 @@
                                    :version {:fhir/flags #{:MS}}},
                             :require #{:code},
                             :fhir/flags #{:MS}},
- schema {:zen.fhir/version "0.6.23-1",
+ schema {:zen.fhir/version "0.6.24",
          :confirms #{hl7-fhir-r5-core.shareablevalueset/schema
                      zen.fhir/Resource},
          :zen/tags #{zen.fhir/profile-schema zen/schema},
@@ -58,6 +51,5 @@
                                    :timestamp {:fhir/flags #{:MS}},
                                    :parameter {:type zen/vector,
                                                :every {:fhir/flags #{:MS}}}},
-                            :fhir/flags #{:MS}},
-                :compose {:every {:keys {:include {:confirms #{hl7-fhir-r5-core.executablevalueset/compose-include-schema}}}}}},
+                            :fhir/flags #{:MS}}},
          :zen.fhir/type "ValueSet"}}

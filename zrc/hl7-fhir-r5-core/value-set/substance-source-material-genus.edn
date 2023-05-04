@@ -2,7 +2,7 @@
  import #{zen.fhir},
  value-set {:zen/tags #{zen.fhir/value-set},
             :zen/desc "The genus of an organism, typically referring to the Latin epithet of the genus element of the plant/animal scientific name.",
-            :zen.fhir/version "0.6.23-1",
+            :zen.fhir/version "0.6.24",
             :fhir/code-systems #{{:fhir/url "http://hl7.org/fhir/substance-source-material-genus",
                                   :zen.fhir/content :bundled}},
             :uri "http://hl7.org/fhir/ValueSet/substance-source-material-genus",

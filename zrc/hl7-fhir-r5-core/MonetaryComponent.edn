@@ -7,7 +7,7 @@
           hl7-fhir-r5-core.Money
           hl7-fhir-r5-core.code
           hl7-fhir-r5-core.DataType},
- schema {:zen.fhir/version "0.6.23-1",
+ schema {:zen.fhir/version "0.6.24",
          :confirms #{hl7-fhir-r5-core.DataType/schema},
          :zen/tags #{zen/schema zen.fhir/structure-schema},
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/MonetaryComponent",

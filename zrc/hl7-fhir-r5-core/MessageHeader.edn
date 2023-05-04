@@ -20,7 +20,7 @@
           hl7-fhir-r5-core.value-set.response-code
           hl7-fhir-r5-core.value-set.message-reason-encounter
           hl7-fhir-r5-core.Endpoint},
- schema {:zen.fhir/version "0.6.23-1",
+ schema {:zen.fhir/version "0.6.24",
          :confirms #{hl7-fhir-r5-core.DomainResource/schema
                      zen.fhir/Resource},
          :zen/tags #{zen/schema zen.fhir/base-schema},

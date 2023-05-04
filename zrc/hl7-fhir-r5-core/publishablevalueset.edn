@@ -6,19 +6,12 @@
           hl7-fhir-r5-core.shareablevalueset
           hl7-fhir-uv-extensions-r5.valueset-otherTitle
           hl7-fhir-uv-extensions-r5.valueset-compose-createdBy},
- compose-include-concept-designation-schema {:zen/tags #{zen/schema
-                                                         zen.fhir/structure-schema},
-                                             :zen.fhir/version "0.6.23-1"},
  compose-include-schema {:zen/tags #{zen/schema
                                      zen.fhir/structure-schema},
-                         :zen.fhir/version "0.6.23-1",
+                         :zen.fhir/version "0.6.24",
                          :type zen/map,
-                         :keys {:copyright {:fhir/flags #{:MS}},
-                                :concept {:every {:keys {:designation {:confirms #{hl7-fhir-r5-core.publishablevalueset/compose-include-concept-designation-schema}}}}}}},
- expansion-contains-schema {:zen/tags #{zen/schema
-                                        zen.fhir/structure-schema},
-                            :zen.fhir/version "0.6.23-1"},
- schema {:zen.fhir/version "0.6.23-1",
+                         :keys {:copyright {:fhir/flags #{:MS}}}},
+ schema {:zen.fhir/version "0.6.24",
          :confirms #{hl7-fhir-r5-core.shareablevalueset/schema
                      zen.fhir/Resource},
          :zen/tags #{zen.fhir/profile-schema zen/schema},
@@ -45,7 +38,6 @@
                                    :fhir/flags #{:MS}},
                 :copyright {:fhir/flags #{:MS}},
                 :topic {:type zen/vector, :every {:fhir/flags #{:MS}}},
-                :expansion {:every {:keys {:contains {:confirms #{hl7-fhir-r5-core.publishablevalueset/expansion-contains-schema}}}}},
                 :sourceReference {:confirms #{hl7-fhir-uv-extensions-r5.valueset-sourceReference/schema},
                                   :fhir/extensionUri "http://hl7.org/fhir/StructureDefinition/valueset-sourceReference"},
                 :identifier {:type zen/vector,

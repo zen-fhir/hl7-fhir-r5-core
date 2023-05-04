@@ -5,18 +5,14 @@
           hl7-fhir-r5-core.shareablevalueset
           hl7-fhir-r5-core.computablevalueset
           hl7-fhir-uv-extensions-r5.valueset-expression},
- compose-include-concept-designation-schema {:zen/tags #{zen/schema
-                                                         zen.fhir/structure-schema},
-                                             :zen.fhir/version "0.6.23-1"},
  compose-include-schema {:zen/tags #{zen/schema
                                      zen.fhir/structure-schema},
-                         :zen.fhir/version "0.6.23-1",
+                         :zen.fhir/version "0.6.24",
                          :type zen/map,
                          :keys {:system {:fhir/flags #{:MS}},
                                 :version {:fhir/flags #{:MS}},
                                 :concept {:type zen/vector,
-                                          :every {:fhir/flags #{:MS},
-                                                  :keys {:designation {:confirms #{hl7-fhir-r5-core.computablevalueset/compose-include-concept-designation-schema}}}}},
+                                          :every {:fhir/flags #{:MS}}},
                                 :filter {:type zen/vector,
                                          :every {:type zen/map,
                                                  :keys {:property {:fhir/flags #{:MS}},
@@ -29,14 +25,11 @@
                                 :valueSet {:type zen/vector,
                                            :every {:fhir/flags #{:MS}}}},
                          :fhir/flags #{:MS}},
- expansion-contains-schema {:zen/tags #{zen/schema
-                                        zen.fhir/structure-schema},
-                            :zen.fhir/version "0.6.23-1"},
  schema {:zen/tags #{zen.fhir/profile-schema zen/schema},
          :zen/desc "Defines a computable value set as one that SHALL have an expression-based definition (i.e. a value set defined intensionally using expressions of the code systems involved) and MAY have an expansion included. The expression-based definition SHALL be represented in only one of three ways; using the compose element, using the expression extension, or using the rules-text extension to provide a step-by-step process for expanding the value set definition",
          :zen.fhir/type "ValueSet",
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/computablevalueset",
-         :zen.fhir/version "0.6.23-1",
+         :zen.fhir/version "0.6.24",
          :confirms #{hl7-fhir-r5-core.shareablevalueset/schema
                      zen.fhir/Resource},
          :type zen/map,
@@ -59,5 +52,4 @@
                                            :every {:confirms #{hl7-fhir-r5-core.computablevalueset/compose-include-schema}}},
                                  :exclude {:type zen/vector,
                                            :every {:fhir/flags #{:MS}}}},
-                          :fhir/flags #{:MS}},
-                :expansion {:every {:keys {:contains {:confirms #{hl7-fhir-r5-core.computablevalueset/expansion-contains-schema}}}}}}}}
+                          :fhir/flags #{:MS}}}}}
