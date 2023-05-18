@@ -4,4 +4,4 @@
          :zen/desc "integer64 Type: A very large whole number",
          :zen.fhir/type "integer64",
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/integer64",
-         :zen.fhir/version "0.6.24"}}
+         :zen.fhir/version "0.6.25-1"}}

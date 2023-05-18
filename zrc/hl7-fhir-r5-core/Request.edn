@@ -4,5 +4,5 @@
          :zen/desc "Logical Model: A pattern to be followed by resources that represent a specific proposal, plan and/or order for some sort of action or service.",
          :zen.fhir/type "Request",
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Request",
-         :zen.fhir/version "0.6.24",
+         :zen.fhir/version "0.6.25-1",
          :confirms #{hl7-fhir-r5-core.Base/schema}}}

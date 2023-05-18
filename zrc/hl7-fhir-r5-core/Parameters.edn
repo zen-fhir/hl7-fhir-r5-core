@@ -59,7 +59,7 @@
           hl7-fhir-r5-core.ContactDetail
           hl7-fhir-r5-core.Resource},
  parameter-schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
-                   :zen.fhir/version "0.6.24",
+                   :zen.fhir/version "0.6.25-1",
                    :confirms #{hl7-fhir-r5-core.BackboneElement/schema},
                    :type zen/map,
                    :keys {:name {:confirms #{hl7-fhir-r5-core.string/schema},
@@ -215,7 +215,7 @@
          :zen/desc "This resource is used to pass information into and back from an operation (whether invoked directly from REST or within a messaging environment).  It is not persisted or allowed to be referenced by other resources except as described in the definition of the Parameters resource.",
          :zen.fhir/type "Parameters",
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Parameters",
-         :zen.fhir/version "0.6.24",
+         :zen.fhir/version "0.6.25-1",
          :confirms #{hl7-fhir-r5-core.Resource/schema
                      zen.fhir/Resource},
          :type zen/map,

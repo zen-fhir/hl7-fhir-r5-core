@@ -4,9 +4,11 @@
           hl7-fhir-r5-core.string
           hl7-fhir-r5-core.Element
           hl7-fhir-r5-core.Identifier
+          hl7-fhir-r5-core.DataType
           hl7-fhir-r5-core.uri},
- schema {:zen.fhir/version "0.6.24",
-         :confirms #{zen.fhir/Reference},
+ schema {:zen.fhir/version "0.6.25-1",
+         :confirms #{zen.fhir/Reference
+                     hl7-fhir-r5-core.DataType/schema},
          :zen/tags #{zen/schema zen.fhir/structure-schema},
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Reference",
          :zen.fhir/reference {:refers #{}},

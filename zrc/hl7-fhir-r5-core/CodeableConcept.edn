@@ -8,7 +8,7 @@
          :zen/desc "CodeableConcept Type: A concept that may be defined by a formal reference to a terminology or ontology or may be provided by text.",
          :zen.fhir/type "CodeableConcept",
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/CodeableConcept",
-         :zen.fhir/version "0.6.24",
+         :zen.fhir/version "0.6.25-1",
          :confirms #{hl7-fhir-r5-core.DataType/schema},
          :type zen/map,
          :keys {:coding {:type zen/vector,
