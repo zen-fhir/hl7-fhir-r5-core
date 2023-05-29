@@ -9,7 +9,7 @@
          :zen/desc "ProductShelfLife Type: The shelf-life and storage information for a medicinal product item or container can be described using this class.",
          :zen.fhir/type "ProductShelfLife",
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/ProductShelfLife",
-         :zen.fhir/version "0.6.25-1",
+         :zen.fhir/version "0.6.27",
          :confirms #{hl7-fhir-r5-core.BackboneType/schema},
          :type zen/map,
          :keys {:type {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
