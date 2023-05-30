@@ -2,7 +2,7 @@
  import #{zen.fhir},
  value-set {:zen/tags #{zen.fhir/value-set},
             :zen/desc "The presentation type in which an administrable medicinal product is given to a patient.",
-            :zen.fhir/version "0.6.27",
+            :zen.fhir/version "0.6.28",
             :fhir/code-systems #{{:fhir/url "http://hl7.org/fhir/unit-of-presentation",
                                   :zen.fhir/content :bundled}},
             :uri "http://hl7.org/fhir/ValueSet/unit-of-presentation",

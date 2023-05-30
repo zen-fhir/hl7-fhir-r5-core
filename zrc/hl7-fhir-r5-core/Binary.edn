@@ -6,7 +6,7 @@
           hl7-fhir-r5-core.Reference
           hl7-fhir-r5-core.code
           hl7-fhir-r5-core.Resource},
- schema {:zen.fhir/version "0.6.27",
+ schema {:zen.fhir/version "0.6.28",
          :confirms #{hl7-fhir-r5-core.Resource/schema
                      zen.fhir/Resource},
          :zen/tags #{zen/schema zen.fhir/base-schema},
