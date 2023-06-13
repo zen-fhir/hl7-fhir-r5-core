@@ -24,7 +24,7 @@
           hl7-fhir-r5-core.Binary
           hl7-fhir-r5-core.value-set.substance-codes},
  component-schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
-                   :zen.fhir/version "0.6.28",
+                   :zen.fhir/version "0.6.29",
                    :confirms #{hl7-fhir-r5-core.BackboneElement/schema},
                    :type zen/map,
                    :keys {:type {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
@@ -71,7 +71,7 @@
                    :fhir/flags #{:SU},
                    :zen/desc "Physical parts of the manufactured item, that it is intrisically made from. This is distinct from the ingredients that are part of its chemical makeup"},
  property-schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
-                  :zen.fhir/version "0.6.28",
+                  :zen.fhir/version "0.6.29",
                   :confirms #{hl7-fhir-r5-core.BackboneElement/schema},
                   :type zen/map,
                   :keys {:type {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
@@ -105,7 +105,7 @@
                   :require #{:type},
                   :fhir/flags #{:SU},
                   :zen/desc "General characteristics of this item"},
- schema {:zen.fhir/version "0.6.28",
+ schema {:zen.fhir/version "0.6.29",
          :confirms #{hl7-fhir-r5-core.DomainResource/schema
                      zen.fhir/Resource},
          :zen/tags #{zen/schema zen.fhir/base-schema},

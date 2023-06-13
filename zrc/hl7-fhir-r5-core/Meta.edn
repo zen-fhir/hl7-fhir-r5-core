@@ -13,7 +13,7 @@
          :zen/desc "Meta Type: The metadata about a resource. This is content in the resource that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.",
          :zen.fhir/type "Meta",
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Meta",
-         :zen.fhir/version "0.6.28",
+         :zen.fhir/version "0.6.29",
          :confirms #{hl7-fhir-r5-core.DataType/schema},
          :type zen/map,
          :keys {:versionId {:confirms #{hl7-fhir-r5-core.id/schema},

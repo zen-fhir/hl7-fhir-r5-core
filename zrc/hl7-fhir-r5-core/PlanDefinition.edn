@@ -77,7 +77,7 @@
           hl7-fhir-r5-core.Endpoint
           hl7-fhir-r5-core.Patient},
  action-schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
-                :zen.fhir/version "0.6.28",
+                :zen.fhir/version "0.6.29",
                 :confirms #{hl7-fhir-r5-core.BackboneElement/schema},
                 :type zen/map,
                 :keys {:_groupingBehavior {:confirms #{hl7-fhir-r5-core.Element/schema}},
@@ -301,7 +301,7 @@
                                                                   :strength :required},
                                              :zen/desc "single | multiple"}},
                 :zen/desc "Action defined by the plan"},
- schema {:zen.fhir/version "0.6.28",
+ schema {:zen.fhir/version "0.6.29",
          :confirms #{hl7-fhir-r5-core.DomainResource/schema
                      zen.fhir/Resource},
          :zen/tags #{zen/schema zen.fhir/base-schema},

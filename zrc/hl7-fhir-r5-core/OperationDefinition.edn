@@ -28,7 +28,7 @@
           hl7-fhir-r5-core.ContactDetail
           hl7-fhir-r5-core.value-set.fhir-types},
  parameter-schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
-                   :zen.fhir/version "0.6.28",
+                   :zen.fhir/version "0.6.29",
                    :confirms #{hl7-fhir-r5-core.BackboneElement/schema},
                    :type zen/map,
                    :keys {:min {:confirms #{hl7-fhir-r5-core.integer/schema},
@@ -105,7 +105,7 @@
                           :_use {:confirms #{hl7-fhir-r5-core.Element/schema}}},
                    :require #{:min :use :name :max},
                    :zen/desc "Parameters for the operation/query"},
- schema {:zen.fhir/version "0.6.28",
+ schema {:zen.fhir/version "0.6.29",
          :confirms #{hl7-fhir-r5-core.DomainResource/schema
                      zen.fhir/Resource},
          :zen/tags #{zen/schema zen.fhir/base-schema},

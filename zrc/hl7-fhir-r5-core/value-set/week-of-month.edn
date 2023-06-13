@@ -2,7 +2,7 @@
  import #{zen.fhir},
  value-set {:zen/tags #{zen.fhir/value-set},
             :zen/desc "The set of weeks in a month.",
-            :zen.fhir/version "0.6.28",
+            :zen.fhir/version "0.6.29",
             :fhir/code-systems #{{:fhir/url "http://hl7.org/fhir/week-of-month",
                                   :zen.fhir/content :bundled}},
             :uri "http://hl7.org/fhir/ValueSet/week-of-month",

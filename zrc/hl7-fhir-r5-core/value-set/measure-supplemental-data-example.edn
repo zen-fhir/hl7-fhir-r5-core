@@ -2,7 +2,7 @@
  import #{zen.fhir},
  value-set {:zen/tags #{zen.fhir/value-set},
             :zen/desc "Supplemental data in a population for measuring purposes.",
-            :zen.fhir/version "0.6.28",
+            :zen.fhir/version "0.6.29",
             :fhir/code-systems #{{:fhir/url "http://hl7.org/fhir/measure-supplemental-data-example",
                                   :zen.fhir/content :bundled}},
             :uri "http://hl7.org/fhir/ValueSet/measure-supplemental-data-example",
