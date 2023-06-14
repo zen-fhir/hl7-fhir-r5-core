@@ -4,5 +4,5 @@
          :zen/desc "Logical Model: A pattern to be followed by [canonical resources](canonicalresource.html) that meet minimal requirements for sharing via registries or similar mechanisms.",
          :zen.fhir/type "Shareable",
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Shareable",
-         :zen.fhir/version "0.6.29",
+         :zen.fhir/version "0.6.29-22",
          :confirms #{hl7-fhir-r5-core.Base/schema}}}

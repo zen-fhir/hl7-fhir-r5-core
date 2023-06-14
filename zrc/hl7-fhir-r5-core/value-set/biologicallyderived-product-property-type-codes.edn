@@ -2,7 +2,7 @@
  import #{zen.fhir},
  value-set {:zen/tags #{zen.fhir/value-set},
             :zen/desc "This value set can enumerate ISBT 128 Codes published by ICCBBA as a part of the ISBT 128 standard. These example codes represent data elements defined in ST-027 ISBT 128 Dictionary of Standard Data Elements and are used to define data structure and format expectations for electronic exchange with the ISBT 128 standard.",
-            :zen.fhir/version "0.6.29",
+            :zen.fhir/version "0.6.29-22",
             :fhir/code-systems #{{:fhir/url "http://hl7.org/fhir/biologicallyderived-product-property-type-codes",
                                   :zen.fhir/content :not-present}},
             :uri "http://hl7.org/fhir/ValueSet/biologicallyderived-product-property-type-codes",
