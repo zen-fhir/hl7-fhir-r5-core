@@ -2,7 +2,7 @@
  import #{zen.fhir},
  value-set {:zen/tags #{zen.fhir/value-set},
             :zen/desc "Possible values for the disposition of a comment or change request, typically used for comments and change requests, to indicate the disposition of the responsible party towards the changes suggested by the comment or change request.",
-            :zen.fhir/version "0.6.29-22",
+            :zen.fhir/version "0.6.29-4",
             :fhir/code-systems #{{:fhir/url "http://hl7.org/fhir/artifactassessment-disposition",
                                   :zen.fhir/content :bundled}},
             :uri "http://hl7.org/fhir/ValueSet/artifactassessment-disposition",

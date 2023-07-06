@@ -4,7 +4,7 @@
          :zen/desc "FHIR Respiratory Rate Profile",
          :zen.fhir/type "Observation",
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/resprate",
-         :zen.fhir/version "0.6.29-22",
+         :zen.fhir/version "0.6.29-4",
          :confirms #{hl7-fhir-r5-core.vitalsigns/schema
                      zen.fhir/Resource},
          :type zen/map,

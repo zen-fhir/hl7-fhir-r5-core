@@ -10,7 +10,7 @@
          :zen/desc "HumanName Type: A name, normally of a human, that can be used for other living entities (e.g. animals but not organizations) that have been assigned names by a human and may need the use of name parts or the need for usage information.",
          :zen.fhir/type "HumanName",
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/HumanName",
-         :zen.fhir/version "0.6.29-22",
+         :zen.fhir/version "0.6.29-4",
          :confirms #{hl7-fhir-r5-core.DataType/schema},
          :type zen/map,
          :keys {:_family {:confirms #{hl7-fhir-r5-core.Element/schema}},

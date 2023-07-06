@@ -4,7 +4,7 @@
          :zen/desc "Enforces the minimum information set for the test script metadata required by HL7 and other organizations that share and publish test scripts",
          :zen.fhir/type "TestScript",
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/shareabletestscript",
-         :zen.fhir/version "0.6.29-22",
+         :zen.fhir/version "0.6.29-4",
          :confirms #{zen.fhir/Resource
                      hl7-fhir-r5-core.TestScript/schema},
          :type zen/map,

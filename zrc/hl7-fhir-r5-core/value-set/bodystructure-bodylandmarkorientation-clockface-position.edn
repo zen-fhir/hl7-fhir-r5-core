@@ -2,7 +2,7 @@
  import #{zen.fhir},
  value-set {:zen/tags #{zen.fhir/value-set},
             :zen/desc "Select SNOMED CT codes. A set of codes that describe a things orientation based on a hourly positions of a clock face.",
-            :zen.fhir/version "0.6.29-22",
+            :zen.fhir/version "0.6.29-4",
             :fhir/code-systems #{{:fhir/url "http://snomed.info/sct",
                                   :zen.fhir/content :bundled}},
             :uri "http://hl7.org/fhir/ValueSet/bodystructure-bodylandmarkorientation-clockface-position",
