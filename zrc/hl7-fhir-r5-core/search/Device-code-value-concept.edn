@@ -1,0 +1,17 @@
+{ns hl7-fhir-r5-core.search.Device-code-value-concept,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Device-code-value-concept",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Device-code-value-concept",
+         :fhir/type "composite",
+         :name "code-value-concept",
+         :expr {:Device {:base-knife [[]],
+                         :base-jsonpath ["$[*]"],
+                         :component-knife [[["specification"
+                                             "CodeableConcept"]]
+                                           [["version" "string"]]],
+                         :component-jsonpath [["$.\"specification\".\"CodeableConcept\"[*]"]
+                                              ["$.\"version\".\"string\"[*]"]],
+                         :data-types #{},
+                         :search-types [:token :string],
+                         :template :composite}}}}

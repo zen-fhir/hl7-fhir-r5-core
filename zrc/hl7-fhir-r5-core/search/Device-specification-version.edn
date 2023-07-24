@@ -1,0 +1,17 @@
+{ns hl7-fhir-r5-core.search.Device-specification-version,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Device-specification-version",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Device-specification-version",
+         :fhir/type "composite",
+         :name "specification-version",
+         :expr {:Device {:base-knife [["conformsTo"]],
+                         :base-jsonpath ["$.\"conformsTo\"[*]"],
+                         :component-knife [[["specification"]]
+                                           [["version"]]],
+                         :component-jsonpath [["$.\"specification\"[*]"]
+                                              ["$.\"version\"[*]"]],
+                         :data-types #{{:type "BackboneElement",
+                                        :polymorphic? false}},
+                         :search-types [:token :string],
+                         :template :composite}}}}

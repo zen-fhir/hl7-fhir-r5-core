@@ -1,0 +1,315 @@
+{ns hl7-fhir-r5-core.search.CanonicalResource-context-type-value,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "CanonicalResource-context-type-value",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/CanonicalResource-context-type-value",
+         :fhir/type "composite",
+         :name "context-type-value",
+         :expr {:MessageDefinition {:base-knife [["useContext"]],
+                                    :base-jsonpath ["$.\"useContext\"[*]"],
+                                    :component-knife [[["code"]]
+                                                      [["value"
+                                                        "CodeableConcept"]]],
+                                    :component-jsonpath [["$.\"code\"[*]"]
+                                                         ["$.\"value\".\"CodeableConcept\"[*]"]],
+                                    :data-types #{},
+                                    :search-types [:token :token],
+                                    :template :composite},
+                :Evidence {:base-knife [["useContext"]],
+                           :base-jsonpath ["$.\"useContext\"[*]"],
+                           :component-knife [[["code"]]
+                                             [["value"
+                                               "CodeableConcept"]]],
+                           :component-jsonpath [["$.\"code\"[*]"]
+                                                ["$.\"value\".\"CodeableConcept\"[*]"]],
+                           :data-types #{},
+                           :search-types [:token :token],
+                           :template :composite},
+                :ConditionDefinition {:base-knife [["useContext"]],
+                                      :base-jsonpath ["$.\"useContext\"[*]"],
+                                      :component-knife [[["code"]]
+                                                        [["value"
+                                                          "CodeableConcept"]]],
+                                      :component-jsonpath [["$.\"code\"[*]"]
+                                                           ["$.\"value\".\"CodeableConcept\"[*]"]],
+                                      :data-types #{{:type "CodeableConcept",
+                                                     :polymorphic? false}},
+                                      :search-types [:token :token],
+                                      :template :composite},
+                :CompartmentDefinition {:base-knife [["useContext"]],
+                                        :base-jsonpath ["$.\"useContext\"[*]"],
+                                        :component-knife [[["code"]]
+                                                          [["value"
+                                                            "CodeableConcept"]]],
+                                        :component-jsonpath [["$.\"code\"[*]"]
+                                                             ["$.\"value\".\"CodeableConcept\"[*]"]],
+                                        :data-types #{{:type "code",
+                                                       :polymorphic? false}},
+                                        :search-types [:token :token],
+                                        :template :composite},
+                :EvidenceVariable {:base-knife [["useContext"]],
+                                   :base-jsonpath ["$.\"useContext\"[*]"],
+                                   :component-knife [[["code"]]
+                                                     [["value"
+                                                       "CodeableConcept"]]],
+                                   :component-jsonpath [["$.\"code\"[*]"]
+                                                        ["$.\"value\".\"CodeableConcept\"[*]"]],
+                                   :data-types #{},
+                                   :search-types [:token :token],
+                                   :template :composite},
+                :ImplementationGuide {:base-knife [["useContext"]],
+                                      :base-jsonpath ["$.\"useContext\"[*]"],
+                                      :component-knife [[["code"]]
+                                                        [["value"
+                                                          "CodeableConcept"]]],
+                                      :component-jsonpath [["$.\"code\"[*]"]
+                                                           ["$.\"value\".\"CodeableConcept\"[*]"]],
+                                      :data-types #{},
+                                      :search-types [:token :token],
+                                      :template :composite},
+                :CodeSystem {:base-knife [["useContext"]],
+                             :base-jsonpath ["$.\"useContext\"[*]"],
+                             :component-knife [[["code"]]
+                                               [["value"
+                                                 "CodeableConcept"]]],
+                             :component-jsonpath [["$.\"code\"[*]"]
+                                                  ["$.\"value\".\"CodeableConcept\"[*]"]],
+                             :data-types #{},
+                             :search-types [:token :token],
+                             :template :composite},
+                :PlanDefinition {:base-knife [["useContext"]],
+                                 :base-jsonpath ["$.\"useContext\"[*]"],
+                                 :component-knife [[["code"]]
+                                                   [["value"
+                                                     "CodeableConcept"]]],
+                                 :component-jsonpath [["$.\"code\"[*]"]
+                                                      ["$.\"value\".\"CodeableConcept\"[*]"]],
+                                 :data-types #{},
+                                 :search-types [:token :token],
+                                 :template :composite},
+                :StructureMap {:base-knife [["useContext"]],
+                               :base-jsonpath ["$.\"useContext\"[*]"],
+                               :component-knife [[["code"]]
+                                                 [["value"
+                                                   "CodeableConcept"]]],
+                               :component-jsonpath [["$.\"code\"[*]"]
+                                                    ["$.\"value\".\"CodeableConcept\"[*]"]],
+                               :data-types #{},
+                               :search-types [:token :token],
+                               :template :composite},
+                :Library {:base-knife [["useContext"]],
+                          :base-jsonpath ["$.\"useContext\"[*]"],
+                          :component-knife [[["code"]]
+                                            [["value"
+                                              "CodeableConcept"]]],
+                          :component-jsonpath [["$.\"code\"[*]"]
+                                               ["$.\"value\".\"CodeableConcept\"[*]"]],
+                          :data-types #{},
+                          :search-types [:token :token],
+                          :template :composite},
+                :ActivityDefinition {:base-knife [["useContext"]],
+                                     :base-jsonpath ["$.\"useContext\"[*]"],
+                                     :component-knife [[["code"]]
+                                                       [["value"
+                                                         "CodeableConcept"]]],
+                                     :component-jsonpath [["$.\"code\"[*]"]
+                                                          ["$.\"value\".\"CodeableConcept\"[*]"]],
+                                     :data-types #{{:type "CodeableConcept",
+                                                    :polymorphic? false}},
+                                     :search-types [:token :token],
+                                     :template :composite},
+                :Citation {:base-knife [["useContext"]],
+                           :base-jsonpath ["$.\"useContext\"[*]"],
+                           :component-knife [[["code"]]
+                                             [["value"
+                                               "CodeableConcept"]]],
+                           :component-jsonpath [["$.\"code\"[*]"]
+                                                ["$.\"value\".\"CodeableConcept\"[*]"]],
+                           :data-types #{},
+                           :search-types [:token :token],
+                           :template :composite},
+                :EvidenceReport {:base-knife [["useContext"]],
+                                 :base-jsonpath ["$.\"useContext\"[*]"],
+                                 :component-knife [[["code"]]
+                                                   [["value"
+                                                     "CodeableConcept"]]],
+                                 :component-jsonpath [["$.\"code\"[*]"]
+                                                      ["$.\"value\".\"CodeableConcept\"[*]"]],
+                                 :data-types #{},
+                                 :search-types [:token :token],
+                                 :template :composite},
+                :ChargeItemDefinition {:base-knife [["useContext"]],
+                                       :base-jsonpath ["$.\"useContext\"[*]"],
+                                       :component-knife [[["code"]]
+                                                         [["value"
+                                                           "CodeableConcept"]]],
+                                       :component-jsonpath [["$.\"code\"[*]"]
+                                                            ["$.\"value\".\"CodeableConcept\"[*]"]],
+                                       :data-types #{{:type "CodeableConcept",
+                                                      :polymorphic? false}},
+                                       :search-types [:token :token],
+                                       :template :composite},
+                :NamingSystem {:base-knife [["useContext"]],
+                               :base-jsonpath ["$.\"useContext\"[*]"],
+                               :component-knife [[["code"]]
+                                                 [["value"
+                                                   "CodeableConcept"]]],
+                               :component-jsonpath [["$.\"code\"[*]"]
+                                                    ["$.\"value\".\"CodeableConcept\"[*]"]],
+                               :data-types #{},
+                               :search-types [:token :token],
+                               :template :composite},
+                :Questionnaire {:base-knife [["useContext"]],
+                                :base-jsonpath ["$.\"useContext\"[*]"],
+                                :component-knife [[["code"]]
+                                                  [["value"
+                                                    "CodeableConcept"]]],
+                                :component-jsonpath [["$.\"code\"[*]"]
+                                                     ["$.\"value\".\"CodeableConcept\"[*]"]],
+                                :data-types #{{:type "Coding",
+                                               :polymorphic? false}},
+                                :search-types [:token :token],
+                                :template :composite},
+                :EventDefinition {:base-knife [["useContext"]],
+                                  :base-jsonpath ["$.\"useContext\"[*]"],
+                                  :component-knife [[["code"]]
+                                                    [["value"
+                                                      "CodeableConcept"]]],
+                                  :component-jsonpath [["$.\"code\"[*]"]
+                                                       ["$.\"value\".\"CodeableConcept\"[*]"]],
+                                  :data-types #{},
+                                  :search-types [:token :token],
+                                  :template :composite},
+                :ValueSet {:base-knife [["useContext"]],
+                           :base-jsonpath ["$.\"useContext\"[*]"],
+                           :component-knife [[["code"]]
+                                             [["value"
+                                               "CodeableConcept"]]],
+                           :component-jsonpath [["$.\"code\"[*]"]
+                                                ["$.\"value\".\"CodeableConcept\"[*]"]],
+                           :data-types #{},
+                           :search-types [:token :token],
+                           :template :composite},
+                :ExampleScenario {:base-knife [["useContext"]],
+                                  :base-jsonpath ["$.\"useContext\"[*]"],
+                                  :component-knife [[["code"]]
+                                                    [["value"
+                                                      "CodeableConcept"]]],
+                                  :component-jsonpath [["$.\"code\"[*]"]
+                                                       ["$.\"value\".\"CodeableConcept\"[*]"]],
+                                  :data-types #{},
+                                  :search-types [:token :token],
+                                  :template :composite},
+                :Measure {:base-knife [["useContext"]],
+                          :base-jsonpath ["$.\"useContext\"[*]"],
+                          :component-knife [[["code"]]
+                                            [["value"
+                                              "CodeableConcept"]]],
+                          :component-jsonpath [["$.\"code\"[*]"]
+                                               ["$.\"value\".\"CodeableConcept\"[*]"]],
+                          :data-types #{},
+                          :search-types [:token :token],
+                          :template :composite},
+                :CapabilityStatement {:base-knife [["useContext"]],
+                                      :base-jsonpath ["$.\"useContext\"[*]"],
+                                      :component-knife [[["code"]]
+                                                        [["value"
+                                                          "CodeableConcept"]]],
+                                      :component-jsonpath [["$.\"code\"[*]"]
+                                                           ["$.\"value\".\"CodeableConcept\"[*]"]],
+                                      :data-types #{},
+                                      :search-types [:token :token],
+                                      :template :composite},
+                :TestScript {:base-knife [["useContext"]],
+                             :base-jsonpath ["$.\"useContext\"[*]"],
+                             :component-knife [[["code"]]
+                                               [["value"
+                                                 "CodeableConcept"]]],
+                             :component-jsonpath [["$.\"code\"[*]"]
+                                                  ["$.\"value\".\"CodeableConcept\"[*]"]],
+                             :data-types #{},
+                             :search-types [:token :token],
+                             :template :composite},
+                :ConceptMap {:base-knife [["useContext"]],
+                             :base-jsonpath ["$.\"useContext\"[*]"],
+                             :component-knife [[["code"]]
+                                               [["value"
+                                                 "CodeableConcept"]]],
+                             :component-jsonpath [["$.\"code\"[*]"]
+                                                  ["$.\"value\".\"CodeableConcept\"[*]"]],
+                             :data-types #{},
+                             :search-types [:token :token],
+                             :template :composite},
+                :StructureDefinition {:base-knife [["useContext"]],
+                                      :base-jsonpath ["$.\"useContext\"[*]"],
+                                      :component-knife [[["code"]]
+                                                        [["value"
+                                                          "CodeableConcept"]]],
+                                      :component-jsonpath [["$.\"code\"[*]"]
+                                                           ["$.\"value\".\"CodeableConcept\"[*]"]],
+                                      :data-types #{},
+                                      :search-types [:token :token],
+                                      :template :composite},
+                :Requirements {:base-knife [["useContext"]],
+                               :base-jsonpath ["$.\"useContext\"[*]"],
+                               :component-knife [[["code"]]
+                                                 [["value"
+                                                   "CodeableConcept"]]],
+                               :component-jsonpath [["$.\"code\"[*]"]
+                                                    ["$.\"value\".\"CodeableConcept\"[*]"]],
+                               :data-types #{},
+                               :search-types [:token :token],
+                               :template :composite},
+                :ActorDefinition {:base-knife [["useContext"]],
+                                  :base-jsonpath ["$.\"useContext\"[*]"],
+                                  :component-knife [[["code"]]
+                                                    [["value"
+                                                      "CodeableConcept"]]],
+                                  :component-jsonpath [["$.\"code\"[*]"]
+                                                       ["$.\"value\".\"CodeableConcept\"[*]"]],
+                                  :data-types #{},
+                                  :search-types [:token :token],
+                                  :template :composite},
+                :SearchParameter {:base-knife [["useContext"]],
+                                  :base-jsonpath ["$.\"useContext\"[*]"],
+                                  :component-knife [[["code"]]
+                                                    [["value"
+                                                      "CodeableConcept"]]],
+                                  :component-jsonpath [["$.\"code\"[*]"]
+                                                       ["$.\"value\".\"CodeableConcept\"[*]"]],
+                                  :data-types #{{:type "code",
+                                                 :polymorphic? false}},
+                                  :search-types [:token :token],
+                                  :template :composite},
+                :OperationDefinition {:base-knife [["useContext"]],
+                                      :base-jsonpath ["$.\"useContext\"[*]"],
+                                      :component-knife [[["code"]]
+                                                        [["value"
+                                                          "CodeableConcept"]]],
+                                      :component-jsonpath [["$.\"code\"[*]"]
+                                                           ["$.\"value\".\"CodeableConcept\"[*]"]],
+                                      :data-types #{{:type "code",
+                                                     :polymorphic? false}},
+                                      :search-types [:token :token],
+                                      :template :composite},
+                :GraphDefinition {:base-knife [["useContext"]],
+                                  :base-jsonpath ["$.\"useContext\"[*]"],
+                                  :component-knife [[["code"]]
+                                                    [["value"
+                                                      "CodeableConcept"]]],
+                                  :component-jsonpath [["$.\"code\"[*]"]
+                                                       ["$.\"value\".\"CodeableConcept\"[*]"]],
+                                  :data-types #{},
+                                  :search-types [:token :token],
+                                  :template :composite},
+                :TerminologyCapabilities {:base-knife [["useContext"]],
+                                          :base-jsonpath ["$.\"useContext\"[*]"],
+                                          :component-knife [[["code"]]
+                                                            [["value"
+                                                              "CodeableConcept"]]],
+                                          :component-jsonpath [["$.\"code\"[*]"]
+                                                               ["$.\"value\".\"CodeableConcept\"[*]"]],
+                                          :data-types #{},
+                                          :search-types [:token
+                                                         :token],
+                                          :template :composite}}}}

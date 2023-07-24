@@ -7,7 +7,7 @@
          :zen/desc "CodeableReference Type: A reference to a resource (by instance), or instead, a reference to a concept defined in a terminology or ontology (by class).",
          :zen.fhir/type "CodeableReference",
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/CodeableReference",
-         :zen.fhir/version "0.6.29-4",
+         :zen.fhir/version "0.6.30",
          :confirms #{hl7-fhir-r5-core.DataType/schema},
          :type zen/map,
          :keys {:concept {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},

@@ -7,7 +7,7 @@
           hl7-fhir-uv-extensions-r5.valueset-expression},
  compose-include-schema {:zen/tags #{zen/schema
                                      zen.fhir/structure-schema},
-                         :zen.fhir/version "0.6.29-4",
+                         :zen.fhir/version "0.6.30",
                          :type zen/map,
                          :keys {:system {:fhir/flags #{:MS}},
                                 :version {:fhir/flags #{:MS}},
@@ -29,7 +29,7 @@
          :zen/desc "Defines a computable value set as one that SHALL have an expression-based definition (i.e. a value set defined intensionally using expressions of the code systems involved) and MAY have an expansion included. The expression-based definition SHALL be represented in only one of three ways; using the compose element, using the expression extension, or using the rules-text extension to provide a step-by-step process for expanding the value set definition",
          :zen.fhir/type "ValueSet",
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/computablevalueset",
-         :zen.fhir/version "0.6.29-4",
+         :zen.fhir/version "0.6.30",
          :confirms #{hl7-fhir-r5-core.shareablevalueset/schema
                      zen.fhir/Resource},
          :type zen/map,

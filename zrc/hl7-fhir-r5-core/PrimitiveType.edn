@@ -4,5 +4,5 @@
          :zen/desc "PrimitiveType Type: The base type for all re-useable types defined that have a simple property.",
          :zen.fhir/type "PrimitiveType",
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/PrimitiveType",
-         :zen.fhir/version "0.6.29-4",
+         :zen.fhir/version "0.6.30",
          :confirms #{hl7-fhir-r5-core.DataType/schema}}}

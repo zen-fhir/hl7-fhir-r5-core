@@ -1,0 +1,19 @@
+{ns hl7-fhir-r5-core.search.Composition-section-code-text,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Composition-section-code-text",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Composition-section-code-text",
+         :fhir/type "composite",
+         :name "section-code-text",
+         :expr {:Composition {:base-knife [["section"]],
+                              :base-jsonpath ["$.\"section\"[*]"],
+                              :component-knife [[["section" "code"]]
+                                                [["section" "text"]]],
+                              :component-jsonpath [["$.\"section\".\"code\"[*]"]
+                                                   ["$.\"section\".\"text\"[*]"]],
+                              :data-types #{{:type "CodeableConcept",
+                                             :polymorphic? false}
+                                            {:type "Narrative",
+                                             :polymorphic? false}},
+                              :search-types [:token :special],
+                              :template :composite}}}}

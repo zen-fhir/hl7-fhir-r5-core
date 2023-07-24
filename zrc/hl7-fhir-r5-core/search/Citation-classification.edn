@@ -1,0 +1,16 @@
+{ns hl7-fhir-r5-core.search.Citation-classification,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "Citation-classification",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/Citation-classification",
+         :fhir/type "composite",
+         :name "classification",
+         :expr {:Citation {:base-knife [["classification"]],
+                           :base-jsonpath ["$.\"classification\"[*]"],
+                           :component-knife [[["type"]]
+                                             [["classifier"]]],
+                           :component-jsonpath [["$.\"type\"[*]"]
+                                                ["$.\"classifier\"[*]"]],
+                           :data-types #{},
+                           :search-types [:token :token],
+                           :template :composite}}}}

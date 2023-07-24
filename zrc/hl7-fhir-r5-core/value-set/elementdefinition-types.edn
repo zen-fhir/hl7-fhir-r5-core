@@ -2,7 +2,7 @@
  import #{zen.fhir},
  value-set {:zen/tags #{zen.fhir/value-set},
             :zen/desc "Allowed types for FHIR elements in ElementDefinition.type.code",
-            :zen.fhir/version "0.6.29-4",
+            :zen.fhir/version "0.6.30",
             :fhir/code-systems #{{:fhir/url "http://hl7.org/fhir/CodeSystem/fhirpath-types",
                                   :zen.fhir/content :bundled}
                                  {:fhir/url "http://hl7.org/fhir/fhir-types",

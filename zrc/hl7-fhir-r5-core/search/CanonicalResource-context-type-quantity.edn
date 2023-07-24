@@ -1,0 +1,377 @@
+{ns hl7-fhir-r5-core.search.CanonicalResource-context-type-quantity,
+ import #{zen.fhir},
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "CanonicalResource-context-type-quantity",
+         :fhir/url "http://hl7.org/fhir/SearchParameter/CanonicalResource-context-type-quantity",
+         :fhir/type "composite",
+         :name "context-type-quantity",
+         :expr {:MessageDefinition {:base-knife [["useContext"]],
+                                    :base-jsonpath ["$.\"useContext\"[*]"],
+                                    :component-knife [[["code"]]
+                                                      [["value"
+                                                        "Quantity"]
+                                                       ["value"
+                                                        "Range"]]],
+                                    :component-jsonpath [["$.\"code\"[*]"]
+                                                         ["$.\"value\".\"Quantity\"[*]"
+                                                          "$.\"value\".\"Range\"[*]"]],
+                                    :data-types #{},
+                                    :search-types [:token :quantity],
+                                    :template :composite},
+                :Evidence {:base-knife [["useContext"]],
+                           :base-jsonpath ["$.\"useContext\"[*]"],
+                           :component-knife [[["code"]]
+                                             [["value" "Quantity"]
+                                              ["value" "Range"]]],
+                           :component-jsonpath [["$.\"code\"[*]"]
+                                                ["$.\"value\".\"Quantity\"[*]"
+                                                 "$.\"value\".\"Range\"[*]"]],
+                           :data-types #{},
+                           :search-types [:token :quantity],
+                           :template :composite},
+                :ConditionDefinition {:base-knife [["useContext"]],
+                                      :base-jsonpath ["$.\"useContext\"[*]"],
+                                      :component-knife [[["code"]]
+                                                        [["value"
+                                                          "Quantity"]
+                                                         ["value"
+                                                          "Range"]]],
+                                      :component-jsonpath [["$.\"code\"[*]"]
+                                                           ["$.\"value\".\"Quantity\"[*]"
+                                                            "$.\"value\".\"Range\"[*]"]],
+                                      :data-types #{{:type "CodeableConcept",
+                                                     :polymorphic? false}},
+                                      :search-types [:token :quantity],
+                                      :template :composite},
+                :CompartmentDefinition {:base-knife [["useContext"]],
+                                        :base-jsonpath ["$.\"useContext\"[*]"],
+                                        :component-knife [[["code"]]
+                                                          [["value"
+                                                            "Quantity"]
+                                                           ["value"
+                                                            "Range"]]],
+                                        :component-jsonpath [["$.\"code\"[*]"]
+                                                             ["$.\"value\".\"Quantity\"[*]"
+                                                              "$.\"value\".\"Range\"[*]"]],
+                                        :data-types #{{:type "code",
+                                                       :polymorphic? false}},
+                                        :search-types [:token
+                                                       :quantity],
+                                        :template :composite},
+                :EvidenceVariable {:base-knife [["useContext"]],
+                                   :base-jsonpath ["$.\"useContext\"[*]"],
+                                   :component-knife [[["code"]]
+                                                     [["value"
+                                                       "Quantity"]
+                                                      ["value"
+                                                       "Range"]]],
+                                   :component-jsonpath [["$.\"code\"[*]"]
+                                                        ["$.\"value\".\"Quantity\"[*]"
+                                                         "$.\"value\".\"Range\"[*]"]],
+                                   :data-types #{},
+                                   :search-types [:token :quantity],
+                                   :template :composite},
+                :ImplementationGuide {:base-knife [["useContext"]],
+                                      :base-jsonpath ["$.\"useContext\"[*]"],
+                                      :component-knife [[["code"]]
+                                                        [["value"
+                                                          "Quantity"]
+                                                         ["value"
+                                                          "Range"]]],
+                                      :component-jsonpath [["$.\"code\"[*]"]
+                                                           ["$.\"value\".\"Quantity\"[*]"
+                                                            "$.\"value\".\"Range\"[*]"]],
+                                      :data-types #{},
+                                      :search-types [:token :quantity],
+                                      :template :composite},
+                :CodeSystem {:base-knife [["useContext"]],
+                             :base-jsonpath ["$.\"useContext\"[*]"],
+                             :component-knife [[["code"]]
+                                               [["value" "Quantity"]
+                                                ["value" "Range"]]],
+                             :component-jsonpath [["$.\"code\"[*]"]
+                                                  ["$.\"value\".\"Quantity\"[*]"
+                                                   "$.\"value\".\"Range\"[*]"]],
+                             :data-types #{},
+                             :search-types [:token :quantity],
+                             :template :composite},
+                :PlanDefinition {:base-knife [["useContext"]],
+                                 :base-jsonpath ["$.\"useContext\"[*]"],
+                                 :component-knife [[["code"]]
+                                                   [["value"
+                                                     "Quantity"]
+                                                    ["value" "Range"]]],
+                                 :component-jsonpath [["$.\"code\"[*]"]
+                                                      ["$.\"value\".\"Quantity\"[*]"
+                                                       "$.\"value\".\"Range\"[*]"]],
+                                 :data-types #{},
+                                 :search-types [:token :quantity],
+                                 :template :composite},
+                :StructureMap {:base-knife [["useContext"]],
+                               :base-jsonpath ["$.\"useContext\"[*]"],
+                               :component-knife [[["code"]]
+                                                 [["value" "Quantity"]
+                                                  ["value" "Range"]]],
+                               :component-jsonpath [["$.\"code\"[*]"]
+                                                    ["$.\"value\".\"Quantity\"[*]"
+                                                     "$.\"value\".\"Range\"[*]"]],
+                               :data-types #{},
+                               :search-types [:token :quantity],
+                               :template :composite},
+                :Library {:base-knife [["useContext"]],
+                          :base-jsonpath ["$.\"useContext\"[*]"],
+                          :component-knife [[["code"]]
+                                            [["value" "Quantity"]
+                                             ["value" "Range"]]],
+                          :component-jsonpath [["$.\"code\"[*]"]
+                                               ["$.\"value\".\"Quantity\"[*]"
+                                                "$.\"value\".\"Range\"[*]"]],
+                          :data-types #{},
+                          :search-types [:token :quantity],
+                          :template :composite},
+                :ActivityDefinition {:base-knife [["useContext"]],
+                                     :base-jsonpath ["$.\"useContext\"[*]"],
+                                     :component-knife [[["code"]]
+                                                       [["value"
+                                                         "Quantity"]
+                                                        ["value"
+                                                         "Range"]]],
+                                     :component-jsonpath [["$.\"code\"[*]"]
+                                                          ["$.\"value\".\"Quantity\"[*]"
+                                                           "$.\"value\".\"Range\"[*]"]],
+                                     :data-types #{{:type "CodeableConcept",
+                                                    :polymorphic? false}},
+                                     :search-types [:token :quantity],
+                                     :template :composite},
+                :Citation {:base-knife [["useContext"]],
+                           :base-jsonpath ["$.\"useContext\"[*]"],
+                           :component-knife [[["code"]]
+                                             [["value" "Quantity"]
+                                              ["value" "Range"]]],
+                           :component-jsonpath [["$.\"code\"[*]"]
+                                                ["$.\"value\".\"Quantity\"[*]"
+                                                 "$.\"value\".\"Range\"[*]"]],
+                           :data-types #{},
+                           :search-types [:token :quantity],
+                           :template :composite},
+                :EvidenceReport {:base-knife [["useContext"]],
+                                 :base-jsonpath ["$.\"useContext\"[*]"],
+                                 :component-knife [[["code"]]
+                                                   [["value"
+                                                     "Quantity"]
+                                                    ["value" "Range"]]],
+                                 :component-jsonpath [["$.\"code\"[*]"]
+                                                      ["$.\"value\".\"Quantity\"[*]"
+                                                       "$.\"value\".\"Range\"[*]"]],
+                                 :data-types #{},
+                                 :search-types [:token :quantity],
+                                 :template :composite},
+                :ChargeItemDefinition {:base-knife [["useContext"]],
+                                       :base-jsonpath ["$.\"useContext\"[*]"],
+                                       :component-knife [[["code"]]
+                                                         [["value"
+                                                           "Quantity"]
+                                                          ["value"
+                                                           "Range"]]],
+                                       :component-jsonpath [["$.\"code\"[*]"]
+                                                            ["$.\"value\".\"Quantity\"[*]"
+                                                             "$.\"value\".\"Range\"[*]"]],
+                                       :data-types #{{:type "CodeableConcept",
+                                                      :polymorphic? false}},
+                                       :search-types [:token
+                                                      :quantity],
+                                       :template :composite},
+                :NamingSystem {:base-knife [["useContext"]],
+                               :base-jsonpath ["$.\"useContext\"[*]"],
+                               :component-knife [[["code"]]
+                                                 [["value" "Quantity"]
+                                                  ["value" "Range"]]],
+                               :component-jsonpath [["$.\"code\"[*]"]
+                                                    ["$.\"value\".\"Quantity\"[*]"
+                                                     "$.\"value\".\"Range\"[*]"]],
+                               :data-types #{},
+                               :search-types [:token :quantity],
+                               :template :composite},
+                :Questionnaire {:base-knife [["useContext"]],
+                                :base-jsonpath ["$.\"useContext\"[*]"],
+                                :component-knife [[["code"]]
+                                                  [["value"
+                                                    "Quantity"]
+                                                   ["value" "Range"]]],
+                                :component-jsonpath [["$.\"code\"[*]"]
+                                                     ["$.\"value\".\"Quantity\"[*]"
+                                                      "$.\"value\".\"Range\"[*]"]],
+                                :data-types #{{:type "Coding",
+                                               :polymorphic? false}},
+                                :search-types [:token :quantity],
+                                :template :composite},
+                :EventDefinition {:base-knife [["useContext"]],
+                                  :base-jsonpath ["$.\"useContext\"[*]"],
+                                  :component-knife [[["code"]]
+                                                    [["value"
+                                                      "Quantity"]
+                                                     ["value" "Range"]]],
+                                  :component-jsonpath [["$.\"code\"[*]"]
+                                                       ["$.\"value\".\"Quantity\"[*]"
+                                                        "$.\"value\".\"Range\"[*]"]],
+                                  :data-types #{},
+                                  :search-types [:token :quantity],
+                                  :template :composite},
+                :ValueSet {:base-knife [["useContext"]],
+                           :base-jsonpath ["$.\"useContext\"[*]"],
+                           :component-knife [[["code"]]
+                                             [["value" "Quantity"]
+                                              ["value" "Range"]]],
+                           :component-jsonpath [["$.\"code\"[*]"]
+                                                ["$.\"value\".\"Quantity\"[*]"
+                                                 "$.\"value\".\"Range\"[*]"]],
+                           :data-types #{},
+                           :search-types [:token :quantity],
+                           :template :composite},
+                :ExampleScenario {:base-knife [["useContext"]],
+                                  :base-jsonpath ["$.\"useContext\"[*]"],
+                                  :component-knife [[["code"]]
+                                                    [["value"
+                                                      "Quantity"]
+                                                     ["value" "Range"]]],
+                                  :component-jsonpath [["$.\"code\"[*]"]
+                                                       ["$.\"value\".\"Quantity\"[*]"
+                                                        "$.\"value\".\"Range\"[*]"]],
+                                  :data-types #{},
+                                  :search-types [:token :quantity],
+                                  :template :composite},
+                :Measure {:base-knife [["useContext"]],
+                          :base-jsonpath ["$.\"useContext\"[*]"],
+                          :component-knife [[["code"]]
+                                            [["value" "Quantity"]
+                                             ["value" "Range"]]],
+                          :component-jsonpath [["$.\"code\"[*]"]
+                                               ["$.\"value\".\"Quantity\"[*]"
+                                                "$.\"value\".\"Range\"[*]"]],
+                          :data-types #{},
+                          :search-types [:token :quantity],
+                          :template :composite},
+                :CapabilityStatement {:base-knife [["useContext"]],
+                                      :base-jsonpath ["$.\"useContext\"[*]"],
+                                      :component-knife [[["code"]]
+                                                        [["value"
+                                                          "Quantity"]
+                                                         ["value"
+                                                          "Range"]]],
+                                      :component-jsonpath [["$.\"code\"[*]"]
+                                                           ["$.\"value\".\"Quantity\"[*]"
+                                                            "$.\"value\".\"Range\"[*]"]],
+                                      :data-types #{},
+                                      :search-types [:token :quantity],
+                                      :template :composite},
+                :TestScript {:base-knife [["useContext"]],
+                             :base-jsonpath ["$.\"useContext\"[*]"],
+                             :component-knife [[["code"]]
+                                               [["value" "Quantity"]
+                                                ["value" "Range"]]],
+                             :component-jsonpath [["$.\"code\"[*]"]
+                                                  ["$.\"value\".\"Quantity\"[*]"
+                                                   "$.\"value\".\"Range\"[*]"]],
+                             :data-types #{},
+                             :search-types [:token :quantity],
+                             :template :composite},
+                :ConceptMap {:base-knife [["useContext"]],
+                             :base-jsonpath ["$.\"useContext\"[*]"],
+                             :component-knife [[["code"]]
+                                               [["value" "Quantity"]
+                                                ["value" "Range"]]],
+                             :component-jsonpath [["$.\"code\"[*]"]
+                                                  ["$.\"value\".\"Quantity\"[*]"
+                                                   "$.\"value\".\"Range\"[*]"]],
+                             :data-types #{},
+                             :search-types [:token :quantity],
+                             :template :composite},
+                :StructureDefinition {:base-knife [["useContext"]],
+                                      :base-jsonpath ["$.\"useContext\"[*]"],
+                                      :component-knife [[["code"]]
+                                                        [["value"
+                                                          "Quantity"]
+                                                         ["value"
+                                                          "Range"]]],
+                                      :component-jsonpath [["$.\"code\"[*]"]
+                                                           ["$.\"value\".\"Quantity\"[*]"
+                                                            "$.\"value\".\"Range\"[*]"]],
+                                      :data-types #{},
+                                      :search-types [:token :quantity],
+                                      :template :composite},
+                :Requirements {:base-knife [["useContext"]],
+                               :base-jsonpath ["$.\"useContext\"[*]"],
+                               :component-knife [[["code"]]
+                                                 [["value" "Quantity"]
+                                                  ["value" "Range"]]],
+                               :component-jsonpath [["$.\"code\"[*]"]
+                                                    ["$.\"value\".\"Quantity\"[*]"
+                                                     "$.\"value\".\"Range\"[*]"]],
+                               :data-types #{},
+                               :search-types [:token :quantity],
+                               :template :composite},
+                :ActorDefinition {:base-knife [["useContext"]],
+                                  :base-jsonpath ["$.\"useContext\"[*]"],
+                                  :component-knife [[["code"]]
+                                                    [["value"
+                                                      "Quantity"]
+                                                     ["value" "Range"]]],
+                                  :component-jsonpath [["$.\"code\"[*]"]
+                                                       ["$.\"value\".\"Quantity\"[*]"
+                                                        "$.\"value\".\"Range\"[*]"]],
+                                  :data-types #{},
+                                  :search-types [:token :quantity],
+                                  :template :composite},
+                :SearchParameter {:base-knife [["useContext"]],
+                                  :base-jsonpath ["$.\"useContext\"[*]"],
+                                  :component-knife [[["code"]]
+                                                    [["value"
+                                                      "Quantity"]
+                                                     ["value" "Range"]]],
+                                  :component-jsonpath [["$.\"code\"[*]"]
+                                                       ["$.\"value\".\"Quantity\"[*]"
+                                                        "$.\"value\".\"Range\"[*]"]],
+                                  :data-types #{{:type "code",
+                                                 :polymorphic? false}},
+                                  :search-types [:token :quantity],
+                                  :template :composite},
+                :OperationDefinition {:base-knife [["useContext"]],
+                                      :base-jsonpath ["$.\"useContext\"[*]"],
+                                      :component-knife [[["code"]]
+                                                        [["value"
+                                                          "Quantity"]
+                                                         ["value"
+                                                          "Range"]]],
+                                      :component-jsonpath [["$.\"code\"[*]"]
+                                                           ["$.\"value\".\"Quantity\"[*]"
+                                                            "$.\"value\".\"Range\"[*]"]],
+                                      :data-types #{{:type "code",
+                                                     :polymorphic? false}},
+                                      :search-types [:token :quantity],
+                                      :template :composite},
+                :GraphDefinition {:base-knife [["useContext"]],
+                                  :base-jsonpath ["$.\"useContext\"[*]"],
+                                  :component-knife [[["code"]]
+                                                    [["value"
+                                                      "Quantity"]
+                                                     ["value" "Range"]]],
+                                  :component-jsonpath [["$.\"code\"[*]"]
+                                                       ["$.\"value\".\"Quantity\"[*]"
+                                                        "$.\"value\".\"Range\"[*]"]],
+                                  :data-types #{},
+                                  :search-types [:token :quantity],
+                                  :template :composite},
+                :TerminologyCapabilities {:base-knife [["useContext"]],
+                                          :base-jsonpath ["$.\"useContext\"[*]"],
+                                          :component-knife [[["code"]]
+                                                            [["value"
+                                                              "Quantity"]
+                                                             ["value"
+                                                              "Range"]]],
+                                          :component-jsonpath [["$.\"code\"[*]"]
+                                                               ["$.\"value\".\"Quantity\"[*]"
+                                                                "$.\"value\".\"Range\"[*]"]],
+                                          :data-types #{},
+                                          :search-types [:token
+                                                         :quantity],
+                                          :template :composite}}}}
