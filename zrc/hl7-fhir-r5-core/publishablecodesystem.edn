@@ -3,7 +3,7 @@
           hl7-fhir-uv-extensions-r5.codesystem-sourceReference
           hl7-fhir-r5-core.shareablecodesystem
           hl7-fhir-uv-extensions-r5.codesystem-otherName},
- schema {:zen.fhir/version "0.6.30",
+ schema {:zen.fhir/version "0.6.30-1",
          :confirms #{hl7-fhir-r5-core.shareablecodesystem/schema
                      zen.fhir/Resource},
          :zen/tags #{zen.fhir/profile-schema zen/schema},

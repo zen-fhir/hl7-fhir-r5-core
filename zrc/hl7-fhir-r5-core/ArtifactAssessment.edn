@@ -29,7 +29,7 @@
           hl7-fhir-r5-core.value-set.certainty-rating
           hl7-fhir-r5-core.Patient},
  content-schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
-                 :zen.fhir/version "0.6.30",
+                 :zen.fhir/version "0.6.30-1",
                  :confirms #{hl7-fhir-r5-core.BackboneElement/schema},
                  :type zen/map,
                  :keys {:path {:type zen/vector,
@@ -74,7 +74,7 @@
                                           :every {:confirms #{hl7-fhir-r5-core.RelatedArtifact/schema},
                                                   :zen/desc "Additional information"}}},
                  :zen/desc "Comment, classifier, or rating content"},
- schema {:zen.fhir/version "0.6.30",
+ schema {:zen.fhir/version "0.6.30-1",
          :confirms #{hl7-fhir-r5-core.DomainResource/schema
                      zen.fhir/Resource},
          :zen/tags #{zen/schema zen.fhir/base-schema},
