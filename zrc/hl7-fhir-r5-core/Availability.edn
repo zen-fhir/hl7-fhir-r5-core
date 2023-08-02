@@ -12,7 +12,7 @@
          :zen/desc "Availability Type: Availability data for an {item}.",
          :zen.fhir/type "Availability",
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Availability",
-         :zen.fhir/version "0.6.30-1",
+         :zen.fhir/version "0.6.30-7",
          :confirms #{hl7-fhir-r5-core.DataType/schema},
          :type zen/map,
          :keys {:availableTime {:type zen/vector,

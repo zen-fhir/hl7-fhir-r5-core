@@ -9,7 +9,7 @@
           hl7-fhir-r5-core.value-set.operation-outcome
           hl7-fhir-r5-core.value-set.issue-type
           hl7-fhir-r5-core.code},
- schema {:zen.fhir/version "0.6.30-1",
+ schema {:zen.fhir/version "0.6.30-7",
          :confirms #{hl7-fhir-r5-core.DomainResource/schema
                      zen.fhir/Resource},
          :zen/tags #{zen/schema zen.fhir/base-schema},

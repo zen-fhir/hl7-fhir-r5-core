@@ -6,7 +6,7 @@
          :zen/desc "BackboneType Type: Base definition for the few data types that are allowed to carry modifier extensions.",
          :zen.fhir/type "BackboneType",
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/BackboneType",
-         :zen.fhir/version "0.6.30-1",
+         :zen.fhir/version "0.6.30-7",
          :confirms #{hl7-fhir-r5-core.DataType/schema},
          :type zen/map,
          :keys {:modifierExtension {:type zen/vector,

@@ -4,5 +4,5 @@
          :zen/desc "Logical Model: A pattern to be followed by resources that represent a product used in healthcare, for clinical or operational purposes.",
          :zen.fhir/type "Product",
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Product",
-         :zen.fhir/version "0.6.30-1",
+         :zen.fhir/version "0.6.30-7",
          :confirms #{hl7-fhir-r5-core.Base/schema}}}
