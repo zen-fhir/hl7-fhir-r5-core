@@ -49,7 +49,7 @@
           hl7-fhir-r5-core.value-set.substance-weight-method},
  molecularWeight-schema {:zen/tags #{zen/schema
                                      zen.fhir/structure-schema},
-                         :zen.fhir/version "0.6.30-7",
+                         :zen.fhir/version "0.6.30-14",
                          :confirms #{hl7-fhir-r5-core.BackboneElement/schema},
                          :type zen/map,
                          :keys {:method {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
@@ -69,7 +69,7 @@
                          :fhir/flags #{:SU},
                          :zen/desc "The average mass of a molecule of a compound"},
  name-schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
-              :zen.fhir/version "0.6.30-7",
+              :zen.fhir/version "0.6.30-14",
               :confirms #{hl7-fhir-r5-core.BackboneElement/schema},
               :type zen/map,
               :keys {:official {:type zen/vector,
@@ -148,7 +148,7 @@
          :zen/desc "The detailed description of a substance, typically at a level beyond what is used for prescribing.",
          :zen.fhir/type "SubstanceDefinition",
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/SubstanceDefinition",
-         :zen.fhir/version "0.6.30-7",
+         :zen.fhir/version "0.6.30-14",
          :confirms #{hl7-fhir-r5-core.DomainResource/schema
                      zen.fhir/Resource},
          :type zen/map,

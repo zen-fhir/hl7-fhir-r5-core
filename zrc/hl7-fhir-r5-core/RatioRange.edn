@@ -7,7 +7,7 @@
          :zen/desc "RatioRange Type: A range of ratios expressed as a low and high numerator and a denominator.",
          :zen.fhir/type "RatioRange",
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/RatioRange",
-         :zen.fhir/version "0.6.30-7",
+         :zen.fhir/version "0.6.30-14",
          :confirms #{hl7-fhir-r5-core.DataType/schema},
          :type zen/map,
          :keys {:lowNumerator {:confirms #{hl7-fhir-r5-core.Quantity/schema

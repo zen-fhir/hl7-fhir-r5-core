@@ -2,7 +2,7 @@
  import #{zen.fhir},
  value-set {:zen/tags #{zen.fhir/value-set},
             :zen/desc "The type of 2D coordinates describing a 2D image region.",
-            :zen.fhir/version "0.6.30-7",
+            :zen.fhir/version "0.6.30-14",
             :fhir/code-systems #{{:fhir/url "http://hl7.org/fhir/imagingselection-2dgraphictype",
                                   :zen.fhir/content :bundled}},
             :uri "http://hl7.org/fhir/ValueSet/imagingselection-2dgraphictype",

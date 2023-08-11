@@ -2,7 +2,7 @@
  import #{zen.fhir},
  value-set {:zen/tags #{zen.fhir/value-set},
             :zen/desc "A legal or regulatory framework against which an authorization is granted, or other reasons for it.",
-            :zen.fhir/version "0.6.30-7",
+            :zen.fhir/version "0.6.30-14",
             :fhir/code-systems #{{:fhir/url "http://hl7.org/fhir/regulated-authorization-basis",
                                   :zen.fhir/content :bundled}},
             :uri "http://hl7.org/fhir/ValueSet/regulated-authorization-basis",
