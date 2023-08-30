@@ -4,5 +4,5 @@
          :zen/desc "Logical Model: A pattern to be followed by resources that represent a publishable knowledge artifact such as a ValueSet, Profile, Library, Decision Support Rule, or Quality Measure.",
          :zen.fhir/type "Publishable",
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Publishable",
-         :zen.fhir/version "0.6.30-14",
+         :zen.fhir/version "0.6.31",
          :confirms #{hl7-fhir-r5-core.Base/schema}}}

@@ -2,7 +2,7 @@
  import #{zen.fhir},
  value-set {:zen/tags #{zen.fhir/value-set},
             :zen/desc "A sample of security labels from [Healthcare Privacy and Security Classification System](security-labels.html#hcs) that are used on events and requests/responses (aka user context or organization context) made up of PurposeOfUse and maybe a refrain/obligation.",
-            :zen.fhir/version "0.6.30-14",
+            :zen.fhir/version "0.6.31",
             :fhir/code-systems #{{:fhir/url "http://terminology.hl7.org/CodeSystem/v3-ActCode",
                                   :zen.fhir/content :bundled}
                                  {:fhir/url "http://terminology.hl7.org/CodeSystem/v3-ActReason",
