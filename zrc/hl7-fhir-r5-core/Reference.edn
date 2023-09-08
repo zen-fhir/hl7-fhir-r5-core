@@ -6,7 +6,7 @@
           hl7-fhir-r5-core.Identifier
           hl7-fhir-r5-core.DataType
           hl7-fhir-r5-core.uri},
- schema {:zen.fhir/version "0.6.31",
+ schema {:zen.fhir/version "0.6.32",
          :confirms #{zen.fhir/Reference
                      hl7-fhir-r5-core.DataType/schema},
          :zen/tags #{zen/schema zen.fhir/structure-schema},

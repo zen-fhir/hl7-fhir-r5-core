@@ -4,5 +4,5 @@
          :zen/desc "Logical Model: A pattern followed by resources that represent the participant in some activity, process, or responsible for providing information about a resource.",
          :zen.fhir/type "Participant",
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Participant",
-         :zen.fhir/version "0.6.31",
+         :zen.fhir/version "0.6.32",
          :confirms #{hl7-fhir-r5-core.Base/schema}}}

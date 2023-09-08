@@ -42,7 +42,7 @@
           hl7-fhir-r5-core.Patient
           hl7-fhir-r5-core.value-set.consent-data-meaning},
  provision-schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
-                   :zen.fhir/version "0.6.31",
+                   :zen.fhir/version "0.6.32",
                    :confirms #{hl7-fhir-r5-core.BackboneElement/schema},
                    :type zen/map,
                    :keys {:provision {:type zen/vector,
@@ -131,7 +131,7 @@
                                          :zen/desc "Data controlled by this provision"}}},
                    :fhir/flags #{:SU},
                    :zen/desc "Constraints to the base Consent.policyRule/Consent.policy"},
- schema {:zen.fhir/version "0.6.31",
+ schema {:zen.fhir/version "0.6.32",
          :confirms #{hl7-fhir-r5-core.DomainResource/schema
                      zen.fhir/Resource},
          :zen/tags #{zen/schema zen.fhir/base-schema},
