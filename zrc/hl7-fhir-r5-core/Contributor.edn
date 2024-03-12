@@ -6,7 +6,7 @@
           hl7-fhir-r5-core.value-set.contributor-type
           hl7-fhir-r5-core.DataType
           hl7-fhir-r5-core.ContactDetail},
- schema {:zen.fhir/version "0.6.32",
+ schema {:zen.fhir/version "0.6.42",
          :confirms #{hl7-fhir-r5-core.DataType/schema},
          :zen/tags #{zen/schema zen.fhir/structure-schema},
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/Contributor",

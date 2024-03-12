@@ -2,7 +2,7 @@
  import #{zen.fhir},
  value-set {:zen/tags #{zen.fhir/value-set},
             :zen/desc "The optical rotation type of a substance.",
-            :zen.fhir/version "0.6.32",
+            :zen.fhir/version "0.6.42",
             :fhir/code-systems #{{:fhir/url "http://hl7.org/fhir/substance-optical-activity",
                                   :zen.fhir/content :bundled}},
             :uri "http://hl7.org/fhir/ValueSet/substance-optical-activity",

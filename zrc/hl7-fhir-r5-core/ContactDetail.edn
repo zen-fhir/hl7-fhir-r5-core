@@ -8,7 +8,7 @@
          :zen/desc "ContactDetail Type: Specifies contact information for a person or organization.",
          :zen.fhir/type "ContactDetail",
          :zen.fhir/profileUri "http://hl7.org/fhir/StructureDefinition/ContactDetail",
-         :zen.fhir/version "0.6.32",
+         :zen.fhir/version "0.6.42",
          :confirms #{hl7-fhir-r5-core.DataType/schema},
          :type zen/map,
          :keys {:name {:confirms #{hl7-fhir-r5-core.string/schema},

@@ -2,7 +2,7 @@
  import #{zen.fhir},
  value-set {:zen/tags #{zen.fhir/value-set},
             :zen/desc "Dose form for a medication, in the form suitable for administering to the patient, after mixing, where necessary.",
-            :zen.fhir/version "0.6.32",
+            :zen.fhir/version "0.6.42",
             :fhir/code-systems #{{:fhir/url "http://hl7.org/fhir/administrable-dose-form",
                                   :zen.fhir/content :bundled}},
             :uri "http://hl7.org/fhir/ValueSet/administrable-dose-form",

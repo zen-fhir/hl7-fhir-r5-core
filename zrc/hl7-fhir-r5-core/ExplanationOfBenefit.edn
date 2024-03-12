@@ -87,7 +87,7 @@
           hl7-fhir-r5-core.value-set.benefit-network},
  item-adjudication-schema {:zen/tags #{zen/schema
                                        zen.fhir/structure-schema},
-                           :zen.fhir/version "0.6.32",
+                           :zen.fhir/version "0.6.42",
                            :confirms #{hl7-fhir-r5-core.BackboneElement/schema},
                            :type zen/map,
                            :keys {:category {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
@@ -106,7 +106,7 @@
                            :zen/desc "Adjudication details"},
  item-reviewOutcome-schema {:zen/tags #{zen/schema
                                         zen.fhir/structure-schema},
-                            :zen.fhir/version "0.6.32",
+                            :zen.fhir/version "0.6.42",
                             :confirms #{hl7-fhir-r5-core.BackboneElement/schema},
                             :type zen/map,
                             :keys {:decision {:confirms #{hl7-fhir-r5-core.CodeableConcept/schema},
@@ -124,7 +124,7 @@
                                    :preAuthPeriod {:confirms #{hl7-fhir-r5-core.Period/schema},
                                                    :zen/desc "Preauthorization reference effective period"}},
                             :zen/desc "Adjudication results"},
- schema {:zen.fhir/version "0.6.32",
+ schema {:zen.fhir/version "0.6.42",
          :confirms #{hl7-fhir-r5-core.DomainResource/schema
                      zen.fhir/Resource},
          :zen/tags #{zen/schema zen.fhir/base-schema},
